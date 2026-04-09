@@ -790,6 +790,201 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
   font-weight: 700;
   color: var(--accent2);
 }
+
+/* ═══════════════════════════════════════
+   TIPS PAGE
+═══════════════════════════════════════ */
+#tips {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 16px 16px 48px;
+}
+.tips-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.tips-tab {
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  border-radius: 99px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text2);
+  cursor: pointer;
+  transition: all var(--transition);
+  font-family: var(--font);
+}
+.tips-tab:hover { border-color: var(--border2); color: var(--text); }
+.tips-tab.active { background: var(--grad1); border-color: transparent; color: #fff; }
+
+/* ── 헷갈리는 개념 ── */
+.compare-section { margin-bottom: 32px; }
+.compare-section h3 {
+  font-size: 15px; font-weight: 900;
+  color: var(--text);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.compare-section h3 .badge {
+  font-size: 10px; font-weight: 800;
+  background: var(--accent-bg);
+  color: var(--accent2);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  padding: 2px 8px;
+  letter-spacing: .5px;
+}
+.compare-grid {
+  display: grid;
+  gap: 10px;
+}
+.compare-grid.col2 { grid-template-columns: 1fr 1fr; }
+.compare-grid.col3 { grid-template-columns: 1fr 1fr 1fr; }
+@media(max-width:540px){
+  .compare-grid.col2, .compare-grid.col3 { grid-template-columns: 1fr; }
+}
+.cmp-card {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  transition: all var(--transition);
+}
+.cmp-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.cmp-card.hl { border-color: var(--accent); background: var(--accent-bg); }
+.cmp-name {
+  font-size: 13px; font-weight: 900;
+  color: var(--accent2);
+  margin-bottom: 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.cmp-name .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+.cmp-rows { display: flex; flex-direction: column; gap: 5px; }
+.cmp-row {
+  display: flex; gap: 8px;
+  font-size: 12px; line-height: 1.5;
+}
+.cmp-row .k {
+  color: var(--text3);
+  font-weight: 700;
+  min-width: 52px;
+  flex-shrink: 0;
+  font-size: 11px;
+}
+.cmp-row .v { color: var(--text2); }
+.cmp-row .v strong { color: var(--text); font-weight: 800; }
+.vs-divider {
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text3); font-size: 11px; font-weight: 800;
+  padding: 4px 0;
+}
+.tip-box {
+  background: linear-gradient(135deg, var(--accent-bg), transparent);
+  border: 1.5px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.7;
+}
+.tip-box .tip-title {
+  font-size: 12px; font-weight: 800;
+  color: var(--accent2); margin-bottom: 6px;
+}
+
+/* ── 문제 공략법 ── */
+.strategy-block { margin-bottom: 28px; }
+.strategy-block h3 {
+  font-size: 15px; font-weight: 900;
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.kw-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 8px;
+}
+.kw-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  transition: all var(--transition);
+}
+.kw-card:hover { border-color: var(--border2); }
+.kw-keyword {
+  font-size: 12px; font-weight: 800;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-bottom: 5px;
+}
+.kw-phrases {
+  display: flex; flex-wrap: wrap; gap: 4px;
+  margin-bottom: 7px;
+}
+.kw-phrase {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 2px 7px;
+  font-size: 11px;
+  color: var(--text2);
+  font-weight: 600;
+}
+.kw-answer {
+  font-size: 13px; font-weight: 900;
+  color: var(--accent2);
+}
+.trap-list { display: flex; flex-direction: column; gap: 8px; }
+.trap-item {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-left: 4px solid var(--wrong);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text2);
+}
+.trap-item strong { color: var(--text); }
+.trap-item .correct-arrow {
+  color: var(--correct);
+  font-weight: 800;
+  margin-top: 4px;
+  display: block;
+  font-size: 12px;
+}
+.decision-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 10px;
+}
+.decision-q {
+  font-size: 14px; font-weight: 800;
+  color: var(--text);
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.decision-opts { display: flex; flex-direction: column; gap: 6px; }
+.decision-opt {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13px; color: var(--text2); line-height: 1.6;
+}
+.decision-opt .arrow { color: var(--accent2); font-weight: 800; flex-shrink:0; font-size:14px; }
+.decision-opt .then { color: var(--correct); font-weight: 800; }
 </style>
 </head>
 <body>
@@ -863,6 +1058,7 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
     <button class="btn-primary" onclick="startQuiz()">▶ 퀴즈 시작하기</button>
     <button class="btn-secondary" onclick="showBookmarks()">⭐ 즐겨찾기 모아보기</button>
     <button class="btn-secondary" onclick="showGlossary()">📖 AWS 용어집</button>
+    <button class="btn-secondary" onclick="showTips()">🎯 헷갈리는 개념 & 공략법</button>
   </div>
 </div>
 
@@ -1285,6 +1481,442 @@ document.addEventListener('keydown',e=>{
 document.getElementById('q-count').addEventListener('input',function(){ document.getElementById('q-count-val').textContent=this.value; });
 initTheme();
 loadStats();
+/* ══════════════════════════════════════
+   TIPS PAGE
+══════════════════════════════════════ */
+function showTips(){
+  renderCompare();
+  showScreen('tips');
+}
+function switchTips(panel, btn){
+  document.querySelectorAll('.tips-panel').forEach(p=>p.style.display='none');
+  document.querySelectorAll('.tips-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tips-'+panel).style.display='block';
+  btn.classList.add('active');
+  if(panel==='strategy') renderStrategy();
+  else if(panel==='traps') renderTraps();
+  else if(panel==='decision') renderDecision();
+  else renderCompare();
+}
+
+/* ── 헷갈리는 개념 비교 ── */
+const COMPARES = [
+  {
+    title:"CloudWatch vs CloudTrail vs Config",
+    badge:"모니터링 3형제",
+    cols:3,
+    cards:[
+      {name:"CloudWatch", dot:"#06b6d4", hl:false, rows:[
+        {k:"목적",v:"<strong>성능·운영 모니터링</strong>"},
+        {k:"데이터",v:"메트릭, 로그, 이벤트"},
+        {k:"질문",v:"지금 CPU가 얼마야?"},
+        {k:"핵심",v:"경보→자동 조치(ASG, Lambda)"},
+      ]},
+      {name:"CloudTrail", dot:"#f97316", hl:false, rows:[
+        {k:"목적",v:"<strong>API 감사·보안 기록</strong>"},
+        {k:"데이터",v:"누가·언제·어디서·무엇을"},
+        {k:"질문",v:"누가 버킷을 삭제했어?"},
+        {k:"핵심",v:"규정 준수, 보안 조사"},
+      ]},
+      {name:"Config", dot:"#8b5cf6", hl:false, rows:[
+        {k:"목적",v:"<strong>리소스 구성 변경 추적</strong>"},
+        {k:"데이터",v:"리소스 구성 스냅샷"},
+        {k:"질문",v:"SG 규칙이 언제 바뀌었어?"},
+        {k:"핵심",v:"컴플라이언스 규칙 평가"},
+      ]},
+    ],
+    tip:"💡 <strong>CloudTrail</strong>은 '누가 했는지', <strong>Config</strong>는 '무엇이 바뀌었는지', <strong>CloudWatch</strong>는 '지금 어떤 상태인지' — 세 개 같이 쓰는 문제가 자주 출제!"
+  },
+  {
+    title:"SQS vs SNS vs EventBridge vs Kinesis",
+    badge:"메시징 4형제",
+    cols:2,
+    cards:[
+      {name:"SQS", dot:"#ec4899", hl:false, rows:[
+        {k:"패턴",v:"<strong>대기열(Queue)</strong> — 1:1"},
+        {k:"순서",v:"Standard(미보장) / FIFO(보장)"},
+        {k:"사용",v:"비동기 작업 디커플링, 재시도"},
+        {k:"특징",v:"소비자가 직접 폴링, 최대 14일 보관"},
+      ]},
+      {name:"SNS", dot:"#ec4899", hl:false, rows:[
+        {k:"패턴",v:"<strong>Pub-Sub</strong> — 1:다수"},
+        {k:"순서",v:"보장 안 됨(FIFO 토픽 별도)"},
+        {k:"사용",v:"팬아웃, 알림 브로드캐스트"},
+        {k:"특징",v:"Push 방식, SQS+SNS 조합 많이 출제"},
+      ]},
+      {name:"EventBridge", dot:"#ec4899", hl:false, rows:[
+        {k:"패턴",v:"<strong>이벤트 버스</strong> — 규칙 기반"},
+        {k:"순서",v:"보장 안 됨"},
+        {k:"사용",v:"AWS 서비스 이벤트 라우팅, SaaS 통합"},
+        {k:"특징",v:"스케줄(cron), 이벤트 패턴 매칭"},
+      ]},
+      {name:"Kinesis Streams", dot:"#ec4899", hl:false, rows:[
+        {k:"패턴",v:"<strong>실시간 스트림</strong> — 샤드"},
+        {k:"순서",v:"샤드 내 보장"},
+        {k:"사용",v:"실시간 로그, IoT, 클릭스트림"},
+        {k:"특징",v:"여러 소비자 동시·데이터 재처리 가능"},
+      ]},
+    ],
+    tip:"💡 <strong>'디커플링'→SQS</strong>, <strong>'팬아웃'→SNS</strong>, <strong>'AWS 이벤트 트리거'→EventBridge</strong>, <strong>'실시간 대용량 스트리밍'→Kinesis</strong> 키워드로 구분!"
+  },
+  {
+    title:"RDS Multi-AZ vs Read Replica",
+    badge:"RDS 고가용성 vs 성능",
+    cols:2,
+    cards:[
+      {name:"Multi-AZ", dot:"#8b5cf6", hl:false, rows:[
+        {k:"목적",v:"<strong>고가용성(HA)</strong>"},
+        {k:"복제",v:"동기(Synchronous)"},
+        {k:"읽기",v:"Standby는 읽기 불가"},
+        {k:"Failover",v:"자동 (1~2분, DNS 변경)"},
+        {k:"리전",v:"동일 리전, 다른 AZ"},
+      ]},
+      {name:"Read Replica", dot:"#8b5cf6", hl:false, rows:[
+        {k:"목적",v:"<strong>읽기 성능·분산</strong>"},
+        {k:"복제",v:"비동기(Asynchronous)"},
+        {k:"읽기",v:"읽기 전용 엔드포인트"},
+        {k:"Failover",v:"수동 승격 필요"},
+        {k:"리전",v:"동일·다른 리전 가능"},
+      ]},
+    ],
+    tip:"💡 <strong>장애 복구·가용성→Multi-AZ</strong>, <strong>읽기 트래픽 부하 분산→Read Replica</strong>. 두 개를 동시에 쓸 수도 있음!"
+  },
+  {
+    title:"보안 그룹(SG) vs 네트워크 ACL(NACL)",
+    badge:"방화벽 2종",
+    cols:2,
+    cards:[
+      {name:"보안 그룹", dot:"#f43f5e", hl:false, rows:[
+        {k:"레벨",v:"<strong>인스턴스</strong> 수준"},
+        {k:"상태",v:"<strong>Stateful</strong> (응답 자동 허용)"},
+        {k:"규칙",v:"허용 규칙만 (거부 불가)"},
+        {k:"평가",v:"모든 규칙 검사 후 결정"},
+        {k:"기본",v:"인바운드 전체 거부"},
+      ]},
+      {name:"네트워크 ACL", dot:"#f43f5e", hl:false, rows:[
+        {k:"레벨",v:"<strong>서브넷</strong> 수준"},
+        {k:"상태",v:"<strong>Stateless</strong> (양방향 별도 규칙)"},
+        {k:"규칙",v:"허용 + <strong>거부</strong> 규칙"},
+        {k:"평가",v:"번호 순서대로 (낮은 번호 우선)"},
+        {k:"기본",v:"인바운드 전체 허용"},
+      ]},
+    ],
+    tip:"💡 <strong>특정 IP 차단(거부)→NACL</strong>, <strong>인스턴스 간 세밀한 허용→SG</strong>. IP 차단 요구사항이 나오면 NACL!"
+  },
+  {
+    title:"ALB vs NLB vs GWLB",
+    badge:"로드밸런서 3종",
+    cols:3,
+    cards:[
+      {name:"ALB", dot:"#10b981", hl:false, rows:[
+        {k:"레이어",v:"<strong>L7 (HTTP/HTTPS)</strong>"},
+        {k:"라우팅",v:"URL경로, 호스트헤더, 쿼리"},
+        {k:"타겟",v:"EC2, ECS, Lambda, IP"},
+        {k:"특징",v:"WebSocket, HTTP/2, gRPC"},
+        {k:"사용",v:"마이크로서비스, 웹앱"},
+      ]},
+      {name:"NLB", dot:"#10b981", hl:false, rows:[
+        {k:"레이어",v:"<strong>L4 (TCP/UDP/TLS)</strong>"},
+        {k:"라우팅",v:"IP+포트"},
+        {k:"타겟",v:"EC2, IP, ALB"},
+        {k:"특징",v:"고정 IP/EIP, 초저지연"},
+        {k:"사용",v:"게임, IoT, 금융 실시간"},
+      ]},
+      {name:"GWLB", dot:"#10b981", hl:false, rows:[
+        {k:"레이어",v:"<strong>L3 (IP)</strong>"},
+        {k:"라우팅",v:"GENEVE 터널링"},
+        {k:"타겟",v:"어플라이언스(방화벽, IDS)"},
+        {k:"특징",v:"트래픽 투명 검사"},
+        {k:"사용",v:"인라인 보안 어플라이언스"},
+      ]},
+    ],
+    tip:"💡 <strong>'콘텐츠 기반 라우팅'→ALB</strong>, <strong>'고정IP/초저지연'→NLB</strong>, <strong>'방화벽 인라인 삽입'→GWLB</strong>"
+  },
+  {
+    title:"CloudFront vs Global Accelerator",
+    badge:"글로벌 가속 2종",
+    cols:2,
+    cards:[
+      {name:"CloudFront", dot:"#10b981", hl:false, rows:[
+        {k:"목적",v:"<strong>콘텐츠 캐싱 CDN</strong>"},
+        {k:"프로토콜",v:"HTTP/HTTPS"},
+        {k:"IP",v:"동적 (엣지마다 다름)"},
+        {k:"캐싱",v:"정적·동적 콘텐츠"},
+        {k:"사용",v:"웹사이트, 이미지, 동영상"},
+      ]},
+      {name:"Global Accelerator", dot:"#10b981", hl:false, rows:[
+        {k:"목적",v:"<strong>네트워크 경로 최적화</strong>"},
+        {k:"프로토콜",v:"TCP/UDP (HTTP도 가능)"},
+        {k:"IP",v:"<strong>고정 Anycast IP 2개</strong>"},
+        {k:"캐싱",v:"없음 (캐시 X)"},
+        {k:"사용",v:"게임, IoT, 비HTTP 실시간"},
+      ]},
+    ],
+    tip:"💡 <strong>'캐싱·콘텐츠 배포'→CloudFront</strong>, <strong>'고정IP·TCP/UDP·빠른 장애 전환'→Global Accelerator</strong>. 둘 다 DDoS 방어 포함!"
+  },
+  {
+    title:"Secrets Manager vs SSM Parameter Store",
+    badge:"비밀 저장소 2종",
+    cols:2,
+    cards:[
+      {name:"Secrets Manager", dot:"#f43f5e", hl:false, rows:[
+        {k:"비용",v:"유료 (비밀당 월 $0.40)"},
+        {k:"핵심",v:"<strong>자동 로테이션</strong> 내장"},
+        {k:"통합",v:"RDS·Redshift 자격증명 갱신"},
+        {k:"크기",v:"최대 64KB"},
+        {k:"사용",v:"DB 비밀번호, API 키 로테이션"},
+      ]},
+      {name:"Parameter Store", dot:"#06b6d4", hl:false, rows:[
+        {k:"비용",v:"Standard <strong>무료</strong>, Advanced 유료"},
+        {k:"핵심",v:"구성 데이터·계층 경로 관리"},
+        {k:"통합",v:"KMS로 암호화 가능"},
+        {k:"크기",v:"4KB(Standard)/8KB(Advanced)"},
+        {k:"사용",v:"앱 설정값, 환경변수 저장"},
+      ]},
+    ],
+    tip:"💡 <strong>'자동 로테이션 필요'→Secrets Manager</strong>, <strong>'설정값 저장·무료'→Parameter Store</strong>. 로테이션이 핵심 차이!"
+  },
+  {
+    title:"S3 스토리지 클래스 비교",
+    badge:"S3 스토리지 계층",
+    cols:2,
+    cards:[
+      {name:"Standard / Standard-IA / One Zone-IA", dot:"#3b82f6", hl:false, rows:[
+        {k:"Standard",v:"<strong>빈번한 액세스</strong> · 즉시 검색"},
+        {k:"Standard-IA",v:"<strong>비빈번 액세스</strong> · 즉시 검색 · 저장비↓"},
+        {k:"One Zone-IA",v:"단일 AZ · IA보다 20% 저렴 · 재생성 가능 데이터"},
+        {k:"공통",v:"30일 최소 보관, 검색 비용 발생"},
+      ]},
+      {name:"Glacier 3종 / Intelligent-Tiering", dot:"#3b82f6", hl:false, rows:[
+        {k:"Instant",v:"<strong>Glacier</strong> · 즉시 검색 · 분기 1회"},
+        {k:"Flexible",v:"<strong>Glacier</strong> · 1~12h · 장기 아카이브"},
+        {k:"Deep Archive",v:"<strong>Glacier</strong> · 12~48h · 최저비용"},
+        {k:"I-Tiering",v:"접근 패턴 불규칙 데이터 자동 계층 이동"},
+      ]},
+    ],
+    tip:"💡 <strong>'접근 빈도 예측 불가'→Intelligent-Tiering</strong>, <strong>'7~10년 규정 준수 보관'→Glacier Deep Archive</strong>, <strong>'비빈번 but 즉시 필요'→Standard-IA</strong>"
+  },
+  {
+    title:"VPC Peering vs Transit Gateway vs PrivateLink",
+    badge:"VPC 연결 3종",
+    cols:3,
+    cards:[
+      {name:"VPC Peering", dot:"#10b981", hl:false, rows:[
+        {k:"구조",v:"1:1 직접 연결"},
+        {k:"전이",v:"<strong>전이적 라우팅 불가</strong>"},
+        {k:"규모",v:"소규모 (수십 VPC)"},
+        {k:"비용",v:"데이터 전송 비용만"},
+        {k:"특징",v:"단순, 지연 최소"},
+      ]},
+      {name:"Transit Gateway", dot:"#10b981", hl:false, rows:[
+        {k:"구조",v:"허브-스포크 중앙 집중"},
+        {k:"전이",v:"<strong>전이적 라우팅 지원</strong>"},
+        {k:"규모",v:"대규모 (수천 VPC)"},
+        {k:"비용",v:"첨부 + 데이터 전송"},
+        {k:"특징",v:"VPN·DX 통합, 라우팅 테이블"},
+      ]},
+      {name:"PrivateLink", dot:"#10b981", hl:false, rows:[
+        {k:"구조",v:"서비스 노출 (단방향)"},
+        {k:"전이",v:"해당 없음"},
+        {k:"규모",v:"서비스 제공자:소비자"},
+        {k:"비용",v:"엔드포인트 + 데이터"},
+        {k:"특징",v:"CIDR 겹쳐도 OK, 인터넷 불필요"},
+      ]},
+    ],
+    tip:"💡 <strong>'많은 VPC 중앙 연결'→Transit GW</strong>, <strong>'2개 VPC 단순 연결'→Peering</strong>, <strong>'서비스를 프라이빗 노출'→PrivateLink</strong>"
+  },
+];
+
+function renderCompare(){
+  const c = document.getElementById('tips-compare');
+  c.innerHTML = '';
+  COMPARES.forEach(cmp => {
+    const sec = document.createElement('div');
+    sec.className = 'compare-section';
+    const colClass = cmp.cols===3 ? 'col3' : 'col2';
+    const cardsHtml = cmp.cards.map(card => {
+      const rowsHtml = card.rows.map(r =>
+        `<div class="cmp-row"><span class="k">${r.k}</span><span class="v">${r.v}</span></div>`
+      ).join('');
+      return `<div class="cmp-card${card.hl?' hl':''}">
+        <div class="cmp-name"><span class="dot" style="background:${card.dot}"></span>${card.name}</div>
+        <div class="cmp-rows">${rowsHtml}</div>
+      </div>`;
+    }).join('');
+    sec.innerHTML = `
+      <h3>${cmp.title} <span class="badge">${cmp.badge}</span></h3>
+      <div class="compare-grid ${colClass}">${cardsHtml}</div>
+      ${cmp.tip ? `<div class="tip-box"><div class="tip-title">💡 핵심 구분법</div>${cmp.tip}</div>` : ''}`;
+    c.appendChild(sec);
+  });
+}
+
+/* ── 문제 공략 키워드 ── */
+const KEYWORDS = [
+  {kw:"운영 오버헤드 최소화", phrases:["최소한의 운영","관리 불필요","운영 복잡성 최소"], answer:"서버리스 우선 (Lambda·Fargate·Aurora Serverless·Athena)"},
+  {kw:"비용 최적화", phrases:["비용 효율","가장 저렴","비용 절감"], answer:"Spot Instance · Reserved · Savings Plans · S3 Lifecycle"},
+  {kw:"고가용성 (HA)", phrases:["중단 없이","장애 허용","가용성 향상"], answer:"Multi-AZ · Auto Scaling · Route 53 Failover · ELB"},
+  {kw:"재해 복구 (DR)", phrases:["재해 복구","RPO·RTO","다른 리전"], answer:"Aurora Global DB · S3 CRR · DynamoDB Global Tables"},
+  {kw:"실시간 스트리밍", phrases:["실시간 처리","스트리밍","대용량 이벤트"], answer:"Kinesis Data Streams · MSK(Kafka)"},
+  {kw:"서버리스 ETL", phrases:["서버리스 데이터 변환","데이터 통합","관리 없는 ETL"], answer:"AWS Glue · Lambda"},
+  {kw:"S3 분석·쿼리", phrases:["S3 데이터 쿼리","서버리스 SQL"], answer:"Amazon Athena (+ Glue Catalog)"},
+  {kw:"웹 공격 차단", phrases:["SQL 인젝션","XSS","웹 공격"], answer:"AWS WAF (CloudFront·ALB에 연결)"},
+  {kw:"DDoS 방어", phrases:["DDoS","분산 서비스 거부"], answer:"AWS Shield Standard(자동) / Advanced(유료)"},
+  {kw:"민감 데이터 탐지", phrases:["PII","개인정보","민감 데이터"], answer:"Amazon Macie (S3)"},
+  {kw:"API 감사·이력", phrases:["누가 삭제했는지","API 호출 이력","감사 로그"], answer:"AWS CloudTrail"},
+  {kw:"구성 변경 추적", phrases:["리소스 구성 변경","컴플라이언스 검사"], answer:"AWS Config"},
+  {kw:"온프레미스 연결", phrases:["데이터센터 연결","하이브리드"], answer:"Direct Connect(안정) / VPN(빠른구성)"},
+  {kw:"컨테이너 오케스트레이션", phrases:["컨테이너 관리","Docker 클러스터"], answer:"ECS(AWS 네이티브) / EKS(Kubernetes)"},
+  {kw:"자격증명 자동 갱신", phrases:["비밀번호 자동 교체","DB 자격증명 로테이션"], answer:"AWS Secrets Manager"},
+  {kw:"글로벌 사용자 지연", phrases:["전 세계 낮은 지연","글로벌 배포"], answer:"CloudFront(캐시) / Global Accelerator(TCP/UDP)"},
+  {kw:"대용량 마이그레이션", phrases:["수십 TB·PB 이전","오프라인 전송"], answer:"AWS Snowball / Snowmobile"},
+  {kw:"데이터 동기화", phrases:["온프레미스→AWS 전송","반복 데이터 이동"], answer:"AWS DataSync"},
+  {kw:"공유 파일 시스템", phrases:["여러 EC2 공유","NFS 마운트"], answer:"Amazon EFS"},
+  {kw:"Windows 파일 서버", phrases:["SMB","Active Directory 파일"], answer:"FSx for Windows File Server"},
+  {kw:"DB 읽기 부하 분산", phrases:["읽기 트래픽 분산","보고서 쿼리 분리"], answer:"RDS Read Replica / Aurora Replica"},
+  {kw:"인메모리 캐시", phrases:["DB 캐시","밀리초 응답","세션 저장"], answer:"ElastiCache Redis · DynamoDB DAX"},
+  {kw:"IoT 데이터 수집", phrases:["IoT 디바이스","센서 데이터"], answer:"IoT Core → Kinesis / DynamoDB / S3"},
+  {kw:"ML 모델 학습·배포", phrases:["머신러닝 플랫폼","모델 학습"], answer:"Amazon SageMaker"},
+];
+
+function renderStrategy(){
+  const c = document.getElementById('tips-strategy');
+  if(c.dataset.rendered) return;
+  c.dataset.rendered = '1';
+  const block = document.createElement('div');
+  block.className = 'strategy-block';
+  block.innerHTML = '<h3>🗝️ 키워드 → 서비스 매핑</h3>';
+  const grid = document.createElement('div');
+  grid.className = 'kw-grid';
+  KEYWORDS.forEach(kw => {
+    const card = document.createElement('div');
+    card.className = 'kw-card';
+    const phrasesHtml = kw.phrases.map(p=>`<span class="kw-phrase">"${p}"</span>`).join('');
+    card.innerHTML = `
+      <div class="kw-keyword">${kw.kw}</div>
+      <div class="kw-phrases">${phrasesHtml}</div>
+      <div class="kw-answer">→ ${kw.answer}</div>`;
+    grid.appendChild(card);
+  });
+  block.appendChild(grid);
+  c.appendChild(block);
+}
+
+/* ── 자주 나오는 함정 ── */
+const TRAPS = [
+  {wrong:"<strong>CloudWatch</strong>가 API 호출 기록을 담당한다", right:"→ API 호출 감사는 <strong>CloudTrail</strong>. CloudWatch는 성능 메트릭·로그 모니터링"},
+  {wrong:"<strong>Multi-AZ</strong>로 읽기 성능이 향상된다", right:"→ Multi-AZ Standby는 읽기 불가. 읽기 분산은 <strong>Read Replica</strong>"},
+  {wrong:"<strong>Spot Instance</strong>는 언제든 저렴하게 쓸 수 있다", right:"→ 2분 전 중단 알림, 언제든 회수 가능. 중단 허용 배치 작업에만 적합"},
+  {wrong:"<strong>NAT Gateway</strong>는 인터넷→프라이빗 서브넷 인바운드도 허용한다", right:"→ NAT Gateway는 아웃바운드 전용. 인바운드는 차단됨"},
+  {wrong:"<strong>SCP</strong>는 IAM 역할에 권한을 부여한다", right:"→ SCP는 최대 허용 권한의 '상한선'. 허용 목록이 없으면 아무것도 못 함"},
+  {wrong:"<strong>S3 CORS</strong>가 퍼블릭 접근을 막아준다", right:"→ CORS는 브라우저 크로스 오리진 정책. 보안은 버킷 정책+Block Public Access"},
+  {wrong:"<strong>CloudFront</strong>는 모든 프로토콜을 가속한다", right:"→ CloudFront는 HTTP/HTTPS CDN. TCP/UDP 가속은 <strong>Global Accelerator</strong>"},
+  {wrong:"<strong>VPC Peering</strong>은 A-B-C 연결 시 A↔C가 자동으로 된다", right:"→ VPC Peering은 전이적 라우팅 불가. A↔C는 별도 Peering 필요. Transit GW 활용"},
+  {wrong:"<strong>EBS 볼륨</strong>은 여러 EC2에서 동시에 마운트 가능하다", right:"→ 기본 EBS는 단일 EC2 전용. 다중 마운트는 <strong>EFS</strong>(NFS) 사용"},
+  {wrong:"<strong>Lambda</strong>는 무제한 실행 시간을 지원한다", right:"→ Lambda 최대 실행 시간은 <strong>15분</strong>. 장기 작업은 ECS·Batch·Step Functions"},
+  {wrong:"<strong>Secrets Manager</strong>와 <strong>Parameter Store</strong>는 기능이 동일하다", right:"→ Secrets Manager는 자동 로테이션이 핵심. Parameter Store는 무료 설정값 저장"},
+  {wrong:"<strong>Security Group</strong>에 거부 규칙을 추가할 수 있다", right:"→ SG는 허용 규칙만 가능. IP 거부는 <strong>Network ACL</strong>에서 가능"},
+  {wrong:"<strong>Direct Connect</strong>는 즉시 설정해 바로 사용 가능하다", right:"→ DX는 물리 회선 연결로 수 주~수 개월 소요. 빠른 연결은 <strong>Site-to-Site VPN</strong>"},
+  {wrong:"<strong>Aurora Read Replica</strong>는 Multi-AZ와 동일한 역할이다", right:"→ Read Replica=읽기 분산, Multi-AZ=장애 복구. Aurora는 두 기능을 동시에 제공"},
+  {wrong:"<strong>SQS FIFO</strong>는 Standard보다 처리량이 높다", right:"→ FIFO는 초당 300(배치 3,000)건으로 Standard보다 낮음. 순서 보장이 목적"},
+];
+
+function renderTraps(){
+  const c = document.getElementById('tips-traps');
+  if(c.dataset.rendered) return;
+  c.dataset.rendered = '1';
+  const block = document.createElement('div');
+  block.className = 'strategy-block';
+  block.innerHTML = '<h3>⚠️ 자주 나오는 함정 & 오개념</h3><div class="trap-list" id="trap-list"></div>';
+  c.appendChild(block);
+  const list = block.querySelector('#trap-list');
+  TRAPS.forEach(t => {
+    const item = document.createElement('div');
+    item.className = 'trap-item';
+    item.innerHTML = `❌ ${t.wrong}<span class="correct-arrow">${t.right}</span>`;
+    list.appendChild(item);
+  });
+}
+
+/* ── 서비스 선택 트리 ── */
+const DECISIONS = [
+  {
+    q:"스토리지 — 어떤 서비스를 써야 할까?",
+    opts:[
+      {if:"여러 서버가 동시에 공유·마운트", then:"Amazon EFS (NFS)"},
+      {if:"단일 EC2 전용 블록 스토리지", then:"Amazon EBS (gp3/io2)"},
+      {if:"객체 저장, 정적 웹, 데이터 레이크", then:"Amazon S3"},
+      {if:"Windows SMB + Active Directory", then:"FSx for Windows"},
+      {if:"HPC·ML 고성능 병렬 파일", then:"FSx for Lustre"},
+      {if:"7년 이상 규정 준수 아카이브", then:"S3 Glacier Deep Archive"},
+    ]
+  },
+  {
+    q:"데이터베이스 — 어떤 서비스를 써야 할까?",
+    opts:[
+      {if:"관계형 DB, 완전관리형", then:"Amazon RDS (MySQL/PostgreSQL 등)"},
+      {if:"관계형 DB + 최고 성능·자동 스케일", then:"Amazon Aurora"},
+      {if:"NoSQL 키-값, 밀리초 응답, 서버리스", then:"Amazon DynamoDB"},
+      {if:"인메모리 캐시, 세션 저장", then:"ElastiCache Redis/Memcached"},
+      {if:"페타바이트 분석, OLAP", then:"Amazon Redshift"},
+      {if:"그래프 관계 탐색", then:"Amazon Neptune"},
+      {if:"MongoDB 호환 도큐먼트", then:"Amazon DocumentDB"},
+    ]
+  },
+  {
+    q:"메시징 — 어떤 서비스를 써야 할까?",
+    opts:[
+      {if:"비동기 작업 디커플링, 재시도", then:"Amazon SQS"},
+      {if:"다수 구독자에 동시 알림(팬아웃)", then:"Amazon SNS"},
+      {if:"AWS 이벤트 기반 자동화, SaaS 통합", then:"Amazon EventBridge"},
+      {if:"실시간 대용량 스트리밍·재처리", then:"Amazon Kinesis Data Streams"},
+      {if:"스트리밍→S3/Redshift 자동 적재", then:"Amazon Kinesis Firehose"},
+      {if:"기존 Kafka 워크로드 이전", then:"Amazon MSK"},
+    ]
+  },
+  {
+    q:"네트워크 연결 — 어떤 서비스를 써야 할까?",
+    opts:[
+      {if:"온프레미스↔AWS, 빠른 구성, 암호화", then:"Site-to-Site VPN"},
+      {if:"온프레미스↔AWS, 안정적 전용 회선", then:"AWS Direct Connect"},
+      {if:"2개 VPC 단순 프라이빗 연결", then:"VPC Peering"},
+      {if:"다수 VPC 중앙 연결, 전이적 라우팅", then:"AWS Transit Gateway"},
+      {if:"서비스를 프라이빗으로 노출", then:"AWS PrivateLink"},
+      {if:"AWS 서비스를 인터넷 없이 접근", then:"VPC Endpoint (Gateway/Interface)"},
+    ]
+  },
+  {
+    q:"컴퓨팅 — 어떤 서비스를 써야 할까?",
+    opts:[
+      {if:"이벤트 기반, 서버리스, 15분 이하", then:"AWS Lambda"},
+      {if:"컨테이너, AWS 네이티브 관리", then:"Amazon ECS + Fargate"},
+      {if:"컨테이너, Kubernetes 필요", then:"Amazon EKS"},
+      {if:"장기 배치 처리, HPC", then:"AWS Batch"},
+      {if:"코드만 배포, PaaS", then:"AWS Elastic Beanstalk"},
+      {if:"예측 불가 트래픽, 비용 절감", then:"EC2 Spot + Auto Scaling"},
+      {if:"장기 안정 워크로드, 비용 절감", then:"EC2 Reserved / Savings Plans"},
+    ]
+  },
+];
+
+function renderDecision(){
+  const c = document.getElementById('tips-decision');
+  if(c.dataset.rendered) return;
+  c.dataset.rendered = '1';
+  DECISIONS.forEach(d => {
+    const card = document.createElement('div');
+    card.className = 'decision-card';
+    const optsHtml = d.opts.map(o =>
+      `<div class="decision-opt">
+        <span class="arrow">▸</span>
+        <span><span style="color:var(--text2)">${o.if}</span> → <span class="then">${o.then}</span></span>
+      </div>`
+    ).join('');
+    card.innerHTML = `<div class="decision-q">${d.q}</div><div class="decision-opts">${optsHtml}</div>`;
+    c.appendChild(card);
+  });
+}
+
 
 /* ══════════════════════════════════════
    GLOSSARY DATA
@@ -1485,6 +2117,25 @@ function toggleTerm(head){
   <div class="cat-tabs" id="cat-tabs"></div>
   <div class="glossary-count" id="glossary-count"></div>
   <div id="glossary-list"></div>
+</div>
+
+
+<!-- ═══ TIPS ═══ -->
+<div id="tips" class="screen">
+  <div class="page-header">
+    <button class="btn-icon" onclick="showHome()">←</button>
+    <h2>🎯 개념 비교 & 공략법</h2>
+  </div>
+  <div class="tips-tabs">
+    <button class="tips-tab active" onclick="switchTips('compare',this)">🔀 헷갈리는 개념 비교</button>
+    <button class="tips-tab" onclick="switchTips('strategy',this)">🗝️ 문제 공략 키워드</button>
+    <button class="tips-tab" onclick="switchTips('traps',this)">⚠️ 자주 나오는 함정</button>
+    <button class="tips-tab" onclick="switchTips('decision',this)">🌲 서비스 선택 트리</button>
+  </div>
+  <div id="tips-compare" class="tips-panel"></div>
+  <div id="tips-strategy" class="tips-panel" style="display:none"></div>
+  <div id="tips-traps" class="tips-panel" style="display:none"></div>
+  <div id="tips-decision" class="tips-panel" style="display:none"></div>
 </div>
 
 </body>

@@ -1502,234 +1502,435 @@ function switchTips(panel, btn){
 /* ── 헷갈리는 개념 비교 ── */
 const COMPARES = [
   {
-    title:"CloudWatch vs CloudTrail vs Config",
-    badge:"모니터링 3형제",
+    title:"CloudWatch vs CloudTrail vs AWS Config",
+    badge:"모니터링 3형제 ★★★",
     cols:3,
     cards:[
-      {name:"CloudWatch", dot:"#06b6d4", hl:false, rows:[
-        {k:"목적",v:"<strong>성능·운영 모니터링</strong>"},
-        {k:"데이터",v:"메트릭, 로그, 이벤트"},
-        {k:"질문",v:"지금 CPU가 얼마야?"},
-        {k:"핵심",v:"경보→자동 조치(ASG, Lambda)"},
+      {name:"CloudWatch", dot:"#06b6d4", rows:[
+        {k:"핵심 역할",v:"<strong>성능·운영 모니터링</strong>"},
+        {k:"데이터 종류",v:"메트릭, 로그, 경보, 대시보드"},
+        {k:"핵심 질문",v:"지금 CPU가 몇 %야? 메모리 부족해?"},
+        {k:"EC2 기본 메트릭",v:"CPU·네트워크·디스크 (메모리·프로세스는 <strong>에이전트 필요</strong>)"},
+        {k:"자동화",v:"경보 → Auto Scaling·Lambda·SNS 알림 트리거"},
+        {k:"로그",v:"CloudWatch Logs로 Lambda·ECS·API GW 로그 수집"},
       ]},
-      {name:"CloudTrail", dot:"#f97316", hl:false, rows:[
-        {k:"목적",v:"<strong>API 감사·보안 기록</strong>"},
-        {k:"데이터",v:"누가·언제·어디서·무엇을"},
-        {k:"질문",v:"누가 버킷을 삭제했어?"},
-        {k:"핵심",v:"규정 준수, 보안 조사"},
+      {name:"CloudTrail", dot:"#f97316", rows:[
+        {k:"핵심 역할",v:"<strong>API 호출 감사·보안 이력</strong>"},
+        {k:"데이터 종류",v:"누가·언제·어디서·무엇을(API 요청)"},
+        {k:"핵심 질문",v:"누가 S3 버킷을 삭제했나? 언제 SG를 변경했나?"},
+        {k:"보관 기간",v:"기본 90일. S3 추가 보관으로 장기 유지"},
+        {k:"이벤트 종류",v:"<strong>관리 이벤트</strong>(기본 ON)·<strong>데이터 이벤트</strong>(S3·Lambda, 별도 활성화)"},
+        {k:"활용",v:"보안 조사·규정 준수·이상 탐지 기반 데이터"},
       ]},
-      {name:"Config", dot:"#8b5cf6", hl:false, rows:[
-        {k:"목적",v:"<strong>리소스 구성 변경 추적</strong>"},
-        {k:"데이터",v:"리소스 구성 스냅샷"},
-        {k:"질문",v:"SG 규칙이 언제 바뀌었어?"},
-        {k:"핵심",v:"컴플라이언스 규칙 평가"},
+      {name:"AWS Config", dot:"#8b5cf6", rows:[
+        {k:"핵심 역할",v:"<strong>리소스 구성 변경 추적·평가</strong>"},
+        {k:"데이터 종류",v:"리소스 구성 스냅샷·변경 이력"},
+        {k:"핵심 질문",v:"SG 규칙이 언제 어떻게 바뀌었나?"},
+        {k:"규칙 평가",v:"Config Rules로 규정 준수 자동 평가·위반 탐지"},
+        {k:"차이",v:"CloudTrail: <strong>누가 API 호출</strong> / Config: <strong>구성이 어떻게 변했나</strong>"},
+        {k:"활용",v:"컴플라이언스 감사·인프라 드리프트 탐지"},
       ]},
     ],
-    tip:"💡 <strong>CloudTrail</strong>은 '누가 했는지', <strong>Config</strong>는 '무엇이 바뀌었는지', <strong>CloudWatch</strong>는 '지금 어떤 상태인지' — 세 개 같이 쓰는 문제가 자주 출제!"
+    tip:"💡 <strong>CloudTrail</strong>=누가 했는지(API 감사), <strong>Config</strong>=무엇이 바뀌었는지(구성 변경), <strong>CloudWatch</strong>=지금 어떤 상태인지(성능 지표). 시험에 3개가 동시에 선택지로 나오면 질문의 '목적'으로 구분!"
   },
   {
     title:"SQS vs SNS vs EventBridge vs Kinesis",
-    badge:"메시징 4형제",
+    badge:"메시징 4형제 ★★★",
     cols:2,
     cards:[
-      {name:"SQS", dot:"#ec4899", hl:false, rows:[
-        {k:"패턴",v:"<strong>대기열(Queue)</strong> — 1:1"},
-        {k:"순서",v:"Standard(미보장) / FIFO(보장)"},
-        {k:"사용",v:"비동기 작업 디커플링, 재시도"},
-        {k:"특징",v:"소비자가 직접 폴링, 최대 14일 보관"},
+      {name:"SQS (Simple Queue Service)", dot:"#ec4899", rows:[
+        {k:"패턴",v:"<strong>대기열(Queue) — 1:1 소비</strong>"},
+        {k:"방식",v:"<strong>Pull(폴링)</strong> — 소비자가 직접 메시지 가져옴"},
+        {k:"순서",v:"Standard(미보장·최소 1회) / FIFO(순서보장·정확히 1회)"},
+        {k:"보관",v:"최대 <strong>14일</strong>. 기본 4일"},
+        {k:"크기",v:"메시지 최대 256KB (S2N 확장 시 2GB)"},
+        {k:"사용",v:"비동기 작업 디커플링, 실패 재시도, DLQ 연계"},
       ]},
-      {name:"SNS", dot:"#ec4899", hl:false, rows:[
-        {k:"패턴",v:"<strong>Pub-Sub</strong> — 1:다수"},
-        {k:"순서",v:"보장 안 됨(FIFO 토픽 별도)"},
-        {k:"사용",v:"팬아웃, 알림 브로드캐스트"},
-        {k:"특징",v:"Push 방식, SQS+SNS 조합 많이 출제"},
+      {name:"SNS (Simple Notification Service)", dot:"#ec4899", rows:[
+        {k:"패턴",v:"<strong>Pub-Sub — 1:다수 팬아웃</strong>"},
+        {k:"방식",v:"<strong>Push</strong> — 토픽이 구독자에게 즉시 전달"},
+        {k:"순서",v:"미보장 (SNS FIFO 토픽 별도 존재)"},
+        {k:"보관",v:"없음 — 전달 실패 시 재시도 후 소멸"},
+        {k:"구독자",v:"SQS·Lambda·HTTP·이메일·SMS·모바일 푸시"},
+        {k:"사용",v:"알림 브로드캐스트, SNS→SQS 팬아웃 패턴"},
       ]},
-      {name:"EventBridge", dot:"#ec4899", hl:false, rows:[
-        {k:"패턴",v:"<strong>이벤트 버스</strong> — 규칙 기반"},
-        {k:"순서",v:"보장 안 됨"},
-        {k:"사용",v:"AWS 서비스 이벤트 라우팅, SaaS 통합"},
-        {k:"특징",v:"스케줄(cron), 이벤트 패턴 매칭"},
+      {name:"Amazon EventBridge", dot:"#ec4899", rows:[
+        {k:"패턴",v:"<strong>이벤트 버스 — 규칙 기반 라우팅</strong>"},
+        {k:"방식",v:"이벤트 패턴 매칭 후 타겟으로 라우팅"},
+        {k:"소스",v:"AWS 서비스 이벤트, SaaS(Zendesk·Shopify), 커스텀"},
+        {k:"스케줄",v:"cron/rate 표현식으로 <strong>예약 실행</strong>"},
+        {k:"특징",v:"이벤트 버스 아카이브·재처리. Schema Registry"},
+        {k:"사용",v:"서비스 간 느슨한 결합, SaaS 통합, 자동화 트리거"},
       ]},
-      {name:"Kinesis Streams", dot:"#ec4899", hl:false, rows:[
-        {k:"패턴",v:"<strong>실시간 스트림</strong> — 샤드"},
-        {k:"순서",v:"샤드 내 보장"},
-        {k:"사용",v:"실시간 로그, IoT, 클릭스트림"},
-        {k:"특징",v:"여러 소비자 동시·데이터 재처리 가능"},
+      {name:"Kinesis Data Streams", dot:"#ec4899", rows:[
+        {k:"패턴",v:"<strong>실시간 스트리밍 — 다중 소비자 병렬</strong>"},
+        {k:"방식",v:"Pull 기반. 여러 소비자가 동일 데이터 독립 소비"},
+        {k:"순서",v:"<strong>샤드 내 순서 보장</strong>"},
+        {k:"보관",v:"기본 24시간, 최대 <strong>365일</strong> 재처리 가능"},
+        {k:"처리량",v:"샤드당 1MB/s 쓰기·2MB/s 읽기. 샤드 분할로 확장"},
+        {k:"사용",v:"실시간 클릭스트림·IoT·로그·ML 피처 파이프라인"},
       ]},
     ],
-    tip:"💡 <strong>'디커플링'→SQS</strong>, <strong>'팬아웃'→SNS</strong>, <strong>'AWS 이벤트 트리거'→EventBridge</strong>, <strong>'실시간 대용량 스트리밍'→Kinesis</strong> 키워드로 구분!"
+    tip:"💡 <strong>'비동기 디커플링·재시도'→SQS</strong> / <strong>'여러 수신자에게 동시 알림'→SNS</strong> / <strong>'AWS 서비스 이벤트 자동 처리'→EventBridge</strong> / <strong>'실시간 대용량 스트리밍·재처리'→Kinesis</strong><br><br>📌 <strong>SNS+SQS 팬아웃</strong>: SNS 토픽 → 여러 SQS 대기열 → 각 소비자. 대표 아키텍처 패턴!"
   },
   {
-    title:"RDS Multi-AZ vs Read Replica",
-    badge:"RDS 고가용성 vs 성능",
-    cols:2,
+    title:"RDS Multi-AZ vs Read Replica vs Aurora",
+    badge:"RDS 고가용성·성능 ★★★",
+    cols:3,
     cards:[
-      {name:"Multi-AZ", dot:"#8b5cf6", hl:false, rows:[
-        {k:"목적",v:"<strong>고가용성(HA)</strong>"},
-        {k:"복제",v:"동기(Synchronous)"},
-        {k:"읽기",v:"Standby는 읽기 불가"},
-        {k:"Failover",v:"자동 (1~2분, DNS 변경)"},
-        {k:"리전",v:"동일 리전, 다른 AZ"},
+      {name:"RDS Multi-AZ", dot:"#8b5cf6", rows:[
+        {k:"목적",v:"<strong>고가용성(HA) — 장애 복구</strong>"},
+        {k:"복제 방식",v:"<strong>동기(Synchronous)</strong> 복제"},
+        {k:"Standby",v:"읽기 불가·동일 리전 다른 AZ"},
+        {k:"Failover",v:"자동 (1~2분, DNS 엔드포인트 유지)"},
+        {k:"성능",v:"읽기 성능 향상 없음"},
+        {k:"비용",v:"추가 인스턴스 요금 발생"},
       ]},
-      {name:"Read Replica", dot:"#8b5cf6", hl:false, rows:[
+      {name:"Read Replica", dot:"#8b5cf6", rows:[
         {k:"목적",v:"<strong>읽기 성능·분산</strong>"},
-        {k:"복제",v:"비동기(Asynchronous)"},
-        {k:"읽기",v:"읽기 전용 엔드포인트"},
-        {k:"Failover",v:"수동 승격 필요"},
-        {k:"리전",v:"동일·다른 리전 가능"},
+        {k:"복제 방식",v:"<strong>비동기(Asynchronous)</strong> 복제"},
+        {k:"복제본",v:"읽기 전용 엔드포인트 제공"},
+        {k:"Failover",v:"수동 승격 필요 (자동 아님)"},
+        {k:"위치",v:"동일 리전·<strong>다른 리전 가능</strong>"},
+        {k:"개수",v:"MySQL·PostgreSQL 최대 15개"},
+      ]},
+      {name:"Aurora", dot:"#8b5cf6", rows:[
+        {k:"목적",v:"<strong>성능+HA 동시 해결</strong>"},
+        {k:"복제 방식",v:"공유 스토리지 (6개 사본·3 AZ)"},
+        {k:"Replica",v:"최대 15개, 읽기 가능 + <strong>자동 Failover</strong>"},
+        {k:"Failover",v:"30초 미만 (Read Replica 중 자동 승격)"},
+        {k:"성능",v:"MySQL 5배·PostgreSQL 3배 성능"},
+        {k:"특징",v:"스토리지 자동 확장 128TB, Serverless v2"},
       ]},
     ],
-    tip:"💡 <strong>장애 복구·가용성→Multi-AZ</strong>, <strong>읽기 트래픽 부하 분산→Read Replica</strong>. 두 개를 동시에 쓸 수도 있음!"
+    tip:"💡 <strong>'장애 자동 복구'→Multi-AZ</strong> / <strong>'읽기 부하 분산'→Read Replica</strong> / <strong>'고성능+HA 동시'→Aurora</strong><br><br>📌 Aurora는 Replica가 HA + 읽기 분산을 동시에 담당. RDS Multi-AZ처럼 별도 Standby 불필요!"
+  },
+  {
+    title:"EC2 구매 옵션 완전 비교",
+    badge:"비용 최적화 ★★★",
+    cols:2,
+    cards:[
+      {name:"On-Demand vs Reserved", dot:"#f97316", rows:[
+        {k:"On-Demand",v:"<strong>초/시간 단위 과금</strong>. 약정 없음. 유연하지만 가장 비쌈"},
+        {k:"Standard RI",v:"1·3년 약정, <strong>최대 72% 절감</strong>. 인스턴스 타입 변경 불가"},
+        {k:"Convertible RI",v:"약정 할인(최대 54%) + <strong>인스턴스 패밀리·리전 변경 가능</strong>"},
+        {k:"Scheduled RI",v:"특정 시간대(예: 평일 9~18시)만 예약"},
+        {k:"적합한 경우",v:"예측 가능·안정적 워크로드 (DB 서버·앱 서버)"},
+      ]},
+      {name:"Spot vs Savings Plans", dot:"#f97316", rows:[
+        {k:"Spot",v:"<strong>최대 90% 절감</strong>. AWS 잉여 용량. 2분 전 중단 알림"},
+        {k:"Spot 적합",v:"배치 처리·데이터 분석·CI/CD·ML 학습 (<strong>중단 허용</strong> 작업)"},
+        {k:"Spot 부적합",v:"웹 서버·DB 등 중단 불가 워크로드"},
+        {k:"Savings Plans",v:"<strong>$/시간 사용량 약정</strong>, Compute(EC2+Fargate+Lambda)·EC2 타입"},
+        {k:"Dedicated Host",v:"물리 서버 단독 점유. BYOL 라이선스·규정 준수"},
+        {k:"Dedicated Instance",v:"전용 하드웨어 실행. 서버 가시성 없음"},
+      ]},
+    ],
+    tip:"💡 비용 문제 접근법: <strong>예측 가능+장기→Reserved/Savings Plans</strong> / <strong>중단 허용+단기→Spot</strong> / <strong>유연+단기→On-Demand</strong><br><br>📌 <strong>Spot Fleet</strong>: 여러 인스턴스 타입·AZ 조합으로 Spot 중단 위험 분산!"
   },
   {
     title:"보안 그룹(SG) vs 네트워크 ACL(NACL)",
-    badge:"방화벽 2종",
+    badge:"방화벽 2종 ★★★",
     cols:2,
     cards:[
-      {name:"보안 그룹", dot:"#f43f5e", hl:false, rows:[
-        {k:"레벨",v:"<strong>인스턴스</strong> 수준"},
-        {k:"상태",v:"<strong>Stateful</strong> (응답 자동 허용)"},
-        {k:"규칙",v:"허용 규칙만 (거부 불가)"},
-        {k:"평가",v:"모든 규칙 검사 후 결정"},
-        {k:"기본",v:"인바운드 전체 거부"},
+      {name:"보안 그룹 (Security Group)", dot:"#f43f5e", rows:[
+        {k:"적용 범위",v:"<strong>인스턴스</strong> 레벨 (EC2·RDS·Lambda 등)"},
+        {k:"상태",v:"<strong>Stateful</strong> — 인바운드 허용 시 응답 자동 허용"},
+        {k:"규칙 종류",v:"<strong>허용 규칙만</strong> (거부 규칙 없음)"},
+        {k:"규칙 평가",v:"모든 규칙 검사 후 최종 결정"},
+        {k:"기본 동작",v:"인바운드 전체 거부 / 아웃바운드 전체 허용"},
+        {k:"참조",v:"다른 SG를 소스로 참조 가능"},
       ]},
-      {name:"네트워크 ACL", dot:"#f43f5e", hl:false, rows:[
-        {k:"레벨",v:"<strong>서브넷</strong> 수준"},
-        {k:"상태",v:"<strong>Stateless</strong> (양방향 별도 규칙)"},
-        {k:"규칙",v:"허용 + <strong>거부</strong> 규칙"},
-        {k:"평가",v:"번호 순서대로 (낮은 번호 우선)"},
-        {k:"기본",v:"인바운드 전체 허용"},
+      {name:"네트워크 ACL (NACL)", dot:"#f43f5e", rows:[
+        {k:"적용 범위",v:"<strong>서브넷</strong> 레벨 (서브넷 전체 트래픽)"},
+        {k:"상태",v:"<strong>Stateless</strong> — 인바운드·아웃바운드 각각 별도 규칙"},
+        {k:"규칙 종류",v:"허용 + <strong>거부 규칙</strong> 모두 정의 가능"},
+        {k:"규칙 평가",v:"<strong>번호 순서대로</strong> (낮은 번호 우선, 일치 시 즉시 적용)"},
+        {k:"기본 동작",v:"기본 NACL: 모두 허용 / 커스텀 NACL: 모두 거부"},
+        {k:"사용",v:"특정 IP 대역 <strong>차단(블랙리스트)</strong>에 효과적"},
       ]},
     ],
-    tip:"💡 <strong>특정 IP 차단(거부)→NACL</strong>, <strong>인스턴스 간 세밀한 허용→SG</strong>. IP 차단 요구사항이 나오면 NACL!"
+    tip:"💡 <strong>'특정 IP 차단·거부 규칙 필요'→NACL</strong> / <strong>'인스턴스 간 세밀한 허용 제어'→SG</strong><br><br>📌 Stateless NACL: TCP 응답은 임시 포트(1024~65535) 아웃바운드 규칙도 필요!"
   },
   {
-    title:"ALB vs NLB vs GWLB",
-    badge:"로드밸런서 3종",
-    cols:3,
+    title:"ALB vs NLB vs GWLB vs CLB",
+    badge:"로드밸런서 4종 ★★★",
+    cols:2,
     cards:[
-      {name:"ALB", dot:"#10b981", hl:false, rows:[
-        {k:"레이어",v:"<strong>L7 (HTTP/HTTPS)</strong>"},
-        {k:"라우팅",v:"URL경로, 호스트헤더, 쿼리"},
-        {k:"타겟",v:"EC2, ECS, Lambda, IP"},
-        {k:"특징",v:"WebSocket, HTTP/2, gRPC"},
-        {k:"사용",v:"마이크로서비스, 웹앱"},
+      {name:"ALB · NLB", dot:"#10b981", rows:[
+        {k:"ALB 레이어",v:"<strong>L7 (HTTP/HTTPS/gRPC)</strong>"},
+        {k:"ALB 라우팅",v:"URL 경로·호스트·헤더·쿼리스트링·메서드 기반"},
+        {k:"ALB 타겟",v:"EC2·ECS·Lambda·IP·ALB"},
+        {k:"ALB 특징",v:"WebSocket·HTTP/2·인증(Cognito·OIDC)·WAF 연동"},
+        {k:"NLB 레이어",v:"<strong>L4 (TCP/UDP/TLS)</strong>"},
+        {k:"NLB 특징",v:"<strong>고정 IP·EIP</strong>·초저지연·초당 수백만 요청·Zonal DNS"},
       ]},
-      {name:"NLB", dot:"#10b981", hl:false, rows:[
-        {k:"레이어",v:"<strong>L4 (TCP/UDP/TLS)</strong>"},
-        {k:"라우팅",v:"IP+포트"},
-        {k:"타겟",v:"EC2, IP, ALB"},
-        {k:"특징",v:"고정 IP/EIP, 초저지연"},
-        {k:"사용",v:"게임, IoT, 금융 실시간"},
-      ]},
-      {name:"GWLB", dot:"#10b981", hl:false, rows:[
-        {k:"레이어",v:"<strong>L3 (IP)</strong>"},
-        {k:"라우팅",v:"GENEVE 터널링"},
-        {k:"타겟",v:"어플라이언스(방화벽, IDS)"},
-        {k:"특징",v:"트래픽 투명 검사"},
-        {k:"사용",v:"인라인 보안 어플라이언스"},
+      {name:"GWLB · CLB", dot:"#10b981", rows:[
+        {k:"GWLB 레이어",v:"<strong>L3 (IP 패킷)</strong>"},
+        {k:"GWLB 특징",v:"GENEVE 터널링으로 트래픽 투명 검사 → 방화벽·IDS/IPS 삽입"},
+        {k:"GWLB 사용",v:"인라인 보안 어플라이언스 삽입 아키텍처"},
+        {k:"CLB",v:"구세대. L4·L7 혼합. <strong>신규 설계에는 사용 지양</strong>"},
+        {k:"공통",v:"헬스 체크로 정상 타겟에만 트래픽 분산"},
+        {k:"교차 AZ",v:"ALB 기본 활성화 / NLB·GWLB 기본 비활성화"},
       ]},
     ],
-    tip:"💡 <strong>'콘텐츠 기반 라우팅'→ALB</strong>, <strong>'고정IP/초저지연'→NLB</strong>, <strong>'방화벽 인라인 삽입'→GWLB</strong>"
+    tip:"💡 <strong>'콘텐츠 기반 라우팅·마이크로서비스'→ALB</strong> / <strong>'고정IP·초저지연·비HTTP'→NLB</strong> / <strong>'방화벽 인라인'→GWLB</strong><br><br>📌 NLB는 고정 IP가 필요한 화이트리스트 환경(파트너 방화벽)에 필수!"
   },
   {
     title:"CloudFront vs Global Accelerator",
-    badge:"글로벌 가속 2종",
+    badge:"글로벌 가속 2종 ★★★",
     cols:2,
     cards:[
-      {name:"CloudFront", dot:"#10b981", hl:false, rows:[
-        {k:"목적",v:"<strong>콘텐츠 캐싱 CDN</strong>"},
-        {k:"프로토콜",v:"HTTP/HTTPS"},
+      {name:"Amazon CloudFront", dot:"#10b981", rows:[
+        {k:"핵심 기능",v:"<strong>콘텐츠 캐싱 CDN</strong>"},
+        {k:"프로토콜",v:"HTTP/HTTPS (WebSocket 지원)"},
         {k:"IP",v:"동적 (엣지마다 다름)"},
-        {k:"캐싱",v:"정적·동적 콘텐츠"},
-        {k:"사용",v:"웹사이트, 이미지, 동영상"},
+        {k:"캐싱",v:"정적(이미지·CSS·JS)·동적 콘텐츠"},
+        {k:"보안",v:"WAF·Shield Standard 통합, OAC로 S3 보호"},
+        {k:"사용",v:"웹사이트·API·동영상 스트리밍·소프트웨어 배포"},
+        {k:"오리진",v:"S3·ALB·EC2·커스텀 HTTP 서버"},
       ]},
-      {name:"Global Accelerator", dot:"#10b981", hl:false, rows:[
-        {k:"목적",v:"<strong>네트워크 경로 최적화</strong>"},
-        {k:"프로토콜",v:"TCP/UDP (HTTP도 가능)"},
-        {k:"IP",v:"<strong>고정 Anycast IP 2개</strong>"},
-        {k:"캐싱",v:"없음 (캐시 X)"},
-        {k:"사용",v:"게임, IoT, 비HTTP 실시간"},
+      {name:"AWS Global Accelerator", dot:"#10b981", rows:[
+        {k:"핵심 기능",v:"<strong>네트워크 경로 최적화</strong>"},
+        {k:"프로토콜",v:"TCP/UDP (HTTP도 가능, 캐싱 없음)"},
+        {k:"IP",v:"<strong>고정 Anycast IP 2개</strong> (화이트리스트 가능)"},
+        {k:"캐싱",v:"없음 — 프록시만 함"},
+        {k:"장애 전환",v:"엔드포인트 장애 시 수 초 내 자동 전환"},
+        {k:"사용",v:"게임·IoT·VoIP·금융 거래 (비HTTP·고정IP 필요)"},
+        {k:"오리진",v:"ALB·NLB·EC2·EIP"},
       ]},
     ],
-    tip:"💡 <strong>'캐싱·콘텐츠 배포'→CloudFront</strong>, <strong>'고정IP·TCP/UDP·빠른 장애 전환'→Global Accelerator</strong>. 둘 다 DDoS 방어 포함!"
+    tip:"💡 <strong>'캐싱·이미지·동영상·웹 콘텐츠 배포'→CloudFront</strong> / <strong>'고정IP·TCP/UDP·빠른 장애 전환'→Global Accelerator</strong><br><br>📌 둘 다 DDoS 방어 포함. HTTP 앱이지만 고정 IP가 필요하면 GA 선택!"
   },
   {
-    title:"Secrets Manager vs SSM Parameter Store",
-    badge:"비밀 저장소 2종",
+    title:"EBS vs EFS vs S3 vs FSx",
+    badge:"스토리지 4종 ★★★",
     cols:2,
     cards:[
-      {name:"Secrets Manager", dot:"#f43f5e", hl:false, rows:[
-        {k:"비용",v:"유료 (비밀당 월 $0.40)"},
-        {k:"핵심",v:"<strong>자동 로테이션</strong> 내장"},
-        {k:"통합",v:"RDS·Redshift 자격증명 갱신"},
-        {k:"크기",v:"최대 64KB"},
-        {k:"사용",v:"DB 비밀번호, API 키 로테이션"},
+      {name:"EBS · EFS", dot:"#3b82f6", rows:[
+        {k:"EBS 유형",v:"<strong>블록 스토리지</strong> — EC2 전용 디스크"},
+        {k:"EBS 연결",v:"단일 EC2 전용 (Multi-Attach: io1/io2만 가능)"},
+        {k:"EBS 특징",v:"AZ 내 존재. 스냅샷→다른 AZ/리전 복사 가능"},
+        {k:"EFS 유형",v:"<strong>파일 스토리지(NFS)</strong> — 공유 파일 시스템"},
+        {k:"EFS 연결",v:"다수 EC2·ECS·Lambda <strong>동시 마운트</strong> 가능"},
+        {k:"EFS 특징",v:"멀티 AZ 고가용성. 용량 자동 확장. Linux 전용"},
       ]},
-      {name:"Parameter Store", dot:"#06b6d4", hl:false, rows:[
-        {k:"비용",v:"Standard <strong>무료</strong>, Advanced 유료"},
-        {k:"핵심",v:"구성 데이터·계층 경로 관리"},
-        {k:"통합",v:"KMS로 암호화 가능"},
-        {k:"크기",v:"4KB(Standard)/8KB(Advanced)"},
-        {k:"사용",v:"앱 설정값, 환경변수 저장"},
-      ]},
-    ],
-    tip:"💡 <strong>'자동 로테이션 필요'→Secrets Manager</strong>, <strong>'설정값 저장·무료'→Parameter Store</strong>. 로테이션이 핵심 차이!"
-  },
-  {
-    title:"S3 스토리지 클래스 비교",
-    badge:"S3 스토리지 계층",
-    cols:2,
-    cards:[
-      {name:"Standard / Standard-IA / One Zone-IA", dot:"#3b82f6", hl:false, rows:[
-        {k:"Standard",v:"<strong>빈번한 액세스</strong> · 즉시 검색"},
-        {k:"Standard-IA",v:"<strong>비빈번 액세스</strong> · 즉시 검색 · 저장비↓"},
-        {k:"One Zone-IA",v:"단일 AZ · IA보다 20% 저렴 · 재생성 가능 데이터"},
-        {k:"공통",v:"30일 최소 보관, 검색 비용 발생"},
-      ]},
-      {name:"Glacier 3종 / Intelligent-Tiering", dot:"#3b82f6", hl:false, rows:[
-        {k:"Instant",v:"<strong>Glacier</strong> · 즉시 검색 · 분기 1회"},
-        {k:"Flexible",v:"<strong>Glacier</strong> · 1~12h · 장기 아카이브"},
-        {k:"Deep Archive",v:"<strong>Glacier</strong> · 12~48h · 최저비용"},
-        {k:"I-Tiering",v:"접근 패턴 불규칙 데이터 자동 계층 이동"},
+      {name:"S3 · FSx", dot:"#3b82f6", rows:[
+        {k:"S3 유형",v:"<strong>객체 스토리지</strong> — HTTP API 접근"},
+        {k:"S3 특징",v:"무제한 용량·11 Nine 내구성·정적 웹 호스팅"},
+        {k:"S3 사용",v:"데이터 레이크·백업·미디어·정적 웹·아카이브"},
+        {k:"FSx-Win",v:"<strong>SMB·Windows</strong> — AD 통합, DFS 지원"},
+        {k:"FSx-Lus",v:"<strong>HPC·ML</strong> — 병렬 파일시스템, S3 통합"},
+        {k:"FSx-ONTAP",v:"NFS·SMB·iSCSI 멀티프로토콜 지원"},
       ]},
     ],
-    tip:"💡 <strong>'접근 빈도 예측 불가'→Intelligent-Tiering</strong>, <strong>'7~10년 규정 준수 보관'→Glacier Deep Archive</strong>, <strong>'비빈번 but 즉시 필요'→Standard-IA</strong>"
+    tip:"💡 <strong>'EC2 디스크'→EBS</strong> / <strong>'여러 서버 공유 NFS·Linux'→EFS</strong> / <strong>'객체·무제한·HTTP'→S3</strong> / <strong>'Windows SMB'→FSx for Windows</strong> / <strong>'HPC·ML 고성능'→FSx for Lustre</strong>"
   },
   {
-    title:"VPC Peering vs Transit Gateway vs PrivateLink",
-    badge:"VPC 연결 3종",
+    title:"Secrets Manager vs SSM Parameter Store vs KMS",
+    badge:"비밀·암호화 관리 ★★★",
     cols:3,
     cards:[
-      {name:"VPC Peering", dot:"#10b981", hl:false, rows:[
-        {k:"구조",v:"1:1 직접 연결"},
-        {k:"전이",v:"<strong>전이적 라우팅 불가</strong>"},
-        {k:"규모",v:"소규모 (수십 VPC)"},
-        {k:"비용",v:"데이터 전송 비용만"},
-        {k:"특징",v:"단순, 지연 최소"},
+      {name:"Secrets Manager", dot:"#f43f5e", rows:[
+        {k:"핵심",v:"<strong>자격증명 자동 로테이션</strong>"},
+        {k:"비용",v:"유료 — 비밀당 월 $0.40 + API 호출"},
+        {k:"크기",v:"최대 64KB"},
+        {k:"통합",v:"RDS·Redshift·DocumentDB 자격증명 자동 갱신"},
+        {k:"사용",v:"DB 비밀번호·API 키·OAuth 토큰 관리"},
       ]},
-      {name:"Transit Gateway", dot:"#10b981", hl:false, rows:[
-        {k:"구조",v:"허브-스포크 중앙 집중"},
-        {k:"전이",v:"<strong>전이적 라우팅 지원</strong>"},
-        {k:"규모",v:"대규모 (수천 VPC)"},
-        {k:"비용",v:"첨부 + 데이터 전송"},
-        {k:"특징",v:"VPN·DX 통합, 라우팅 테이블"},
+      {name:"SSM Parameter Store", dot:"#06b6d4", rows:[
+        {k:"핵심",v:"<strong>구성값·비밀 저장</strong> (로테이션 없음)"},
+        {k:"비용",v:"Standard <strong>무료</strong>(4KB) / Advanced 유료(8KB)"},
+        {k:"크기",v:"4KB(Standard) / 8KB(Advanced)"},
+        {k:"통합",v:"KMS로 암호화 가능. 계층적 경로(/app/prod/db)"},
+        {k:"사용",v:"앱 설정값·환경변수·암호화 문자열"},
       ]},
-      {name:"PrivateLink", dot:"#10b981", hl:false, rows:[
-        {k:"구조",v:"서비스 노출 (단방향)"},
-        {k:"전이",v:"해당 없음"},
-        {k:"규모",v:"서비스 제공자:소비자"},
-        {k:"비용",v:"엔드포인트 + 데이터"},
-        {k:"특징",v:"CIDR 겹쳐도 OK, 인터넷 불필요"},
+      {name:"AWS KMS", dot:"#f43f5e", rows:[
+        {k:"핵심",v:"<strong>암호화 키 생성·관리·감사</strong>"},
+        {k:"키 종류",v:"CMK(대칭 AES-256·비대칭 RSA·ECC)"},
+        {k:"통합",v:"S3·EBS·RDS·DynamoDB·SQS·Lambda 등 전방위"},
+        {k:"감사",v:"CloudTrail로 <strong>모든 키 사용 기록</strong>"},
+        {k:"로테이션",v:"CMK 자동 연간 로테이션 옵션"},
       ]},
     ],
-    tip:"💡 <strong>'많은 VPC 중앙 연결'→Transit GW</strong>, <strong>'2개 VPC 단순 연결'→Peering</strong>, <strong>'서비스를 프라이빗 노출'→PrivateLink</strong>"
+    tip:"💡 <strong>'DB 비밀번호 자동 교체'→Secrets Manager</strong> / <strong>'앱 설정값·무료'→Parameter Store</strong> / <strong>'암호화 키 관리'→KMS</strong><br><br>📌 Secrets Manager는 내부적으로 KMS를 사용해 암호화!"
+  },
+  {
+    title:"VPC 연결 옵션 완전 비교",
+    badge:"네트워크 연결 ★★★",
+    cols:2,
+    cards:[
+      {name:"온프레미스 연결", dot:"#10b981", rows:[
+        {k:"Site-to-Site VPN",v:"IPsec 암호화 터널. <strong>빠른 설정(수 시간)</strong>. 인터넷 경유, 대역폭 가변"},
+        {k:"Direct Connect",v:"전용 물리 회선. <strong>안정적 대역폭·낮은 지연</strong>. 설정 수 주 소요"},
+        {k:"DX+VPN",v:"DX 장애 시 VPN 백업. 또는 암호화 오버레이"},
+        {k:"DX Gateway",v:"단일 DX로 여러 리전·VPC 접근"},
+        {k:"비교 기준",v:"<strong>빠른 연결→VPN</strong> / <strong>안정·고대역폭→DX</strong>"},
+      ]},
+      {name:"VPC 간 연결", dot:"#10b981", rows:[
+        {k:"VPC Peering",v:"1:1 직접 연결. <strong>전이적 라우팅 불가</strong>. 소규모"},
+        {k:"Transit Gateway",v:"허브-스포크. <strong>전이적 라우팅 지원</strong>. 수천 VPC"},
+        {k:"PrivateLink",v:"서비스 프라이빗 노출. CIDR 겹쳐도 OK"},
+        {k:"VPC Endpoint",v:"AWS 서비스 프라이빗 접근. Gateway(S3·DDB 무료)·Interface(유료)"},
+        {k:"비교 기준",v:"<strong>2개→Peering</strong> / <strong>다수→TGW</strong> / <strong>서비스 노출→PrivateLink</strong>"},
+      ]},
+    ],
+    tip:"💡 <strong>'즉시 연결 필요'→VPN</strong> / <strong>'안정적 전용 회선'→Direct Connect</strong> / <strong>'전이적 라우팅·대규모 VPC'→Transit GW</strong><br><br>📌 VPN+DX 혼합: DX Primary, VPN Backup 구성으로 HA + 비용 최적화!"
+  },
+  {
+    title:"Lambda vs ECS(Fargate) vs EC2 Auto Scaling",
+    badge:"컴퓨팅 선택 ★★★",
+    cols:3,
+    cards:[
+      {name:"AWS Lambda", dot:"#f97316", rows:[
+        {k:"실행 시간",v:"최대 <strong>15분</strong>"},
+        {k:"관리",v:"서버·OS 관리 완전 불필요"},
+        {k:"스케일링",v:"자동·즉각·동시 실행 수천 개"},
+        {k:"과금",v:"요청 수 + 실행 시간(ms)"},
+        {k:"메모리",v:"128MB ~ 10GB"},
+        {k:"적합",v:"이벤트 트리거·짧은 실행·서버리스 API"},
+      ]},
+      {name:"ECS + Fargate", dot:"#f97316", rows:[
+        {k:"실행 시간",v:"제한 없음 (장기 실행 가능)"},
+        {k:"관리",v:"EC2 노드 관리 불필요 (Fargate)"},
+        {k:"스케일링",v:"Task 단위 자동 스케일링"},
+        {k:"과금",v:"vCPU + 메모리 사용 시간"},
+        {k:"메모리",v:"0.5GB ~ 120GB"},
+        {k:"적합",v:"마이크로서비스·장기 실행·컨테이너 워크로드"},
+      ]},
+      {name:"EC2 Auto Scaling", dot:"#f97316", rows:[
+        {k:"실행 시간",v:"제한 없음"},
+        {k:"관리",v:"OS·미들웨어 직접 관리"},
+        {k:"스케일링",v:"인스턴스 단위 (분 단위)"},
+        {k:"과금",v:"인스턴스 실행 시간"},
+        {k:"메모리",v:"인스턴스 타입에 따라 제한 없음"},
+        {k:"적합",v:"기존 앱 리프트·GPU 워크로드·OS 수준 제어 필요"},
+      ]},
+    ],
+    tip:"💡 <strong>'이벤트 기반·짧은 실행·서버리스'→Lambda</strong> / <strong>'컨테이너·장기·서버리스'→Fargate</strong> / <strong>'GPU·OS제어·기존앱'→EC2</strong><br><br>📌 15분 초과 작업: Step Functions(Lambda 오케스트레이션) 또는 ECS·Batch 사용!"
+  },
+  {
+    title:"DynamoDB vs RDS vs ElastiCache",
+    badge:"DB 선택 기준 ★★★",
+    cols:3,
+    cards:[
+      {name:"DynamoDB", dot:"#8b5cf6", rows:[
+        {k:"타입",v:"<strong>NoSQL 키-값/도큐먼트</strong>"},
+        {k:"응답",v:"<strong>한 자릿수 밀리초</strong> (DAX로 마이크로초)"},
+        {k:"스케일",v:"자동 (수십만 RPS 처리)"},
+        {k:"항목 크기",v:"최대 400KB"},
+        {k:"적합",v:"유연한 스키마·극고속·글로벌 분산·서버리스"},
+        {k:"부적합",v:"복잡한 조인·트랜잭션 (제한적 지원)"},
+      ]},
+      {name:"RDS / Aurora", dot:"#8b5cf6", rows:[
+        {k:"타입",v:"<strong>관계형(SQL)</strong>"},
+        {k:"응답",v:"밀리초~수십 밀리초"},
+        {k:"스케일",v:"수직 확장·Read Replica (수평 제한)"},
+        {k:"항목 크기",v:"제한 없음 (스토리지 한도 내)"},
+        {k:"적합",v:"복잡한 쿼리·조인·트랜잭션·ACID 보장"},
+        {k:"Aurora",v:"고성능 RDBMS·자동 HA·Serverless"},
+      ]},
+      {name:"ElastiCache (Redis)", dot:"#8b5cf6", rows:[
+        {k:"타입",v:"<strong>인메모리 캐시</strong>"},
+        {k:"응답",v:"<strong>마이크로초 ~ 밀리초</strong>"},
+        {k:"스케일",v:"클러스터 모드(샤딩)·읽기 복제"},
+        {k:"적합",v:"DB 부하 경감·세션 저장·리더보드·Pub-Sub"},
+        {k:"지속성",v:"AOF·RDB 스냅샷으로 데이터 영속 가능"},
+        {k:"주의",v:"기본 DB 대체 불가 — 캐시 레이어로 사용"},
+      ]},
+    ],
+    tip:"💡 <strong>'ACID 트랜잭션·복잡한 조인'→RDS/Aurora</strong> / <strong>'고속·유연한 스키마·자동 스케일'→DynamoDB</strong> / <strong>'캐싱·세션'→ElastiCache</strong><br><br>📌 DAX(DynamoDB Accelerator): DynamoDB 앞단 캐시로 읽기를 마이크로초로!"
+  },
+  {
+    title:"S3 스토리지 클래스 완전 비교",
+    badge:"S3 비용 최적화 ★★★",
+    cols:2,
+    cards:[
+      {name:"Standard 계열", dot:"#3b82f6", rows:[
+        {k:"Standard",v:"<strong>빈번한 액세스</strong>. 즉시 검색. 3 AZ 내구성. 기본 클래스"},
+        {k:"Standard-IA",v:"<strong>비빈번 액세스</strong>. 즉시 검색. 저장비 낮음·검색 비용 발생. 최소 30일"},
+        {k:"One Zone-IA",v:"단일 AZ. Standard-IA보다 20% 저렴. 재생성 가능 데이터"},
+        {k:"구분",v:"IA는 '가끔 필요하지만 즉시 꺼내야 하는' 데이터"},
+      ]},
+      {name:"Glacier 계열 & 특수", dot:"#3b82f6", rows:[
+        {k:"Glacier Instant",v:"분기 1회 접근. <strong>즉시 검색</strong>. Standard-IA보다 저렴"},
+        {k:"Glacier Flexible",v:"<strong>1~12시간</strong> 검색. Expedited(1~5분·추가비용) 가능"},
+        {k:"Glacier Deep Archive",v:"<strong>12~48시간</strong>. <strong>최저 비용</strong>. 7~10년 보관"},
+        {k:"Intelligent-Tiering",v:"접근 패턴 <strong>자동 분석→계층 이동</strong>. 예측 불가 데이터"},
+      ]},
+    ],
+    tip:"💡 <strong>'접근 빈도 불규칙'→Intelligent-Tiering</strong> / <strong>'즉시 꺼내야·가끔 접근'→Standard-IA</strong> / <strong>'7~10년 보관·가장 저렴'→Glacier Deep Archive</strong><br><br>📌 S3 Lifecycle: Standard → Standard-IA(30일) → Glacier(90일) → Deep Archive(180일) 자동 전환!"
+  },
+  {
+    title:"GuardDuty vs Inspector vs Macie vs Security Hub",
+    badge:"보안 탐지 4종 ★★★",
+    cols:2,
+    cards:[
+      {name:"GuardDuty · Inspector", dot:"#f43f5e", rows:[
+        {k:"GuardDuty",v:"<strong>ML 기반 위협 탐지</strong>. 에이전트 불필요"},
+        {k:"GD 소스",v:"CloudTrail·VPC Flow Logs·DNS Logs·S3 Logs 분석"},
+        {k:"GD 탐지",v:"악의적 IP·비정상 API·크립토마이닝·계정 탈취"},
+        {k:"Inspector",v:"<strong>취약점 자동 스캔</strong>. CVE 기반"},
+        {k:"Insp 대상",v:"EC2·ECR 컨테이너 이미지·Lambda 함수"},
+        {k:"Insp 특징",v:"지속적 재스캔. 우선순위 점수·패치 권고"},
+      ]},
+      {name:"Macie · Security Hub", dot:"#f43f5e", rows:[
+        {k:"Macie",v:"<strong>S3 민감 데이터</strong>(PII·신용카드·자격증명) 자동 탐지"},
+        {k:"Macie 활용",v:"GDPR·HIPAA 준수. 버킷 공개 여부·암호화 상태 점검"},
+        {k:"Security Hub",v:"<strong>보안 발견 사항 중앙 집계</strong>·우선순위화"},
+        {k:"SH 소스",v:"GuardDuty·Inspector·Macie·Config·IAM Analyzer"},
+        {k:"SH 특징",v:"CSPM(클라우드 보안 태세 관리). CIS·PCI DSS 기준"},
+        {k:"Detective",v:"GuardDuty 발견 사항 <strong>근본 원인 조사·시각화</strong>"},
+      ]},
+    ],
+    tip:"💡 <strong>'위협 탐지(이상 행동)'→GuardDuty</strong> / <strong>'취약점 스캔(CVE)'→Inspector</strong> / <strong>'S3 민감 데이터'→Macie</strong> / <strong>'보안 결과 통합 관리'→Security Hub</strong>"
+  },
+  {
+    title:"Auto Scaling 정책 비교",
+    badge:"스케일링 전략 ★★",
+    cols:2,
+    cards:[
+      {name:"동적 스케일링", dot:"#f97316", rows:[
+        {k:"Target Tracking",v:"<strong>지표를 목표값으로 유지</strong> (예: CPU 60%). 가장 단순·권장"},
+        {k:"Step Scaling",v:"지표 단계별 증감폭 다르게. CloudWatch 경보 기반"},
+        {k:"Simple Scaling",v:"경보 발생 시 고정 증감. 쿨다운 기간 적용"},
+        {k:"권장 순서",v:"Target Tracking → Step → Simple"},
+      ]},
+      {name:"예측·예약 스케일링", dot:"#f97316", rows:[
+        {k:"Scheduled",v:"특정 시간대 미리 스케일 아웃 (예: 매일 9시 +5)"},
+        {k:"Predictive",v:"<strong>ML로 트래픽 예측</strong>→사전 프로비저닝. 반복 패턴에 효과"},
+        {k:"Warmup",v:"새 인스턴스 준비 시간. 스케일링 중 조기 판단 방지"},
+        {k:"Cooldown",v:"스케일링 후 안정화 대기 시간 (기본 300초)"},
+      ]},
+    ],
+    tip:"💡 <strong>'비용 최소화'→Target Tracking(목표 지표 유지)</strong> / <strong>'트래픽 패턴 예측 가능'→Scheduled+Predictive</strong> 조합이 최적!"
+  },
+  {
+    title:"Route 53 라우팅 정책 비교",
+    badge:"DNS 라우팅 ★★",
+    cols:2,
+    cards:[
+      {name:"기본 라우팅 정책", dot:"#10b981", rows:[
+        {k:"Simple",v:"단순 레코드. 헬스 체크 없음. 단일 리소스"},
+        {k:"Weighted",v:"<strong>가중치 비율</strong>로 분산 (A:70%, B:30%). 배포 테스트"},
+        {k:"Latency",v:"<strong>응답 지연 최소</strong> 리전으로 라우팅"},
+        {k:"Failover",v:"Primary 장애 시 <strong>Secondary로 자동 전환</strong>"},
+      ]},
+      {name:"지리 기반 라우팅", dot:"#10b981", rows:[
+        {k:"Geolocation",v:"사용자 <strong>국가·대륙</strong> 기반 라우팅. 콘텐츠 현지화"},
+        {k:"Geoproximity",v:"지리적 근접성 + <strong>Bias 값</strong>으로 트래픽 이동 조절"},
+        {k:"Multi-Value",v:"최대 8개 정상 레코드 반환. 클라이언트 사이드 로드밸런싱"},
+        {k:"IP-based",v:"클라이언트 IP CIDR 기반 라우팅"},
+      ]},
+    ],
+    tip:"💡 <strong>'DR·장애 전환'→Failover</strong> / <strong>'지연 최소'→Latency</strong> / <strong>'A/B 테스트'→Weighted</strong> / <strong>'국가별 콘텐츠'→Geolocation</strong><br><br>📌 Failover는 헬스 체크 필수! Primary 다운 시 Secondary(S3 정적 페이지 등)로 전환"
   },
 ];
 
 function renderCompare(){
   const c = document.getElementById('tips-compare');
-  c.innerHTML = '';
+  if(c.dataset.rendered){ return; }
+  c.dataset.rendered='1';
   COMPARES.forEach(cmp => {
     const sec = document.createElement('div');
     sec.className = 'compare-section';
@@ -1738,7 +1939,7 @@ function renderCompare(){
       const rowsHtml = card.rows.map(r =>
         `<div class="cmp-row"><span class="k">${r.k}</span><span class="v">${r.v}</span></div>`
       ).join('');
-      return `<div class="cmp-card${card.hl?' hl':''}">
+      return `<div class="cmp-card">
         <div class="cmp-name"><span class="dot" style="background:${card.dot}"></span>${card.name}</div>
         <div class="cmp-rows">${rowsHtml}</div>
       </div>`;
@@ -1753,30 +1954,34 @@ function renderCompare(){
 
 /* ── 문제 공략 키워드 ── */
 const KEYWORDS = [
-  {kw:"운영 오버헤드 최소화", phrases:["최소한의 운영","관리 불필요","운영 복잡성 최소"], answer:"서버리스 우선 (Lambda·Fargate·Aurora Serverless·Athena)"},
-  {kw:"비용 최적화", phrases:["비용 효율","가장 저렴","비용 절감"], answer:"Spot Instance · Reserved · Savings Plans · S3 Lifecycle"},
-  {kw:"고가용성 (HA)", phrases:["중단 없이","장애 허용","가용성 향상"], answer:"Multi-AZ · Auto Scaling · Route 53 Failover · ELB"},
-  {kw:"재해 복구 (DR)", phrases:["재해 복구","RPO·RTO","다른 리전"], answer:"Aurora Global DB · S3 CRR · DynamoDB Global Tables"},
-  {kw:"실시간 스트리밍", phrases:["실시간 처리","스트리밍","대용량 이벤트"], answer:"Kinesis Data Streams · MSK(Kafka)"},
-  {kw:"서버리스 ETL", phrases:["서버리스 데이터 변환","데이터 통합","관리 없는 ETL"], answer:"AWS Glue · Lambda"},
-  {kw:"S3 분석·쿼리", phrases:["S3 데이터 쿼리","서버리스 SQL"], answer:"Amazon Athena (+ Glue Catalog)"},
-  {kw:"웹 공격 차단", phrases:["SQL 인젝션","XSS","웹 공격"], answer:"AWS WAF (CloudFront·ALB에 연결)"},
-  {kw:"DDoS 방어", phrases:["DDoS","분산 서비스 거부"], answer:"AWS Shield Standard(자동) / Advanced(유료)"},
-  {kw:"민감 데이터 탐지", phrases:["PII","개인정보","민감 데이터"], answer:"Amazon Macie (S3)"},
-  {kw:"API 감사·이력", phrases:["누가 삭제했는지","API 호출 이력","감사 로그"], answer:"AWS CloudTrail"},
-  {kw:"구성 변경 추적", phrases:["리소스 구성 변경","컴플라이언스 검사"], answer:"AWS Config"},
-  {kw:"온프레미스 연결", phrases:["데이터센터 연결","하이브리드"], answer:"Direct Connect(안정) / VPN(빠른구성)"},
-  {kw:"컨테이너 오케스트레이션", phrases:["컨테이너 관리","Docker 클러스터"], answer:"ECS(AWS 네이티브) / EKS(Kubernetes)"},
-  {kw:"자격증명 자동 갱신", phrases:["비밀번호 자동 교체","DB 자격증명 로테이션"], answer:"AWS Secrets Manager"},
-  {kw:"글로벌 사용자 지연", phrases:["전 세계 낮은 지연","글로벌 배포"], answer:"CloudFront(캐시) / Global Accelerator(TCP/UDP)"},
-  {kw:"대용량 마이그레이션", phrases:["수십 TB·PB 이전","오프라인 전송"], answer:"AWS Snowball / Snowmobile"},
-  {kw:"데이터 동기화", phrases:["온프레미스→AWS 전송","반복 데이터 이동"], answer:"AWS DataSync"},
-  {kw:"공유 파일 시스템", phrases:["여러 EC2 공유","NFS 마운트"], answer:"Amazon EFS"},
-  {kw:"Windows 파일 서버", phrases:["SMB","Active Directory 파일"], answer:"FSx for Windows File Server"},
-  {kw:"DB 읽기 부하 분산", phrases:["읽기 트래픽 분산","보고서 쿼리 분리"], answer:"RDS Read Replica / Aurora Replica"},
-  {kw:"인메모리 캐시", phrases:["DB 캐시","밀리초 응답","세션 저장"], answer:"ElastiCache Redis · DynamoDB DAX"},
-  {kw:"IoT 데이터 수집", phrases:["IoT 디바이스","센서 데이터"], answer:"IoT Core → Kinesis / DynamoDB / S3"},
-  {kw:"ML 모델 학습·배포", phrases:["머신러닝 플랫폼","모델 학습"], answer:"Amazon SageMaker"},
+  {kw:"운영 오버헤드 최소화",phrases:["최소한의 운영","관리 불필요","운영 복잡성 최소","가장 적은 노력"],answer:"서버리스 우선 — Lambda·Fargate·Aurora Serverless·DynamoDB·Athena"},
+  {kw:"비용 최적화",phrases:["비용 효율","가장 저렴","비용 절감","비용을 최소화"],answer:"Spot·Reserved·Savings Plans·S3 Lifecycle·Compute Optimizer"},
+  {kw:"고가용성 (HA)",phrases:["중단 없이","장애 허용","가용성 향상","다운타임 없이"],answer:"Multi-AZ·Auto Scaling·Route 53 Failover·ELB+헬스체크"},
+  {kw:"재해 복구 (DR)",phrases:["재해 복구","RPO·RTO","다른 리전으로","비즈니스 연속성"],answer:"Aurora Global DB·S3 CRR·DynamoDB Global Tables·Route 53 Failover"},
+  {kw:"실시간 스트리밍",phrases:["실시간 처리","스트리밍 데이터","대용량 이벤트 수집"],answer:"Kinesis Data Streams (처리·재처리) / Kinesis Firehose (S3 적재)"},
+  {kw:"서버리스 분석",phrases:["서버리스 SQL","S3 데이터 분석","관리 없는 쿼리"],answer:"Athena (S3 SQL) + Glue (ETL·카탈로그) + QuickSight (시각화)"},
+  {kw:"웹 공격 차단",phrases:["SQL 인젝션","XSS","봇 트래픽 차단","웹 취약점"],answer:"AWS WAF → CloudFront·ALB·API GW에 연결"},
+  {kw:"DDoS 방어",phrases:["DDoS","분산 서비스 거부","대규모 트래픽 공격"],answer:"Shield Standard(무료·자동) / Shield Advanced(유료·L7·DRT팀)"},
+  {kw:"API 감사·이력 추적",phrases:["누가 삭제했는지","API 호출 기록","보안 감사 로그"],answer:"AWS CloudTrail (관리 이벤트·데이터 이벤트)"},
+  {kw:"구성 변경 추적",phrases:["리소스 구성 변경","컴플라이언스 검사","드리프트 탐지"],answer:"AWS Config + Config Rules (자동 평가·수정)"},
+  {kw:"온프레미스 연결",phrases:["데이터센터 연결","하이브리드 클라우드","전용 회선"],answer:"Direct Connect(안정·고대역) / VPN(빠른 구성) / DX+VPN(백업)"},
+  {kw:"컨테이너 오케스트레이션",phrases:["컨테이너 관리","Docker 클러스터","마이크로서비스"],answer:"ECS(AWS 네이티브) / EKS(Kubernetes) + Fargate(서버리스 실행)"},
+  {kw:"자격증명 자동 갱신",phrases:["비밀번호 자동 교체","DB 자격증명 로테이션","시크릿 관리"],answer:"AWS Secrets Manager (자동 로테이션 내장)"},
+  {kw:"글로벌 사용자 지연 최소화",phrases:["전 세계 낮은 지연","글로벌 배포","여러 리전 동시"],answer:"CloudFront(캐시·HTTP) / Global Accelerator(TCP/UDP·고정IP)"},
+  {kw:"대용량 데이터 마이그레이션",phrases:["수십 TB 이전","오프라인 전송","네트워크 전송 불가"],answer:"Snowball Edge(80TB) / Snowmobile(100PB) / DataSync(온라인)"},
+  {kw:"공유 파일 시스템",phrases:["여러 EC2 공유","NFS 마운트","다수 인스턴스 동시 접근"],answer:"Amazon EFS (Linux NFS) / FSx for Windows (Windows SMB)"},
+  {kw:"DB 읽기 부하 분산",phrases:["읽기 트래픽 분산","보고서 쿼리 분리","읽기 전용 엔드포인트"],answer:"RDS Read Replica / Aurora Read Replica (최대 15개)"},
+  {kw:"인메모리 캐시",phrases:["DB 앞단 캐시","밀리초 응답","세션 저장소","리더보드"],answer:"ElastiCache Redis (복제·Pub-Sub) / DynamoDB DAX (DDB 전용)"},
+  {kw:"민감 데이터 탐지",phrases:["PII 탐지","개인정보 분류","S3 데이터 분류"],answer:"Amazon Macie (S3 자동 탐지·분류)"},
+  {kw:"위협 탐지",phrases:["이상 행동 탐지","보안 위협 모니터링","계정 침해 탐지"],answer:"Amazon GuardDuty (ML 기반·에이전트 없음)"},
+  {kw:"취약점 스캔",phrases:["CVE 취약점","패치 관리","컨테이너 보안 스캔"],answer:"Amazon Inspector (EC2·ECR·Lambda 지속 스캔)"},
+  {kw:"다중 계정 관리",phrases:["여러 AWS 계정","중앙 거버넌스","계정별 권한 제어"],answer:"AWS Organizations + SCP + Control Tower + IAM Identity Center"},
+  {kw:"IoT 데이터 수집·처리",phrases:["IoT 디바이스","센서 데이터","MQTT 프로토콜"],answer:"IoT Core → Kinesis / DynamoDB / S3 / Lambda"},
+  {kw:"ML 모델 학습·배포",phrases:["머신러닝 플랫폼","모델 학습·추론","SageMaker"],answer:"SageMaker (학습·튜닝·배포·모니터링 통합 플랫폼)"},
+  {kw:"이벤트 기반 아키텍처",phrases:["이벤트 트리거","서비스 간 느슨한 결합","비동기 처리"],answer:"EventBridge (이벤트 버스) + Lambda + SQS + SNS 조합"},
+  {kw:"정적 웹사이트 호스팅",phrases:["정적 웹사이트","HTML·CSS·JS 배포","서버 없이 웹"],answer:"S3 정적 호스팅 + CloudFront(CDN) + Route 53(도메인)"},
+  {kw:"배치 처리",phrases:["대규모 배치","HPC 워크로드","비정기 대용량 처리"],answer:"AWS Batch (EC2/Spot/Fargate 자동 선택) / EMR (Hadoop/Spark)"},
+  {kw:"API 관리",phrases:["REST API","WebSocket API","API 게이트웨이","API 인증"],answer:"API Gateway (스로틀링·캐싱·인증·스테이지 관리)"},
 ];
 
 function renderStrategy(){
@@ -1785,7 +1990,7 @@ function renderStrategy(){
   c.dataset.rendered = '1';
   const block = document.createElement('div');
   block.className = 'strategy-block';
-  block.innerHTML = '<h3>🗝️ 키워드 → 서비스 매핑</h3>';
+  block.innerHTML = '<h3>🗝️ 키워드 → 서비스 매핑 (실제 출제 빈도 기반)</h3>';
   const grid = document.createElement('div');
   grid.className = 'kw-grid';
   KEYWORDS.forEach(kw => {
@@ -1804,21 +2009,26 @@ function renderStrategy(){
 
 /* ── 자주 나오는 함정 ── */
 const TRAPS = [
-  {wrong:"<strong>CloudWatch</strong>가 API 호출 기록을 담당한다", right:"→ API 호출 감사는 <strong>CloudTrail</strong>. CloudWatch는 성능 메트릭·로그 모니터링"},
-  {wrong:"<strong>Multi-AZ</strong>로 읽기 성능이 향상된다", right:"→ Multi-AZ Standby는 읽기 불가. 읽기 분산은 <strong>Read Replica</strong>"},
-  {wrong:"<strong>Spot Instance</strong>는 언제든 저렴하게 쓸 수 있다", right:"→ 2분 전 중단 알림, 언제든 회수 가능. 중단 허용 배치 작업에만 적합"},
-  {wrong:"<strong>NAT Gateway</strong>는 인터넷→프라이빗 서브넷 인바운드도 허용한다", right:"→ NAT Gateway는 아웃바운드 전용. 인바운드는 차단됨"},
-  {wrong:"<strong>SCP</strong>는 IAM 역할에 권한을 부여한다", right:"→ SCP는 최대 허용 권한의 '상한선'. 허용 목록이 없으면 아무것도 못 함"},
-  {wrong:"<strong>S3 CORS</strong>가 퍼블릭 접근을 막아준다", right:"→ CORS는 브라우저 크로스 오리진 정책. 보안은 버킷 정책+Block Public Access"},
-  {wrong:"<strong>CloudFront</strong>는 모든 프로토콜을 가속한다", right:"→ CloudFront는 HTTP/HTTPS CDN. TCP/UDP 가속은 <strong>Global Accelerator</strong>"},
-  {wrong:"<strong>VPC Peering</strong>은 A-B-C 연결 시 A↔C가 자동으로 된다", right:"→ VPC Peering은 전이적 라우팅 불가. A↔C는 별도 Peering 필요. Transit GW 활용"},
-  {wrong:"<strong>EBS 볼륨</strong>은 여러 EC2에서 동시에 마운트 가능하다", right:"→ 기본 EBS는 단일 EC2 전용. 다중 마운트는 <strong>EFS</strong>(NFS) 사용"},
-  {wrong:"<strong>Lambda</strong>는 무제한 실행 시간을 지원한다", right:"→ Lambda 최대 실행 시간은 <strong>15분</strong>. 장기 작업은 ECS·Batch·Step Functions"},
-  {wrong:"<strong>Secrets Manager</strong>와 <strong>Parameter Store</strong>는 기능이 동일하다", right:"→ Secrets Manager는 자동 로테이션이 핵심. Parameter Store는 무료 설정값 저장"},
-  {wrong:"<strong>Security Group</strong>에 거부 규칙을 추가할 수 있다", right:"→ SG는 허용 규칙만 가능. IP 거부는 <strong>Network ACL</strong>에서 가능"},
-  {wrong:"<strong>Direct Connect</strong>는 즉시 설정해 바로 사용 가능하다", right:"→ DX는 물리 회선 연결로 수 주~수 개월 소요. 빠른 연결은 <strong>Site-to-Site VPN</strong>"},
-  {wrong:"<strong>Aurora Read Replica</strong>는 Multi-AZ와 동일한 역할이다", right:"→ Read Replica=읽기 분산, Multi-AZ=장애 복구. Aurora는 두 기능을 동시에 제공"},
-  {wrong:"<strong>SQS FIFO</strong>는 Standard보다 처리량이 높다", right:"→ FIFO는 초당 300(배치 3,000)건으로 Standard보다 낮음. 순서 보장이 목적"},
+  {wrong:"<strong>CloudWatch</strong>로 '누가 API를 호출했는지' 추적할 수 있다",right:"→ API 호출 감사는 <strong>CloudTrail</strong>. CloudWatch는 성능 메트릭·로그 수집·경보 전용"},
+  {wrong:"RDS <strong>Multi-AZ Standby</strong>에서 읽기 쿼리를 보낼 수 있다",right:"→ Multi-AZ Standby는 장애 복구 전용 — 읽기 불가. 읽기 분산은 <strong>Read Replica</strong> 사용"},
+  {wrong:"<strong>Spot Instance</strong>는 언제든 저렴하게 장기 운영 가능하다",right:"→ 2분 전 중단 알림으로 언제든 회수됨. <strong>중단 허용 배치 작업</strong>에만 적합"},
+  {wrong:"<strong>NAT Gateway</strong>는 외부에서 프라이빗 서브넷으로의 인바운드도 허용한다",right:"→ NAT GW는 <strong>아웃바운드 전용</strong>. 프라이빗 서브넷 인바운드는 PrivateLink·VPN·DX 사용"},
+  {wrong:"<strong>SCP</strong>는 계정에 IAM 권한을 부여한다",right:"→ SCP는 최대 허용 권한의 '상한선'. 부여 기능 없음. IAM이 없으면 SCP에 있어도 실행 불가"},
+  {wrong:"<strong>보안 그룹</strong>에서 특정 IP를 거부(Deny)할 수 있다",right:"→ SG는 허용 규칙만 가능. IP 차단(거부)은 <strong>Network ACL(NACL)</strong>에서만 가능"},
+  {wrong:"<strong>CloudFront</strong>는 TCP/UDP 프로토콜도 캐싱·가속한다",right:"→ CloudFront는 HTTP/HTTPS CDN 전용. TCP/UDP 가속은 <strong>Global Accelerator</strong>"},
+  {wrong:"<strong>VPC Peering</strong>은 A-B-C 연결 시 A↔C가 자동으로 통신된다",right:"→ VPC Peering은 전이적 라우팅 불가. A↔C는 별도 Peering 또는 <strong>Transit Gateway</strong> 사용"},
+  {wrong:"<strong>EBS 볼륨</strong>은 여러 EC2에서 동시 마운트 가능하다",right:"→ 기본 EBS는 단일 EC2 전용. 다중 마운트는 <strong>EFS(NFS)</strong>. io1/io2 Multi-Attach는 동일 AZ 제한"},
+  {wrong:"<strong>Lambda</strong>는 실행 시간 제한이 없어 장기 작업에도 적합하다",right:"→ Lambda 최대 <strong>15분</strong>. 장기 작업은 ECS·Batch·Step Functions 사용"},
+  {wrong:"<strong>Secrets Manager</strong>와 <strong>Parameter Store</strong>는 기능이 동일하다",right:"→ Secrets Manager의 핵심은 <strong>자동 로테이션</strong>. Parameter Store는 무료 설정값 저장이 강점"},
+  {wrong:"<strong>Direct Connect</strong>는 즉시 설정해 바로 사용 가능하다",right:"→ DX는 물리 회선 연결로 <strong>수 주~수 개월</strong> 소요. 즉시 연결은 Site-to-Site VPN 사용"},
+  {wrong:"<strong>SQS FIFO</strong>는 Standard보다 처리량이 높다",right:"→ FIFO는 초당 300(배치 3,000)건으로 Standard보다 <strong>낮음</strong>. FIFO의 목적은 순서 보장"},
+  {wrong:"<strong>S3 Transfer Acceleration</strong>은 다운로드 속도를 높여준다",right:"→ Transfer Acceleration은 <strong>업로드(S3로 전송)</strong> 가속 전용. 다운로드는 CloudFront CDN"},
+  {wrong:"<strong>CloudTrail</strong>은 기본적으로 모든 S3 객체 접근을 기록한다",right:"→ CloudTrail 기본은 <strong>관리 이벤트</strong>만. S3 객체 읽기/쓰기는 <strong>데이터 이벤트</strong> 별도 활성화 필요"},
+  {wrong:"<strong>Aurora Read Replica</strong>는 Multi-AZ와 역할이 같다",right:"→ Aurora Replica는 읽기 분산 + 장애 시 <strong>자동 Failover(Primary 승격)</strong>. 두 역할 동시 수행"},
+  {wrong:"<strong>GuardDuty</strong>는 에이전트 설치가 필요하다",right:"→ GuardDuty는 <strong>에이전트 없음</strong>. CloudTrail·VPC Flow Logs·DNS Logs를 ML로 분석"},
+  {wrong:"RDS <strong>스냅샷</strong>으로 다른 AZ에 즉시 복원할 수 있다",right:"→ 스냅샷은 S3 저장 후 <strong>동일 리전 어느 AZ에도 복원 가능</strong>. 다른 리전은 스냅샷 복사 필요"},
+  {wrong:"<strong>Kinesis Firehose</strong>는 소비자 코드를 직접 작성해야 한다",right:"→ Firehose는 <strong>완전관리형</strong> — 소비자 관리 불필요. S3·Redshift·OpenSearch 자동 적재"},
+  {wrong:"<strong>IAM 역할</strong>은 특정 사용자에게만 부여할 수 있다",right:"→ IAM 역할은 EC2·Lambda·ECS 등 <strong>AWS 서비스</strong>, 크로스 계정, SAML 연동 등 다양하게 부여 가능"},
 ];
 
 function renderTraps(){
@@ -1827,7 +2037,7 @@ function renderTraps(){
   c.dataset.rendered = '1';
   const block = document.createElement('div');
   block.className = 'strategy-block';
-  block.innerHTML = '<h3>⚠️ 자주 나오는 함정 & 오개념</h3><div class="trap-list" id="trap-list"></div>';
+  block.innerHTML = '<h3>⚠️ 자주 나오는 함정 & 오개념 (실제 출제 기반)</h3><div class="trap-list" id="trap-list"></div>';
   c.appendChild(block);
   const list = block.querySelector('#trap-list');
   TRAPS.forEach(t => {
@@ -1841,60 +2051,82 @@ function renderTraps(){
 /* ── 서비스 선택 트리 ── */
 const DECISIONS = [
   {
-    q:"스토리지 — 어떤 서비스를 써야 할까?",
+    q:"📦 스토리지 — 어떤 서비스를 써야 할까?",
     opts:[
-      {if:"여러 서버가 동시에 공유·마운트", then:"Amazon EFS (NFS)"},
-      {if:"단일 EC2 전용 블록 스토리지", then:"Amazon EBS (gp3/io2)"},
-      {if:"객체 저장, 정적 웹, 데이터 레이크", then:"Amazon S3"},
-      {if:"Windows SMB + Active Directory", then:"FSx for Windows"},
-      {if:"HPC·ML 고성능 병렬 파일", then:"FSx for Lustre"},
-      {if:"7년 이상 규정 준수 아카이브", then:"S3 Glacier Deep Archive"},
+      {if:"여러 서버(EC2·ECS·Lambda)가 동시에 공유·마운트 (Linux NFS)",then:"Amazon EFS"},
+      {if:"단일 EC2 전용 블록 스토리지 (고성능 IOPS 필요)",then:"Amazon EBS (gp3 기본 / io2 고성능)"},
+      {if:"객체 저장·정적 웹·데이터 레이크·백업·미디어",then:"Amazon S3 (스토리지 클래스 Lifecycle 적용)"},
+      {if:"Windows SMB + Active Directory 통합 파일 서버",then:"FSx for Windows File Server"},
+      {if:"HPC·ML 고성능 병렬 파일 시스템 (S3 통합)",then:"FSx for Lustre"},
+      {if:"7년 이상 규정 준수 장기 아카이브",then:"S3 Glacier Deep Archive"},
+      {if:"온프레미스 NFS/SMB → AWS 자동 동기화",then:"AWS DataSync"},
+      {if:"대용량 오프라인 물리 전송 (인터넷 느리거나 불가)",then:"AWS Snowball Edge / Snowmobile"},
     ]
   },
   {
-    q:"데이터베이스 — 어떤 서비스를 써야 할까?",
+    q:"🗄️ 데이터베이스 — 어떤 서비스를 써야 할까?",
     opts:[
-      {if:"관계형 DB, 완전관리형", then:"Amazon RDS (MySQL/PostgreSQL 등)"},
-      {if:"관계형 DB + 최고 성능·자동 스케일", then:"Amazon Aurora"},
-      {if:"NoSQL 키-값, 밀리초 응답, 서버리스", then:"Amazon DynamoDB"},
-      {if:"인메모리 캐시, 세션 저장", then:"ElastiCache Redis/Memcached"},
-      {if:"페타바이트 분석, OLAP", then:"Amazon Redshift"},
-      {if:"그래프 관계 탐색", then:"Amazon Neptune"},
-      {if:"MongoDB 호환 도큐먼트", then:"Amazon DocumentDB"},
+      {if:"관계형 DB · 완전관리형 (MySQL·PostgreSQL·SQL Server·Oracle)",then:"Amazon RDS"},
+      {if:"관계형 DB + 최고 성능 + 자동 HA + Serverless 옵션",then:"Amazon Aurora"},
+      {if:"NoSQL 키-값 · 한 자릿수 밀리초 · 서버리스 · 자동 스케일",then:"Amazon DynamoDB"},
+      {if:"DynamoDB 읽기를 마이크로초로 가속",then:"DynamoDB DAX (인메모리 캐시)"},
+      {if:"인메모리 캐시 · 세션 저장 · 리더보드 · Pub-Sub",then:"ElastiCache Redis"},
+      {if:"페타바이트 분석 · OLAP · 데이터 웨어하우스",then:"Amazon Redshift"},
+      {if:"그래프 관계 탐색 (소셜·추천·사기탐지)",then:"Amazon Neptune"},
+      {if:"MongoDB 호환 도큐먼트 DB",then:"Amazon DocumentDB"},
+      {if:"시계열 데이터 (IoT·DevOps 메트릭)",then:"Amazon Timestream"},
     ]
   },
   {
-    q:"메시징 — 어떤 서비스를 써야 할까?",
+    q:"📨 메시징 & 통합 — 어떤 서비스를 써야 할까?",
     opts:[
-      {if:"비동기 작업 디커플링, 재시도", then:"Amazon SQS"},
-      {if:"다수 구독자에 동시 알림(팬아웃)", then:"Amazon SNS"},
-      {if:"AWS 이벤트 기반 자동화, SaaS 통합", then:"Amazon EventBridge"},
-      {if:"실시간 대용량 스트리밍·재처리", then:"Amazon Kinesis Data Streams"},
-      {if:"스트리밍→S3/Redshift 자동 적재", then:"Amazon Kinesis Firehose"},
-      {if:"기존 Kafka 워크로드 이전", then:"Amazon MSK"},
+      {if:"비동기 작업 디커플링 · 실패 재시도 · DLQ 필요",then:"Amazon SQS (Standard 또는 FIFO)"},
+      {if:"다수 구독자에 동시 알림·팬아웃 (Push 방식)",then:"Amazon SNS"},
+      {if:"AWS 서비스 이벤트 자동 처리 · SaaS 통합 · cron 스케줄",then:"Amazon EventBridge"},
+      {if:"실시간 대용량 스트리밍 · 다중 소비자 · 재처리",then:"Amazon Kinesis Data Streams"},
+      {if:"스트리밍 데이터 → S3/Redshift/OpenSearch 자동 적재",then:"Amazon Kinesis Data Firehose"},
+      {if:"기존 Apache Kafka 워크로드 마이그레이션",then:"Amazon MSK (Managed Kafka)"},
+      {if:"Lambda·ECS·SageMaker 단계별 워크플로 오케스트레이션",then:"AWS Step Functions"},
     ]
   },
   {
-    q:"네트워크 연결 — 어떤 서비스를 써야 할까?",
+    q:"🌐 네트워크 & 연결 — 어떤 서비스를 써야 할까?",
     opts:[
-      {if:"온프레미스↔AWS, 빠른 구성, 암호화", then:"Site-to-Site VPN"},
-      {if:"온프레미스↔AWS, 안정적 전용 회선", then:"AWS Direct Connect"},
-      {if:"2개 VPC 단순 프라이빗 연결", then:"VPC Peering"},
-      {if:"다수 VPC 중앙 연결, 전이적 라우팅", then:"AWS Transit Gateway"},
-      {if:"서비스를 프라이빗으로 노출", then:"AWS PrivateLink"},
-      {if:"AWS 서비스를 인터넷 없이 접근", then:"VPC Endpoint (Gateway/Interface)"},
+      {if:"온프레미스 → AWS · 빠른 구성 · IPsec 암호화",then:"AWS Site-to-Site VPN"},
+      {if:"온프레미스 → AWS · 전용 회선 · 안정적 대역폭",then:"AWS Direct Connect"},
+      {if:"2개 VPC 간 단순 프라이빗 연결",then:"VPC Peering"},
+      {if:"다수 VPC 중앙 허브 연결 · 전이적 라우팅 필요",then:"AWS Transit Gateway"},
+      {if:"서비스를 인터넷 노출 없이 다른 VPC에 프라이빗 제공",then:"AWS PrivateLink (Interface Endpoint)"},
+      {if:"VPC에서 S3·DynamoDB 인터넷 없이 접근 (무료)",then:"VPC Gateway Endpoint"},
+      {if:"HTTP 콘텐츠 캐싱 · 글로벌 CDN · S3 정적 웹",then:"Amazon CloudFront"},
+      {if:"TCP/UDP 가속 · 고정 Anycast IP · 빠른 장애 전환",then:"AWS Global Accelerator"},
     ]
   },
   {
-    q:"컴퓨팅 — 어떤 서비스를 써야 할까?",
+    q:"💻 컴퓨팅 — 어떤 서비스를 써야 할까?",
     opts:[
-      {if:"이벤트 기반, 서버리스, 15분 이하", then:"AWS Lambda"},
-      {if:"컨테이너, AWS 네이티브 관리", then:"Amazon ECS + Fargate"},
-      {if:"컨테이너, Kubernetes 필요", then:"Amazon EKS"},
-      {if:"장기 배치 처리, HPC", then:"AWS Batch"},
-      {if:"코드만 배포, PaaS", then:"AWS Elastic Beanstalk"},
-      {if:"예측 불가 트래픽, 비용 절감", then:"EC2 Spot + Auto Scaling"},
-      {if:"장기 안정 워크로드, 비용 절감", then:"EC2 Reserved / Savings Plans"},
+      {if:"이벤트 기반 · 서버리스 · 15분 이하 실행",then:"AWS Lambda"},
+      {if:"컨테이너 · AWS 네이티브 관리 · 서버리스 실행",then:"ECS + Fargate"},
+      {if:"컨테이너 · Kubernetes 필요 · 기존 K8s 이전",then:"Amazon EKS (+ Fargate 또는 EC2 노드)"},
+      {if:"장기 배치 처리 · HPC · Spot 자동 선택",then:"AWS Batch"},
+      {if:"코드만 업로드 · 인프라 자동 구성 · PaaS",then:"AWS Elastic Beanstalk"},
+      {if:"예측 불가 트래픽 · 비용 절감 · 중단 허용",then:"EC2 Spot Instance + Auto Scaling"},
+      {if:"장기 안정 워크로드 · 예약 할인",then:"EC2 Reserved Instance / Savings Plans"},
+      {if:"GPU · OS 수준 제어 · 기존 앱 리프트&시프트",then:"EC2 (적절한 인스턴스 타입 선택)"},
+    ]
+  },
+  {
+    q:"🔐 보안 — 어떤 서비스를 써야 할까?",
+    opts:[
+      {if:"웹 공격 차단 (SQL인젝션·XSS·봇)",then:"AWS WAF → CloudFront·ALB·API GW에 연결"},
+      {if:"DDoS 방어",then:"Shield Standard(무료) / Shield Advanced(유료·DRT팀)"},
+      {if:"이상 행동·위협 탐지 (에이전트 없음)",then:"Amazon GuardDuty"},
+      {if:"EC2·컨테이너·Lambda 취약점 스캔 (CVE)",then:"Amazon Inspector"},
+      {if:"S3 민감 데이터(PII) 자동 탐지·분류",then:"Amazon Macie"},
+      {if:"암호화 키 관리·감사",then:"AWS KMS (+ CloudHSM for FIPS 140-2 Level 3)"},
+      {if:"DB 자격증명 자동 로테이션",then:"AWS Secrets Manager"},
+      {if:"앱 설정값·비밀 저장 (로테이션 불필요·무료)",then:"SSM Parameter Store"},
+      {if:"다중 계정 SCP 정책·통합 결제",then:"AWS Organizations + Control Tower"},
     ]
   },
 ];

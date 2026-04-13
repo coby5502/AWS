@@ -1492,6 +1492,13 @@ function showTips(){
   showScreen('tips');
 }
 
+function switchTips(tab, btn){
+  document.querySelectorAll('.tips-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.tips-panel').forEach(p=>p.style.display='none');
+  document.getElementById('tips-'+tab).style.display='block';
+}
+
 const COMPARES = [
   {
     title:"CloudWatch vs CloudTrail vs AWS Config",
@@ -2287,7 +2294,7 @@ const DECISIONS = [
 ];
 
 function renderCompare(){
-  const c=document.getElementById('compare-grid');
+  const c=document.getElementById('tips-compare');
   if(!c)return;
   c.innerHTML='';
   COMPARES.forEach(sec=>{
@@ -2305,7 +2312,7 @@ function renderCompare(){
 }
 
 function renderKeywords(){
-  const c=document.getElementById('keywords-grid');
+  const c=document.getElementById('tips-strategy');
   if(!c)return;
   c.innerHTML='';
   KEYWORDS.forEach(item=>{
@@ -2317,7 +2324,7 @@ function renderKeywords(){
 }
 
 function renderTraps(){
-  const c=document.getElementById('traps-grid');
+  const c=document.getElementById('tips-traps');
   if(!c)return;
   c.innerHTML='';
   TRAPS.forEach(item=>{
@@ -2329,7 +2336,7 @@ function renderTraps(){
 }
 
 function renderDecisions(){
-  const c=document.getElementById('decisions-grid');
+  const c=document.getElementById('tips-decision');
   if(!c)return;
   c.innerHTML='';
   DECISIONS.forEach(d=>{

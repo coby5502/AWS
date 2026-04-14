@@ -1160,6 +1160,407 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
 #tips-decision { display: none; }
 #tips-compare { display: block; }
 .tips-panel[style*="block"] { display: block !important; }
+
+/* ══════════════════════════════════════
+   GLOSSARY — 리디자인
+══════════════════════════════════════ */
+.term-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: all var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+.term-card:hover { border-color: var(--border2); box-shadow: var(--shadow); transform: translateY(-2px); }
+.term-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 16px; cursor: pointer;
+  background: var(--surface);
+  transition: background var(--transition);
+}
+.term-head:hover { background: var(--surface2); }
+.term-cat-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.term-name { font-size: 14px; font-weight: 900; color: var(--text); flex: 1; }
+.term-short { font-size: 11px; color: var(--text3); margin-left: auto; text-align: right; max-width: 140px; }
+.term-chev { color: var(--text3); font-size: 11px; transition: transform .2s; flex-shrink: 0; }
+.term-head.open .term-chev { transform: rotate(180deg); }
+.term-body {
+  display: none; padding: 0 16px 16px;
+  border-top: 1px solid var(--border);
+  animation: slideDown .18s ease;
+}
+.term-body.open { display: block; }
+@keyframes slideDown { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:none} }
+.term-desc {
+  font-size: 13px; color: var(--text2); line-height: 1.7;
+  margin-top: 12px; margin-bottom: 10px;
+}
+.term-desc strong { color: var(--text); font-weight: 800; }
+.term-desc code {
+  background: var(--surface2); border-radius: 4px;
+  padding: 1px 5px; font-size: 12px; color: var(--accent2);
+}
+.term-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.term-tag {
+  font-size: 11px; font-weight: 700;
+  background: var(--accent-bg); color: var(--accent2);
+  border: 1px solid var(--border2); border-radius: 20px;
+  padding: 2px 9px;
+}
+.glossary-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px; flex-wrap: wrap; gap: 8px;
+}
+.glossary-header .gc-count {
+  font-size: 12px; color: var(--text3); font-weight: 700;
+}
+.cat-tabs {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px;
+}
+.cat-tab {
+  font-size: 12px; font-weight: 700;
+  padding: 5px 12px; border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--surface); color: var(--text2);
+  cursor: pointer; transition: all var(--transition);
+  position: relative; padding-left: 22px;
+  font-family: var(--font);
+}
+.cat-tab::before {
+  content: ''; position: absolute; left: 8px; top: 50%; transform: translateY(-50%);
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--dot, var(--accent));
+}
+.cat-tab:hover { border-color: var(--border2); color: var(--text); }
+.cat-tab.active { background: var(--grad1); border-color: transparent; color: #fff; }
+.cat-tab.active::before { background: rgba(255,255,255,.8); }
+.glossary-list {
+  display: flex; flex-direction: column; gap: 8px;
+}
+.glossary-search-wrap {
+  position: relative; margin-bottom: 14px;
+}
+.glossary-search-wrap input {
+  width: 100%; padding: 10px 14px 10px 38px;
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--surface); color: var(--text); font-family: var(--font);
+  font-size: 14px; transition: all var(--transition); box-sizing: border-box;
+}
+.glossary-search-wrap input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-bg); }
+.glossary-search-wrap::before {
+  content: '🔍'; position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+  font-size: 14px;
+}
+
+/* ══════════════════════════════════════
+   TIPS — 비교표 리디자인
+══════════════════════════════════════ */
+.compare-section { margin-bottom: 36px; }
+.csec-head {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 16px; flex-wrap: wrap;
+}
+.csec-title { font-size: 16px; font-weight: 900; color: var(--text); }
+.csec-badge {
+  font-size: 10px; font-weight: 800; letter-spacing: .5px;
+  background: var(--grad1); color: #fff;
+  border-radius: 20px; padding: 3px 10px;
+}
+.ccards-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.ccards-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+@media(max-width:640px) { .ccards-2, .ccards-3 { grid-template-columns: 1fr; } }
+.ccard {
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm);
+  transition: all var(--transition);
+}
+.ccard:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--border2); }
+.ccard-head {
+  font-size: 13px; font-weight: 900; color: var(--text);
+  padding: 11px 14px; background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+}
+.ctable { width: 100%; border-collapse: collapse; }
+.ctd-k {
+  font-size: 11px; font-weight: 700; color: var(--text3);
+  padding: 7px 8px 7px 14px; width: 36%; vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+.ctd-v {
+  font-size: 12px; color: var(--text2); line-height: 1.55;
+  padding: 7px 14px 7px 6px; border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.ctd-v strong { color: var(--text); font-weight: 800; }
+.ctip {
+  background: linear-gradient(135deg, var(--accent-bg) 0%, transparent 100%);
+  border: 1.5px solid var(--border2); border-radius: var(--radius);
+  padding: 13px 16px; font-size: 13px; color: var(--text2); line-height: 1.75;
+}
+.ctip strong { color: var(--text); font-weight: 800; }
+
+/* keywords grid */
+#tips-strategy { display: none; gap: 10px; }
+#tips-strategy.show { display: grid !important; grid-template-columns: repeat(auto-fill,minmax(240px,1fr)); }
+.kw-card {
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-radius: var(--radius); padding: 14px 16px;
+  transition: all var(--transition); box-shadow: var(--shadow-sm);
+}
+.kw-card:hover { border-color: var(--border2); box-shadow: var(--shadow); transform: translateY(-1px); }
+.kw-word {
+  font-size: 14px; font-weight: 900; color: var(--accent2);
+  margin-bottom: 6px; display: flex; align-items: center; gap: 6px;
+}
+.kw-word::before { content:'🔑'; font-size:13px; }
+.kw-services {
+  font-size: 12px; color: var(--text2); line-height: 1.6; margin-bottom: 8px;
+}
+.kw-tip {
+  font-size: 11px; color: var(--text3); line-height: 1.5;
+  border-top: 1px solid var(--border); padding-top: 8px; margin-top: 4px;
+}
+
+/* traps grid */
+#tips-traps { display: none; gap: 10px; }
+#tips-traps.show { display: grid !important; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); }
+.trap-card {
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow-sm);
+  transition: all var(--transition);
+}
+.trap-card:hover { border-color: var(--border2); box-shadow: var(--shadow); transform: translateY(-2px); }
+.trap-icon { font-size: 22px; margin-bottom: 6px; }
+.trap-title { font-size: 13px; font-weight: 900; color: var(--text); margin-bottom: 10px; }
+.trap-wrong {
+  font-size: 12px; color: var(--wrong); line-height: 1.6;
+  background: var(--wrong-bg); border-radius: 8px;
+  padding: 8px 12px; margin-bottom: 8px;
+}
+.trap-right {
+  font-size: 12px; color: var(--text2); line-height: 1.6;
+  background: var(--correct-bg); border-radius: 8px; padding: 8px 12px;
+}
+.trap-right strong { color: var(--correct); font-weight: 800; }
+
+/* decisions */
+
+.decision-card {
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-radius: var(--radius); padding: 18px; margin-bottom: 12px;
+  box-shadow: var(--shadow-sm); transition: all var(--transition);
+}
+.decision-card:hover { border-color: var(--border2); box-shadow: var(--shadow); }
+.decision-head { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.decision-icon { font-size: 20px; }
+.decision-q { font-size: 12px; color: var(--text3); font-weight: 700; }
+.decision-title {
+  font-size: 15px; font-weight: 900; color: var(--text);
+  margin-bottom: 14px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.decision-opts { display: flex; flex-direction: column; gap: 7px; }
+.decision-opt {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: var(--surface2); border-radius: 10px; padding: 8px 12px;
+  font-size: 12px; line-height: 1.6; transition: all var(--transition);
+}
+.decision-opt:hover { background: var(--surface3); }
+.decision-label { color: var(--text2); flex: 1; }
+.decision-answer { color: var(--accent2); font-weight: 800; flex-shrink: 0; }
+.decision-answer strong { color: var(--accent2); }
+
+/* ══════════════════════════════════════
+   FLASHCARD — 플래시카드 기능
+══════════════════════════════════════ */
+#flashcard { max-width: 480px; margin: 0 auto; padding: 16px 16px 60px; }
+
+.fc-mode-wrap {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px;
+}
+.fc-mode-btn {
+  background: var(--surface); border: 2px solid var(--border);
+  border-radius: var(--radius); padding: 14px 10px;
+  cursor: pointer; transition: all var(--transition);
+  font-family: var(--font); text-align: center;
+}
+.fc-mode-btn:hover { border-color: var(--border2); transform: translateY(-1px); }
+.fc-mode-btn.active { border-color: var(--accent); background: var(--accent-bg); }
+.fc-mode-icon { font-size: 24px; margin-bottom: 4px; }
+.fc-mode-label { font-size: 13px; font-weight: 800; color: var(--text); }
+.fc-mode-desc { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.fc-start-btn {
+  width: 100%; padding: 16px;
+  background: var(--grad1); color: #fff;
+  border: none; border-radius: var(--radius);
+  font-size: 16px; font-weight: 900;
+  cursor: pointer; font-family: var(--font);
+  box-shadow: 0 4px 20px rgba(108,92,231,.35);
+  transition: all var(--transition); margin-bottom: 24px;
+}
+.fc-start-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(108,92,231,.45); }
+
+.fc-session { display: none; }
+.fc-session.active { display: block; }
+
+.fc-progress-wrap { margin-bottom: 20px; }
+.fc-progress-info {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 8px;
+}
+.fc-progress-label { font-size: 13px; font-weight: 700; color: var(--text2); }
+.fc-progress-stats {
+  display: flex; gap: 12px; font-size: 12px; font-weight: 700;
+}
+.fc-stat-know { color: var(--correct); }
+.fc-stat-dontknow { color: var(--wrong); }
+.fc-progress-bar {
+  height: 6px; background: var(--surface2); border-radius: 99px; overflow: hidden;
+}
+.fc-progress-fill {
+  height: 100%; background: var(--grad1);
+  border-radius: 99px; transition: width .4s ease;
+}
+
+/* Card flip */
+.fc-card-wrap {
+  perspective: 1000px; height: 280px; margin-bottom: 20px; cursor: pointer;
+}
+.fc-card {
+  width: 100%; height: 100%; position: relative;
+  transform-style: preserve-3d; transition: transform .55s cubic-bezier(.4,0,.2,1);
+  border-radius: var(--radius-lg);
+}
+.fc-card.flipped { transform: rotateY(180deg); }
+.fc-face {
+  position: absolute; width: 100%; height: 100%;
+  backface-visibility: hidden; border-radius: var(--radius-lg);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 24px; box-sizing: border-box;
+  box-shadow: var(--shadow);
+}
+.fc-front {
+  background: var(--grad1); color: #fff;
+}
+.fc-back {
+  background: var(--surface); border: 2px solid var(--border);
+  transform: rotateY(180deg); color: var(--text);
+}
+.fc-type-badge {
+  font-size: 10px; font-weight: 800; letter-spacing: .8px;
+  background: rgba(255,255,255,.2); border-radius: 20px;
+  padding: 3px 10px; margin-bottom: 14px; color: rgba(255,255,255,.9);
+}
+.fc-front-q {
+  font-size: 22px; font-weight: 900; color: #fff;
+  text-align: center; line-height: 1.4;
+}
+.fc-front-sub {
+  font-size: 12px; color: rgba(255,255,255,.7);
+  margin-top: 12px; text-align: center;
+}
+.fc-tap-hint {
+  position: absolute; bottom: 18px;
+  font-size: 11px; color: rgba(255,255,255,.6); font-weight: 600;
+}
+.fc-back-type {
+  font-size: 10px; font-weight: 800; color: var(--accent2);
+  letter-spacing: .8px; margin-bottom: 10px; text-transform: uppercase;
+}
+.fc-back-ans {
+  font-size: 14px; font-weight: 700; color: var(--text);
+  text-align: center; line-height: 1.65;
+  max-height: 160px; overflow-y: auto;
+}
+.fc-back-ans strong { color: var(--accent2); }
+
+/* Rating buttons */
+.fc-rating {
+  display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px;
+  margin-bottom: 20px; opacity: 0;
+  transition: opacity .3s; pointer-events: none;
+}
+.fc-rating.show { opacity: 1; pointer-events: all; }
+.fc-rate-btn {
+  padding: 10px 4px; border-radius: var(--radius-sm);
+  border: 2px solid var(--border); background: var(--surface);
+  cursor: pointer; font-family: var(--font);
+  transition: all var(--transition); text-align: center;
+}
+.fc-rate-btn:hover { transform: translateY(-2px); }
+.fc-rate-btn .rate-emoji { font-size: 20px; display: block; margin-bottom: 3px; }
+.fc-rate-btn .rate-label { font-size: 11px; font-weight: 800; color: var(--text2); }
+.fc-rate-btn.r0:hover,.fc-rate-btn.r0.picked { border-color:#f87171; background:rgba(248,113,113,.12); }
+.fc-rate-btn.r1:hover,.fc-rate-btn.r1.picked { border-color:#fb923c; background:rgba(251,146,60,.12); }
+.fc-rate-btn.r2:hover,.fc-rate-btn.r2.picked { border-color:#34d399; background:rgba(52,211,153,.12); }
+.fc-rate-btn.r3:hover,.fc-rate-btn.r3.picked { border-color:#a78bfa; background:rgba(167,139,250,.12); }
+
+.fc-nav-row {
+  display: flex; gap: 10px; justify-content: center; margin-bottom: 16px;
+}
+.fc-skip-btn {
+  padding: 8px 18px; border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border); background: var(--surface);
+  font-size: 13px; font-weight: 700; color: var(--text3);
+  cursor: pointer; font-family: var(--font);
+  transition: all var(--transition);
+}
+.fc-skip-btn:hover { border-color: var(--border2); color: var(--text); }
+
+/* Results */
+.fc-result { display: none; text-align: center; padding: 20px 0; }
+.fc-result.show { display: block; }
+.fc-result-ring {
+  width: 120px; height: 120px; border-radius: 50%;
+  background: var(--grad1); margin: 0 auto 20px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  box-shadow: 0 8px 32px rgba(108,92,231,.4);
+}
+.fc-result-pct { font-size: 32px; font-weight: 900; color: #fff; }
+.fc-result-lbl { font-size: 11px; color: rgba(255,255,255,.8); font-weight: 700; }
+.fc-result-title { font-size: 18px; font-weight: 900; color: var(--text); margin-bottom: 8px; }
+.fc-result-sub { font-size: 14px; color: var(--text2); margin-bottom: 24px; line-height: 1.6; }
+.fc-result-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 24px;
+}
+.fc-result-stat {
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm); padding: 12px 8px;
+}
+.fc-result-stat .rs-num { font-size: 22px; font-weight: 900; color: var(--text); }
+.fc-result-stat .rs-lbl { font-size: 11px; color: var(--text3); font-weight: 700; margin-top: 2px; }
+.fc-replay-btn {
+  width: 100%; padding: 14px;
+  background: var(--grad1); color: #fff; border: none;
+  border-radius: var(--radius); font-size: 15px; font-weight: 900;
+  cursor: pointer; font-family: var(--font); margin-bottom: 10px;
+}
+.fc-back-home {
+  width: 100%; padding: 12px;
+  background: var(--surface); color: var(--text2);
+  border: 1.5px solid var(--border); border-radius: var(--radius);
+  font-size: 13px; font-weight: 700; cursor: pointer; font-family: var(--font);
+}
+
+/* Card mode selector counts */
+.fc-mode-btn .fc-count-badge {
+  display: inline-block; font-size: 10px; font-weight: 800;
+  background: var(--accent-bg); color: var(--accent2);
+  border-radius: 20px; padding: 1px 7px; margin-top: 4px;
+}
+
+
+/* panel show states */
+.tips-panel { display: none; }
+#tips-compare { display: none; }
+#tips-compare.show { display: block !important; }
+#tips-strategy.show { display: grid !important; grid-template-columns: repeat(auto-fill,minmax(240px,1fr)); }
+#tips-traps.show { display: grid !important; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); }
+#tips-decision.show { display: block !important; }
 </style>
 </head>
 <body>
@@ -1234,6 +1635,7 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
     <button class="btn-secondary" onclick="showBookmarks()">⭐ 즐겨찾기 모아보기</button>
     <button class="btn-secondary" onclick="showGlossary()">📖 AWS 용어집</button>
     <button class="btn-secondary" onclick="showTips()">🎯 헷갈리는 개념 & 공략법</button>
+    <button class="btn-secondary" onclick="showFlashcard()" style="background:var(--grad1);color:#fff;border-color:transparent;font-weight:900">🧠 스마트 플래시카드</button>
   </div>
 </div>
 
@@ -1670,9 +2072,10 @@ function showTips(){
 function switchTips(tab, btn){
   document.querySelectorAll('.tips-tab').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('.tips-panel').forEach(p=>p.style.display='none');
-  const gridTabs = {'strategy':'grid','traps':'grid'};
-  document.getElementById('tips-'+tab).style.display = gridTabs[tab] || 'block';
+  document.querySelectorAll('.tips-panel').forEach(p=>{p.style.display='none';p.classList.remove('show');});
+  const el=document.getElementById('tips-'+tab);
+  el.style.display='';
+  el.classList.add('show');
 }
 
 const COMPARES = [
@@ -2787,11 +3190,379 @@ function toggleTerm(head){
     <button class="tips-tab" onclick="switchTips('traps',this)">⚠️ 자주 나오는 함정</button>
     <button class="tips-tab" onclick="switchTips('decision',this)">🌲 서비스 선택 트리</button>
   </div>
-  <div id="tips-compare" class="tips-panel"></div>
+  <div id="tips-compare" class="tips-panel show"></div>
   <div id="tips-strategy" class="tips-panel" style="display:none"></div>
   <div id="tips-traps" class="tips-panel" style="display:none"></div>
   <div id="tips-decision" class="tips-panel" style="display:none"></div>
 </div>
 
+
+<!-- ═══ FLASHCARD ═══ -->
+<div id="flashcard" class="screen">
+  <div class="page-header">
+    <button class="btn-icon" onclick="showHome()">←</button>
+    <h2>🧠 플래시카드</h2>
+  </div>
+
+  <!-- Mode selector (shown before session starts) -->
+  <div id="fc-setup">
+    <div class="fc-mode-wrap">
+      <button class="fc-mode-btn active" onclick="fcSetMode('terms',this)">
+        <div class="fc-mode-icon">📖</div>
+        <div class="fc-mode-label">AWS 용어</div>
+        <div class="fc-mode-desc">서비스명 → 설명</div>
+        <div class="fc-count-badge" id="fc-count-terms">131개</div>
+      </button>
+      <button class="fc-mode-btn" onclick="fcSetMode('keywords',this)">
+        <div class="fc-mode-icon">🔑</div>
+        <div class="fc-mode-label">키워드 매핑</div>
+        <div class="fc-mode-desc">시나리오 → 서비스</div>
+        <div class="fc-count-badge" id="fc-count-keywords">28개</div>
+      </button>
+      <button class="fc-mode-btn" onclick="fcSetMode('traps',this)">
+        <div class="fc-mode-icon">⚠️</div>
+        <div class="fc-mode-label">함정 패턴</div>
+        <div class="fc-mode-desc">오답 → 정답 이유</div>
+        <div class="fc-count-badge" id="fc-count-traps">20개</div>
+      </button>
+      <button class="fc-mode-btn" onclick="fcSetMode('mixed',this)">
+        <div class="fc-mode-icon">🎲</div>
+        <div class="fc-mode-label">전체 혼합</div>
+        <div class="fc-mode-desc">랜덤 셔플</div>
+        <div class="fc-count-badge">전체</div>
+      </button>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+      <span style="font-size:13px;font-weight:700;color:var(--text2)">📦 세션당 카드</span>
+      <input type="range" id="fc-count-slider" min="10" max="50" value="20" step="5"
+        style="flex:1" oninput="document.getElementById('fc-count-disp').textContent=this.value">
+      <span id="fc-count-disp" style="font-size:14px;font-weight:900;color:var(--accent2);min-width:28px">20</span>
+    </div>
+
+    <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:20px;font-size:12px;color:var(--text3);line-height:1.6">
+      💡 <strong style="color:var(--text2)">학습 방법:</strong> 카드를 보고 답을 생각한 뒤 탭해서 뒤집어요.<br>
+      반복 횟수는 자신감에 따라 자동 조절됩니다 (스페이스드 리피티션)
+    </div>
+
+    <button class="fc-start-btn" onclick="fcStart()">🚀 학습 시작하기</button>
+
+    <!-- 취약 카드 보기 -->
+    <div id="fc-weak-section" style="display:none">
+      <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:10px">⚠️ 취약 카드 <span id="fc-weak-count" style="color:var(--wrong)"></span></div>
+      <div id="fc-weak-list" style="display:flex;flex-direction:column;gap:6px"></div>
+    </div>
+  </div>
+
+  <!-- Session -->
+  <div class="fc-session" id="fc-session">
+    <div class="fc-progress-wrap">
+      <div class="fc-progress-info">
+        <span class="fc-progress-label" id="fc-prog-label">1 / 20</span>
+        <div class="fc-progress-stats">
+          <span class="fc-stat-know">✅ <span id="fc-know-cnt">0</span></span>
+          <span class="fc-stat-dontknow">❌ <span id="fc-dk-cnt">0</span></span>
+        </div>
+      </div>
+      <div class="fc-progress-bar"><div class="fc-progress-fill" id="fc-prog-fill" style="width:0%"></div></div>
+    </div>
+
+    <div class="fc-card-wrap" id="fc-card-wrap" onclick="fcFlip()">
+      <div class="fc-card" id="fc-card">
+        <div class="fc-face fc-front">
+          <div class="fc-type-badge" id="fc-type-badge">AWS 용어</div>
+          <div class="fc-front-q" id="fc-front-q">Loading...</div>
+          <div class="fc-front-sub" id="fc-front-sub"></div>
+          <div class="fc-tap-hint">탭해서 정답 확인 →</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-back-type" id="fc-back-type">정답</div>
+          <div class="fc-back-ans" id="fc-back-ans">...</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc-rating" id="fc-rating">
+      <button class="fc-rate-btn r0" onclick="fcRate(0)">
+        <span class="rate-emoji">😵</span>
+        <span class="rate-label">몰라</span>
+      </button>
+      <button class="fc-rate-btn r1" onclick="fcRate(1)">
+        <span class="rate-emoji">🤔</span>
+        <span class="rate-label">애매해</span>
+      </button>
+      <button class="fc-rate-btn r2" onclick="fcRate(2)">
+        <span class="rate-emoji">😊</span>
+        <span class="rate-label">알아</span>
+      </button>
+      <button class="fc-rate-btn r3" onclick="fcRate(3)">
+        <span class="rate-emoji">🔥</span>
+        <span class="rate-label">완벽해</span>
+      </button>
+    </div>
+
+    <div class="fc-nav-row">
+      <button class="fc-skip-btn" onclick="fcSkip()">⏭ 건너뛰기</button>
+      <button class="fc-skip-btn" onclick="fcEndSession()">🏁 세션 종료</button>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="fc-result" id="fc-result">
+    <div class="fc-result-ring">
+      <div class="fc-result-pct" id="fc-res-pct">0%</div>
+      <div class="fc-result-lbl">정확도</div>
+    </div>
+    <div class="fc-result-title" id="fc-res-title">잘 했어요! 👏</div>
+    <div class="fc-result-sub" id="fc-res-sub"></div>
+    <div class="fc-result-grid">
+      <div class="fc-result-stat">
+        <div class="rs-num" id="fc-rs-total">0</div>
+        <div class="rs-lbl">총 카드</div>
+      </div>
+      <div class="fc-result-stat">
+        <div class="rs-num" style="color:var(--correct)" id="fc-rs-know">0</div>
+        <div class="rs-lbl">알고 있음</div>
+      </div>
+      <div class="fc-result-stat">
+        <div class="rs-num" style="color:var(--wrong)" id="fc-rs-dk">0</div>
+        <div class="rs-lbl">복습 필요</div>
+      </div>
+    </div>
+    <button class="fc-replay-btn" onclick="fcReplay()">🔄 취약 카드만 다시 학습</button>
+    <button class="fc-back-home" onclick="fcBackToSetup()">← 모드 선택으로</button>
+  </div>
+</div>
+
+<script>
+
+/* ══════════════════════════════════════
+   FLASHCARD ENGINE
+══════════════════════════════════════ */
+let FC = {
+  mode: 'terms',
+  deck: [],
+  session: [],
+  idx: 0,
+  flipped: false,
+  know: 0,
+  dontKnow: 0,
+  weakIds: {},   // id → fail count
+  ratings: {},   // id → last rating
+};
+
+function showFlashcard(){
+  loadFcData();
+  document.getElementById('fc-setup').style.display='block';
+  document.getElementById('fc-session').classList.remove('active');
+  document.getElementById('fc-result').classList.remove('show');
+  renderWeakSection();
+  showScreen('flashcard');
+}
+
+function loadFcData(){
+  // Load persisted ratings
+  try { FC.ratings = JSON.parse(localStorage.getItem('fcRatings')||'{}'); } catch(e){}
+  try { FC.weakIds = JSON.parse(localStorage.getItem('fcWeak')||'{}'); } catch(e){}
+}
+
+function fcSetMode(mode, btn){
+  FC.mode = mode;
+  document.querySelectorAll('.fc-mode-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function buildDeck(mode){
+  const deck = [];
+  if(mode==='terms'||mode==='mixed'){
+    GLOSSARY.forEach((g,i)=>{
+      deck.push({
+        id:'g'+i, type:'AWS 용어',
+        front: g.name,
+        frontSub: g.cat + ' · ' + g.short,
+        back: g.desc,
+        backType:'설명',
+      });
+    });
+  }
+  if(mode==='keywords'||mode==='mixed'){
+    KEYWORDS.forEach((k,i)=>{
+      deck.push({
+        id:'kw'+i, type:'키워드 매핑',
+        front: '"'+k.kw+'" 키워드가 나오면?',
+        frontSub: '',
+        back: '<strong>'+k.services+'</strong><br><br>'+k.tip,
+        backType:'연관 서비스',
+      });
+    });
+  }
+  if(mode==='traps'||mode==='mixed'){
+    TRAPS.forEach((t,i)=>{
+      deck.push({
+        id:'tr'+i, type:'⚠️ 함정 패턴',
+        front: t.icon+' '+t.title,
+        frontSub: '❌ '+t.wrong,
+        back: '✅ '+t.right,
+        backType:'올바른 이해',
+      });
+    });
+  }
+  return deck;
+}
+
+function fcStart(){
+  const count = parseInt(document.getElementById('fc-count-slider').value);
+  const allDeck = buildDeck(FC.mode);
+
+  // Spaced repetition: sort by weakness (unknown cards first)
+  allDeck.sort((a,b)=>{
+    const wa = FC.weakIds[a.id]||0;
+    const wb = FC.weakIds[b.id]||0;
+    const ra = FC.ratings[a.id]??2;
+    const rb = FC.ratings[b.id]??2;
+    // Score: lower rating + more fails = higher priority
+    return (wb*3 - rb) - (wa*3 - ra);
+  });
+
+  // Take top 'count' weighted cards, then shuffle a bit
+  FC.deck = allDeck;
+  FC.session = allDeck.slice(0, count);
+  // Lightly shuffle (keep weak cards near front)
+  for(let i=FC.session.length-1;i>Math.floor(FC.session.length*.3);i--){
+    const j=Math.floor(Math.random()*(i-Math.floor(FC.session.length*.3)))+Math.floor(FC.session.length*.3);
+    [FC.session[i],FC.session[j]]=[FC.session[j],FC.session[i]];
+  }
+
+  FC.idx=0; FC.know=0; FC.dontKnow=0; FC.flipped=false;
+  document.getElementById('fc-setup').style.display='none';
+  document.getElementById('fc-result').classList.remove('show');
+  document.getElementById('fc-session').classList.add('active');
+  fcShowCard();
+}
+
+function fcShowCard(){
+  if(FC.idx>=FC.session.length){ fcEndSession(); return; }
+  const card=FC.session[FC.idx];
+  const total=FC.session.length;
+
+  // Progress
+  document.getElementById('fc-prog-label').textContent=(FC.idx+1)+' / '+total;
+  document.getElementById('fc-prog-fill').style.width=((FC.idx/total)*100)+'%';
+  document.getElementById('fc-know-cnt').textContent=FC.know;
+  document.getElementById('fc-dk-cnt').textContent=FC.dontKnow;
+
+  // Card content
+  document.getElementById('fc-type-badge').textContent=card.type;
+  document.getElementById('fc-front-q').textContent=card.front;
+  document.getElementById('fc-front-sub').textContent=card.frontSub||'';
+  document.getElementById('fc-back-type').textContent=card.backType||'정답';
+  document.getElementById('fc-back-ans').innerHTML=card.back;
+
+  // Reset flip
+  FC.flipped=false;
+  const el=document.getElementById('fc-card');
+  el.classList.remove('flipped');
+  document.getElementById('fc-rating').classList.remove('show');
+  document.querySelectorAll('.fc-rate-btn').forEach(b=>b.classList.remove('picked'));
+}
+
+function fcFlip(){
+  if(FC.flipped) return;
+  FC.flipped=true;
+  document.getElementById('fc-card').classList.add('flipped');
+  document.getElementById('fc-rating').classList.add('show');
+}
+
+function fcRate(rating){
+  if(!FC.flipped) return;
+  const card=FC.session[FC.idx];
+  FC.ratings[card.id]=rating;
+  // Update weak tracking
+  if(rating<=1){
+    FC.weakIds[card.id]=(FC.weakIds[card.id]||0)+1;
+    FC.dontKnow++;
+    document.getElementById('fc-dk-cnt').textContent=FC.dontKnow;
+  } else {
+    if(FC.weakIds[card.id]>0) FC.weakIds[card.id]--;
+    FC.know++;
+    document.getElementById('fc-know-cnt').textContent=FC.know;
+  }
+  // Save
+  try{
+    localStorage.setItem('fcRatings', JSON.stringify(FC.ratings));
+    localStorage.setItem('fcWeak', JSON.stringify(FC.weakIds));
+  }catch(e){}
+  // Highlight picked
+  document.querySelectorAll('.fc-rate-btn').forEach((b,i)=>{
+    b.classList.toggle('picked', i===rating);
+  });
+  // Next after short delay
+  setTimeout(()=>{ FC.idx++; fcShowCard(); }, 400);
+}
+
+function fcSkip(){
+  FC.idx++;
+  fcShowCard();
+}
+
+function fcEndSession(){
+  document.getElementById('fc-session').classList.remove('active');
+  const total=FC.know+FC.dontKnow;
+  const pct=total?Math.round(FC.know/total*100):0;
+  document.getElementById('fc-res-pct').textContent=pct+'%';
+  document.getElementById('fc-rs-total').textContent=FC.session.length;
+  document.getElementById('fc-rs-know').textContent=FC.know;
+  document.getElementById('fc-rs-dk').textContent=FC.dontKnow;
+
+  let title='', sub='';
+  if(pct>=90){ title='완벽해요! 🔥'; sub='이 세트는 거의 마스터했어요. 다음 세트에 도전해보세요!'; }
+  else if(pct>=70){ title='잘 하고 있어요! 👏'; sub='취약 카드를 한 번 더 복습하면 완벽할 거예요.'; }
+  else if(pct>=50){ title='절반은 알고 있어요 💪'; sub='아직 모르는 카드를 집중 학습해봐요!'; }
+  else { title='처음엔 다 그래요 😊'; sub='모르는 카드를 한 번 더 반복하다 보면 외워져요!'; }
+  document.getElementById('fc-res-title').textContent=title;
+  document.getElementById('fc-res-sub').textContent=sub;
+  document.getElementById('fc-result').classList.add('show');
+}
+
+function fcReplay(){
+  // Replay only wrong cards
+  const wrongCards=FC.session.filter(c=>FC.ratings[c.id]===undefined||FC.ratings[c.id]<=1);
+  if(!wrongCards.length){ toast('모든 카드를 알고 있어요! 🎉'); return; }
+  FC.session=wrongCards;
+  FC.idx=0; FC.know=0; FC.dontKnow=0; FC.flipped=false;
+  document.getElementById('fc-result').classList.remove('show');
+  document.getElementById('fc-session').classList.add('active');
+  fcShowCard();
+}
+
+function fcBackToSetup(){
+  document.getElementById('fc-result').classList.remove('show');
+  document.getElementById('fc-session').classList.remove('active');
+  document.getElementById('fc-setup').style.display='block';
+  renderWeakSection();
+}
+
+function renderWeakSection(){
+  const weakEntries=Object.entries(FC.weakIds||{}).filter(([,v])=>v>0);
+  const sec=document.getElementById('fc-weak-section');
+  if(!weakEntries.length){ sec.style.display='none'; return; }
+  weakEntries.sort((a,b)=>b[1]-a[1]);
+  const top=weakEntries.slice(0,5);
+  document.getElementById('fc-weak-count').textContent=weakEntries.length+'개';
+
+  // Build weak list from deck
+  const allDeck=buildDeck('mixed');
+  const idMap={};
+  allDeck.forEach(c=>idMap[c.id]=c);
+  const listHtml=top.map(([id,cnt])=>{
+    const c=idMap[id];
+    if(!c) return '';
+    return '<div style="background:var(--wrong-bg);border-radius:8px;padding:8px 12px;font-size:12px;color:var(--text2);display:flex;align-items:center;gap:8px"><span style="color:var(--wrong);font-weight:800">×'+cnt+'</span><span>'+c.front+'</span></div>';
+  }).join('');
+  document.getElementById('fc-weak-list').innerHTML=listHtml;
+  sec.style.display='block';
+}
+
+</script>
 </body>
 </html>

@@ -794,773 +794,179 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
 /* ═══════════════════════════════════════
    TIPS PAGE
 ═══════════════════════════════════════ */
+
+/* ══════════════════════════════════════════════════════════
+   TIPS PAGE — 전면 리디자인 (가독성 최우선)
+══════════════════════════════════════════════════════════ */
 #tips {
-  max-width: 760px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 16px 16px 48px;
+  padding: 0 16px 64px;
 }
 .tips-tabs {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
+  display: flex; gap: 6px; flex-wrap: nowrap; overflow-x: auto;
+  padding-bottom: 2px;
+  margin-bottom: 32px;
 }
+.tips-tabs::-webkit-scrollbar { display: none; }
 .tips-tab {
-  background: var(--surface2);
-  border: 1.5px solid var(--border);
-  border-radius: 99px;
-  padding: 8px 18px;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text2);
-  cursor: pointer;
-  transition: all var(--transition);
-  font-family: var(--font);
-}
-.tips-tab:hover { border-color: var(--border2); color: var(--text); }
-.tips-tab.active { background: var(--grad1); border-color: transparent; color: #fff; }
-
-/* ── 헷갈리는 개념 ── */
-.compare-section { margin-bottom: 32px; }
-.compare-section h3 {
-  font-size: 15px; font-weight: 900;
-  color: var(--text);
-  margin-bottom: 14px;
-  display: flex; align-items: center; gap: 8px;
-}
-.compare-section h3 .badge {
-  font-size: 10px; font-weight: 800;
-  background: var(--accent-bg);
-  color: var(--accent2);
-  border: 1px solid var(--border2);
-  border-radius: 6px;
-  padding: 2px 8px;
-  letter-spacing: .5px;
-}
-.compare-grid {
-  display: grid;
-  gap: 10px;
-}
-.compare-grid.col2 { grid-template-columns: 1fr 1fr; }
-.compare-grid.col3 { grid-template-columns: 1fr 1fr 1fr; }
-@media(max-width:540px){
-  .compare-grid.col2, .compare-grid.col3 { grid-template-columns: 1fr; }
-}
-.cmp-card {
-  background: var(--surface);
+  display: flex; align-items: center; gap: 6px; white-space: nowrap;
+  padding: 10px 20px; border-radius: 99px;
   border: 2px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px;
-  transition: all var(--transition);
+  background: var(--surface);
+  font-size: 13px; font-weight: 800; color: var(--text2);
+  cursor: pointer; font-family: var(--font);
+  transition: all var(--transition); flex-shrink: 0;
 }
-.cmp-card:hover { border-color: var(--border2); transform: translateY(-2px); }
-.cmp-card.hl { border-color: var(--accent); background: var(--accent-bg); }
-.cmp-name {
-  font-size: 13px; font-weight: 900;
-  color: var(--accent2);
-  margin-bottom: 8px;
-  display: flex; align-items: center; gap: 6px;
-}
-.cmp-name .dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  flex-shrink: 0;
-}
-.cmp-rows { display: flex; flex-direction: column; gap: 5px; }
-.cmp-row {
-  display: flex; gap: 8px;
-  font-size: 12px; line-height: 1.5;
-}
-.cmp-row .k {
-  color: var(--text3);
-  font-weight: 700;
-  min-width: 52px;
-  flex-shrink: 0;
-  font-size: 11px;
-}
-.cmp-row .v { color: var(--text2); }
-.cmp-row .v strong { color: var(--text); font-weight: 800; }
-.vs-divider {
-  display: flex; align-items: center; justify-content: center;
-  color: var(--text3); font-size: 11px; font-weight: 800;
-  padding: 4px 0;
-}
-.tip-box {
-  background: linear-gradient(135deg, var(--accent-bg), transparent);
-  border: 1.5px solid var(--border2);
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  margin-top: 10px;
-  font-size: 13px;
-  color: var(--text2);
-  line-height: 1.7;
-}
-.tip-box .tip-title {
-  font-size: 12px; font-weight: 800;
-  color: var(--accent2); margin-bottom: 6px;
+.tips-tab:hover { border-color: var(--border2); color: var(--text); background: var(--surface2); }
+.tips-tab.active {
+  background: var(--grad1); border-color: transparent; color: #fff;
+  box-shadow: 0 4px 16px rgba(108,92,231,.35);
 }
 
-/* ── 문제 공략법 ── */
-.strategy-block { margin-bottom: 28px; }
-.strategy-block h3 {
-  font-size: 15px; font-weight: 900;
-  margin-bottom: 14px;
-  display: flex; align-items: center; gap: 8px;
-}
-.kw-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 8px;
-}
-.kw-card {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 12px 14px;
-  transition: all var(--transition);
-}
-.kw-card:hover { border-color: var(--border2); }
-.kw-keyword {
-  font-size: 12px; font-weight: 800;
-  color: var(--text3);
-  text-transform: uppercase;
-  letter-spacing: .5px;
-  margin-bottom: 5px;
-}
-.kw-phrases {
-  display: flex; flex-wrap: wrap; gap: 4px;
-  margin-bottom: 7px;
-}
-.kw-phrase {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  padding: 2px 7px;
-  font-size: 11px;
-  color: var(--text2);
-  font-weight: 600;
-}
-.kw-answer {
-  font-size: 13px; font-weight: 900;
-  color: var(--accent2);
-}
-.trap-list { display: flex; flex-direction: column; gap: 8px; }
-.trap-item {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-left: 4px solid var(--wrong);
-  border-radius: var(--radius-sm);
-  padding: 12px 14px;
-  font-size: 13px;
-  line-height: 1.65;
-  color: var(--text2);
-}
-.trap-item strong { color: var(--text); }
-.trap-item .correct-arrow {
-  color: var(--correct);
-  font-weight: 800;
-  margin-top: 4px;
-  display: block;
-  font-size: 12px;
-}
-.decision-card {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px;
-  margin-bottom: 10px;
-}
-.decision-q {
-  font-size: 14px; font-weight: 800;
-  color: var(--text);
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--border);
-}
-.decision-opts { display: flex; flex-direction: column; gap: 6px; }
-.decision-opt {
-  display: flex; align-items: flex-start; gap: 10px;
-  font-size: 13px; color: var(--text2); line-height: 1.6;
-}
-.decision-opt .arrow { color: var(--accent2); font-weight: 800; flex-shrink:0; font-size:14px; }
-.decision-opt .then { color: var(--correct); font-weight: 800; }
-
-/* ── 비교 섹션 (compare) ── */
-.csec-head {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 14px; flex-wrap: wrap;
-}
-.csec-title {
-  font-size: 15px; font-weight: 900; color: var(--text);
-}
-.csec-badge {
-  font-size: 10px; font-weight: 800;
-  background: var(--accent-bg); color: var(--accent2);
-  border: 1px solid var(--border2); border-radius: 6px;
-  padding: 2px 8px; letter-spacing: .5px;
-}
-.ccards-2 {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-  margin-bottom: 10px;
-}
-.ccards-3 {
-  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;
-  margin-bottom: 10px;
-}
-@media(max-width: 600px) {
-  .ccards-2, .ccards-3 { grid-template-columns: 1fr; }
-}
-.ccard {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: all var(--transition);
-}
-.ccard:hover { border-color: var(--border2); transform: translateY(-1px); }
-.ccard-head {
-  font-size: 13px; font-weight: 900; color: var(--text);
-  padding: 10px 14px;
-  background: var(--surface2);
-  border-bottom: 1px solid var(--border);
-}
-.ctable { width: 100%; border-collapse: collapse; }
-.ctd-k {
-  font-size: 11px; font-weight: 700; color: var(--text3);
-  padding: 6px 14px 6px 14px;
-  width: 38%; vertical-align: top;
-  border-bottom: 1px solid var(--border);
-  white-space: nowrap;
-}
-.ctd-v {
-  font-size: 12px; color: var(--text2); line-height: 1.55;
-  padding: 6px 14px 6px 6px;
-  border-bottom: 1px solid var(--border);
-  vertical-align: top;
-}
-.ctd-v strong { color: var(--text); font-weight: 800; }
-.ctip {
-  background: linear-gradient(135deg, var(--accent-bg), transparent);
-  border: 1.5px solid var(--border2); border-radius: var(--radius);
-  padding: 12px 16px; font-size: 13px; color: var(--text2);
-  line-height: 1.7;
-}
-.ctip strong { color: var(--text); font-weight: 800; }
-
-/* ── 키워드 카드 ── */
-.kw-card {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 12px 14px;
-  transition: all var(--transition);
-}
-.kw-card:hover { border-color: var(--border2); }
-.kw-word {
-  font-size: 13px; font-weight: 900; color: var(--accent2);
-  margin-bottom: 5px;
-}
-.kw-services {
-  font-size: 12px; color: var(--text2); line-height: 1.5;
-  margin-bottom: 6px;
-}
-.kw-tip {
-  font-size: 11px; color: var(--text3); line-height: 1.5;
-  border-top: 1px solid var(--border);
-  padding-top: 6px; margin-top: 4px;
-}
-
-/* ── 함정 카드 ── */
-.trap-card {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  transition: all var(--transition);
-}
-.trap-card:hover { border-color: var(--border2); }
-.trap-icon {
-  font-size: 20px; margin-bottom: 4px;
-}
-.trap-title {
-  font-size: 13px; font-weight: 900; color: var(--text);
-  margin-bottom: 8px;
-}
-.trap-wrong {
-  font-size: 12px; color: var(--wrong, #ef4444);
-  background: rgba(239,68,68,.08); border-radius: 6px;
-  padding: 6px 10px; margin-bottom: 6px; line-height: 1.55;
-}
-.trap-right {
-  font-size: 12px; color: var(--text2); line-height: 1.55;
-  padding: 6px 10px;
-  background: rgba(16,185,129,.08); border-radius: 6px;
-}
-.trap-right strong { color: var(--text); font-weight: 800; }
-
-/* ── 결정 트리 ── */
-.decision-card {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px;
-  margin-bottom: 12px;
-  transition: all var(--transition);
-}
-.decision-card:hover { border-color: var(--border2); }
-.decision-head {
-  display: flex; align-items: center; gap: 8px;
-  margin-bottom: 4px;
-}
-.decision-icon { font-size: 18px; flex-shrink: 0; }
-.decision-q {
-  font-size: 13px; font-weight: 800; color: var(--text3);
-}
-.decision-title {
-  font-size: 15px; font-weight: 900; color: var(--text);
-  margin-bottom: 12px; padding-bottom: 10px;
-  border-bottom: 1px solid var(--border);
-}
-.decision-opts { display: flex; flex-direction: column; gap: 6px; }
-.decision-opt {
-  display: flex; align-items: flex-start; gap: 0;
-  font-size: 12px; line-height: 1.6;
-  background: var(--surface2); border-radius: 6px;
-  padding: 6px 10px; gap: 8px;
-}
-.decision-label {
-  color: var(--text2); flex: 1; min-width: 0;
-}
-.decision-answer {
-  color: var(--accent2); font-weight: 800;
-  flex-shrink: 0; white-space: nowrap;
-}
-.decision-answer strong { color: var(--accent2); }
-
-/* ── keywords grid ── */
-#tips-strategy { display: none; }
-#tips-strategy .kw-grid-wrap {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 10px;
-}
-
-/* ── Tips panel grid layouts ── */
-#tips-strategy {
-  display: none;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 10px;
-}
-#tips-traps {
-  display: none;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 10px;
-}
-#tips-decision { display: none; }
-#tips-compare { display: block; }
-.tips-panel[style*="block"] { display: block !important; }
-
-/* ══════════════════════════════════════
-   GLOSSARY — 리디자인
-══════════════════════════════════════ */
-.term-card {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: all var(--transition);
-  box-shadow: var(--shadow-sm);
-}
-.term-card:hover { border-color: var(--border2); box-shadow: var(--shadow); transform: translateY(-2px); }
-.term-head {
-  display: flex; align-items: center; gap: 10px;
-  padding: 14px 16px; cursor: pointer;
-  background: var(--surface);
-  transition: background var(--transition);
-}
-.term-head:hover { background: var(--surface2); }
-.term-cat-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-.term-name { font-size: 14px; font-weight: 900; color: var(--text); flex: 1; }
-.term-short { font-size: 11px; color: var(--text3); margin-left: auto; text-align: right; max-width: 140px; }
-.term-chev { color: var(--text3); font-size: 11px; transition: transform .2s; flex-shrink: 0; }
-.term-head.open .term-chev { transform: rotate(180deg); }
-.term-body {
-  display: none; padding: 0 16px 16px;
-  border-top: 1px solid var(--border);
-  animation: slideDown .18s ease;
-}
-.term-body.open { display: block; }
-@keyframes slideDown { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:none} }
-.term-desc {
-  font-size: 13px; color: var(--text2); line-height: 1.7;
-  margin-top: 12px; margin-bottom: 10px;
-}
-.term-desc strong { color: var(--text); font-weight: 800; }
-.term-desc code {
-  background: var(--surface2); border-radius: 4px;
-  padding: 1px 5px; font-size: 12px; color: var(--accent2);
-}
-.term-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
-.term-tag {
-  font-size: 11px; font-weight: 700;
-  background: var(--accent-bg); color: var(--accent2);
-  border: 1px solid var(--border2); border-radius: 20px;
-  padding: 2px 9px;
-}
-.glossary-header {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 12px; flex-wrap: wrap; gap: 8px;
-}
-.glossary-header .gc-count {
-  font-size: 12px; color: var(--text3); font-weight: 700;
-}
-.cat-tabs {
-  display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px;
-}
-.cat-tab {
-  font-size: 12px; font-weight: 700;
-  padding: 5px 12px; border-radius: 20px;
-  border: 1.5px solid var(--border);
-  background: var(--surface); color: var(--text2);
-  cursor: pointer; transition: all var(--transition);
-  position: relative; padding-left: 22px;
-  font-family: var(--font);
-}
-.cat-tab::before {
-  content: ''; position: absolute; left: 8px; top: 50%; transform: translateY(-50%);
-  width: 7px; height: 7px; border-radius: 50%;
-  background: var(--dot, var(--accent));
-}
-.cat-tab:hover { border-color: var(--border2); color: var(--text); }
-.cat-tab.active { background: var(--grad1); border-color: transparent; color: #fff; }
-.cat-tab.active::before { background: rgba(255,255,255,.8); }
-.glossary-list {
-  display: flex; flex-direction: column; gap: 8px;
-}
-.glossary-search-wrap {
-  position: relative; margin-bottom: 14px;
-}
-.glossary-search-wrap input {
-  width: 100%; padding: 10px 14px 10px 38px;
-  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
-  background: var(--surface); color: var(--text); font-family: var(--font);
-  font-size: 14px; transition: all var(--transition); box-sizing: border-box;
-}
-.glossary-search-wrap input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-bg); }
-.glossary-search-wrap::before {
-  content: '🔍'; position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
-  font-size: 14px;
-}
-
-/* ══════════════════════════════════════
-   TIPS — 비교표 리디자인
-══════════════════════════════════════ */
-.compare-section { margin-bottom: 36px; }
-.csec-head {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 16px; flex-wrap: wrap;
-}
-.csec-title { font-size: 16px; font-weight: 900; color: var(--text); }
-.csec-badge {
-  font-size: 10px; font-weight: 800; letter-spacing: .5px;
+/* ── 비교 섹션 ── */
+#tips-compare { display: none; }
+#tips-compare.show { display: flex; flex-direction: column; gap: 52px; }
+.compare-section {}
+.csec-head { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
+.csec-num {
+  width: 34px; height: 34px; border-radius: 50%;
   background: var(--grad1); color: #fff;
-  border-radius: 20px; padding: 3px 10px;
+  font-size: 13px; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; box-shadow: 0 3px 12px rgba(108,92,231,.4);
 }
-.ccards-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-.ccards-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-@media(max-width:640px) { .ccards-2, .ccards-3 { grid-template-columns: 1fr; } }
+.csec-title { font-size: 18px; font-weight: 900; color: var(--text); }
+.csec-badge {
+  font-size: 11px; font-weight: 800; letter-spacing: .5px;
+  background: var(--accent-bg); color: var(--accent2);
+  border: 1.5px solid var(--border2); border-radius: 99px; padding: 3px 12px;
+}
+.ccards-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.ccards-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+@media(max-width:720px) { .ccards-3 { grid-template-columns: 1fr 1fr; } }
+@media(max-width:480px) { .ccards-2, .ccards-3 { grid-template-columns: 1fr; } }
+
 .ccard {
-  background: var(--surface); border: 1.5px solid var(--border);
-  border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm);
-  transition: all var(--transition);
+  background: var(--surface); border: 2px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform .2s, box-shadow .2s, border-color .2s;
 }
-.ccard:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--border2); }
+.ccard:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--border2); }
 .ccard-head {
-  font-size: 13px; font-weight: 900; color: var(--text);
-  padding: 11px 14px; background: var(--surface2);
-  border-bottom: 1px solid var(--border);
+  padding: 14px 18px; font-size: 14px; font-weight: 900; color: #fff;
+  letter-spacing: .1px;
 }
 .ctable { width: 100%; border-collapse: collapse; }
 .ctd-k {
-  font-size: 11px; font-weight: 700; color: var(--text3);
-  padding: 7px 8px 7px 14px; width: 36%; vertical-align: top;
+  font-size: 11px; font-weight: 800; color: var(--text3);
+  padding: 10px 8px 10px 18px; width: 32%; vertical-align: top;
   border-bottom: 1px solid var(--border);
+  letter-spacing: .3px;
+  text-transform: uppercase;
 }
 .ctd-v {
-  font-size: 12px; color: var(--text2); line-height: 1.55;
-  padding: 7px 14px 7px 6px; border-bottom: 1px solid var(--border);
-  vertical-align: top;
+  font-size: 13px; color: var(--text2); line-height: 1.65;
+  padding: 10px 18px 10px 8px;
+  border-bottom: 1px solid var(--border); vertical-align: top;
 }
 .ctd-v strong { color: var(--text); font-weight: 800; }
+.ctable tr:last-child .ctd-k,
+.ctable tr:last-child .ctd-v { border-bottom: none; }
+.ctable tr:hover .ctd-k,
+.ctable tr:hover .ctd-v { background: var(--surface2); transition: background .15s; }
+
 .ctip {
-  background: linear-gradient(135deg, var(--accent-bg) 0%, transparent 100%);
-  border: 1.5px solid var(--border2); border-radius: var(--radius);
-  padding: 13px 16px; font-size: 13px; color: var(--text2); line-height: 1.75;
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, var(--accent-bg) 0%, transparent 70%);
+  border: 2px solid var(--border2); border-radius: var(--radius);
+  padding: 16px 20px 16px 20px;
+  font-size: 13px; color: var(--text2); line-height: 1.8;
 }
+.ctip::after { content:'💡'; position:absolute; right:14px; bottom:-4px; font-size:42px; opacity:.1; }
 .ctip strong { color: var(--text); font-weight: 800; }
 
-/* keywords grid */
-#tips-strategy { display: none; gap: 10px; }
-#tips-strategy.show { display: grid !important; grid-template-columns: repeat(auto-fill,minmax(240px,1fr)); }
+/* ── 키워드 매핑 ── */
+#tips-strategy { display: none; }
+#tips-strategy.show {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 14px;
+}
 .kw-card {
-  background: var(--surface); border: 1.5px solid var(--border);
-  border-radius: var(--radius); padding: 14px 16px;
-  transition: all var(--transition); box-shadow: var(--shadow-sm);
+  background: var(--surface); border: 2px solid var(--border);
+  border-radius: var(--radius); padding: 18px 20px;
+  box-shadow: var(--shadow-sm); transition: all .2s;
+  display: flex; flex-direction: column; gap: 10px;
 }
-.kw-card:hover { border-color: var(--border2); box-shadow: var(--shadow); transform: translateY(-1px); }
+.kw-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
 .kw-word {
-  font-size: 14px; font-weight: 900; color: var(--accent2);
-  margin-bottom: 6px; display: flex; align-items: center; gap: 6px;
+  font-size: 15px; font-weight: 900; color: var(--text);
+  padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 8px;
 }
-.kw-word::before { content:'🔑'; font-size:13px; }
+.kw-word::before { content:'🔑'; font-size:14px; }
 .kw-services {
-  font-size: 12px; color: var(--text2); line-height: 1.6; margin-bottom: 8px;
+  font-size: 13px; color: var(--accent2); font-weight: 700; line-height: 1.65;
+  background: var(--accent-bg); border-radius: 8px; padding: 8px 12px;
 }
-.kw-tip {
-  font-size: 11px; color: var(--text3); line-height: 1.5;
-  border-top: 1px solid var(--border); padding-top: 8px; margin-top: 4px;
-}
+.kw-tip { font-size: 12px; color: var(--text3); line-height: 1.6; }
 
-/* traps grid */
-#tips-traps { display: none; gap: 10px; }
-#tips-traps.show { display: grid !important; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); }
-.trap-card {
-  background: var(--surface); border: 1.5px solid var(--border);
-  border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow-sm);
-  transition: all var(--transition);
+/* ── 함정 패턴 ── */
+#tips-traps { display: none; }
+#tips-traps.show {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px;
 }
-.trap-card:hover { border-color: var(--border2); box-shadow: var(--shadow); transform: translateY(-2px); }
-.trap-icon { font-size: 22px; margin-bottom: 6px; }
-.trap-title { font-size: 13px; font-weight: 900; color: var(--text); margin-bottom: 10px; }
+.trap-card {
+  background: var(--surface); border: 2px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow-sm); transition: all .2s;
+  display: flex; flex-direction: column;
+}
+.trap-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--border2); }
+.trap-icon { font-size: 28px; padding: 18px 20px 8px; }
+.trap-title { font-size: 14px; font-weight: 900; color: var(--text); padding: 0 20px 14px; border-bottom: 1px solid var(--border); }
 .trap-wrong {
-  font-size: 12px; color: var(--wrong); line-height: 1.6;
-  background: var(--wrong-bg); border-radius: 8px;
-  padding: 8px 12px; margin-bottom: 8px;
+  margin: 14px 20px 10px; font-size: 13px; color: var(--wrong);
+  background: var(--wrong-bg); border-radius: 10px; padding: 10px 14px;
+  line-height: 1.65; border-left: 3px solid var(--wrong);
 }
 .trap-right {
-  font-size: 12px; color: var(--text2); line-height: 1.6;
-  background: var(--correct-bg); border-radius: 8px; padding: 8px 12px;
+  margin: 0 20px 18px; font-size: 13px; color: var(--text2);
+  background: var(--correct-bg); border-radius: 10px; padding: 10px 14px;
+  line-height: 1.65; border-left: 3px solid var(--correct); flex: 1;
 }
 .trap-right strong { color: var(--correct); font-weight: 800; }
 
-/* decisions */
-
+/* ── 서비스 선택 트리 ── */
+#tips-decision { display: none; }
+#tips-decision.show { display: flex !important; flex-direction: column; gap: 16px; }
 .decision-card {
-  background: var(--surface); border: 1.5px solid var(--border);
-  border-radius: var(--radius); padding: 18px; margin-bottom: 12px;
-  box-shadow: var(--shadow-sm); transition: all var(--transition);
+  background: var(--surface); border: 2px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow-sm); transition: all .2s;
 }
-.decision-card:hover { border-color: var(--border2); box-shadow: var(--shadow); }
-.decision-head { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
-.decision-icon { font-size: 20px; }
+.decision-card:hover { box-shadow: var(--shadow); border-color: var(--border2); }
+.decision-head {
+  padding: 16px 22px; background: var(--surface2);
+  border-bottom: 2px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+}
+.decision-icon { font-size: 24px; flex-shrink: 0; }
+.decision-title { font-size: 16px; font-weight: 900; color: var(--text); }
 .decision-q { font-size: 12px; color: var(--text3); font-weight: 700; }
-.decision-title {
-  font-size: 15px; font-weight: 900; color: var(--text);
-  margin-bottom: 14px; padding-bottom: 12px;
-  border-bottom: 1px solid var(--border);
-}
-.decision-opts { display: flex; flex-direction: column; gap: 7px; }
+.decision-opts { padding: 14px 22px 20px; display: flex; flex-direction: column; gap: 8px; }
 .decision-opt {
-  display: flex; align-items: flex-start; gap: 10px;
-  background: var(--surface2); border-radius: 10px; padding: 8px 12px;
-  font-size: 12px; line-height: 1.6; transition: all var(--transition);
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px; background: var(--surface2);
+  border-radius: 10px; transition: background .15s;
 }
 .decision-opt:hover { background: var(--surface3); }
-.decision-label { color: var(--text2); flex: 1; }
-.decision-answer { color: var(--accent2); font-weight: 800; flex-shrink: 0; }
+.decision-label { font-size: 13px; color: var(--text2); line-height: 1.6; flex: 1; }
+.decision-answer { font-size: 13px; font-weight: 900; color: var(--accent2); flex-shrink: 0; }
 .decision-answer strong { color: var(--accent2); }
 
-/* ══════════════════════════════════════
-   FLASHCARD — 플래시카드 기능
-══════════════════════════════════════ */
-#flashcard { max-width: 480px; margin: 0 auto; padding: 16px 16px 60px; }
-
-.fc-mode-wrap {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px;
-}
-.fc-mode-btn {
-  background: var(--surface); border: 2px solid var(--border);
-  border-radius: var(--radius); padding: 14px 10px;
-  cursor: pointer; transition: all var(--transition);
-  font-family: var(--font); text-align: center;
-}
-.fc-mode-btn:hover { border-color: var(--border2); transform: translateY(-1px); }
-.fc-mode-btn.active { border-color: var(--accent); background: var(--accent-bg); }
-.fc-mode-icon { font-size: 24px; margin-bottom: 4px; }
-.fc-mode-label { font-size: 13px; font-weight: 800; color: var(--text); }
-.fc-mode-desc { font-size: 11px; color: var(--text3); margin-top: 2px; }
-
-.fc-start-btn {
-  width: 100%; padding: 16px;
-  background: var(--grad1); color: #fff;
-  border: none; border-radius: var(--radius);
-  font-size: 16px; font-weight: 900;
-  cursor: pointer; font-family: var(--font);
-  box-shadow: 0 4px 20px rgba(108,92,231,.35);
-  transition: all var(--transition); margin-bottom: 24px;
-}
-.fc-start-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(108,92,231,.45); }
-
-.fc-session { display: none; }
-.fc-session.active { display: block; }
-
-.fc-progress-wrap { margin-bottom: 20px; }
-.fc-progress-info {
-  display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 8px;
-}
-.fc-progress-label { font-size: 13px; font-weight: 700; color: var(--text2); }
-.fc-progress-stats {
-  display: flex; gap: 12px; font-size: 12px; font-weight: 700;
-}
-.fc-stat-know { color: var(--correct); }
-.fc-stat-dontknow { color: var(--wrong); }
-.fc-progress-bar {
-  height: 6px; background: var(--surface2); border-radius: 99px; overflow: hidden;
-}
-.fc-progress-fill {
-  height: 100%; background: var(--grad1);
-  border-radius: 99px; transition: width .4s ease;
-}
-
-/* Card flip */
-.fc-card-wrap {
-  perspective: 1000px; height: 280px; margin-bottom: 20px; cursor: pointer;
-}
-.fc-card {
-  width: 100%; height: 100%; position: relative;
-  transform-style: preserve-3d; transition: transform .55s cubic-bezier(.4,0,.2,1);
-  border-radius: var(--radius-lg);
-}
-.fc-card.flipped { transform: rotateY(180deg); }
-.fc-face {
-  position: absolute; width: 100%; height: 100%;
-  backface-visibility: hidden; border-radius: var(--radius-lg);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 24px; box-sizing: border-box;
-  box-shadow: var(--shadow);
-}
-.fc-front {
-  background: var(--grad1); color: #fff;
-}
-.fc-back {
-  background: var(--surface); border: 2px solid var(--border);
-  transform: rotateY(180deg); color: var(--text);
-}
-.fc-type-badge {
-  font-size: 10px; font-weight: 800; letter-spacing: .8px;
-  background: rgba(255,255,255,.2); border-radius: 20px;
-  padding: 3px 10px; margin-bottom: 14px; color: rgba(255,255,255,.9);
-}
-.fc-front-q {
-  font-size: 22px; font-weight: 900; color: #fff;
-  text-align: center; line-height: 1.4;
-}
-.fc-front-sub {
-  font-size: 12px; color: rgba(255,255,255,.7);
-  margin-top: 12px; text-align: center;
-}
-.fc-tap-hint {
-  position: absolute; bottom: 18px;
-  font-size: 11px; color: rgba(255,255,255,.6); font-weight: 600;
-}
-.fc-back-type {
-  font-size: 10px; font-weight: 800; color: var(--accent2);
-  letter-spacing: .8px; margin-bottom: 10px; text-transform: uppercase;
-}
-.fc-back-ans {
-  font-size: 14px; font-weight: 700; color: var(--text);
-  text-align: center; line-height: 1.65;
-  max-height: 160px; overflow-y: auto;
-}
-.fc-back-ans strong { color: var(--accent2); }
-
-/* Rating buttons */
-.fc-rating {
-  display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px;
-  margin-bottom: 20px; opacity: 0;
-  transition: opacity .3s; pointer-events: none;
-}
-.fc-rating.show { opacity: 1; pointer-events: all; }
-.fc-rate-btn {
-  padding: 10px 4px; border-radius: var(--radius-sm);
-  border: 2px solid var(--border); background: var(--surface);
-  cursor: pointer; font-family: var(--font);
-  transition: all var(--transition); text-align: center;
-}
-.fc-rate-btn:hover { transform: translateY(-2px); }
-.fc-rate-btn .rate-emoji { font-size: 20px; display: block; margin-bottom: 3px; }
-.fc-rate-btn .rate-label { font-size: 11px; font-weight: 800; color: var(--text2); }
-.fc-rate-btn.r0:hover,.fc-rate-btn.r0.picked { border-color:#f87171; background:rgba(248,113,113,.12); }
-.fc-rate-btn.r1:hover,.fc-rate-btn.r1.picked { border-color:#fb923c; background:rgba(251,146,60,.12); }
-.fc-rate-btn.r2:hover,.fc-rate-btn.r2.picked { border-color:#34d399; background:rgba(52,211,153,.12); }
-.fc-rate-btn.r3:hover,.fc-rate-btn.r3.picked { border-color:#a78bfa; background:rgba(167,139,250,.12); }
-
-.fc-nav-row {
-  display: flex; gap: 10px; justify-content: center; margin-bottom: 16px;
-}
-.fc-skip-btn {
-  padding: 8px 18px; border-radius: var(--radius-sm);
-  border: 1.5px solid var(--border); background: var(--surface);
-  font-size: 13px; font-weight: 700; color: var(--text3);
-  cursor: pointer; font-family: var(--font);
-  transition: all var(--transition);
-}
-.fc-skip-btn:hover { border-color: var(--border2); color: var(--text); }
-
-/* Results */
-.fc-result { display: none; text-align: center; padding: 20px 0; }
-.fc-result.show { display: block; }
-.fc-result-ring {
-  width: 120px; height: 120px; border-radius: 50%;
-  background: var(--grad1); margin: 0 auto 20px;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  box-shadow: 0 8px 32px rgba(108,92,231,.4);
-}
-.fc-result-pct { font-size: 32px; font-weight: 900; color: #fff; }
-.fc-result-lbl { font-size: 11px; color: rgba(255,255,255,.8); font-weight: 700; }
-.fc-result-title { font-size: 18px; font-weight: 900; color: var(--text); margin-bottom: 8px; }
-.fc-result-sub { font-size: 14px; color: var(--text2); margin-bottom: 24px; line-height: 1.6; }
-.fc-result-grid {
-  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 24px;
-}
-.fc-result-stat {
-  background: var(--surface); border: 1.5px solid var(--border);
-  border-radius: var(--radius-sm); padding: 12px 8px;
-}
-.fc-result-stat .rs-num { font-size: 22px; font-weight: 900; color: var(--text); }
-.fc-result-stat .rs-lbl { font-size: 11px; color: var(--text3); font-weight: 700; margin-top: 2px; }
-.fc-replay-btn {
-  width: 100%; padding: 14px;
-  background: var(--grad1); color: #fff; border: none;
-  border-radius: var(--radius); font-size: 15px; font-weight: 900;
-  cursor: pointer; font-family: var(--font); margin-bottom: 10px;
-}
-.fc-back-home {
-  width: 100%; padding: 12px;
-  background: var(--surface); color: var(--text2);
-  border: 1.5px solid var(--border); border-radius: var(--radius);
-  font-size: 13px; font-weight: 700; cursor: pointer; font-family: var(--font);
-}
-
-/* Card mode selector counts */
-.fc-mode-btn .fc-count-badge {
-  display: inline-block; font-size: 10px; font-weight: 800;
-  background: var(--accent-bg); color: var(--accent2);
-  border-radius: 20px; padding: 1px 7px; margin-top: 4px;
-}
-
-
-/* panel show states */
-.tips-panel { display: none; }
-#tips-compare { display: none; }
-#tips-compare.show { display: block !important; }
-#tips-strategy.show { display: grid !important; grid-template-columns: repeat(auto-fill,minmax(240px,1fr)); }
-#tips-traps.show { display: grid !important; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); }
-#tips-decision.show { display: block !important; }
 </style>
 </head>
 <body>
@@ -2072,10 +1478,898 @@ function showTips(){
 function switchTips(tab, btn){
   document.querySelectorAll('.tips-tab').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('.tips-panel').forEach(p=>{p.style.display='none';p.classList.remove('show');});
-  const el=document.getElementById('tips-'+tab);
-  el.style.display='';
-  el.classList.add('show');
+  document.querySelectorAll('.tips-panel').forEach(p=>{
+    p.classList.remove('show');
+    p.style.removeProperty('display');
+  });
+  document.getElementById('tips-'+tab).classList.add('show');
+}
+
+const COMPARES = [
+  {
+    title:"CloudWatch vs CloudTrail vs AWS Config",
+    badge:"모니터링 3형제 ★★★",
+    cols:3,
+    cards:[
+      {name:"CloudWatch", dot:"#06b6d4", rows:[
+        {k:"핵심 역할",v:"<strong>성능·운영 모니터링</strong>"},
+        {k:"데이터 종류",v:"메트릭, 로그, 경보, 대시보드, 이벤트"},
+        {k:"핵심 질문",v:"지금 CPU가 몇 %야? 오류율이 올라갔어?"},
+        {k:"EC2 기본 메트릭",v:"CPU·네트워크·디스크 I/O (메모리·프로세스는 <strong>에이전트 필요</strong>)"},
+        {k:"자동화",v:"경보 → Auto Scaling / Lambda / SNS 알림 트리거"},
+        {k:"로그",v:"CloudWatch Logs로 Lambda·ECS·API GW 로그 수집"},
+        {k:"Logs Insights",v:"로그를 SQL 유사 언어로 실시간 쿼리·분석"},
+        {k:"커스텀 메트릭",v:"애플리케이션에서 직접 메트릭 발행 가능"},
+      ]},
+      {name:"CloudTrail", dot:"#f97316", rows:[
+        {k:"핵심 역할",v:"<strong>API 호출 감사·보안 이력</strong>"},
+        {k:"데이터 종류",v:"누가·언제·어디서·무엇을(API 요청)"},
+        {k:"핵심 질문",v:"누가 S3 버킷을 삭제했나? 언제 SG를 변경했나?"},
+        {k:"기본 보관",v:"90일 이벤트 히스토리 (S3 Trail 설정으로 장기 보관)"},
+        {k:"이벤트 종류",v:"<strong>관리 이벤트</strong>(기본 ON) · <strong>데이터 이벤트</strong>(S3·Lambda, 별도 활성화)"},
+        {k:"무결성 검증",v:"로그 파일 해시로 위변조 탐지 가능"},
+        {k:"활용",v:"보안 조사·규정 준수·이상 탐지 기반 데이터"},
+        {k:"다중 리전",v:"모든 리전 로그를 단일 S3 버킷에 집계 가능"},
+      ]},
+      {name:"AWS Config", dot:"#8b5cf6", rows:[
+        {k:"핵심 역할",v:"<strong>리소스 구성 변경 추적·규정 준수 평가</strong>"},
+        {k:"데이터 종류",v:"리소스 구성 스냅샷·변경 이력"},
+        {k:"핵심 질문",v:"SG 규칙이 언제 어떻게 바뀌었나?"},
+        {k:"Config Rules",v:"규정 준수 자동 평가 — 위반 리소스 탐지"},
+        {k:"Remediation",v:"비준수 리소스를 SSM Automation으로 <strong>자동 수정</strong>"},
+        {k:"Conformance Pack",v:"보안 표준(CIS·PCI DSS) 규칙 묶음 배포"},
+        {k:"CloudTrail과 차이",v:"CloudTrail: 누가 API 호출 / Config: 구성이 어떻게 변했나"},
+        {k:"활용",v:"컴플라이언스 감사·인프라 드리프트 탐지"},
+      ]},
+    ],
+    tip:"💡 <strong>CloudWatch</strong>=지금 어떤 상태(성능/메트릭), <strong>CloudTrail</strong>=누가 무슨 API 호출(보안 감사), <strong>Config</strong>=리소스 구성이 어떻게 변했나(드리프트 추적). 시험에서 '누가 변경했는지' → CloudTrail, '무엇이 변경됐는지' → Config, '현재 상태가 어떤지' → CloudWatch!"
+  },
+  {
+    title:"SQS vs SNS vs EventBridge vs Kinesis",
+    badge:"메시징 4형제 ★★★",
+    cols:2,
+    cards:[
+      {name:"SQS (Simple Queue Service)", dot:"#ec4899", rows:[
+        {k:"패턴",v:"<strong>대기열(Queue) — 1:1 소비</strong>"},
+        {k:"방식",v:"<strong>Pull(폴링)</strong> — 소비자가 직접 메시지 가져옴"},
+        {k:"순서",v:"Standard(미보장·최소 1회) / FIFO(순서보장·정확히 1회)"},
+        {k:"보관",v:"최대 <strong>14일</strong>. 기본 4일"},
+        {k:"크기",v:"메시지 최대 256KB"},
+        {k:"가시성 타임아웃",v:"처리 중 다른 소비자가 못 가져가도록 임시 숨김"},
+        {k:"DLQ",v:"처리 실패 메시지 → Dead Letter Queue로 격리"},
+        {k:"키워드",v:"'처리 실패 재시도', '비동기 디커플링', '순서 보장'"},
+      ]},
+      {name:"SNS (Simple Notification Service)", dot:"#3b82f6", rows:[
+        {k:"패턴",v:"<strong>발행·구독(Pub/Sub) — 1:N</strong>"},
+        {k:"방식",v:"<strong>Push</strong> — 구독자에게 즉시 전달"},
+        {k:"구독자",v:"SQS·Lambda·HTTP/S·Email·SMS·모바일 푸시"},
+        {k:"Fan-out",v:"SNS 하나에서 여러 SQS로 동시 전달 (<strong>Fan-out 패턴</strong>)"},
+        {k:"필터링",v:"메시지 필터 정책으로 구독자별 선택 수신"},
+        {k:"보관",v:"저장 없음 — 전달 후 사라짐"},
+        {k:"FIFO SNS",v:"SNS FIFO → SQS FIFO 조합으로 순서 보장 팬아웃"},
+        {k:"키워드",v:"'즉시 알림', '다수 구독자', '이메일·SMS 발송'"},
+      ]},
+      {name:"EventBridge (이벤트 버스)", dot:"#10b981", rows:[
+        {k:"패턴",v:"<strong>이벤트 기반 라우팅</strong>"},
+        {k:"방식",v:"이벤트 패턴 매칭 → 타겟 라우팅"},
+        {k:"이벤트 소스",v:"AWS 서비스·SaaS 파트너·커스텀 앱"},
+        {k:"스케줄러",v:"Cron/Rate 기반 주기적 실행"},
+        {k:"Schema Registry",v:"이벤트 스키마 자동 탐색·관리"},
+        {k:"SNS와 차이",v:"EventBridge: <strong>복잡한 이벤트 라우팅·SaaS 통합</strong>, SNS: <strong>단순 알림 팬아웃</strong>"},
+        {k:"아카이브·재처리",v:"이벤트 아카이브 후 재처리 지원"},
+        {k:"키워드",v:"'AWS 서비스 변경 감지', 'SaaS 연동', '스케줄 실행'"},
+      ]},
+      {name:"Kinesis Data Streams", dot:"#f59e0b", rows:[
+        {k:"패턴",v:"<strong>실시간 대용량 스트리밍</strong>"},
+        {k:"방식",v:"생산자→샤드→다수 소비자 동시 소비"},
+        {k:"순서",v:"샤드 내 순서 보장 (파티션 키 기준)"},
+        {k:"보관",v:"기본 <strong>24시간</strong>(최대 365일) — <strong>재소비 가능</strong>"},
+        {k:"처리량",v:"샤드당 쓰기 1MB/s · 읽기 2MB/s"},
+        {k:"SQS와 차이",v:"SQS: 삭제 후 재소비 불가 / Kinesis: <strong>재소비 가능</strong>"},
+        {k:"Firehose",v:"Kinesis → Firehose → S3/Redshift 자동 전달"},
+        {k:"키워드",v:"'클릭스트림', 'IoT 센서', '로그 실시간 수집'"},
+      ]},
+    ],
+    tip:"💡 결정 공식: <strong>비동기 디커플링·작업 큐</strong>=SQS, <strong>즉시 알림·팬아웃</strong>=SNS, <strong>이벤트 기반 자동화·SaaS 연동</strong>=EventBridge, <strong>대용량 실시간 스트리밍·재소비</strong>=Kinesis"
+  },
+  {
+    title:"RDS Multi-AZ vs Read Replica vs Aurora",
+    badge:"DB 가용성·성능 ★★★",
+    cols:3,
+    cards:[
+      {name:"RDS Multi-AZ", dot:"#ef4444", rows:[
+        {k:"목적",v:"<strong>고가용성 · 장애조치</strong>"},
+        {k:"복제 방식",v:"<strong>동기(Synchronous)</strong> 복제 — 프라이머리→스탠바이"},
+        {k:"스탠바이 역할",v:"<strong>읽기 불가</strong> — 순수 대기 전용"},
+        {k:"장애조치",v:"프라이머리 장애 시 DNS 자동 전환 (~1~2분)"},
+        {k:"백업",v:"스탠바이에서 백업 수행 (프라이머리 성능 영향 없음)"},
+        {k:"비용",v:"프라이머리 비용 + 스탠바이 비용"},
+        {k:"사용 시나리오",v:"프로덕션 DB 가용성 보장"},
+        {k:"핵심 키워드",v:"'자동 장애조치', '고가용성', 'standby'"},
+      ]},
+      {name:"RDS Read Replica", dot:"#3b82f6", rows:[
+        {k:"목적",v:"<strong>읽기 성능 확장</strong>"},
+        {k:"복제 방식",v:"<strong>비동기(Asynchronous)</strong> 복제 — 약간의 지연"},
+        {k:"레플리카 역할",v:"<strong>읽기 전용</strong> — 별도 엔드포인트로 접근"},
+        {k:"수량",v:"최대 5개. 다른 AZ·<strong>다른 리전</strong>도 가능"},
+        {k:"승격(Promote)",v:"독립 DB로 승격 가능 (복제 관계 단절)"},
+        {k:"비용",v:"트래픽: 같은 리전 무료 / <strong>교차 리전은 유료</strong>"},
+        {k:"사용 시나리오",v:"보고서·분석·읽기 부하 분산"},
+        {k:"핵심 키워드",v:"'읽기 확장', '보고서 쿼리', '지연 허용'"},
+      ]},
+      {name:"Aurora", dot:"#10b981", rows:[
+        {k:"목적",v:"<strong>고성능 + 고가용성 동시</strong>"},
+        {k:"복제 방식",v:"스토리지 레벨 6복사본(3AZ) 자동 분산"},
+        {k:"레플리카",v:"최대 15개 Read Replica (~10ms 지연)"},
+        {k:"장애조치",v:"수십 초 내 자동 장애조치 (Multi-AZ보다 빠름)"},
+        {k:"스토리지",v:"자동 확장 10GB→128TB"},
+        {k:"Global DB",v:"최대 5개 리전·<1초 복제 지연·RPO~1초"},
+        {k:"Serverless v2",v:"워크로드에 따라 자동 ACU 스케일링"},
+        {k:"핵심 키워드",v:"'MySQL/PG 호환', '고성능 클라우드 네이티브'"},
+      ]},
+    ],
+    tip:"💡 <strong>Multi-AZ</strong>=장애조치용 스탠바이(읽기 불가·동기), <strong>Read Replica</strong>=읽기 부하 분산(비동기·별도 엔드포인트), <strong>Aurora</strong>=성능과 가용성 동시(6복사본·15레플리카). '자동 장애조치' 키워드만으로는 Multi-AZ/Aurora 둘 다 해당 → 성능 요구사항도 함께 판단!"
+  },
+  {
+    title:"EC2 구매 옵션 비교",
+    badge:"비용 최적화 ★★★",
+    cols:2,
+    cards:[
+      {name:"On-Demand · Spot · Savings Plans", dot:"#f97316", rows:[
+        {k:"On-Demand",v:"<strong>약정 없음</strong> · 초/시간 과금 · 테스트·예측불가 워크로드"},
+        {k:"Spot",v:"<strong>최대 90% 절감</strong> · 2분 경고 중단 가능 · 내결함성 필수"},
+        {k:"Compute Savings Plans",v:"1~3년 약정 · <strong>최대 66% 절감</strong> · EC2+Lambda+Fargate 유연"},
+        {k:"EC2 Instance SP",v:"특정 패밀리 약정 · <strong>최대 72% 절감</strong> · 가장 큰 할인"},
+        {k:"Spot Fleet",v:"여러 Spot 유형 혼합 · 목표 용량 자동 유지"},
+        {k:"Spot Block",v:"1~6시간 중단 없는 Spot (서비스 종료 예정)"},
+      ]},
+      {name:"Reserved Instance · Dedicated", dot:"#8b5cf6", rows:[
+        {k:"Standard RI",v:"1~3년 약정 · <strong>최대 72% 절감</strong> · 변경 불가 · 가장 저렴"},
+        {k:"Convertible RI",v:"인스턴스 유형 변경 가능 · <strong>최대 54% 절감</strong>"},
+        {k:"Scheduled RI",v:"특정 시간대 주기적 예약 (서비스 종료 예정)"},
+        {k:"Dedicated Host",v:"물리 서버 전체 전용 · BYOL 라이선스 활용 · 규제 준수"},
+        {k:"Dedicated Instance",v:"물리 서버 공유 안 함 · 하지만 서버 ID 고정 없음"},
+        {k:"Capacity Reservation",v:"특정 AZ 용량 예약 · On-Demand 가격 · 약정 없음"},
+      ]},
+    ],
+    tip:"💡 시험 결정 공식: <strong>단기·예측불가</strong>=On-Demand, <strong>비용 최저·중단 허용</strong>=Spot, <strong>지속 운영·1~3년</strong>=Reserved/Savings Plans, <strong>BYOL·규정</strong>=Dedicated Host. 'Spot' 오답 함정: 중단 불가 워크로드(DB·프로덕션)엔 부적합!"
+  },
+  {
+    title:"보안 그룹 vs 네트워크 ACL",
+    badge:"네트워크 보안 ★★★",
+    cols:2,
+    cards:[
+      {name:"보안 그룹 (Security Group)", dot:"#ef4444", rows:[
+        {k:"적용 레벨",v:"<strong>인스턴스/ENI</strong> 레벨"},
+        {k:"상태",v:"<strong>Stateful</strong> — 인바운드 허용 시 아웃바운드 자동 허용"},
+        {k:"규칙 종류",v:"<strong>허용 규칙만</strong> — 거부 규칙 없음"},
+        {k:"평가",v:"모든 규칙을 평가해 하나라도 허용이면 통과"},
+        {k:"기본값",v:"모든 인바운드 차단 · 모든 아웃바운드 허용"},
+        {k:"적용 범위",v:"여러 인스턴스 · 한 인스턴스에 여러 SG 가능"},
+        {k:"SG 참조",v:"다른 SG를 소스로 지정 가능 (IP 없이 동적 규칙)"},
+        {k:"키워드",v:"'인스턴스 접근 제어', 'SSH 허용', 'DB 포트 개방'"},
+      ]},
+      {name:"네트워크 ACL (NACL)", dot:"#3b82f6", rows:[
+        {k:"적용 레벨",v:"<strong>서브넷</strong> 레벨"},
+        {k:"상태",v:"<strong>Stateless</strong> — 인바운드·아웃바운드 각각 평가"},
+        {k:"규칙 종류",v:"<strong>허용·거부 모두</strong> — 특정 IP 차단 가능"},
+        {k:"평가",v:"<strong>규칙 번호 오름차순</strong>으로 평가 후 최초 매칭"},
+        {k:"기본값",v:"기본 NACL: 모든 트래픽 허용 / 커스텀: 모두 차단"},
+        {k:"임시 포트",v:"아웃바운드 규칙에 임시 포트(1024-65535) 개방 필요"},
+        {k:"변경 적용",v:"서브넷 내 모든 인스턴스에 즉시 적용"},
+        {k:"키워드",v:"'특정 IP 차단', '서브넷 전체 차단', '거부 규칙 필요'"},
+      ]},
+    ],
+    tip:"💡 핵심 차이: <strong>SG=Stateful(응답 자동허용)·허용만·인스턴스</strong>, <strong>NACL=Stateless(응답도 규칙 필요)·허용+거부·서브넷</strong>. '특정 IP를 차단해야 한다' → NACL(거부 규칙). '인스턴스별 세밀한 제어' → SG."
+  },
+  {
+    title:"ALB vs NLB vs GWLB",
+    badge:"로드밸런서 3형제 ★★★",
+    cols:3,
+    cards:[
+      {name:"ALB (Application LB)", dot:"#3b82f6", rows:[
+        {k:"OSI 계층",v:"<strong>Layer 7</strong> (HTTP/HTTPS)"},
+        {k:"프로토콜",v:"HTTP · HTTPS · gRPC · WebSocket"},
+        {k:"라우팅 규칙",v:"URL 경로 · 호스트 헤더 · HTTP 헤더 · 쿼리 파라미터"},
+        {k:"대상 유형",v:"EC2 · Lambda · IP · 컨테이너(ECS)"},
+        {k:"고정 IP",v:"없음 (DNS 기반) — CloudFront 또는 GA 조합"},
+        {k:"WAF 통합",v:"✅ 지원"},
+        {k:"인증",v:"Cognito · OIDC 인증 내장"},
+        {k:"키워드",v:"'경로 기반', 'API 라우팅', '컨테이너', '마이크로서비스'"},
+      ]},
+      {name:"NLB (Network LB)", dot:"#10b981", rows:[
+        {k:"OSI 계층",v:"<strong>Layer 4</strong> (TCP/UDP)"},
+        {k:"프로토콜",v:"TCP · UDP · TLS"},
+        {k:"성능",v:"<strong>초당 수백만 요청·극저지연(<1ms)</strong>"},
+        {k:"고정 IP",v:"<strong>Elastic IP 지원</strong> — 방화벽 화이트리스트에 유리"},
+        {k:"클라이언트 IP",v:"원본 클라이언트 IP 보존 가능"},
+        {k:"PrivateLink",v:"✅ PrivateLink 기반 서비스 노출"},
+        {k:"TLS 오프로딩",v:"✅ TLS 종료 지원"},
+        {k:"키워드",v:"'고정 IP', 'TCP/UDP', '초고성능', '게임', 'VoIP'"},
+      ]},
+      {name:"GWLB (Gateway LB)", dot:"#f59e0b", rows:[
+        {k:"OSI 계층",v:"<strong>Layer 3</strong> (IP 패킷)"},
+        {k:"프로토콜",v:"GENEVE (UDP 6081)"},
+        {k:"목적",v:"<strong>3rd Party 보안 어플라이언스에 트래픽 투명 전달</strong>"},
+        {k:"배포 형태",v:"Gateway Load Balancer Endpoint(GWLBE) 사용"},
+        {k:"활용",v:"방화벽·IDS/IPS·패킷 검사 장비 클러스터화"},
+        {k:"투명성",v:"IP·포트 정보 보존한 채 어플라이언스 통과"},
+        {k:"자동화",v:"어플라이언스 장애조치·수평 확장 자동"},
+        {k:"키워드",v:"'방화벽 어플라이언스', '트래픽 검사', '보안 인라인'"},
+      ]},
+    ],
+    tip:"💡 결정 공식: <strong>HTTP 라우팅·마이크로서비스</strong>=ALB, <strong>고정IP·TCP/UDP·초고성능</strong>=NLB, <strong>방화벽/IPS 어플라이언스 통과</strong>=GWLB. NLB는 ALB보다 빠르지만 HTTP 라우팅 기능 없음!"
+  },
+  {
+    title:"CloudFront vs Global Accelerator",
+    badge:"글로벌 성능 ★★★",
+    cols:2,
+    cards:[
+      {name:"Amazon CloudFront", dot:"#f97316", rows:[
+        {k:"핵심 기능",v:"<strong>CDN — 콘텐츠 캐싱·배포</strong>"},
+        {k:"프로토콜",v:"HTTP/HTTPS (Layer 7)"},
+        {k:"IP 종류",v:"동적 DNS — 고정 IP 없음"},
+        {k:"캐싱",v:"✅ 정적·동적 콘텐츠 엣지 캐싱"},
+        {k:"오리진",v:"S3·ALB·EC2·커스텀 HTTP 서버"},
+        {k:"보안",v:"WAF·Shield·OAC(S3 보호) 통합"},
+        {k:"Lambda@Edge",v:"엣지에서 요청/응답 커스터마이징"},
+        {k:"키워드",v:"'정적 파일 배포', '이미지·동영상 CDN', 'S3 배포'"},
+      ]},
+      {name:"AWS Global Accelerator", dot:"#8b5cf6", rows:[
+        {k:"핵심 기능",v:"<strong>글로벌 네트워크 경로 최적화</strong>"},
+        {k:"프로토콜",v:"TCP/UDP (Layer 4) — HTTP도 지원"},
+        {k:"IP 종류",v:"<strong>고정 Anycast IP 2개</strong>"},
+        {k:"캐싱",v:"❌ 캐싱 없음 — 전달만"},
+        {k:"엔드포인트",v:"ALB·NLB·EC2·EIP (멀티 리전)"},
+        {k:"Failover",v:"엔드포인트 장애 시 자동 리전 전환 (~30초)"},
+        {k:"DNS 우회",v:"Anycast IP로 DNS 조회 없이 직접 라우팅"},
+        {k:"키워드",v:"'고정 IP', '게임·IoT', 'TCP/UDP', '리전 장애조치'"},
+      ]},
+    ],
+    tip:"💡 <strong>CloudFront</strong>=캐싱이 필요한 콘텐츠(이미지·동영상·JS), <strong>GA</strong>=캐싱 없이 최적 경로로 빠르게(게임·API·TCP/UDP). 둘 다 글로벌 성능을 높이지만 목적이 다름. '고정 IP가 필요하다' → GA가 명확한 답!"
+  },
+  {
+    title:"EBS vs EFS vs S3 vs FSx",
+    badge:"스토리지 4형제 ★★★",
+    cols:2,
+    cards:[
+      {name:"EBS · FSx", dot:"#3b82f6", rows:[
+        {k:"EBS",v:"<strong>EC2 블록 스토리지</strong> — 단일 AZ · 단일 EC2 연결(일반)"},
+        {k:"EBS 유형",v:"gp3(범용) · io2(고IOPS) · st1(처리량) · sc1(콜드)"},
+        {k:"EBS 특징",v:"단일 AZ · 스냅샷으로 백업·이전"},
+        {k:"FSx for Windows",v:"<strong>SMB·AD 통합</strong> — Windows 파일 시스템"},
+        {k:"FSx for Lustre",v:"<strong>HPC·ML 고성능</strong> — S3와 네이티브 통합"},
+        {k:"FSx ONTAP",v:"NetApp ONTAP — 멀티 프로토콜(NFS/SMB/iSCSI)"},
+        {k:"FSx OpenZFS",v:"OpenZFS — 고성능 파일 시스템"},
+        {k:"FSx 키워드",v:"'Windows 파일 공유', 'HPC/ML 고성능', 'ONTAP 마이그레이션'"},
+      ]},
+      {name:"EFS · S3", dot:"#10b981", rows:[
+        {k:"EFS",v:"<strong>NFS 공유 파일 시스템</strong> — 멀티 EC2 동시 마운트"},
+        {k:"EFS 특징",v:"멀티-AZ · 자동 확장 · Linux 전용(NFS)"},
+        {k:"EFS 유형",v:"Standard(멀티AZ) · One Zone(단일AZ·저렴)"},
+        {k:"S3",v:"<strong>객체 스토리지</strong> — 무제한·HTTP API"},
+        {k:"S3 특징",v:"리전 수준 · 버전 관리 · 수명주기 자동화"},
+        {k:"S3 vs EFS",v:"S3: HTTP·객체단위 / EFS: NFS·파일시스템 마운트"},
+        {k:"S3 vs EBS",v:"S3: 정적 파일·백업 / EBS: OS 볼륨·DB 스토리지"},
+        {k:"EFS 키워드",v:"'공유 파일 시스템', '다수 EC2 동시 접근', '워드프레스'"},
+      ]},
+    ],
+    tip:"💡 결정 공식: <strong>EC2 OS/DB 전용 볼륨</strong>=EBS, <strong>다수 EC2 공유 파일 시스템(Linux)</strong>=EFS, <strong>무한 객체 저장·HTTP API</strong>=S3, <strong>Windows 파일 공유</strong>=FSx for Windows, <strong>HPC/ML</strong>=FSx for Lustre"
+  },
+  {
+    title:"Secrets Manager vs SSM Parameter Store vs KMS",
+    badge:"비밀 관리 ★★★",
+    cols:3,
+    cards:[
+      {name:"Secrets Manager", dot:"#ef4444", rows:[
+        {k:"핵심 기능",v:"<strong>비밀번호·API키 저장·자동 교체</strong>"},
+        {k:"자동 교체",v:"✅ Lambda로 RDS·Redshift 비밀번호 자동 교체"},
+        {k:"암호화",v:"KMS 필수 암호화"},
+        {k:"비용",v:"비밀당 $0.40/월 (비교적 비쌈)"},
+        {k:"교차 계정",v:"✅ 다른 계정에서 참조 가능"},
+        {k:"통합",v:"RDS·EKS·Lambda 네이티브 통합"},
+        {k:"키워드",v:"'자동 교체', 'DB 비밀번호', 'API 키 관리'"},
+      ]},
+      {name:"SSM Parameter Store", dot:"#3b82f6", rows:[
+        {k:"핵심 기능",v:"<strong>구성 파라미터·비밀 저장</strong>"},
+        {k:"자동 교체",v:"❌ 없음 (EventBridge+Lambda 직접 구현)"},
+        {k:"암호화",v:"SecureString 타입만 KMS 암호화"},
+        {k:"비용",v:"스탠다드 파라미터 <strong>무료</strong> (4KB)"},
+        {k:"계층 구조",v:"경로(/prod/app/DB_URL) 기반 관리"},
+        {k:"통합",v:"CloudFormation·CodeBuild·Lambda 직접 참조"},
+        {k:"키워드",v:"'구성 관리', '환경변수', '암호화 불필요 설정값'"},
+      ]},
+      {name:"AWS KMS", dot:"#8b5cf6", rows:[
+        {k:"핵심 기능",v:"<strong>암호화 키 생성·관리·감사</strong>"},
+        {k:"키 종류",v:"AWS Owned·AWS Managed·Customer Managed(CMK)"},
+        {k:"자동 교체",v:"CMK 연간 자동 교체 설정 가능"},
+        {k:"통합",v:"S3·EBS·RDS·DynamoDB·Secrets Manager 등 광범위"},
+        {k:"봉투 암호화",v:"데이터키(DEK)를 CMK로 암호화하는 방식"},
+        {k:"CloudHSM",v:"싱글테넌트 전용 HSM (FIPS 140-2 Level 3)"},
+        {k:"키워드",v:"'암호화', 'CMK', '키 관리', '규정준수 암호화'"},
+      ]},
+    ],
+    tip:"💡 <strong>자동 교체가 필요한 DB 비밀번호</strong>=Secrets Manager, <strong>단순 구성값·환경변수(비용 아낄 때)</strong>=Parameter Store, <strong>암호화 키 자체를 관리</strong>=KMS. Secrets Manager는 내부에서 KMS를 사용해 암호화!"
+  },
+  {
+    title:"VPC 연결 옵션 총정리",
+    badge:"네트워크 연결 ★★★",
+    cols:2,
+    cards:[
+      {name:"AWS 내부 연결", dot:"#3b82f6", rows:[
+        {k:"VPC Peering",v:"<strong>VPC간 직접 연결</strong> — 1:1 · 전이 불가 · 같은/다른 계정·리전"},
+        {k:"Transit Gateway",v:"<strong>허브앤스포크</strong> — N:N VPC 연결 · 온프레미스도 연결"},
+        {k:"PrivateLink",v:"<strong>서비스 프라이빗 노출</strong> — NLB+Interface Endpoint"},
+        {k:"VPC Endpoint",v:"인터넷 없이 S3·DynamoDB(Gateway) 또는 기타 서비스(Interface) 접근"},
+        {k:"Transit Gateway vs Peering",v:"소규모=Peering / 대규모 N:N·전이 필요=TGW"},
+      ]},
+      {name:"온프레미스 연결", dot:"#f59e0b", rows:[
+        {k:"Site-to-Site VPN",v:"<strong>IPsec 암호화 터널</strong> — 인터넷 기반 · 빠른 설정 · 1.25Gbps"},
+        {k:"Direct Connect",v:"<strong>전용 물리 회선</strong> — 일관 대역폭·저지연 · 설치 수주"},
+        {k:"DX + VPN 백업",v:"Direct Connect 장애 시 VPN 자동 백업 (이중화)"},
+        {k:"VPN CloudHub",v:"여러 온프레미스 사이트를 VGW 통해 연결 (허브)"},
+        {k:"Direct Connect Gateway",v:"단일 DCX 연결로 여러 리전 VPC 접근"},
+      ]},
+    ],
+    tip:"💡 <strong>빠른 설정·비용 절감</strong>=Site-to-Site VPN, <strong>일관 대역폭·보안·대용량</strong>=Direct Connect, <strong>다수 VPC 연결 단순화</strong>=Transit Gateway, <strong>VPC 간 직접 최소 설정</strong>=VPC Peering. 실전: DX+VPN 백업 조합이 엔터프라이즈 정답!"
+  },
+  {
+    title:"Lambda vs ECS/Fargate vs EC2",
+    badge:"컴퓨팅 선택 ★★★",
+    cols:3,
+    cards:[
+      {name:"AWS Lambda", dot:"#f97316", rows:[
+        {k:"실행 모델",v:"<strong>이벤트 기반 함수 실행</strong>"},
+        {k:"최대 실행시간",v:"<strong>15분</strong>"},
+        {k:"언어",v:"Python·Node·Java·Go·.NET·Ruby·커스텀 런타임"},
+        {k:"Cold Start",v:"첫 호출 지연 — Provisioned Concurrency로 해결"},
+        {k:"메모리",v:"128MB~10,240MB"},
+        {k:"스케일링",v:"요청당 자동 · 동시 실행 기본 1,000"},
+        {k:"과금",v:"요청 수 + 실행 시간(GB·초)"},
+        {k:"키워드",v:"'이벤트 트리거', '서버리스', '단기 함수'"},
+      ]},
+      {name:"ECS Fargate", dot:"#3b82f6", rows:[
+        {k:"실행 모델",v:"<strong>컨테이너 서버리스</strong>"},
+        {k:"실행시간",v:"제한 없음"},
+        {k:"이미지",v:"Docker 컨테이너 이미지"},
+        {k:"인프라",v:"EC2 서버 관리 불필요 (Fargate 자동)"},
+        {k:"과금",v:"vCPU·메모리 단위 초 과금"},
+        {k:"스케일링",v:"ECS Service Auto Scaling · ALB 통합"},
+        {k:"상태",v:"Stateful 앱도 지원 (EFS 마운트)"},
+        {k:"키워드",v:"'컨테이너', '서버리스', '장기 실행', '마이크로서비스'"},
+      ]},
+      {name:"EC2", dot:"#10b981", rows:[
+        {k:"실행 모델",v:"<strong>가상 서버 직접 관리</strong>"},
+        {k:"실행시간",v:"제한 없음 (지속 운영)"},
+        {k:"유연성",v:"OS·런타임·설정 완전 커스터마이징"},
+        {k:"인프라",v:"서버 패치·관리 직접 수행"},
+        {k:"과금",v:"시간 단위 (인스턴스 유형·구매 옵션)"},
+        {k:"GPU 지원",v:"P·G 인스턴스 — ML 훈련·그래픽"},
+        {k:"스팟 활용",v:"비용 최적화 최대 90% 절감 가능"},
+        {k:"키워드",v:"'BYOL', 'GPU', '완전 커스텀', '레거시 앱'"},
+      ]},
+    ],
+    tip:"💡 결정 공식: <strong>이벤트 기반·단기 함수·서버리스</strong>=Lambda, <strong>컨테이너·서버 관리 없이 장기 실행</strong>=ECS Fargate, <strong>완전 제어·GPU·BYOL·레거시</strong>=EC2. Lambda 15분 제한이 걸릴 것 같으면 Fargate 또는 EC2 선택!"
+  },
+  {
+    title:"DynamoDB vs RDS vs ElastiCache",
+    badge:"DB 선택 ★★★",
+    cols:3,
+    cards:[
+      {name:"DynamoDB", dot:"#f59e0b", rows:[
+        {k:"유형",v:"<strong>NoSQL Key-Value / Document</strong>"},
+        {k:"스케일링",v:"무제한 수평 확장 · 서버리스"},
+        {k:"지연시간",v:"<strong>한 자릿수 밀리초</strong> (DAX로 마이크로초)"},
+        {k:"쿼리",v:"파티션 키 기반 · GSI/LSI 보조 인덱스"},
+        {k:"데이터 모델",v:"유연한 스키마 · 중첩 JSON 지원"},
+        {k:"글로벌",v:"Global Tables로 멀티 리전 Active-Active"},
+        {k:"키워드",v:"'서버리스', '무한 확장', '세션', '게임 순위표'"},
+      ]},
+      {name:"RDS/Aurora", dot:"#3b82f6", rows:[
+        {k:"유형",v:"<strong>관계형(RDBMS)</strong>"},
+        {k:"스케일링",v:"수직 확장 중심 · 읽기는 Read Replica"},
+        {k:"트랜잭션",v:"ACID 완전 지원 · JOIN·복잡한 쿼리"},
+        {k:"지연시간",v:"밀리초~수십 밀리초"},
+        {k:"엔진",v:"MySQL·PostgreSQL·MariaDB·Oracle·SQL Server"},
+        {k:"Aurora",v:"MySQL/PG 호환·5배 성능·6복사본 자동"},
+        {k:"키워드",v:"'트랜잭션', '복잡한 쿼리', 'JOIN', '정형 데이터'"},
+      ]},
+      {name:"ElastiCache", dot:"#10b981", rows:[
+        {k:"유형",v:"<strong>인메모리 캐시</strong>"},
+        {k:"엔진",v:"Redis · Memcached"},
+        {k:"지연시간",v:"<strong>마이크로초</strong>"},
+        {k:"목적",v:"DB 부하 감소 · 반복 쿼리 캐싱"},
+        {k:"Redis 특징",v:"영속성·Pub/Sub·Sorted Set·Multi-AZ·레플리카"},
+        {k:"Memcached",v:"단순 캐싱·멀티스레드·파티셔닝"},
+        {k:"키워드",v:"'DB 앞단 캐싱', '세션 저장', '순위표', '마이크로초'"},
+      ]},
+    ],
+    tip:"💡 <strong>구조적 데이터·트랜잭션·복잡한 쿼리</strong>=RDS/Aurora, <strong>비구조적·무한확장·서버리스</strong>=DynamoDB, <strong>DB 앞단 속도 향상·마이크로초</strong>=ElastiCache. ElastiCache는 DB 대체가 아닌 캐시 레이어!"
+  },
+  {
+    title:"S3 스토리지 클래스 비교",
+    badge:"S3 비용 최적화 ★★★",
+    cols:2,
+    cards:[
+      {name:"Hot · Warm 계층", dot:"#3b82f6", rows:[
+        {k:"Standard",v:"<strong>자주 접근</strong> — 11 nine 내구성 · 3 AZ · 즉시 접근"},
+        {k:"Standard-IA",v:"<strong>가끔 접근</strong> — Standard보다 저장 저렴 · 검색 비용 발생"},
+        {k:"One Zone-IA",v:"<strong>단일 AZ</strong> — Standard-IA보다 20% 저렴 · AZ 장애 시 손실 위험"},
+        {k:"Intelligent-Tiering",v:"<strong>접근 패턴 불명확</strong> — 자동 계층 이동 · 검색 비용 없음"},
+        {k:"IA 최소 저장 기간",v:"Standard-IA · One Zone-IA: 최소 <strong>30일</strong>"},
+        {k:"최소 객체 크기",v:"IA 계층: 128KB 미만이면 128KB로 과금"},
+      ]},
+      {name:"Cold · Archive 계층", dot:"#8b5cf6", rows:[
+        {k:"Glacier Instant",v:"<strong>밀리초 즉시</strong> 검색 — 분기 1회 접근 · 90일 최소"},
+        {k:"Glacier Flexible",v:"<strong>1~12시간</strong> 검색 — Expedited(1~5분)·Standard·Bulk"},
+        {k:"Glacier Deep Archive",v:"<strong>12~48시간</strong> — 가장 저렴 · 7~10년 장기 보관 · 180일 최소"},
+        {k:"Lifecycle 전환 규칙",v:"Standard→IA: 최소 30일 후 가능"},
+        {k:"Lifecycle 규칙 제한",v:"One Zone-IA→Glacier는 가능 · Standard→One Zone-IA도 가능"},
+        {k:"비용 공식",v:"저장 비용 낮을수록 검색 비용 높아짐 ↔"},
+      ]},
+    ],
+    tip:"💡 선택 공식: <strong>자주 접근</strong>=Standard, <strong>월 1~2회</strong>=Standard-IA, <strong>분기 1회·즉시필요</strong>=Glacier Instant, <strong>연 1~2회·시간 기다릴 수 있음</strong>=Glacier Flexible, <strong>7~10년 규정준수 보관</strong>=Glacier Deep Archive!"
+  },
+  {
+    title:"GuardDuty vs Inspector vs Macie vs Security Hub",
+    badge:"보안 4형제 ★★★",
+    cols:2,
+    cards:[
+      {name:"GuardDuty · Inspector", dot:"#ef4444", rows:[
+        {k:"GuardDuty 역할",v:"<strong>지능형 위협 탐지</strong> (이상 행동·악성 활동)"},
+        {k:"GuardDuty 소스",v:"VPC Flow Logs · CloudTrail · DNS 로그"},
+        {k:"GuardDuty 탐지",v:"암호화폐 채굴 · C&C 통신 · 자격증명 탈취"},
+        {k:"GuardDuty 방식",v:"ML 기반 이상 탐지 · 에이전트 불필요"},
+        {k:"Inspector 역할",v:"<strong>취약점 평가</strong> (CVE · 노출된 포트)"},
+        {k:"Inspector 대상",v:"EC2 · Lambda 함수 · ECR 컨테이너 이미지"},
+        {k:"Inspector 방식",v:"CVE DB 기반 자동 스캔 · 심각도 점수"},
+        {k:"차이",v:"GuardDuty=행동 이상탐지 / Inspector=소프트웨어 취약점"},
+      ]},
+      {name:"Macie · Security Hub", dot:"#8b5cf6", rows:[
+        {k:"Macie 역할",v:"<strong>S3 민감 데이터 탐지·보호</strong>"},
+        {k:"Macie 탐지",v:"PII · 신용카드 · 비밀키 · 의료 기록"},
+        {k:"Macie 방식",v:"ML + 패턴 매칭 · 버킷 공개 노출 탐지"},
+        {k:"Macie 규정",v:"GDPR · HIPAA · PCI DSS 준수 지원"},
+        {k:"Security Hub 역할",v:"<strong>보안 서비스 결과 통합 대시보드</strong>"},
+        {k:"Security Hub 소스",v:"GuardDuty·Inspector·Macie·Config·Firewall Manager"},
+        {k:"Security Hub 기준",v:"CIS AWS Foundations · PCI DSS · AWS FSBP"},
+        {k:"차이",v:"Security Hub=통합 뷰 / 나머지=개별 탐지 서비스"},
+      ]},
+    ],
+    tip:"💡 <strong>이상 행동·위협 탐지</strong>=GuardDuty, <strong>소프트웨어 CVE 취약점</strong>=Inspector, <strong>S3 PII/민감 데이터</strong>=Macie, <strong>여러 보안 서비스 통합 대시보드</strong>=Security Hub. 시험에서 4개 선택지로 나오면 '무엇을 탐지하는지'로 구분!"
+  },
+  {
+    title:"Auto Scaling 정책 비교",
+    badge:"스케일링 전략 ★★★",
+    cols:2,
+    cards:[
+      {name:"반응형 정책", dot:"#f97316", rows:[
+        {k:"대상 추적 (Target Tracking)",v:"<strong>메트릭을 목표값으로 유지</strong> (CPU 50% 등) — 가장 간단"},
+        {k:"단계적 (Step Scaling)",v:"경보 임계값 단계별 다른 스케일링 수 적용"},
+        {k:"단순 (Simple Scaling)",v:"경보 하나에 고정 액션 (쿨다운 동안 추가 조치 없음)"},
+        {k:"추천 순서",v:"<strong>대상 추적</strong> > 단계적 > 단순 (단순은 레거시)"},
+        {k:"쿨다운 (Cooldown)",v:"스케일링 후 다음 스케일링까지 대기 시간 (기본 300초)"},
+        {k:"웜업 (Warm-up)",v:"인스턴스 기동 후 메트릭 집계에서 제외할 시간"},
+      ]},
+      {name:"사전 예측 정책", dot:"#3b82f6", rows:[
+        {k:"예약 (Scheduled)",v:"<strong>정해진 시간에 용량 변경</strong> — 예측 가능한 트래픽 패턴"},
+        {k:"예측 (Predictive)",v:"<strong>ML로 미래 트래픽 예측</strong>해 사전 스케일 아웃"},
+        {k:"예측 vs 예약",v:"예약: 시간 고정 / 예측: ML로 자동 예측"},
+        {k:"인스턴스 워밍",v:"예측 스케일링은 기동 시간 고려해 미리 프로비저닝"},
+        {k:"Lifecycle Hook",v:"기동·종료 시 커스텀 액션 삽입 가능"},
+        {k:"종료 정책",v:"Default=가장 오래된 설정의 인스턴스 먼저 종료"},
+      ]},
+    ],
+    tip:"💡 <strong>CPU 50% 유지</strong>=대상 추적, <strong>매일 오전 9시 트래픽 증가</strong>=예약, <strong>패턴은 있지만 예측이 어려움</strong>=예측(Predictive), <strong>급격한 스케일링 세분화</strong>=단계적. 시험에서 '자동으로 최적 수 유지'라고 하면 대상 추적!"
+  },
+  {
+    title:"Route 53 라우팅 정책 총정리",
+    badge:"DNS 라우팅 ★★★",
+    cols:2,
+    cards:[
+      {name:"기본·성능 정책", dot:"#3b82f6", rows:[
+        {k:"단순 (Simple)",v:"<strong>단일 레코드</strong> — 상태 확인 불가 · 기본값"},
+        {k:"장애조치 (Failover)",v:"<strong>Primary 장애 시 Secondary로 전환</strong> — 상태 확인 필수"},
+        {k:"지연 기반 (Latency)",v:"<strong>가장 낮은 지연</strong> 리전으로 라우팅 (지리적 위치 아님)"},
+        {k:"다중값 (Multivalue)",v:"여러 IP 반환·상태 확인 조합 (L4 로드밸런서 아님)"},
+        {k:"상태 확인",v:"엔드포인트·다른 상태확인·CloudWatch 경보 3가지"},
+        {k:"TTL",v:"DNS 응답 캐싱 시간 — 트래픽 이전 시 낮게 설정"},
+      ]},
+      {name:"지역·가중치 정책", dot:"#f59e0b", rows:[
+        {k:"가중치 (Weighted)",v:"<strong>비율로 트래픽 분산</strong> — A/B 테스트·블루/그린 배포"},
+        {k:"지리 (Geolocation)",v:"<strong>사용자 위치</strong>(대륙·국가·주) 기반 — 기본 레코드 설정 권장"},
+        {k:"지리 근접 (Geoproximity)",v:"<strong>리소스 위치</strong> 기반 + <strong>Bias</strong>로 범위 확장/축소"},
+        {k:"Geolocation vs Geoproximity",v:"Geolocation: 국가/대륙 규칙 / Geoproximity: 거리+편향"},
+        {k:"IP 기반 (IP-based)",v:"CIDR 기반 라우팅 — ISP별 최적화"},
+        {k:"Alias 레코드",v:"AWS 리소스(ELB·CF·S3)에 CNAME 대신 사용 — Zone Apex 지원"},
+      ]},
+    ],
+    tip:"💡 핵심 구분: <strong>트래픽 비율 분산</strong>=가중치, <strong>사용자 국가/지역</strong>=지리, <strong>가장 빠른 리전</strong>=지연기반, <strong>장애 시 대체</strong>=장애조치. Geolocation ≠ 성능 최적화 (규정 준수·콘텐츠 지역화 목적). Latency가 성능 최적화!"
+  },
+  {
+    title:"IAM 정책 종류 총정리",
+    badge:"IAM 심화 ★★★",
+    cols:2,
+    cards:[
+      {name:"자격증명 기반 정책", dot:"#ef4444", rows:[
+        {k:"인라인 정책",v:"<strong>사용자·그룹·역할에 직접 포함</strong> — 1:1 관계 · 재사용 불가"},
+        {k:"관리형 정책 (AWS)",v:"AWS가 제공·관리 · ReadOnlyAccess·AdministratorAccess 등"},
+        {k:"관리형 정책 (고객)",v:"직접 생성·버전 관리 · 여러 자격증명에 재사용"},
+        {k:"권장",v:"인라인보다 <strong>고객 관리형 정책</strong> 권장 (재사용·버전관리)"},
+        {k:"평가 논리",v:"기본 거부 → 명시적 허용 → 명시적 거부(최우선)"},
+        {k:"Permission Boundary",v:"역할/사용자의 최대 권한 상한선 설정"},
+      ]},
+      {name:"리소스 기반·기타 정책", dot:"#3b82f6", rows:[
+        {k:"리소스 기반 정책",v:"<strong>S3 버킷·SQS·SNS·Lambda 등 리소스에 직접 부착</strong>"},
+        {k:"교차 계정 접근",v:"리소스 기반 정책 or 역할 신뢰 정책으로 허용"},
+        {k:"SCP",v:"Organizations OU/계정의 <strong>최대 권한 상한선</strong>"},
+        {k:"세션 정책",v:"AssumeRole 시 추가 제한 (임시 자격증명 범위 축소)"},
+        {k:"ACL",v:"S3·VPC 구형 방식 (IAM 정책 권장)"},
+        {k:"평가 순서",v:"SCP → 리소스 기반 → IAM 정책 → Permission Boundary"},
+      ]},
+    ],
+    tip:"💡 <strong>인라인</strong>=1:1 직접 부착(재사용 불가), <strong>관리형</strong>=재사용 가능, <strong>리소스 기반</strong>=리소스에 직접 부착(S3 버킷 정책 등), <strong>SCP</strong>=Organization 최대 권한 상한. 교차 계정 시: 역할 신뢰 정책 + IAM 정책 모두 필요!"
+  },
+  {
+    title:"EC2 스토리지 유형 심화",
+    badge:"EC2 스토리지 ★★",
+    cols:2,
+    cards:[
+      {name:"EBS 볼륨 유형", dot:"#3b82f6", rows:[
+        {k:"gp3 (SSD)",v:"<strong>범용 SSD</strong> — IOPS 3,000~16,000 · 처리량 125~1,000MB/s · 기본 권장"},
+        {k:"gp2 (SSD)",v:"구형 범용 SSD — IOPS 볼륨 크기에 연동 (GP3 권장)"},
+        {k:"io2 Block Express",v:"<strong>초고성능</strong> — 최대 256,000 IOPS · 크리티컬 DB"},
+        {k:"st1 (HDD)",v:"<strong>처리량 최적화</strong> — 빅데이터·데이터 웨어하우스·로그 처리"},
+        {k:"sc1 (HDD)",v:"<strong>콜드 HDD</strong> — 가장 저렴 · 자주 접근 안 하는 데이터"},
+        {k:"부팅 볼륨",v:"gp2·gp3·io1·io2만 가능 (st1·sc1은 부팅 불가)"},
+      ]},
+      {name:"인스턴스 스토어", dot:"#f59e0b", rows:[
+        {k:"인스턴스 스토어",v:"<strong>물리적으로 연결된 임시 스토리지</strong> — 인스턴스 종료 시 삭제"},
+        {k:"성능",v:"EBS보다 훨씬 빠른 IO · 수백만 IOPS"},
+        {k:"영속성",v:"❌ 인스턴스 중지·종료 시 데이터 소멸"},
+        {k:"활용",v:"임시 파일·캐시·버퍼·스크래치 데이터"},
+        {k:"EBS와 비교",v:"EBS: 영속·네트워크 연결 / 인스턴스 스토어: 임시·로컬"},
+        {k:"백업",v:"S3에 직접 복사해 영속화 필요"},
+      ]},
+    ],
+    tip:"💡 <strong>OS/앱 볼륨 기본</strong>=gp3, <strong>고성능 DB(Oracle/SAP)</strong>=io2, <strong>하둡/로그처리 처리량</strong>=st1, <strong>아카이브/저비용</strong>=sc1, <strong>임시·초고속 IO</strong>=인스턴스 스토어. st1·sc1은 부팅 볼륨으로 사용 불가!"
+  },
+];
+
+const KEYWORDS = [
+  {kw:"서버리스",       services:"Lambda · DynamoDB · Fargate · Aurora Serverless · S3 · Athena · API Gateway",    tip:"관리 서버 없음 = 서버리스. 실행시간 제한 있으면 Lambda, 컨테이너면 Fargate!"},
+  {kw:"이벤트 트리거",   services:"Lambda · EventBridge · SNS · SQS · S3 Notification · Kinesis",                  tip:"무언가가 발생하면 자동 실행 → Lambda or EventBridge 규칙 확인"},
+  {kw:"자동 장애조치",   services:"RDS Multi-AZ · Aurora · Route 53 Failover · ALB · Global Accelerator",          tip:"Multi-AZ = 자동 장애조치. Read Replica는 수동 승격 필요!"},
+  {kw:"고가용성 (HA)",  services:"Multi-AZ · ALB · Auto Scaling · Aurora · EFS · DynamoDB Global Tables",         tip:"'고가용성' 키워드 = 멀티 AZ 배포가 핵심"},
+  {kw:"재해 복구 (DR)", services:"Aurora Global DB · S3 CRR · Route 53 Failover · Pilot Light · Warm Standby",    tip:"RTO/RPO가 작을수록 비용↑. Active-Active=가장 작은 RTO/RPO"},
+  {kw:"캐싱",           services:"ElastiCache · DynamoDB DAX · CloudFront · API Gateway 캐싱",                     tip:"DB 앞단 캐시=ElastiCache·DAX, 웹 콘텐츠=CloudFront"},
+  {kw:"암호화",         services:"KMS · CloudHSM · S3 SSE · EBS 암호화 · Secrets Manager · ACM",                  tip:"'고객 키 관리'=CMK, '전용 HSM'=CloudHSM, '인증서'=ACM"},
+  {kw:"비용 최적화",    services:"Spot · Reserved · Savings Plans · S3 Intelligent-Tiering · Lifecycle",           tip:"'중단 허용'=Spot, '1~3년 약정'=Reserved/Savings Plans"},
+  {kw:"컨테이너",       services:"ECS · EKS · Fargate · ECR · App Runner",                                         tip:"Docker=ECS/Fargate, Kubernetes=EKS, 이미지저장소=ECR"},
+  {kw:"하이브리드 연결", services:"Direct Connect · Site-to-Site VPN · Storage Gateway · Outposts · DataSync",     tip:"빠른 설정=VPN, 전용 회선=Direct Connect, 데이터 이전=DataSync"},
+  {kw:"규정 준수",      services:"Config · CloudTrail · Macie · GuardDuty · Security Hub · Inspector · Artifact",  tip:"'누가 변경'=CloudTrail, '구성 평가'=Config, 'PII 탐지'=Macie"},
+  {kw:"실시간 데이터",  services:"Kinesis Data Streams · MSK · Lambda · EventBridge",                              tip:"대용량 스트리밍=Kinesis, 재처리 필요=Kinesis(DLQ 아님)"},
+  {kw:"데이터 분석",    services:"Athena · Glue · EMR · Redshift · OpenSearch · QuickSight · Lake Formation",      tip:"S3 직접 쿼리=Athena, ETL=Glue, 대용량 클러스터=EMR, BI=QuickSight"},
+  {kw:"글로벌 배포",    services:"CloudFront · Global Accelerator · Route 53 · Aurora Global · DynamoDB Global",   tip:"콘텐츠 캐싱=CF, 고정IP/TCP=GA, DNS 라우팅=Route 53"},
+  {kw:"마이그레이션",   services:"DMS · MGN · DataSync · Snow Family · Schema Conversion Tool",                    tip:"DB 이전=DMS, 서버 이전=MGN, 오프라인 대용량=Snowball"},
+  {kw:"API 관리",       services:"API Gateway · ALB · CloudFront · WAF · Cognito",                                 tip:"REST/WebSocket API=API Gateway, 마이크로서비스=ALB"},
+  {kw:"메시지 순서 보장",services:"SQS FIFO · SNS FIFO · Kinesis(파티션키) · MSK",                                 tip:"'정확히 1회+순서'=SQS FIFO. 표준 SQS는 순서 미보장!"},
+  {kw:"정적 IP",        services:"NLB Elastic IP · Global Accelerator Anycast IP · EC2 Elastic IP",               tip:"LB에 고정 IP=NLB(EIP), 글로벌=GA, 방화벽 화이트리스트 시 중요"},
+  {kw:"세션 관리",      services:"ElastiCache (Redis) · DynamoDB · Sticky Session (ALB)",                          tip:"분산 세션=ElastiCache/DynamoDB, Sticky=단일 서버 고정(HA 안 좋음)"},
+  {kw:"CI/CD",          services:"CodeCommit · CodeBuild · CodeDeploy · CodePipeline · Elastic Beanstalk",        tip:"소스=CodeCommit, 빌드=CodeBuild, 배포=CodeDeploy, 파이프라인=CodePipeline"},
+  {kw:"모니터링",        services:"CloudWatch · X-Ray · CloudTrail · Config · Health Dashboard",                    tip:"메트릭/로그=CloudWatch, 분산추적=X-Ray, API감사=CloudTrail"},
+  {kw:"오케스트레이션",  services:"Step Functions · ECS · EKS · MWAA (Airflow) · Batch",                           tip:"서비스 간 워크플로=Step Functions, 컨테이너=ECS/EKS"},
+  {kw:"데이터베이스 마이그레이션", services:"DMS · SCT · Snowball Edge",                                            tip:"온라인=DMS, 이종 DB 스키마 변환=SCT, 오프라인 대용량=Snowball Edge"},
+  {kw:"보안 그룹·방화벽", services:"Security Group · NACL · WAF · Network Firewall · Shield · GuardDuty",          tip:"인스턴스=SG, 서브넷=NACL, 웹 앱=WAF, DDoS=Shield, 위협탐지=GuardDuty"},
+  {kw:"오토메이션",      services:"Systems Manager · CloudFormation · CDK · Config Remediation · Lambda",          tip:"OS패치/실행=SSM, 인프라=CloudFormation/CDK, 자동수정=Config Remediation"},
+  {kw:"데이터 공유",     services:"Lake Formation · RAM · S3 · Redshift Data Sharing · Aurora Cloning",            tip:"조직 내 리소스 공유=RAM, 데이터 레이크=Lake Formation"},
+  {kw:"엣지 컴퓨팅",    services:"Lambda@Edge · CloudFront Functions · IoT Greengrass · Outposts · Snowcone",       tip:"CDN 엣지=Lambda@Edge/CF Functions, 온프레미스=Outposts"},
+  {kw:"비용 가시성",     services:"Cost Explorer · Cost and Usage Report · Budgets · Savings Plans · Trusted Advisor", tip:"분석=Cost Explorer, 상세 리포트=CUR, 예산 알림=Budgets"},
+];
+
+const TRAPS = [
+  {
+    title:"RDS Multi-AZ vs Read Replica 혼동",
+    icon:"🔁",
+    wrong:"Multi-AZ는 스탠바이로 읽기 부하 분산도 된다",
+    right:"Multi-AZ 스탠바이는 <strong>읽기/쓰기 불가</strong> — 순수 장애조치용. 읽기 분산은 <strong>Read Replica</strong>(별도 엔드포인트 필요)"
+  },
+  {
+    title:"Lambda 실행 시간 제한",
+    icon:"⏱️",
+    wrong:"Lambda는 어떤 작업이든 서버리스로 처리 가능하다",
+    right:"Lambda 최대 실행 시간 <strong>15분</strong>. 그 이상이면 Fargate·EC2·Step Functions 조합. 동영상 인코딩·대용량 배치는 Lambda 부적합!"
+  },
+  {
+    title:"SQS Standard vs FIFO 혼동",
+    icon:"📬",
+    wrong:"SQS는 항상 메시지 순서를 보장한다",
+    right:"Standard SQS는 <strong>순서 미보장·최소 1회 전달</strong>. 순서 보장이 필요하면 <strong>SQS FIFO</strong>(초당 3,000 메시지·정확히 1회)"
+  },
+  {
+    title:"S3 vs EFS 혼동",
+    icon:"🗂️",
+    wrong:"EC2에서 공유 파일 시스템이 필요하면 S3를 마운트한다",
+    right:"S3는 HTTP API로 접근하는 객체 스토리지 — <strong>파일시스템 마운트 불가</strong>(S3 FUSE는 비권장). 여러 EC2가 공유하는 파일 시스템 = <strong>EFS</strong>"
+  },
+  {
+    title:"Spot 인스턴스 적합성",
+    icon:"💸",
+    wrong:"Spot 인스턴스는 저렴하니 DB, 웹서버 등 모든 곳에 활용한다",
+    right:"Spot은 <strong>2분 경고 후 중단 가능</strong>. 프로덕션 DB·웹서버에는 부적합. 배치 처리·CI/CD·렌더링·비내결함성 작업에만 사용!"
+  },
+  {
+    title:"CloudFront vs Global Accelerator",
+    icon:"🌐",
+    wrong:"CloudFront는 고정 IP를 제공한다",
+    right:"CloudFront는 DNS 기반으로 <strong>고정 IP 없음</strong>. 고정 IP가 필요하면 <strong>Global Accelerator</strong>(Anycast IP 2개). 방화벽 화이트리스트 = GA!"
+  },
+  {
+    title:"KMS vs CloudHSM",
+    icon:"🔐",
+    wrong:"KMS와 CloudHSM은 동일하게 키를 관리한다",
+    right:"KMS는 <strong>멀티테넌트</strong>(AWS와 공유 인프라), CloudHSM은 <strong>싱글테넌트 전용 HSM</strong>(물리 장비 독점). FIPS 140-2 Level 3 요구 시 CloudHSM!"
+  },
+  {
+    title:"NAT Gateway vs Internet Gateway",
+    icon:"🌉",
+    wrong:"프라이빗 서브넷 EC2도 IGW만 있으면 인터넷 접속 가능하다",
+    right:"IGW는 퍼블릭 서브넷용. 프라이빗 서브넷의 아웃바운드 인터넷은 <strong>NAT Gateway</strong> 필요. NAT GW는 <strong>퍼블릭 서브넷에 배치</strong>!"
+  },
+  {
+    title:"EBS 다중 연결 제한",
+    icon:"🔗",
+    wrong:"EBS 볼륨을 여러 EC2에 동시에 연결해 공유 스토리지로 사용할 수 있다",
+    right:"일반 EBS는 <strong>단일 EC2에만 연결</strong>. 멀티 연결은 <strong>io1/io2 Multi-Attach</strong>(같은 AZ 내 최대 16개)만 가능. 공유 파일 시스템은 EFS!"
+  },
+  {
+    title:"S3 Glacier 검색 시간",
+    icon:"🧊",
+    wrong:"Glacier는 데이터를 즉시 꺼낼 수 있다",
+    right:"Glacier Flexible은 <strong>1~12시간</strong> 소요. 즉시 필요하면 <strong>Glacier Instant Retrieval</strong> 또는 <strong>Standard/IA</strong> 사용. 비용과 검색 시간은 반비례!"
+  },
+  {
+    title:"NACL Stateless 함정",
+    icon:"🚦",
+    wrong:"NACL에서 인바운드 80 포트 허용만 하면 웹 트래픽이 동작한다",
+    right:"NACL은 <strong>Stateless</strong> — 응답 트래픽(아웃바운드 임시 포트 1024-65535)도 <strong>별도 허용 규칙</strong> 필요. SG는 Stateful이라 자동 허용!"
+  },
+  {
+    title:"DynamoDB 항목 크기 제한",
+    icon:"📦",
+    wrong:"DynamoDB는 서버리스라 큰 데이터도 무제한 저장 가능하다",
+    right:"DynamoDB 단일 항목(Item) 최대 <strong>400KB</strong>. 그 이상은 S3에 저장 후 DynamoDB에 S3 참조 URL 저장하는 패턴 사용!"
+  },
+  {
+    title:"Transit Gateway 전이성",
+    icon:"🔀",
+    wrong:"VPC Peering을 충분히 구성하면 전이적 라우팅이 가능하다",
+    right:"VPC Peering은 <strong>전이적 라우팅 불가</strong>(A-B-C 연결 시 A↔C 불가). N:N 연결과 전이 라우팅이 필요하면 <strong>Transit Gateway</strong>!"
+  },
+  {
+    title:"Read Replica 교차 리전 비용",
+    icon:"💰",
+    wrong:"RDS Read Replica는 다른 AZ·리전에 생성해도 추가 비용이 없다",
+    right:"같은 리전 Read Replica 복제 트래픽은 무료, <strong>교차 리전 복제는 데이터 전송 비용 발생</strong>. Multi-AZ도 AZ 간 동기 복제 비용 발생!"
+  },
+  {
+    title:"S3 버전 관리와 삭제",
+    icon:"🗑️",
+    wrong:"S3 버전 관리를 활성화하면 실수로 삭제해도 즉시 복구된다",
+    right:"버전 관리 시 삭제하면 <strong>삭제 마커(Delete Marker)</strong>가 생성됨(파일 숨김). 완전 삭제는 특정 버전 ID로 삭제해야 함. MFA Delete로 추가 보호 가능!"
+  },
+  {
+    title:"Kinesis vs SQS 재소비",
+    icon:"🔄",
+    wrong:"SQS와 Kinesis 모두 메시지를 여러 소비자가 재소비할 수 있다",
+    right:"SQS는 소비자가 메시지를 가져가면 <strong>삭제(재소비 불가)</strong>. Kinesis는 보관 기간 내 <strong>여러 소비자가 독립적으로 재소비 가능</strong>!"
+  },
+  {
+    title:"Aurora 스탠바이 vs Read Replica",
+    icon:"🗃️",
+    wrong:"Aurora Multi-AZ와 Aurora Read Replica는 같은 개념이다",
+    right:"Aurora의 경우 Multi-AZ는 스토리지 레벨 6복사본 자동 복제. <strong>Aurora Read Replica는 별도 읽기 엔드포인트</strong> — 장애 시 자동 승격도 가능!"
+  },
+  {
+    title:"Security Group 참조 범위",
+    icon:"🔒",
+    wrong:"Security Group을 소스로 지정하면 모든 IP가 허용된다",
+    right:"SG를 소스로 지정하면 <strong>해당 SG가 연결된 인스턴스의 IP</strong>만 허용. IP 범위가 아닌 <strong>동적인 인스턴스 그룹 기반</strong> 규칙으로 더 안전!"
+  },
+  {
+    title:"On-Demand vs Savings Plans",
+    icon:"💳",
+    wrong:"Savings Plans는 특정 인스턴스 유형에만 사용 가능하다",
+    right:"<strong>Compute Savings Plans</strong>는 EC2·Lambda·Fargate 모두에 유연하게 적용. EC2 Instance Savings Plans는 특정 패밀리만. RI보다 유연성 높음!"
+  },
+  {
+    title:"CloudTrail vs Config 혼동",
+    icon:"📋",
+    wrong:"Config가 있으면 CloudTrail은 필요 없다",
+    right:"Config: <strong>리소스 구성이 어떻게 변했나</strong>(What changed), CloudTrail: <strong>누가 API로 변경했나</strong>(Who/When). 둘은 상호 보완적!"
+  },
+];
+
+const DECISIONS = [
+  {
+    title:"스토리지 선택 결정 트리",
+    icon:"💾",
+    q:"어떤 스토리지가 필요한가?",
+    opts:[
+      {label:"단일 EC2 전용 블록 스토리지 (OS/DB)", answer:"→ <strong>EBS</strong> (gp3 기본, 고IOPS면 io2)"},
+      {label:"여러 EC2가 동시에 공유하는 파일 시스템", answer:"→ <strong>EFS</strong> (Linux·NFS) 또는 FSx for Windows (SMB·AD)"},
+      {label:"무한대 객체 저장, HTTP API 접근", answer:"→ <strong>S3</strong> (버전관리·수명주기·정적 호스팅)"},
+      {label:"HPC·ML 고성능 병렬 파일 시스템", answer:"→ <strong>FSx for Lustre</strong> (S3 네이티브 통합)"},
+      {label:"온프레미스 데이터를 AWS로 오프라인 이전", answer:"→ <strong>Snowball Edge</strong> (80TB) or Snowmobile (100PB)"},
+      {label:"온프레미스↔S3 하이브리드 파일 공유", answer:"→ <strong>Storage Gateway</strong> (File/Volume/Tape)"},
+    ]
+  },
+  {
+    title:"데이터베이스 선택 결정 트리",
+    icon:"🗄️",
+    q:"어떤 데이터베이스가 필요한가?",
+    opts:[
+      {label:"관계형·ACID·복잡한 JOIN 쿼리", answer:"→ <strong>RDS/Aurora</strong> (MySQL·PostgreSQL·Aurora)"},
+      {label:"서버리스 NoSQL·무한 확장·밀리초 응답", answer:"→ <strong>DynamoDB</strong> (파티션키 설계 중요)"},
+      {label:"DB 쿼리 캐싱·마이크로초 응답 필요", answer:"→ <strong>ElastiCache</strong> (Redis: 복잡한 자료구조, Memcached: 단순)"},
+      {label:"수백 TB 데이터 웨어하우스·OLAP 분석", answer:"→ <strong>Redshift</strong> (컬럼형·Spectrum으로 S3 쿼리)"},
+      {label:"그래프 관계 데이터 (SNS 친구·추천)", answer:"→ <strong>Neptune</strong> (Gremlin·SPARQL)"},
+      {label:"MongoDB 호환 문서 DB", answer:"→ <strong>DocumentDB</strong>"},
+      {label:"시계열 IoT·모니터링 데이터", answer:"→ <strong>Timestream</strong> (서버리스 시계열)"},
+      {label:"Cassandra 호환 와이드 컬럼", answer:"→ <strong>Amazon Keyspaces</strong>"},
+    ]
+  },
+  {
+    title:"컴퓨팅 선택 결정 트리",
+    icon:"⚙️",
+    q:"어떤 컴퓨팅이 필요한가?",
+    opts:[
+      {label:"이벤트 기반·단기 함수·15분 이하", answer:"→ <strong>Lambda</strong> (서버리스·이벤트 트리거)"},
+      {label:"컨테이너·서버 관리 없이·장기 실행", answer:"→ <strong>ECS Fargate</strong> (서버리스 컨테이너)"},
+      {label:"Kubernetes 표준·멀티클라우드·복잡한 오케스트레이션", answer:"→ <strong>EKS</strong> (관리형 K8s)"},
+      {label:"완전 제어·GPU·BYOL·레거시 앱", answer:"→ <strong>EC2</strong> (적절한 구매 옵션 선택)"},
+      {label:"코드 푸시만으로 빠른 웹앱 배포 (PaaS)", answer:"→ <strong>Elastic Beanstalk</strong> (내부는 EC2/ELB/ASG)"},
+      {label:"대용량 배치 작업 (HPC·ML 훈련)", answer:"→ <strong>AWS Batch</strong> or EC2 Spot Fleet"},
+      {label:"온프레미스에서 AWS API·서비스 사용", answer:"→ <strong>AWS Outposts</strong> (물리 랙)"},
+    ]
+  },
+  {
+    title:"네트워크 연결 결정 트리",
+    icon:"🔗",
+    q:"어떤 네트워크 연결이 필요한가?",
+    opts:[
+      {label:"온프레미스→AWS, 빠른 설정·암호화, 비용 중요", answer:"→ <strong>Site-to-Site VPN</strong> (IPsec·인터넷 기반)"},
+      {label:"온프레미스→AWS, 전용 회선·안정적 대역폭·저지연", answer:"→ <strong>Direct Connect</strong> (물리 전용 회선)"},
+      {label:"여러 VPC·온프레미스 중앙 연결", answer:"→ <strong>Transit Gateway</strong> (허브앤스포크·전이 라우팅)"},
+      {label:"VPC 2개 직접 연결, 소규모", answer:"→ <strong>VPC Peering</strong> (1:1·전이 불가)"},
+      {label:"인터넷 없이 S3·DynamoDB 접근", answer:"→ <strong>VPC Gateway Endpoint</strong> (무료·라우팅 테이블)"},
+      {label:"인터넷 없이 기타 AWS 서비스 접근", answer:"→ <strong>VPC Interface Endpoint (PrivateLink)</strong> (ENI·요금)"},
+      {label:"서비스를 다른 VPC·계정에 프라이빗 노출", answer:"→ <strong>PrivateLink</strong> (NLB + Interface Endpoint)"},
+    ]
+  },
+  {
+    title:"보안 서비스 선택 결정 트리",
+    icon:"🛡️",
+    q:"어떤 보안 기능이 필요한가?",
+    opts:[
+      {label:"악성 행위·이상 활동 자동 탐지 (ML 기반)", answer:"→ <strong>GuardDuty</strong> (VPC 로그·CloudTrail·DNS 분석)"},
+      {label:"EC2·Lambda·컨테이너 취약점 스캔 (CVE)", answer:"→ <strong>Inspector</strong> (자동 CVE 평가)"},
+      {label:"S3 버킷 PII·민감 데이터 탐지", answer:"→ <strong>Macie</strong> (ML 기반 S3 스캔)"},
+      {label:"웹 앱 공격 차단 (SQL Injection·XSS·봇)", answer:"→ <strong>WAF</strong> (ALB·CloudFront·API GW 앞단)"},
+      {label:"DDoS 방어", answer:"→ <strong>Shield Standard</strong>(무료) or <strong>Shield Advanced</strong>(DRT 지원)"},
+      {label:"여러 보안 서비스 결과 통합 대시보드", answer:"→ <strong>Security Hub</strong> (ASFF 표준화)"},
+      {label:"암호화 키 관리 (멀티테넌트)", answer:"→ <strong>KMS CMK</strong>"},
+      {label:"전용 HSM (FIPS 140-2 Level 3, 싱글테넌트)", answer:"→ <strong>CloudHSM</strong>"},
+    ]
+  },
+  {
+    title:"메시징·이벤트 선택 결정 트리",
+    icon:"📨",
+    q:"어떤 메시징 패턴이 필요한가?",
+    opts:[
+      {label:"비동기 작업 큐·순서 미보장 허용·최소 1회 처리", answer:"→ <strong>SQS Standard</strong>"},
+      {label:"순서 보장·정확히 1회 처리 (금융·재고)", answer:"→ <strong>SQS FIFO</strong>"},
+      {label:"1:N 즉시 알림·팬아웃·Push 기반", answer:"→ <strong>SNS</strong>"},
+      {label:"SNS + SQS 조합으로 팬아웃 + 버퍼링", answer:"→ <strong>SNS→SQS Fan-out 패턴</strong>"},
+      {label:"이벤트 기반 자동화·스케줄·SaaS 통합", answer:"→ <strong>EventBridge</strong>"},
+      {label:"대용량 실시간 스트리밍·재소비·여러 소비자", answer:"→ <strong>Kinesis Data Streams</strong>"},
+      {label:"스트리밍 데이터를 S3/Redshift에 자동 전달", answer:"→ <strong>Kinesis Firehose</strong>"},
+      {label:"Kafka 호환·복잡한 스트리밍 파이프라인", answer:"→ <strong>Amazon MSK</strong>"},
+    ]
+  },
+];
+
+
+function renderCompare(){
+  const c=document.getElementById('tips-compare');
+  if(!c)return;
+  c.innerHTML='';
+  COMPARES.forEach((sec,secIdx)=>{
+    const section=document.createElement('div');
+    section.className='compare-section';
+    let cardsHtml='';
+    sec.cards.forEach(card=>{
+      // pick a readable fg: always white on saturated bg
+      const headStyle=`background:${card.dot}`;
+      let rowsHtml=card.rows.map(r=>`<tr><td class="ctd-k">${r.k}</td><td class="ctd-v">${r.v}</td></tr>`).join('');
+      cardsHtml+=`<div class="ccard">
+        <div class="ccard-head" style="${headStyle}">${card.name}</div>
+        <table class="ctable">${rowsHtml}</table>
+      </div>`;
+    });
+    const gridClass=sec.cols===3?'ccards-3':'ccards-2';
+    section.innerHTML=`
+      <div class="csec-head">
+        <div class="csec-num">${secIdx+1}</div>
+        <span class="csec-title">${sec.title}</span>
+        <span class="csec-badge">${sec.badge}</span>
+      </div>
+      <div class="${gridClass}">${cardsHtml}</div>
+      <div class="ctip">${sec.tip}</div>`;
+    c.appendChild(section);
+  });
+}
+
+function renderKeywords(){
+  const c=document.getElementById('tips-strategy');
+  if(!c)return;
+  c.innerHTML='';
+  KEYWORDS.forEach(item=>{
+    const div=document.createElement('div');
+    div.className='kw-card';
+    div.innerHTML=`<div class="kw-word">${item.kw}</div>
+      <div class="kw-services">${item.services}</div>
+      <div class="kw-tip">${item.tip}</div>`;
+    c.appendChild(div);
+  });
+}
+
+function renderTraps(){
+  const c=document.getElementById('tips-traps');
+  if(!c)return;
+  c.innerHTML='';
+  TRAPS.forEach(item=>{
+    const div=document.createElement('div');
+    div.className='trap-card';
+    div.innerHTML=`<div class="trap-icon">${item.icon}</div>
+      <div class="trap-title">${item.title}</div>
+      <div class="trap-wrong">❌ ${item.wrong}</div>
+      <div class="trap-right">✅ ${item.right}</div>`;
+    c.appendChild(div);
+  });
+}
+
+function renderDecisions(){
+  const c=document.getElementById('tips-decision');
+  if(!c)return;
+  c.innerHTML='';
+  DECISIONS.forEach(d=>{
+    const div=document.createElement('div');
+    div.className='decision-card';
+    const optsHtml=d.opts.map(o=>`<div class="decision-opt">
+      <span class="decision-label">${o.label}</span>
+      <span class="decision-answer">${o.answer}</span>
+    </div>`).join('');
+    div.innerHTML=`<div class="decision-head">
+        <span class="decision-icon">${d.icon}</span>
+        <div>
+          <div class="decision-title">${d.title}</div>
+          <div class="decision-q">${d.q}</div>
+        </div>
+      </div>
+      <div class="decision-opts">${optsHtml}</div>`;
+    c.appendChild(div);
+  });
+}
+
+function switchTips(tab, btn){
+  document.querySelectorAll('.tips-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.tips-panel').forEach(p=>{
+    p.classList.remove('show');
+    p.style.removeProperty('display');
+  });
+  document.getElementById('tips-'+tab).classList.add('show');
 }
 
 const COMPARES = [
@@ -3191,9 +3485,9 @@ function toggleTerm(head){
     <button class="tips-tab" onclick="switchTips('decision',this)">🌲 서비스 선택 트리</button>
   </div>
   <div id="tips-compare" class="tips-panel show"></div>
-  <div id="tips-strategy" class="tips-panel" style="display:none"></div>
-  <div id="tips-traps" class="tips-panel" style="display:none"></div>
-  <div id="tips-decision" class="tips-panel" style="display:none"></div>
+  <div id="tips-strategy" class="tips-panel"></div>
+  <div id="tips-traps" class="tips-panel"></div>
+  <div id="tips-decision" class="tips-panel"></div>
 </div>
 
 

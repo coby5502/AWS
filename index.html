@@ -1529,6 +1529,7 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
 
 <!-- ═══ DATA FILES ═══ -->
 <script src="saa-data.js"></script>
+<script src="saa-extras.js"></script>
 <script src="aif-data.js"></script>
 <script src="aif-extras.js"></script>
 
@@ -2769,13 +2770,13 @@ const DECISIONS = [
 ];
 
 
-// 시험별 컨텐츠 선택 헬퍼
+// 시험별 컨텐츠 선택 헬퍼 — 시험마다 완전 독립. 데이터 없으면 빈 배열
 function _isAIF(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'aif'; }
-function _getCompares(){ return _isAIF() ? (window.AIF_COMPARES || []) : COMPARES; }
-function _getKeywords(){ return _isAIF() ? (window.AIF_KEYWORDS || []) : KEYWORDS; }
-function _getTraps(){ return _isAIF() ? (window.AIF_TRAPS || []) : TRAPS; }
-function _getDecisions(){ return _isAIF() ? (window.AIF_DECISIONS || []) : DECISIONS; }
-function _getGlossary(){ return _isAIF() ? (window.AIF_GLOSSARY || []) : (window.GLOSSARY || window.AIF_GLOSSARY || []); }
+function _getCompares(){ return _isAIF() ? (window.AIF_COMPARES || []) : (typeof COMPARES !== 'undefined' ? COMPARES : (window.SAA_COMPARES || [])); }
+function _getKeywords(){ return _isAIF() ? (window.AIF_KEYWORDS || []) : (typeof KEYWORDS !== 'undefined' ? KEYWORDS : (window.SAA_KEYWORDS || [])); }
+function _getTraps(){    return _isAIF() ? (window.AIF_TRAPS || [])    : (typeof TRAPS    !== 'undefined' ? TRAPS    : (window.SAA_TRAPS    || [])); }
+function _getDecisions(){return _isAIF() ? (window.AIF_DECISIONS || []): (typeof DECISIONS!== 'undefined' ? DECISIONS: (window.SAA_DECISIONS|| [])); }
+function _getGlossary(){ return _isAIF() ? (window.AIF_GLOSSARY || []) : (window.SAA_GLOSSARY || []); }
 
 function renderCompare(){
   const c=document.getElementById('tips-compare');
@@ -2886,18 +2887,12 @@ function showGlossary(){
 function buildCatTabs(){
   const wrap = document.getElementById('cat-tabs');
   wrap.innerHTML = '';
-  // 시험별 카테고리: AIF는 글로서리 데이터에서 자동 추출
-  let cats, colorMap;
-  if(_isAIF()){
-    const gloss = _getGlossary();
-    const uniq = Array.from(new Set(gloss.map(g=>g.cat)));
-    cats = ["전체", ...uniq];
-    colorMap = Object.fromEntries(gloss.map(g=>[g.cat, g.color]));
-    colorMap["전체"] = "#6366f1";
-  } else {
-    cats = CATS;
-    colorMap = CAT_COLORS;
-  }
+  // 시험 무관: 현재 선택된 시험의 글로서리 데이터에서 카테고리·색상을 자동 추출
+  const gloss = _getGlossary();
+  const uniq = Array.from(new Set(gloss.map(g=>g.cat)));
+  const cats = ["전체", ...uniq];
+  const colorMap = Object.fromEntries(gloss.map(g=>[g.cat, g.color]));
+  colorMap["전체"] = "#6366f1";
   cats.forEach(c => {
     const btn = document.createElement('button');
     btn.className = 'cat-tab' + (c === glossaryCat ? ' active' : '');
@@ -3163,8 +3158,8 @@ function showFlashcard(){
 
 function loadFcData(){
   // Load persisted ratings
-  try { FC.ratings = JSON.parse(localStorage.getItem('fcRatings')||'{}'); } catch(e){}
-  try { FC.weakIds = JSON.parse(localStorage.getItem('fcWeak')||'{}'); } catch(e){}
+  try { FC.ratings = JSON.parse(localStorage.getItem(_sk('fcRatings'))||'{}'); } catch(e){}
+  try { FC.weakIds = JSON.parse(localStorage.getItem(_sk('fcWeak'))||'{}'); } catch(e){}
 }
 
 function fcSetMode(mode, btn){
@@ -3293,8 +3288,8 @@ function fcRate(rating){
   }
   // Save
   try{
-    localStorage.setItem('fcRatings', JSON.stringify(FC.ratings));
-    localStorage.setItem('fcWeak', JSON.stringify(FC.weakIds));
+    localStorage.setItem(_sk('fcRatings'), JSON.stringify(FC.ratings));
+    localStorage.setItem(_sk('fcWeak'), JSON.stringify(FC.weakIds));
   }catch(e){}
   // Highlight picked
   document.querySelectorAll('.fc-rate-btn').forEach((b,i)=>{

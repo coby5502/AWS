@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>AWS SAA-C03 퀴즈</title>
+<title>AWS 자격증 퀴즈</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nanum+Round+Gothic:wght@400;700&display=swap" rel="stylesheet">
@@ -1358,9 +1358,6 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
     </button>
   </div>
 
-  <div class="btn-stack" style="margin-top:20px">
-    <button class="btn-secondary" onclick="showTips()">🎯 공통 공략법 보기</button>
-  </div>
 </div>
 
 <!-- ═══ HOME ═══ -->
@@ -1533,6 +1530,7 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
 <!-- ═══ DATA FILES ═══ -->
 <script src="saa-data.js"></script>
 <script src="aif-data.js"></script>
+<script src="aif-extras.js"></script>
 
 <!-- ═══ SCRIPT ═══ -->
 <script>
@@ -2771,11 +2769,19 @@ const DECISIONS = [
 ];
 
 
+// 시험별 컨텐츠 선택 헬퍼
+function _isAIF(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'aif'; }
+function _getCompares(){ return _isAIF() ? (window.AIF_COMPARES || []) : COMPARES; }
+function _getKeywords(){ return _isAIF() ? (window.AIF_KEYWORDS || []) : KEYWORDS; }
+function _getTraps(){ return _isAIF() ? (window.AIF_TRAPS || []) : TRAPS; }
+function _getDecisions(){ return _isAIF() ? (window.AIF_DECISIONS || []) : DECISIONS; }
+function _getGlossary(){ return _isAIF() ? (window.AIF_GLOSSARY || []) : (window.GLOSSARY || window.AIF_GLOSSARY || []); }
+
 function renderCompare(){
   const c=document.getElementById('tips-compare');
   if(!c)return;
   c.innerHTML='';
-  COMPARES.forEach((sec,secIdx)=>{
+  _getCompares().forEach((sec,secIdx)=>{
     const section=document.createElement('div');
     section.className='compare-section';
     let cardsHtml='';
@@ -2805,7 +2811,7 @@ function renderKeywords(){
   const c=document.getElementById('tips-strategy');
   if(!c)return;
   c.innerHTML='';
-  KEYWORDS.forEach(item=>{
+  _getKeywords().forEach(item=>{
     const div=document.createElement('div');
     div.className='kw-card';
     div.innerHTML=`<div class="kw-word">${item.kw}</div>
@@ -2819,7 +2825,7 @@ function renderTraps(){
   const c=document.getElementById('tips-traps');
   if(!c)return;
   c.innerHTML='';
-  TRAPS.forEach(item=>{
+  _getTraps().forEach(item=>{
     const div=document.createElement('div');
     div.className='trap-card';
     div.innerHTML=`<div class="trap-icon">${item.icon}</div>
@@ -2834,7 +2840,7 @@ function renderDecisions(){
   const c=document.getElementById('tips-decision');
   if(!c)return;
   c.innerHTML='';
-  DECISIONS.forEach(d=>{
+  _getDecisions().forEach(d=>{
     const div=document.createElement('div');
     div.className='decision-card';
     const optsHtml=d.opts.map(o=>`<div class="decision-opt">
@@ -2880,10 +2886,22 @@ function showGlossary(){
 function buildCatTabs(){
   const wrap = document.getElementById('cat-tabs');
   wrap.innerHTML = '';
-  CATS.forEach(c => {
+  // 시험별 카테고리: AIF는 글로서리 데이터에서 자동 추출
+  let cats, colorMap;
+  if(_isAIF()){
+    const gloss = _getGlossary();
+    const uniq = Array.from(new Set(gloss.map(g=>g.cat)));
+    cats = ["전체", ...uniq];
+    colorMap = Object.fromEntries(gloss.map(g=>[g.cat, g.color]));
+    colorMap["전체"] = "#6366f1";
+  } else {
+    cats = CATS;
+    colorMap = CAT_COLORS;
+  }
+  cats.forEach(c => {
     const btn = document.createElement('button');
     btn.className = 'cat-tab' + (c === glossaryCat ? ' active' : '');
-    btn.style.setProperty('--dot', CAT_COLORS[c]||'#6366f1');
+    btn.style.setProperty('--dot', colorMap[c]||'#6366f1');
     btn.textContent = c;
     btn.onclick = () => { glossaryCat = c; buildCatTabs(); renderGlossary(); };
     wrap.appendChild(btn);
@@ -2896,7 +2914,7 @@ function filterGlossary(){
 }
 
 function renderGlossary(){
-  let items = GLOSSARY;
+  let items = _getGlossary();
   if(glossaryCat !== "전체") items = items.filter(t => t.cat === glossaryCat);
   if(glossaryQuery) items = items.filter(t =>
     t.name.toLowerCase().includes(glossaryQuery) ||
@@ -3131,6 +3149,11 @@ let FC = {
 
 function showFlashcard(){
   loadFcData();
+  // 시험별 카운트 업데이트
+  const _setCount = (id, n) => { const el = document.getElementById(id); if(el) el.textContent = n + '개'; };
+  _setCount('fc-count-terms', _getGlossary().length);
+  _setCount('fc-count-keywords', _getKeywords().length);
+  _setCount('fc-count-traps', _getTraps().length);
   document.getElementById('fc-setup').style.display='block';
   document.getElementById('fc-session').classList.remove('active');
   document.getElementById('fc-result').classList.remove('show');
@@ -3152,10 +3175,13 @@ function fcSetMode(mode, btn){
 
 function buildDeck(mode){
   const deck = [];
+  const gloss = _getGlossary();
+  const kwds = _getKeywords();
+  const trps = _getTraps();
   if(mode==='terms'||mode==='mixed'){
-    GLOSSARY.forEach((g,i)=>{
+    gloss.forEach((g,i)=>{
       deck.push({
-        id:'g'+i, type:'AWS 용어',
+        id:'g'+i, type:'용어',
         front: g.name,
         frontSub: g.cat + ' · ' + g.short,
         back: g.desc,
@@ -3164,7 +3190,7 @@ function buildDeck(mode){
     });
   }
   if(mode==='keywords'||mode==='mixed'){
-    KEYWORDS.forEach((k,i)=>{
+    kwds.forEach((k,i)=>{
       deck.push({
         id:'kw'+i, type:'키워드 매핑',
         front: '"'+k.kw+'" 키워드가 나오면?',
@@ -3175,10 +3201,10 @@ function buildDeck(mode){
     });
   }
   if(mode==='traps'||mode==='mixed'){
-    TRAPS.forEach((t,i)=>{
+    trps.forEach((t,i)=>{
       deck.push({
         id:'tr'+i, type:'⚠️ 함정 패턴',
-        front: t.icon+' '+t.title,
+        front: (t.icon||'⚠️')+' '+t.title,
         frontSub: '❌ '+t.wrong,
         back: '✅ '+t.right,
         backType:'올바른 이해',

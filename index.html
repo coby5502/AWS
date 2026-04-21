@@ -1191,6 +1191,15 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
         <span>🏢 Organizations</span><span>🌐 Transit Gateway</span><span>🚨 DR</span><span>💸 Cost</span>
       </div>
     </button>
+
+    <button class="exam-card exam-card--alt" onclick="selectExam('dva')">
+      <div class="exam-card-badge">DVA-C02</div>
+      <div class="exam-card-title">Developer Associate</div>
+      <div class="exam-card-desc">서버리스 · API · CI/CD · 한국어 <strong>553</strong>문제</div>
+      <div class="exam-card-tags">
+        <span>⚡ Lambda</span><span>🌐 API Gateway</span><span>🗄️ DynamoDB</span><span>🚀 CI/CD</span>
+      </div>
+    </button>
   </div>
 
 </div>
@@ -1370,6 +1379,8 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
 <script src="mla-extras.js"></script>
 <script src="sap-data.js"></script>
 <script src="sap-extras.js"></script>
+<script src="dva-data.js"></script>
+<script src="dva-extras.js"></script>
 
 <!-- ═══ SCRIPT ═══ -->
 <script>
@@ -1412,6 +1423,15 @@ const EXAM_META = {
     chip: '🏢 AWS PRO CERTIFIED',
     storagePrefix: 'aws_sap_',
     getQuestions: () => window.SAP_QUESTIONS || []
+  },
+  dva: {
+    id: 'dva',
+    code: 'DVA-C02',
+    title: 'DVA-C02 퀴즈',
+    sub: 'Developer Associate · 한국어 기출',
+    chip: '⚡ AWS DEV CERTIFIED',
+    storagePrefix: 'aws_dva_',
+    getQuestions: () => window.DVA_QUESTIONS || []
   }
 };
 
@@ -2633,31 +2653,37 @@ const DECISIONS = [
 function _isAIF(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'aif'; }
 function _isMLA(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'mla'; }
 function _isSAP(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'sap'; }
+function _isDVA(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'dva'; }
 function _getCompares(){
+  if(_isDVA()) return window.DVA_COMPARES || [];
   if(_isSAP()) return window.SAP_COMPARES || [];
   if(_isMLA()) return window.MLA_COMPARES || [];
   if(_isAIF()) return window.AIF_COMPARES || [];
   return (typeof COMPARES !== 'undefined' ? COMPARES : (window.SAA_COMPARES || []));
 }
 function _getKeywords(){
+  if(_isDVA()) return window.DVA_KEYWORDS || [];
   if(_isSAP()) return window.SAP_KEYWORDS || [];
   if(_isMLA()) return window.MLA_KEYWORDS || [];
   if(_isAIF()) return window.AIF_KEYWORDS || [];
   return (typeof KEYWORDS !== 'undefined' ? KEYWORDS : (window.SAA_KEYWORDS || []));
 }
 function _getTraps(){
+  if(_isDVA()) return window.DVA_TRAPS || [];
   if(_isSAP()) return window.SAP_TRAPS || [];
   if(_isMLA()) return window.MLA_TRAPS || [];
   if(_isAIF()) return window.AIF_TRAPS || [];
   return (typeof TRAPS !== 'undefined' ? TRAPS : (window.SAA_TRAPS || []));
 }
 function _getDecisions(){
+  if(_isDVA()) return window.DVA_DECISIONS || [];
   if(_isSAP()) return window.SAP_DECISIONS || [];
   if(_isMLA()) return window.MLA_DECISIONS || [];
   if(_isAIF()) return window.AIF_DECISIONS || [];
   return (typeof DECISIONS !== 'undefined' ? DECISIONS : (window.SAA_DECISIONS || []));
 }
 function _getGlossary(){
+  if(_isDVA()) return window.DVA_GLOSSARY || [];
   if(_isSAP()) return window.SAP_GLOSSARY || [];
   if(_isMLA()) return window.MLA_GLOSSARY || [];
   if(_isAIF()) return window.AIF_GLOSSARY || [];

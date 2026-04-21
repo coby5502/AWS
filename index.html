@@ -131,12 +131,76 @@ input  { font-family: var(--font); }
 }
 
 #exam-selector {
-  max-width: 560px;
+  max-width: 720px;
   margin: 0 auto;
-  padding: 60px 24px 40px;
+  padding: 56px 24px 48px;
 }
 @media (max-width: 480px) {
-  #exam-selector { padding: 48px 20px 40px; }
+  #exam-selector { padding: 40px 18px 40px; }
+}
+#exam-selector .hero { margin-bottom: 24px; }
+#exam-selector .hero h1 { font-size: clamp(28px, 6vw, 40px); }
+#exam-selector .hero p { font-size: 15px; }
+
+/* ── 난이도 섹션 ── */
+.level-section { margin-top: 32px; }
+.level-section:first-of-type { margin-top: 20px; }
+.level-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding: 0 4px;
+}
+.level-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+.level-title {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -0.3px;
+}
+.level-subtitle {
+  font-size: 12px;
+  color: var(--text3);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  margin-left: 2px;
+}
+.level-section[data-level="foundational"] .level-title { color: #0ea5e9; }
+.level-section[data-level="associate"] .level-title { color: #8b5cf6; }
+.level-section[data-level="professional"] .level-title { color: #f59e0b; }
+
+.level-cards {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .level-cards.cards-multi {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+/* 그리드 모드 내부 카드 조정 */
+.level-cards.cards-multi .exam-card { padding: 18px 16px; }
+.level-cards.cards-multi .exam-card-title { font-size: 17px; }
+.level-cards.cards-multi .exam-card-desc { font-size: 12.5px; }
+.level-cards.cards-multi .exam-card-tags span { font-size: 10.5px; padding: 3px 8px; }
+
+/* 레벨별 카드 배지 색상 */
+.exam-card[data-level="foundational"] .exam-card-badge {
+  background: linear-gradient(135deg, rgba(14,165,233,.18), rgba(6,182,212,.18));
+  color: #0ea5e9;
+}
+.exam-card[data-level="associate"] .exam-card-badge {
+  background: linear-gradient(135deg, rgba(139,92,246,.18), rgba(124,111,255,.18));
+  color: #8b5cf6;
+}
+.exam-card[data-level="professional"] .exam-card-badge {
+  background: linear-gradient(135deg, rgba(245,158,11,.2), rgba(251,146,60,.2));
+  color: #f59e0b;
 }
 
 .hero {
@@ -1152,54 +1216,82 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
   <div class="hero">
     <div class="hero-chip">🏆 AWS CERTIFIED</div>
     <h1>AWS 자격증 퀴즈</h1>
-    <p>공부할 시험을 선택하세요</p>
+    <p>난이도별로 시험을 선택하세요</p>
   </div>
 
-  <div class="btn-stack" style="gap:14px;margin-top:30px">
-    <button class="exam-card" onclick="selectExam('saa')">
-      <div class="exam-card-badge">SAA-C03</div>
-      <div class="exam-card-title">Solutions Architect Associate</div>
-      <div class="exam-card-desc">AWS 인프라 설계 · 한국어 기출 <strong>725</strong>문제</div>
-      <div class="exam-card-tags">
-        <span>🏗️ 아키텍처</span><span>💾 스토리지</span><span>🔐 보안</span><span>⚡ 네트워크</span>
-      </div>
-    </button>
+  <!-- Foundational -->
+  <div class="level-section" data-level="foundational">
+    <div class="level-header">
+      <span class="level-icon">🌱</span>
+      <span class="level-title">Foundational</span>
+      <span class="level-subtitle">기초</span>
+    </div>
+    <div class="level-cards">
+      <button class="exam-card" data-level="foundational" onclick="selectExam('aif')">
+        <div class="exam-card-badge">AIF-C01</div>
+        <div class="exam-card-title">AI Practitioner</div>
+        <div class="exam-card-desc">생성형 AI · ML 기초 · 한국어 <strong>389</strong>문제</div>
+        <div class="exam-card-tags">
+          <span>🤖 Bedrock</span><span>🧠 SageMaker</span><span>📚 RAG</span><span>⚖️ Responsible AI</span>
+        </div>
+      </button>
+    </div>
+  </div>
 
-    <button class="exam-card exam-card--alt" onclick="selectExam('aif')">
-      <div class="exam-card-badge">AIF-C01</div>
-      <div class="exam-card-title">AI Practitioner</div>
-      <div class="exam-card-desc">생성형 AI · ML 기초 · 한국어 <strong>389</strong>문제</div>
-      <div class="exam-card-tags">
-        <span>🤖 Bedrock</span><span>🧠 SageMaker</span><span>📚 RAG</span><span>⚖️ Responsible AI</span>
-      </div>
-    </button>
+  <!-- Associate -->
+  <div class="level-section" data-level="associate">
+    <div class="level-header">
+      <span class="level-icon">🎯</span>
+      <span class="level-title">Associate</span>
+      <span class="level-subtitle">어소시에이트</span>
+    </div>
+    <div class="level-cards cards-multi">
+      <button class="exam-card" data-level="associate" onclick="selectExam('saa')">
+        <div class="exam-card-badge">SAA-C03</div>
+        <div class="exam-card-title">Solutions Architect</div>
+        <div class="exam-card-desc">AWS 인프라 설계 · 한국어 <strong>725</strong>문제</div>
+        <div class="exam-card-tags">
+          <span>🏗️ 아키텍처</span><span>💾 스토리지</span><span>🔐 보안</span><span>⚡ 네트워크</span>
+        </div>
+      </button>
 
-    <button class="exam-card exam-card--alt" onclick="selectExam('mla')">
-      <div class="exam-card-badge">MLA-C01</div>
-      <div class="exam-card-title">ML Engineer Associate</div>
-      <div class="exam-card-desc">머신러닝 엔지니어링 · MLOps · 한국어 <strong>211</strong>문제</div>
-      <div class="exam-card-tags">
-        <span>🧪 SageMaker</span><span>🔧 MLOps</span><span>📊 Feature Store</span><span>🚀 Deploy</span>
-      </div>
-    </button>
+      <button class="exam-card" data-level="associate" onclick="selectExam('dva')">
+        <div class="exam-card-badge">DVA-C02</div>
+        <div class="exam-card-title">Developer</div>
+        <div class="exam-card-desc">서버리스 · API · CI/CD · 한국어 <strong>553</strong>문제</div>
+        <div class="exam-card-tags">
+          <span>⚡ Lambda</span><span>🌐 API Gateway</span><span>🗄️ DynamoDB</span><span>🚀 CI/CD</span>
+        </div>
+      </button>
 
-    <button class="exam-card exam-card--alt" onclick="selectExam('sap')">
-      <div class="exam-card-badge">SAP-C02</div>
-      <div class="exam-card-title">Solutions Architect Professional</div>
-      <div class="exam-card-desc">엔터프라이즈 아키텍처 · 멀티계정 · 한국어 <strong>528</strong>문제</div>
-      <div class="exam-card-tags">
-        <span>🏢 Organizations</span><span>🌐 Transit Gateway</span><span>🚨 DR</span><span>💸 Cost</span>
-      </div>
-    </button>
+      <button class="exam-card" data-level="associate" onclick="selectExam('mla')">
+        <div class="exam-card-badge">MLA-C01</div>
+        <div class="exam-card-title">ML Engineer</div>
+        <div class="exam-card-desc">머신러닝 엔지니어링 · MLOps · 한국어 <strong>211</strong>문제</div>
+        <div class="exam-card-tags">
+          <span>🧪 SageMaker</span><span>🔧 MLOps</span><span>📊 Feature Store</span><span>🚀 Deploy</span>
+        </div>
+      </button>
+    </div>
+  </div>
 
-    <button class="exam-card exam-card--alt" onclick="selectExam('dva')">
-      <div class="exam-card-badge">DVA-C02</div>
-      <div class="exam-card-title">Developer Associate</div>
-      <div class="exam-card-desc">서버리스 · API · CI/CD · 한국어 <strong>553</strong>문제</div>
-      <div class="exam-card-tags">
-        <span>⚡ Lambda</span><span>🌐 API Gateway</span><span>🗄️ DynamoDB</span><span>🚀 CI/CD</span>
-      </div>
-    </button>
+  <!-- Professional -->
+  <div class="level-section" data-level="professional">
+    <div class="level-header">
+      <span class="level-icon">💎</span>
+      <span class="level-title">Professional</span>
+      <span class="level-subtitle">프로페셔널</span>
+    </div>
+    <div class="level-cards">
+      <button class="exam-card" data-level="professional" onclick="selectExam('sap')">
+        <div class="exam-card-badge">SAP-C02</div>
+        <div class="exam-card-title">Solutions Architect Professional</div>
+        <div class="exam-card-desc">엔터프라이즈 아키텍처 · 멀티계정 · 한국어 <strong>528</strong>문제</div>
+        <div class="exam-card-tags">
+          <span>🏢 Organizations</span><span>🌐 Transit Gateway</span><span>🚨 DR</span><span>💸 Cost</span>
+        </div>
+      </button>
+    </div>
   </div>
 
 </div>

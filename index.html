@@ -1182,6 +1182,15 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
         <span>🧪 SageMaker</span><span>🔧 MLOps</span><span>📊 Feature Store</span><span>🚀 Deploy</span>
       </div>
     </button>
+
+    <button class="exam-card exam-card--alt" onclick="selectExam('sap')">
+      <div class="exam-card-badge">SAP-C02</div>
+      <div class="exam-card-title">Solutions Architect Professional</div>
+      <div class="exam-card-desc">엔터프라이즈 아키텍처 · 멀티계정 · 한국어 <strong>528</strong>문제</div>
+      <div class="exam-card-tags">
+        <span>🏢 Organizations</span><span>🌐 Transit Gateway</span><span>🚨 DR</span><span>💸 Cost</span>
+      </div>
+    </button>
   </div>
 
 </div>
@@ -1359,6 +1368,8 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
 <script src="aif-extras.js"></script>
 <script src="mla-data.js"></script>
 <script src="mla-extras.js"></script>
+<script src="sap-data.js"></script>
+<script src="sap-extras.js"></script>
 
 <!-- ═══ SCRIPT ═══ -->
 <script>
@@ -1392,6 +1403,15 @@ const EXAM_META = {
     chip: '🧪 AWS ML CERTIFIED',
     storagePrefix: 'aws_mla_',
     getQuestions: () => window.MLA_QUESTIONS || []
+  },
+  sap: {
+    id: 'sap',
+    code: 'SAP-C02',
+    title: 'SAP-C02 퀴즈',
+    sub: 'Solutions Architect Professional · 한국어 기출',
+    chip: '🏢 AWS PRO CERTIFIED',
+    storagePrefix: 'aws_sap_',
+    getQuestions: () => window.SAP_QUESTIONS || []
   }
 };
 
@@ -2612,27 +2632,33 @@ const DECISIONS = [
 // 시험별 컨텐츠 선택 헬퍼 — 시험마다 완전 독립. 데이터 없으면 빈 배열
 function _isAIF(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'aif'; }
 function _isMLA(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'mla'; }
+function _isSAP(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'sap'; }
 function _getCompares(){
+  if(_isSAP()) return window.SAP_COMPARES || [];
   if(_isMLA()) return window.MLA_COMPARES || [];
   if(_isAIF()) return window.AIF_COMPARES || [];
   return (typeof COMPARES !== 'undefined' ? COMPARES : (window.SAA_COMPARES || []));
 }
 function _getKeywords(){
+  if(_isSAP()) return window.SAP_KEYWORDS || [];
   if(_isMLA()) return window.MLA_KEYWORDS || [];
   if(_isAIF()) return window.AIF_KEYWORDS || [];
   return (typeof KEYWORDS !== 'undefined' ? KEYWORDS : (window.SAA_KEYWORDS || []));
 }
 function _getTraps(){
+  if(_isSAP()) return window.SAP_TRAPS || [];
   if(_isMLA()) return window.MLA_TRAPS || [];
   if(_isAIF()) return window.AIF_TRAPS || [];
   return (typeof TRAPS !== 'undefined' ? TRAPS : (window.SAA_TRAPS || []));
 }
 function _getDecisions(){
+  if(_isSAP()) return window.SAP_DECISIONS || [];
   if(_isMLA()) return window.MLA_DECISIONS || [];
   if(_isAIF()) return window.AIF_DECISIONS || [];
   return (typeof DECISIONS !== 'undefined' ? DECISIONS : (window.SAA_DECISIONS || []));
 }
 function _getGlossary(){
+  if(_isSAP()) return window.SAP_GLOSSARY || [];
   if(_isMLA()) return window.MLA_GLOSSARY || [];
   if(_isAIF()) return window.AIF_GLOSSARY || [];
   return (window.SAA_GLOSSARY || []);

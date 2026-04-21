@@ -1356,6 +1356,15 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
         <span>🤖 Bedrock</span><span>🧠 SageMaker</span><span>📚 RAG</span><span>⚖️ Responsible AI</span>
       </div>
     </button>
+
+    <button class="exam-card exam-card--alt" onclick="selectExam('mla')">
+      <div class="exam-card-badge">MLA-C01</div>
+      <div class="exam-card-title">ML Engineer Associate</div>
+      <div class="exam-card-desc">머신러닝 엔지니어링 · MLOps · 한국어 <strong>211</strong>문제</div>
+      <div class="exam-card-tags">
+        <span>🧪 SageMaker</span><span>🔧 MLOps</span><span>📊 Feature Store</span><span>🚀 Deploy</span>
+      </div>
+    </button>
   </div>
 
 </div>
@@ -1532,6 +1541,8 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
 <script src="saa-extras.js"></script>
 <script src="aif-data.js"></script>
 <script src="aif-extras.js"></script>
+<script src="mla-data.js"></script>
+<script src="mla-extras.js"></script>
 
 <!-- ═══ SCRIPT ═══ -->
 <script>
@@ -1556,6 +1567,15 @@ const EXAM_META = {
     chip: '🤖 AWS AI CERTIFIED',
     storagePrefix: 'aws_aif_',
     getQuestions: () => window.AIF_QUESTIONS || []
+  },
+  mla: {
+    id: 'mla',
+    code: 'MLA-C01',
+    title: 'MLA-C01 퀴즈',
+    sub: 'ML Engineer Associate · 한국어 기출',
+    chip: '🧪 AWS ML CERTIFIED',
+    storagePrefix: 'aws_mla_',
+    getQuestions: () => window.MLA_QUESTIONS || []
   }
 };
 
@@ -1578,6 +1598,9 @@ function selectExam(examId){
   if(statTotal) statTotal.textContent = qs.length;
   const slider = document.getElementById('q-count');
   if(slider){
+    // 문제가 아주 적으면 min을 1로 낮춰서 슬라이더가 동작하게 함
+    slider.min = qs.length < 5 ? 1 : 5;
+    slider.step = qs.length < 5 ? 1 : 5;
     slider.max = qs.length;
     if(parseInt(slider.value) > qs.length) slider.value = Math.min(20, qs.length);
     document.getElementById('q-count-val').textContent = slider.value;
@@ -2772,11 +2795,32 @@ const DECISIONS = [
 
 // 시험별 컨텐츠 선택 헬퍼 — 시험마다 완전 독립. 데이터 없으면 빈 배열
 function _isAIF(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'aif'; }
-function _getCompares(){ return _isAIF() ? (window.AIF_COMPARES || []) : (typeof COMPARES !== 'undefined' ? COMPARES : (window.SAA_COMPARES || [])); }
-function _getKeywords(){ return _isAIF() ? (window.AIF_KEYWORDS || []) : (typeof KEYWORDS !== 'undefined' ? KEYWORDS : (window.SAA_KEYWORDS || [])); }
-function _getTraps(){    return _isAIF() ? (window.AIF_TRAPS || [])    : (typeof TRAPS    !== 'undefined' ? TRAPS    : (window.SAA_TRAPS    || [])); }
-function _getDecisions(){return _isAIF() ? (window.AIF_DECISIONS || []): (typeof DECISIONS!== 'undefined' ? DECISIONS: (window.SAA_DECISIONS|| [])); }
-function _getGlossary(){ return _isAIF() ? (window.AIF_GLOSSARY || []) : (window.SAA_GLOSSARY || []); }
+function _isMLA(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'mla'; }
+function _getCompares(){
+  if(_isMLA()) return window.MLA_COMPARES || [];
+  if(_isAIF()) return window.AIF_COMPARES || [];
+  return (typeof COMPARES !== 'undefined' ? COMPARES : (window.SAA_COMPARES || []));
+}
+function _getKeywords(){
+  if(_isMLA()) return window.MLA_KEYWORDS || [];
+  if(_isAIF()) return window.AIF_KEYWORDS || [];
+  return (typeof KEYWORDS !== 'undefined' ? KEYWORDS : (window.SAA_KEYWORDS || []));
+}
+function _getTraps(){
+  if(_isMLA()) return window.MLA_TRAPS || [];
+  if(_isAIF()) return window.AIF_TRAPS || [];
+  return (typeof TRAPS !== 'undefined' ? TRAPS : (window.SAA_TRAPS || []));
+}
+function _getDecisions(){
+  if(_isMLA()) return window.MLA_DECISIONS || [];
+  if(_isAIF()) return window.AIF_DECISIONS || [];
+  return (typeof DECISIONS !== 'undefined' ? DECISIONS : (window.SAA_DECISIONS || []));
+}
+function _getGlossary(){
+  if(_isMLA()) return window.MLA_GLOSSARY || [];
+  if(_isAIF()) return window.AIF_GLOSSARY || [];
+  return (window.SAA_GLOSSARY || []);
+}
 
 function renderCompare(){
   const c=document.getElementById('tips-compare');

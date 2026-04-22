@@ -1201,6 +1201,52 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
 }
 .q-original-opt b { color: var(--accent); margin-right: 6px; }
 
+/* ═══════════════════════════════════════
+   MATCHING QUIZ
+═══════════════════════════════════════ */
+.mm-hint {
+  padding: 12px 14px;
+  background: var(--accent-bg);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+.mm-cat-tag {
+  display: inline-block;
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 800;
+  background: var(--accent-bg);
+  color: var(--accent);
+  border-radius: 999px;
+  margin-bottom: 12px;
+  letter-spacing: .04em;
+}
+.mm-scenario {
+  font-size: 16px;
+  line-height: 1.7;
+  font-weight: 600;
+}
+.mm-scenario::before {
+  content: "📌 시나리오";
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: .1em;
+  margin-bottom: 10px;
+}
+#mm-opts .opt-key {
+  background: var(--surface3);
+  color: var(--text2);
+}
+#mm-opts .opt.correct .opt-key,
+#mm-opts .opt.wrong-sel .opt-key {
+  color: #fff;
+}
+
 </style>
 </head>
 <body>
@@ -1361,6 +1407,85 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
     <button class="btn-secondary" onclick="showBookmarks()">⭐ 즐겨찾기 모아보기</button>
     <button class="btn-secondary" onclick="showGlossary()">📖 AWS 용어집</button>
     <button class="btn-secondary" onclick="showTips()">🎯 헷갈리는 개념 & 공략법</button>
+    <button class="btn-secondary" onclick="showMatching()">🎲 서비스 매칭 퀴즈</button>
+  </div>
+</div>
+
+<!-- ═══ SERVICE MATCHING QUIZ ═══ -->
+<div id="matching" class="screen">
+  <div class="page-header">
+    <button class="btn-icon" onclick="exitMatching()">←</button>
+    <h2>🎲 서비스 매칭 퀴즈</h2>
+  </div>
+
+  <!-- Setup -->
+  <div id="mm-setup">
+    <div class="card">
+      <div class="card-title">🎯 카테고리</div>
+      <div class="pill-group" id="mm-cat-pills"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">📊 문제 수</div>
+      <div class="slider-row">
+        <div class="slider-wrap">
+          <input type="range" id="mm-count" min="5" max="50" value="10" step="5">
+        </div>
+        <div class="slider-val" id="mm-count-val">10</div>
+      </div>
+    </div>
+    <div class="mm-hint">💡 시나리오를 읽고 적절한 AWS 서비스를 고르세요. 결정 트리 기반 1:1 매칭 암기용.</div>
+    <div class="btn-stack">
+      <button class="btn-primary" onclick="mmStart()">▶ 매칭 시작</button>
+    </div>
+  </div>
+
+  <!-- Session -->
+  <div id="mm-session" style="display:none">
+    <div class="quiz-topbar">
+      <div class="prog-block">
+        <div class="prog-meta">
+          <span id="mm-prog">0 / 0</span>
+          <span id="mm-score">정답 0</span>
+        </div>
+        <div class="prog-bar"><div class="prog-fill" id="mm-fill" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="mm-cat-tag" id="mm-cat-tag"></div>
+    <div class="q-card mm-scenario" id="mm-scenario">시나리오…</div>
+    <div class="options" id="mm-opts"></div>
+    <div class="feedback" id="mm-fb">
+      <div class="feedback-verdict" id="mm-verdict"></div>
+      <div class="feedback-exp" id="mm-exp"></div>
+    </div>
+    <div class="action-bar">
+      <button class="btn-next" id="mm-next" onclick="mmNext()">다음 →</button>
+    </div>
+  </div>
+
+  <!-- Result -->
+  <div id="mm-result" style="display:none">
+    <div class="score-ring-wrap" style="margin-top:20px">
+      <svg width="140" height="140" viewBox="0 0 160 160">
+        <circle cx="80" cy="80" r="68" fill="none" stroke="var(--surface3)" stroke-width="10"/>
+        <circle cx="80" cy="80" r="68" fill="none" stroke="#7c6fff" stroke-width="10" stroke-linecap="round"
+                stroke-dasharray="427" id="mm-ring" stroke-dashoffset="427" transform="rotate(-90 80 80)"
+                style="transition:stroke-dashoffset 1s cubic-bezier(.4,0,.2,1)"/>
+      </svg>
+      <div class="score-inner">
+        <div class="score-pct" id="mm-pct">0%</div>
+        <div class="score-sub">정답률</div>
+      </div>
+    </div>
+    <h2 style="text-align:center;margin:18px 0 8px">매칭 완료! 🎉</h2>
+    <div class="res-stats">
+      <div class="res-stat"><div class="n g" id="mm-correct">0</div><div class="l">정답</div></div>
+      <div class="res-stat"><div class="n r" id="mm-wrong">0</div><div class="l">오답</div></div>
+      <div class="res-stat"><div class="n y" id="mm-total">0</div><div class="l">전체</div></div>
+    </div>
+    <div class="btn-stack">
+      <button class="btn-primary" onclick="mmRestart()">🔄 다시 풀기</button>
+      <button class="btn-secondary" onclick="exitMatching()">🏠 홈으로</button>
+    </div>
   </div>
 </div>
 
@@ -1923,8 +2048,199 @@ document.addEventListener('keydown',e=>{
 
 /* ── INIT ── */
 document.getElementById('q-count').addEventListener('input',function(){ document.getElementById('q-count-val').textContent=this.value; });
+document.getElementById('mm-count').addEventListener('input',function(){ document.getElementById('mm-count-val').textContent=this.value; });
 initTheme();
 // 시험 선택 전에는 exam-selector가 active 상태 — loadStats는 exam 선택 후 호출됨
+
+/* ══════════════════════════════════════
+   SERVICE MATCHING QUIZ
+   결정 트리(DECISIONS) 데이터로 '시나리오 → 서비스' 1:1 매칭 암기 퀴즈
+══════════════════════════════════════ */
+const MM = { deck:[], cur:0, correct:0, wrong:0, answered:false, cat:'all', done:[] };
+
+function _mmStripHtml(s){ return String(s||'').replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim(); }
+// 답변 텍스트에서 서비스명(첫 <strong>) + 설명(나머지)을 분리
+function _mmSplitAnswer(raw){
+  const txt = String(raw||'');
+  // 서비스명: <strong>...</strong> 안쪽 우선, 없으면 화살표/대시 앞쪽
+  const m = txt.match(/<strong>([^<]+)<\/strong>/);
+  let service, rest;
+  if(m){
+    service = m[1].trim();
+    rest = txt.replace(m[0], '').replace(/^[→\s]+/, '').replace(/^[—\-:·,\s]+/, '').trim();
+  } else {
+    const parts = txt.replace(/^[→\s]+/, '').split(/\s*[—\-]\s+/, 2);
+    service = parts[0].trim();
+    rest = (parts[1]||'').trim();
+  }
+  return { service: _mmStripHtml(service), reason: _mmStripHtml(rest) };
+}
+
+function showMatching(){
+  const decs = _getDecisions();
+  const setup = document.getElementById('mm-setup');
+  const sess  = document.getElementById('mm-session');
+  const res   = document.getElementById('mm-result');
+  sess.style.display='none'; res.style.display='none'; setup.style.display='block';
+  // 카테고리 pill 생성 (현재 시험의 결정트리 제목 기반)
+  const pills = document.getElementById('mm-cat-pills');
+  pills.innerHTML='';
+  const mkPill = (label, val, active) => {
+    const b = document.createElement('button');
+    b.className = 'pill' + (active?' active':'');
+    b.textContent = label;
+    b.onclick = () => { MM.cat = val; document.querySelectorAll('#mm-cat-pills .pill').forEach(x=>x.classList.remove('active')); b.classList.add('active'); };
+    pills.appendChild(b);
+  };
+  MM.cat = 'all';
+  mkPill('🎲 전체 섞기', 'all', true);
+  decs.forEach((d, i) => mkPill((d.icon||'📂')+' '+d.title, String(i), false));
+  // 슬라이더 최대값 = 총 매칭 가능 개수 (최대 50)
+  const total = decs.reduce((n,d)=>n+(d.opts||[]).length, 0);
+  const slider = document.getElementById('mm-count');
+  slider.max = Math.min(50, Math.max(5, total));
+  if(parseInt(slider.value) > slider.max) slider.value = slider.max;
+  document.getElementById('mm-count-val').textContent = slider.value;
+  showScreen('matching');
+}
+
+function exitMatching(){ showHome(); }
+
+function _mmBuildPool(){
+  const decs = _getDecisions();
+  const pool = [];
+  const scope = (MM.cat === 'all') ? decs : (decs[parseInt(MM.cat)] ? [decs[parseInt(MM.cat)]] : decs);
+  scope.forEach((d, di) => {
+    (d.opts || []).forEach((o, oi) => {
+      const ans = _mmSplitAnswer(o.answer);
+      if(!ans.service) return;
+      pool.push({
+        catTitle: d.title,
+        catIcon:  d.icon || '📂',
+        catQ:     d.q || '',
+        catIdx:   decs.indexOf(d),
+        scenario: _mmStripHtml(o.label),
+        service:  ans.service,
+        reason:   ans.reason,
+        rawAnswer: o.answer
+      });
+    });
+  });
+  return pool;
+}
+
+function _mmShuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+function mmStart(){
+  const pool = _mmBuildPool();
+  if(pool.length < 4){ toast('매칭 가능한 항목이 부족해요'); return; }
+  const count = Math.min(parseInt(document.getElementById('mm-count').value), pool.length);
+  // 정답 모집단에서 요청 수만큼 랜덤 선택
+  MM.deck = _mmShuffle([...pool]).slice(0, count);
+  MM.cur = 0; MM.correct = 0; MM.wrong = 0; MM.done = [];
+  // 디스트랙터 풀: 같은 카테고리 우선, 부족하면 전체
+  MM._pool = pool;
+  document.getElementById('mm-setup').style.display='none';
+  document.getElementById('mm-result').style.display='none';
+  document.getElementById('mm-session').style.display='block';
+  mmRender();
+}
+
+function mmRender(){
+  if(MM.cur >= MM.deck.length){ mmFinish(); return; }
+  const q = MM.deck[MM.cur];
+  MM.answered = false;
+  document.getElementById('mm-prog').textContent = `${MM.cur+1} / ${MM.deck.length}`;
+  document.getElementById('mm-score').textContent = `정답 ${MM.correct}`;
+  document.getElementById('mm-fill').style.width = Math.round(MM.cur / MM.deck.length * 100) + '%';
+  document.getElementById('mm-cat-tag').textContent = q.catIcon + ' ' + q.catTitle;
+  document.getElementById('mm-scenario').textContent = q.scenario;
+
+  // 4지선다 구성: 정답 + 디스트랙터 3
+  const sameCat = MM._pool.filter(x => x.catIdx === q.catIdx && x.service !== q.service);
+  const others  = MM._pool.filter(x => x.catIdx !== q.catIdx && x.service !== q.service);
+  const usedNames = new Set([q.service]);
+  const distract = [];
+  const pick = arr => {
+    _mmShuffle(arr);
+    for(const item of arr){
+      if(distract.length >= 3) break;
+      if(!usedNames.has(item.service)){
+        distract.push(item);
+        usedNames.add(item.service);
+      }
+    }
+  };
+  pick(sameCat);
+  if(distract.length < 3) pick(others);
+  const choices = _mmShuffle([{service:q.service, reason:q.reason, _correct:true}, ...distract.map(d=>({service:d.service, reason:d.reason, _correct:false}))]);
+
+  const ol = document.getElementById('mm-opts');
+  ol.innerHTML = '';
+  const letters = ['A','B','C','D'];
+  choices.forEach((c, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.dataset.correct = c._correct ? '1' : '0';
+    btn.innerHTML = `<span class="opt-key">${letters[i]}</span><span>${_esc(c.service)}</span>`;
+    btn.onclick = () => mmPick(btn, c, q);
+    ol.appendChild(btn);
+  });
+
+  const fb = document.getElementById('mm-fb');
+  fb.className = 'feedback';
+  document.getElementById('mm-verdict').textContent = '';
+  document.getElementById('mm-exp').innerHTML = '';
+  document.getElementById('mm-next').style.display = 'none';
+}
+
+function mmPick(btn, choice, q){
+  if(MM.answered) return;
+  MM.answered = true;
+  const allBtns = document.querySelectorAll('#mm-opts .opt');
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if(b.dataset.correct === '1') b.classList.add('correct');
+    else if(b === btn) b.classList.add('wrong-sel');
+  });
+  const ok = choice._correct;
+  if(ok) MM.correct++; else MM.wrong++;
+  MM.done.push({q, picked: choice.service, ok});
+
+  const fb = document.getElementById('mm-fb');
+  fb.className = 'feedback show ' + (ok ? 'correct' : 'wrong');
+  document.getElementById('mm-verdict').textContent = ok ? '✅ 정답!' : '❌ 오답';
+  const why = q.reason && q.reason.length > 0
+    ? `<div style="margin-top:6px;opacity:.9">💡 ${_esc(q.reason)}</div>`
+    : '';
+  const ctxQ = q.catQ ? `<div style="margin-top:4px;font-size:12px;opacity:.7">📂 ${_esc(q.catTitle)}</div>` : '';
+  document.getElementById('mm-exp').innerHTML =
+    `<div><b>${_esc(q.service)}</b> — ${_esc(q.scenario)}</div>${why}${ctxQ}`;
+  document.getElementById('mm-score').textContent = `정답 ${MM.correct}`;
+  document.getElementById('mm-next').style.display = 'block';
+}
+
+function mmNext(){ MM.cur++; mmRender(); }
+
+function mmFinish(){
+  document.getElementById('mm-session').style.display='none';
+  document.getElementById('mm-result').style.display='block';
+  const total = MM.correct + MM.wrong || 1;
+  const pct = Math.round(MM.correct / total * 100);
+  document.getElementById('mm-pct').textContent = pct + '%';
+  document.getElementById('mm-correct').textContent = MM.correct;
+  document.getElementById('mm-wrong').textContent = MM.wrong;
+  document.getElementById('mm-total').textContent = MM.correct + MM.wrong;
+  const circ = 2 * Math.PI * 68;
+  document.getElementById('mm-ring').setAttribute('stroke-dasharray', circ);
+  document.getElementById('mm-ring').setAttribute('stroke-dashoffset', circ - (circ * pct / 100));
+}
+
+function mmRestart(){
+  document.getElementById('mm-result').style.display='none';
+  showMatching();
+}
+
 /* ══════════════════════════════════════
    TIPS PAGE
 ══════════════════════════════════════ */

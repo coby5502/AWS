@@ -92,8 +92,18 @@ input  { font-family: var(--font); }
 /* ═══════════════════════════════════════
    SCREEN SYSTEM
 ═══════════════════════════════════════ */
-.screen { display: none; animation: fadeUp .3s ease; }
+.screen {
+  display: none;
+  animation: fadeUp .3s ease;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
 .screen.active { display: block; }
+@media (max-width: 640px) {
+  .screen { padding-left: 16px; padding-right: 16px; padding-top: 14px; }
+}
 @keyframes fadeUp {
   from { opacity:0; transform: translateY(12px); }
   to   { opacity:1; transform: translateY(0); }
@@ -1247,6 +1257,76 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
   color: #fff;
 }
 
+/* 매칭 퀴즈 해설 섹션 */
+.mm-sec {
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  margin-top: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+.mm-sec:first-child { margin-top: 4px; }
+.mm-sec--ok   { border-left: 3px solid var(--correct); background: var(--correct-bg); }
+.mm-sec--wrong{ border-left: 3px solid var(--wrong);   background: var(--wrong-bg); }
+.mm-sec--core { border-left: 3px solid var(--accent);  background: var(--accent-bg); }
+.mm-sec--cmp  { border-left: 3px solid var(--warn); }
+.mm-sec--ctx  { border-left: 3px solid var(--text3);   background: var(--surface2); }
+.mm-sec-h {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+.mm-sec-b {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text2);
+}
+.mm-sec-b b { color: var(--text); }
+.mm-sub {
+  color: var(--text3);
+  font-size: 12px;
+  font-weight: 500;
+}
+.mm-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 6px 0;
+  border-top: 1px dashed var(--border);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.mm-row:first-of-type { border-top: none; padding-top: 2px; }
+.mm-row-k {
+  color: var(--text2);
+  flex: 0 0 40%;
+  font-weight: 600;
+}
+.mm-row-v {
+  color: var(--text);
+  flex: 1;
+}
+.mm-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 8px;
+}
+.mm-tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--surface2);
+  color: var(--text2);
+}
+@media (max-width: 520px){
+  .mm-row { flex-direction: column; gap: 2px; }
+  .mm-row-k { flex: none; }
+}
+
 </style>
 </head>
 <body>
@@ -2194,6 +2274,19 @@ function mmRender(){
   document.getElementById('mm-next').style.display = 'none';
 }
 
+// 서비스명으로 용어집에서 핵심 특징 찾기 (대소문자/접두사 관대 매칭)
+function _mmLookupGlossary(serviceName){
+  const gloss = _getGlossary();
+  if(!gloss || !gloss.length || !serviceName) return null;
+  const norm = s => String(s||'').toLowerCase().replace(/\s+/g,' ').replace(/amazon |aws /g,'').trim();
+  const target = norm(serviceName);
+  // 우선 순위: 정확 일치 → 서비스명이 용어명에 포함 → 용어명이 서비스명에 포함
+  let hit = gloss.find(g => norm(g.name) === target);
+  if(!hit) hit = gloss.find(g => target.includes(norm(g.name)) && norm(g.name).length > 3);
+  if(!hit) hit = gloss.find(g => norm(g.name).includes(target) && target.length > 3);
+  return hit || null;
+}
+
 function mmPick(btn, choice, q){
   if(MM.answered) return;
   MM.answered = true;
@@ -2210,12 +2303,86 @@ function mmPick(btn, choice, q){
   const fb = document.getElementById('mm-fb');
   fb.className = 'feedback show ' + (ok ? 'correct' : 'wrong');
   document.getElementById('mm-verdict').textContent = ok ? '✅ 정답!' : '❌ 오답';
-  const why = q.reason && q.reason.length > 0
-    ? `<div style="margin-top:6px;opacity:.9">💡 ${_esc(q.reason)}</div>`
-    : '';
-  const ctxQ = q.catQ ? `<div style="margin-top:4px;font-size:12px;opacity:.7">📂 ${_esc(q.catTitle)}</div>` : '';
-  document.getElementById('mm-exp').innerHTML =
-    `<div><b>${_esc(q.service)}</b> — ${_esc(q.scenario)}</div>${why}${ctxQ}`;
+
+  // ── 풍부한 해설 구성 ──
+  const parts = [];
+
+  // 1) 오답 시 사용자가 고른 것의 실제 용도 (왜 이 시나리오엔 안 맞는지)
+  if(!ok){
+    const pickedItem = MM._pool.find(x => x.service === choice.service);
+    if(pickedItem){
+      parts.push(
+        `<div class="mm-sec mm-sec--wrong">` +
+        `<div class="mm-sec-h">🚫 ${_esc(choice.service)}은(는) 이 시나리오에 안 맞아요</div>` +
+        `<div class="mm-sec-b">이 서비스가 적합한 시나리오: <b>${_esc(pickedItem.scenario)}</b>` +
+        (pickedItem.reason ? ` — ${_esc(pickedItem.reason)}` : '') + `</div>` +
+        `</div>`
+      );
+    }
+  }
+
+  // 2) 정답 서비스 + 이 시나리오와 왜 매칭되는지
+  const whyBody = q.reason
+    ? `<div class="mm-sec-b">${_esc(q.reason)}</div>`
+    : `<div class="mm-sec-b">이 시나리오(<i>${_esc(q.scenario)}</i>)에 가장 적합한 서비스예요.</div>`;
+  parts.push(
+    `<div class="mm-sec mm-sec--ok">` +
+    `<div class="mm-sec-h">✅ 정답: <b>${_esc(q.service)}</b></div>` +
+    whyBody +
+    `</div>`
+  );
+
+  // 3) 용어집 기반 핵심 특징
+  const gl = _mmLookupGlossary(q.service);
+  if(gl){
+    const tags = (gl.tags || []).map(t => `<span class="mm-tag">${_esc(t)}</span>`).join('');
+    parts.push(
+      `<div class="mm-sec mm-sec--core">` +
+      `<div class="mm-sec-h">🔑 핵심 특징` +
+      (gl.short ? ` <span class="mm-sub">· ${_esc(gl.short)}</span>` : '') + `</div>` +
+      `<div class="mm-sec-b">${_esc(gl.desc)}</div>` +
+      (tags ? `<div class="mm-tags">${tags}</div>` : '') +
+      `</div>`
+    );
+  }
+
+  // 4) 같은 결정 트리의 다른 선택지 비교 (혼동 주의)
+  const decs = _getDecisions();
+  const dec  = decs[q.catIdx];
+  if(dec && (dec.opts || []).length > 1){
+    const others = dec.opts.filter(o => {
+      const a = _mmSplitAnswer(o.answer);
+      return a.service && a.service !== q.service;
+    }).slice(0, 4);
+    if(others.length){
+      const rows = others.map(o => {
+        const a = _mmSplitAnswer(o.answer);
+        return `<div class="mm-row"><span class="mm-row-k">${_esc(_mmStripHtml(o.label))}</span>` +
+               `<span class="mm-row-v">→ <b>${_esc(a.service)}</b>` +
+               (a.reason ? ` <span class="mm-sub">· ${_esc(a.reason)}</span>` : '') +
+               `</span></div>`;
+      }).join('');
+      parts.push(
+        `<div class="mm-sec mm-sec--cmp">` +
+        `<div class="mm-sec-h">⚠️ 같은 카테고리의 다른 선택지와 구분</div>` +
+        rows +
+        `</div>`
+      );
+    }
+  }
+
+  // 5) 결정 트리 맥락
+  if(dec){
+    parts.push(
+      `<div class="mm-sec mm-sec--ctx">` +
+      `<div class="mm-sec-h">📂 결정 트리 맥락</div>` +
+      `<div class="mm-sec-b"><b>${_esc(dec.icon||'📂')} ${_esc(dec.title)}</b>` +
+      (dec.q ? `<div class="mm-sub" style="margin-top:4px">${_esc(dec.q)}</div>` : '') +
+      `</div></div>`
+    );
+  }
+
+  document.getElementById('mm-exp').innerHTML = parts.join('');
   document.getElementById('mm-score').textContent = `정답 ${MM.correct}`;
   document.getElementById('mm-next').style.display = 'block';
 }

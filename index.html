@@ -1396,6 +1396,15 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
           <span>🧪 SageMaker</span><span>🔧 MLOps</span><span>📊 Feature Store</span><span>🚀 Deploy</span>
         </div>
       </button>
+
+      <button class="exam-card" data-level="associate" onclick="selectExam('dea')">
+        <div class="exam-card-badge">DEA-C01</div>
+        <div class="exam-card-title">Data Engineer</div>
+        <div class="exam-card-desc">데이터 파이프라인 · ETL · 한국어 <strong>337</strong>문제</div>
+        <div class="exam-card-tags">
+          <span>🌊 Kinesis</span><span>🔧 Glue</span><span>🏢 Redshift</span><span>📊 Athena</span>
+        </div>
+      </button>
     </div>
   </div>
 
@@ -1676,6 +1685,8 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
 <script src="sap-extras.js"></script>
 <script src="dva-data.js"></script>
 <script src="dva-extras.js"></script>
+<script src="dea-data.js"></script>
+<script src="dea-extras.js"></script>
 
 <!-- ═══ SCRIPT ═══ -->
 <script>
@@ -1727,6 +1738,15 @@ const EXAM_META = {
     chip: '⚡ AWS DEV CERTIFIED',
     storagePrefix: 'aws_dva_',
     getQuestions: () => window.DVA_QUESTIONS || []
+  },
+  dea: {
+    id: 'dea',
+    code: 'DEA-C01',
+    title: 'DEA-C01 퀴즈',
+    sub: 'Data Engineer Associate · 한국어 기출',
+    chip: '📊 AWS DATA CERTIFIED',
+    storagePrefix: 'aws_dea_',
+    getQuestions: () => window.DEA_QUESTIONS || []
   }
 };
 
@@ -3227,7 +3247,9 @@ function _isAIF(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'aif'; }
 function _isMLA(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'mla'; }
 function _isSAP(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'sap'; }
 function _isDVA(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'dva'; }
+function _isDEA(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'dea'; }
 function _getCompares(){
+  if(_isDEA()) return window.DEA_COMPARES || [];
   if(_isDVA()) return window.DVA_COMPARES || [];
   if(_isSAP()) return window.SAP_COMPARES || [];
   if(_isMLA()) return window.MLA_COMPARES || [];
@@ -3235,6 +3257,7 @@ function _getCompares(){
   return (typeof COMPARES !== 'undefined' ? COMPARES : (window.SAA_COMPARES || []));
 }
 function _getKeywords(){
+  if(_isDEA()) return window.DEA_KEYWORDS || [];
   if(_isDVA()) return window.DVA_KEYWORDS || [];
   if(_isSAP()) return window.SAP_KEYWORDS || [];
   if(_isMLA()) return window.MLA_KEYWORDS || [];
@@ -3242,6 +3265,7 @@ function _getKeywords(){
   return (typeof KEYWORDS !== 'undefined' ? KEYWORDS : (window.SAA_KEYWORDS || []));
 }
 function _getTraps(){
+  if(_isDEA()) return window.DEA_TRAPS || [];
   if(_isDVA()) return window.DVA_TRAPS || [];
   if(_isSAP()) return window.SAP_TRAPS || [];
   if(_isMLA()) return window.MLA_TRAPS || [];
@@ -3249,6 +3273,7 @@ function _getTraps(){
   return (typeof TRAPS !== 'undefined' ? TRAPS : (window.SAA_TRAPS || []));
 }
 function _getDecisions(){
+  if(_isDEA()) return window.DEA_DECISIONS || [];
   if(_isDVA()) return window.DVA_DECISIONS || [];
   if(_isSAP()) return window.SAP_DECISIONS || [];
   if(_isMLA()) return window.MLA_DECISIONS || [];
@@ -3256,6 +3281,7 @@ function _getDecisions(){
   return (typeof DECISIONS !== 'undefined' ? DECISIONS : (window.SAA_DECISIONS || []));
 }
 function _getGlossary(){
+  if(_isDEA()) return window.DEA_GLOSSARY || [];
   if(_isDVA()) return window.DVA_GLOSSARY || [];
   if(_isSAP()) return window.SAP_GLOSSARY || [];
   if(_isMLA()) return window.MLA_GLOSSARY || [];

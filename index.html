@@ -1424,13 +1424,22 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
       <span class="level-title">Professional</span>
       <span class="level-subtitle">프로페셔널</span>
     </div>
-    <div class="level-cards">
+    <div class="level-cards cards-multi">
       <button class="exam-card" data-level="professional" onclick="selectExam('sap')">
         <div class="exam-card-badge">SAP-C02</div>
-        <div class="exam-card-title">Solutions Architect Professional</div>
+        <div class="exam-card-title">Solutions Architect</div>
         <div class="exam-card-desc">엔터프라이즈 아키텍처 · 멀티계정 · 한국어 <strong>528</strong>문제</div>
         <div class="exam-card-tags">
           <span>🏢 Organizations</span><span>🌐 Transit Gateway</span><span>🚨 DR</span><span>💸 Cost</span>
+        </div>
+      </button>
+
+      <button class="exam-card" data-level="professional" onclick="selectExam('aip')">
+        <div class="exam-card-badge">AIP-C01</div>
+        <div class="exam-card-title">Generative AI Developer</div>
+        <div class="exam-card-desc">Bedrock · RAG · Agents · 한국어 <strong>95</strong>문제</div>
+        <div class="exam-card-tags">
+          <span>🤖 Bedrock</span><span>📚 Knowledge Base</span><span>🧩 Agents</span><span>🛡️ Guardrails</span>
         </div>
       </button>
     </div>
@@ -1698,6 +1707,8 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
 <script src="dea-extras.js"></script>
 <script src="soa-data.js"></script>
 <script src="soa-extras.js"></script>
+<script src="aip-data.js"></script>
+<script src="aip-extras.js"></script>
 
 <!-- ═══ SCRIPT ═══ -->
 <script>
@@ -1767,6 +1778,15 @@ const EXAM_META = {
     chip: '⚙️ AWS OPS CERTIFIED',
     storagePrefix: 'aws_soa_',
     getQuestions: () => window.SOA_QUESTIONS || []
+  },
+  aip: {
+    id: 'aip',
+    code: 'AIP-C01',
+    title: 'AIP-C01 퀴즈',
+    sub: 'Generative AI Developer Professional · 한국어 기출',
+    chip: '🤖 AWS GEN AI CERTIFIED',
+    storagePrefix: 'aws_aip_',
+    getQuestions: () => window.AIP_QUESTIONS || []
   }
 };
 
@@ -3269,7 +3289,9 @@ function _isSAP(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'sap'; }
 function _isDVA(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'dva'; }
 function _isDEA(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'dea'; }
 function _isSOA(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'soa'; }
+function _isAIP(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'aip'; }
 function _getCompares(){
+  if(_isAIP()) return window.AIP_COMPARES || [];
   if(_isSOA()) return window.SOA_COMPARES || [];
   if(_isDEA()) return window.DEA_COMPARES || [];
   if(_isDVA()) return window.DVA_COMPARES || [];
@@ -3279,6 +3301,7 @@ function _getCompares(){
   return (typeof COMPARES !== 'undefined' ? COMPARES : (window.SAA_COMPARES || []));
 }
 function _getKeywords(){
+  if(_isAIP()) return window.AIP_KEYWORDS || [];
   if(_isSOA()) return window.SOA_KEYWORDS || [];
   if(_isDEA()) return window.DEA_KEYWORDS || [];
   if(_isDVA()) return window.DVA_KEYWORDS || [];
@@ -3288,6 +3311,7 @@ function _getKeywords(){
   return (typeof KEYWORDS !== 'undefined' ? KEYWORDS : (window.SAA_KEYWORDS || []));
 }
 function _getTraps(){
+  if(_isAIP()) return window.AIP_TRAPS || [];
   if(_isSOA()) return window.SOA_TRAPS || [];
   if(_isDEA()) return window.DEA_TRAPS || [];
   if(_isDVA()) return window.DVA_TRAPS || [];
@@ -3297,6 +3321,7 @@ function _getTraps(){
   return (typeof TRAPS !== 'undefined' ? TRAPS : (window.SAA_TRAPS || []));
 }
 function _getDecisions(){
+  if(_isAIP()) return window.AIP_DECISIONS || [];
   if(_isSOA()) return window.SOA_DECISIONS || [];
   if(_isDEA()) return window.DEA_DECISIONS || [];
   if(_isDVA()) return window.DVA_DECISIONS || [];
@@ -3306,6 +3331,7 @@ function _getDecisions(){
   return (typeof DECISIONS !== 'undefined' ? DECISIONS : (window.SAA_DECISIONS || []));
 }
 function _getGlossary(){
+  if(_isAIP()) return window.AIP_GLOSSARY || [];
   if(_isSOA()) return window.SOA_GLOSSARY || [];
   if(_isDEA()) return window.DEA_GLOSSARY || [];
   if(_isDVA()) return window.DVA_GLOSSARY || [];

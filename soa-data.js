@@ -1219,7 +1219,7 @@ window.SOA_QUESTIONS = [
       "D": "보안 그룹의 인바운드 규칙을 분석하여 제한되지 않은 SSH 액세스를 확인할 수 있는 AWS Lambda 함수를 생성합니다. 비준수 규칙을 제거하도록 Lambda 함수를 구성합니다. 매시간 Lambda 함수를 호출하도록 Amazon EventBridge 규칙을 구성합니다."
     },
     "answer": "B",
-    "explanation": "이 문제는 AWS Config의 자동 수정(Automatic Remediation) 기능의 이해를 테스트합니다. AWS Config는 AWS Systems Manager 문서를 활용하여 비준수 리소스를 자동으로 수정할 수 있습니다. 'AWS-DisableIncomingSSHOnPort22'는 이러한 용도를 위해 AWS에서 제공하는 관리형 문서입니다. 옵션 A는 CloudWatch 알람을 사용하여 메트릭 기반 자동화를 시도하는데, 이는 구성 규칙 위반에 직접 대응하는 방식이 아닙니다. 옵션 C는 EventBridge를 통한 이벤트 기반 처리인데, Config 규칙 자체의 내장 수정 기능보다 복잡합니다. 옵션 D는 시간 기반 스케줄 실행으로, 실시간 수정이 아니므로 효율성이 떨어집니다. AWS Config의 자동 수정은 규칙 위반이 감지되자마자 즉각 대응하므로 가장 효율적입니다.",
+    "explanation": "이 문제는 AWS Config의 자동 수정(Automatic Remediation) 기능의 이해를 테스트합니다. AWS Config는 AWS Systems Manager 문서를 활용하여 비준수 리소스를 자동으로 수정할 수 있습니다. 'AWS-DisableIncomingSSHOnPort22'는 이러한 용도를 위해 AWS에서 제공하는 관리형 문서입니다.\n\n옵션 A는 CloudWatch 알람을 사용하여 메트릭 기반 자동화를 시도하는데, 이는 구성 규칙 위반에 직접 대응하는 방식이 아닙니다.\n\n옵션 C는 EventBridge를 통한 이벤트 기반 처리인데, Config 규칙 자체의 내장 수정 기능보다 복잡합니다.\n\n옵션 D는 시간 기반 스케줄 실행으로, 실시간 수정이 아니므로 효율성이 떨어집니다. AWS Config의 자동 수정은 규칙 위반이 감지되자마자 즉각 대응하므로 가장 효율적입니다.",
     "en_q": "A company's security policy requires incoming SSH traffic to be restricted to a defined set of addresses. The company is using an AWS Config rule to check whether security groups allow unrestricted incoming SSH traffic. A CloudOps engineer discovers a noncompliant resource and fixes the security group manually. The CloudOps engineer wants to automate the remediation of other noncompliant resources. What is the MOST operationally efficient solution that meets these requirements?",
     "en_opts": {
       "A": "Create an Amazon CloudWatch alarm for the AWS Config rule's status metric. Create an AWS Lambda function that can remove the noncompliant rule from the security group. Configure the alarm action to invoke the Lambda function.",
@@ -1241,7 +1241,7 @@ window.SOA_QUESTIONS = [
       "E": "RDS logs"
     },
     "answer": "CD",
-    "explanation": "HTTP Layer 7 상태 코드는 애플리케이션 계층의 HTTP 응답 코드(200, 404, 500 등)를 의미합니다. VPC Flow Logs는 Layer 3/4 네트워크 트래픽만 기록하므로 HTTP 상태 코드 정보를 포함하지 않습니다. CloudTrail은 AWS API 호출 이력을 추적하는 것이지, 애플리케이션의 HTTP 응답을 기록하지 않습니다. RDS 로그는 데이터베이스 활동을 기록할 뿐 HTTP 상태 코드를 포함하지 않습니다. 반면 ALB(Application Load Balancer)는 Layer 7에서 작동하므로 접근 로그에 HTTP 상태 코드(요청한 HTTP 메서드, URI, 응답 코드)를 기록합니다. CloudFront도 웹 배포 수준에서 HTTP 요청/응답을 처리하므로 CloudFront 접근 로그에 HTTP 상태 코드가 포함됩니다.",
+    "explanation": "HTTP Layer 7 상태 코드는 애플리케이션 계층의 HTTP 응답 코드(200, 404, 500 등)를 의미합니다.\n\nVPC Flow Logs는 Layer 3/4 네트워크 트래픽만 기록하므로 HTTP 상태 코드 정보를 포함하지 않습니다.\n\nCloudTrail은 AWS API 호출 이력을 추적하는 것이지, 애플리케이션의 HTTP 응답을 기록하지 않습니다.\n\nRDS 로그는 데이터베이스 활동을 기록할 뿐 HTTP 상태 코드를 포함하지 않습니다.\n\n반면 ALB(Application Load Balancer)는 Layer 7에서 작동하므로 접근 로그에 HTTP 상태 코드(요청한 HTTP 메서드, URI, 응답 코드)를 기록합니다.\n\nCloudFront도 웹 배포 수준에서 HTTP 요청/응답을 처리하므로 CloudFront 접근 로그에 HTTP 상태 코드가 포함됩니다.",
     "en_q": "A CloudOps engineer is maintaining a web application using an Amazon CloudFront web distribution, an Application Load Balancer (ALB), Amazon RDS, and Amazon EC2 in a VPC. All services have logging enabled. The CloudOps engineer needs to investigate HTTP Layer 7 status codes from the web application. Which log sources contain the status codes? (Choose two.)",
     "en_opts": {
       "A": "VPC Flow Logs",
@@ -1263,7 +1263,7 @@ window.SOA_QUESTIONS = [
       "D": "EC2 health checks로 호출되는 EC2 인스턴스를 재시작하는 AWS Lambda 함수를 생성합니다."
     },
     "answer": "B",
-    "explanation": "이 문제는 CloudWatch 알람을 사용한 자동 인스턴스 복구의 개념을 테스트합니다. 기본 모니터링(Basic Monitoring)은 5분 간격의 메트릭을 제공하는 반면, 자세한 모니터링(Detailed Monitoring)은 1분 간격의 메트릭을 제공합니다. 문제에서 '2분 이상 지속될 때'라고 명시했으므로, 1분 간격의 메트릭을 수집할 수 있는 자세한 모니터링이 필요합니다. 기본 모니터링으로는 CPU 상태 변화를 2분 단위로 정확히 포착할 수 없습니다. CloudWatch 알람은 설정된 임계값을 초과할 때 자동으로 작업을 수행하므로 실시간 대응이 가능합니다. 옵션 C와 D는 시간 기반 또는 health check 기반이라 요구사항을 충족하지 않습니다.",
+    "explanation": "이 문제는 CloudWatch 알람을 사용한 자동 인스턴스 복구의 개념을 테스트합니다.\n\n기본 모니터링(Basic Monitoring)은 5분 간격의 메트릭을 제공하는 반면, 자세한 모니터링(Detailed Monitoring)은 1분 간격의 메트릭을 제공합니다.\n\n문제에서 '2분 이상 지속될 때'라고 명시했으므로, 1분 간격의 메트릭을 수집할 수 있는 자세한 모니터링이 필요합니다.\n\n기본 모니터링으로는 CPU 상태 변화를 2분 단위로 정확히 포착할 수 없습니다.\n\nCloudWatch 알람은 설정된 임계값을 초과할 때 자동으로 작업을 수행하므로 실시간 대응이 가능합니다.\n\n옵션 C와 D는 시간 기반 또는 health check 기반이라 요구사항을 충족하지 않습니다.",
     "en_q": "An errant process is known to use an entire processor and run at 100%. A CloudOps engineer wants to automate restarting an Amazon EC2 instance when the problem occurs for more than 2 minutes. How can this be accomplished?",
     "en_opts": {
       "A": "Create an Amazon CloudWatch alarm for the EC2 instance with basic monitoring. Add an action to restart the instance.",
@@ -1285,7 +1285,7 @@ window.SOA_QUESTIONS = [
       "E": "인라인 정책을 생성합니다."
     },
     "answer": "BD",
-    "explanation": "이 문제는 IAM 정책 관리 방식과 다중 사용자에게의 정책 배포 전략을 테스트합니다. 여러 사용자에게 동일한 정책을 적용하면서 버전 관리가 가능해야 합니다. 옵션 B(IAM 사용자 그룹)는 다중 사용자에게 정책을 일괄 적용할 수 있는 표준 방법입니다. 옵션 D(고객 관리형 정책)는 사용자가 생성하고 관리하는 독립 정책으로, 버전 관리 기능을 지원하여 정책 변경 시 이전 버전으로 롤백할 수 있습니다. 옵션 A는 서비스 연결 역할로, AWS 서비스가 관리하므로 사용자가 수정할 수 없습니다. 옵션 C는 AWS 관리형 정책으로 AWS가 업데이트하므로 버전 관리를 사용자가 제어할 수 없습니다. 옵션 E는 인라인 정책으로 개별 사용자에게만 적용되므로 다중 관리가 어렵습니다.",
+    "explanation": "이 문제는 IAM 정책 관리 방식과 다중 사용자에게의 정책 배포 전략을 테스트합니다. 여러 사용자에게 동일한 정책을 적용하면서 버전 관리가 가능해야 합니다. 옵션 B(IAM 사용자 그룹)는 다중 사용자에게 정책을 일괄 적용할 수 있는 표준 방법입니다. 옵션 D(고객 관리형 정책)는 사용자가 생성하고 관리하는 독립 정책으로, 버전 관리 기능을 지원하여 정책 변경 시 이전 버전으로 롤백할 수 있습니다.\n\n옵션 A는 서비스 연결 역할로, AWS 서비스가 관리하므로 사용자가 수정할 수 없습니다.\n\n옵션 C는 AWS 관리형 정책으로 AWS가 업데이트하므로 버전 관리를 사용자가 제어할 수 없습니다.\n\n옵션 E는 인라인 정책으로 개별 사용자에게만 적용되므로 다중 관리가 어렵습니다.",
     "en_q": "A CloudOps engineer wants to provide access to AWS services by attaching an IAM policy to multiple IAM users The CloudOps engineer also wants to be able to change the policy and create new versions. Which combination of actions will meet these requirements? (Choose two.)",
     "en_opts": {
       "A": "Add the users to an IAM service-linked role. Attach the policy to the role.",
@@ -1307,7 +1307,7 @@ window.SOA_QUESTIONS = [
       "D": "Auto Scaling 그룹에 warm pool을 추가합니다."
     },
     "answer": "D",
-    "explanation": "Warm Pool은 EC2 Auto Scaling의 기능으로, 미리 구성된 인스턴스들을 준비 상태로 유지하다가 스케일아웃 필요 시 빠르게 활성화하는 메커니즘입니다. 부팅 스크립트로 인한 지연을 피할 수 있으므로 응답 시간을 크게 단축할 수 있습니다. 옵션 A는 인스턴스 크기 변경으로 부팅 시간 문제를 해결하지 못합니다. 옵션 B는 항상 최소 개수의 인스턴스를 실행하므로 과도한 프로비저닝이 되어 비용 증가를 초래합니다. 옵션 C의 예측 스케일링은 미래의 부하를 예측하여 미리 스케일아웃하는 기능이지만, 각 인스턴스의 부팅 시간 자체는 단축하지 못합니다. Warm Pool은 과도한 프로비저닝 없이(필요할 때만 활성화) 빠른 대응을 가능하게 합니다.",
+    "explanation": "Warm Pool은 EC2 Auto Scaling의 기능으로, 미리 구성된 인스턴스들을 준비 상태로 유지하다가 스케일아웃 필요 시 빠르게 활성화하는 메커니즘입니다. 부팅 스크립트로 인한 지연을 피할 수 있으므로 응답 시간을 크게 단축할 수 있습니다.\n\n옵션 A는 인스턴스 크기 변경으로 부팅 시간 문제를 해결하지 못합니다.\n\n옵션 B는 항상 최소 개수의 인스턴스를 실행하므로 과도한 프로비저닝이 되어 비용 증가를 초래합니다. 옵션 C의 예측 스케일링은 미래의 부하를 예측하여 미리 스케일아웃하는 기능이지만, 각 인스턴스의 부팅 시간 자체는 단축하지 못합니다. Warm Pool은 과도한 프로비저닝 없이(필요할 때만 활성화) 빠른 대응을 가능하게 합니다.",
     "en_q": "A company runs an application on Amazon EC2 instances that are in an Amazon EC2 Auto Scaling group. Scale-out actions take a long time to become complete because of long-running boot scripts. A CloudOps engineer must implement a solution to reduce the required time for scale-out actions without overprovisioning the Auto Scaling group. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Change the launch configuration to use a larger instance size.",
@@ -1328,7 +1328,7 @@ window.SOA_QUESTIONS = [
       "D": "필요한 EC2 인스턴스를 보유할 새로운 비공개 서브넷을 생성합니다."
     },
     "answer": "D",
-    "explanation": "VPC의 서브넷은 생성 후 CIDR 블록을 축소할 수 없습니다. 서브넷은 AWS에서 관리 목적으로 예약한 5개의 IP 주소를 포함합니다(네트워크 주소, 라우터, DNS, 향후 사용, 브로드캐스트). 11개 인스턴스가 11개의 IP를 사용하면 최소 16개 이상의 IP가 필요한 서브넷(/28 이상)이어야 합니다. 옵션 A는 CIDR을 /27로 변경하면 더 적은 주소 공간을 제공하므로 역효과입니다. 옵션 B는 기존 서브넷을 다른 AZ로 확장할 수 없습니다(서브넷은 단일 AZ 리소스). 옵션 C는 탄력적 IP는 공개 IP를 위한 것이며 프라이빗 서브넷 IP 부족 문제를 해결하지 못합니다. 옵션 D만이 추가 IP 주소 공간을 제공합니다.",
+    "explanation": "VPC의 서브넷은 생성 후 CIDR 블록을 축소할 수 없습니다. 서브넷은 AWS에서 관리 목적으로 예약한 5개의 IP 주소를 포함합니다(네트워크 주소, 라우터, DNS, 향후 사용, 브로드캐스트). 11개 인스턴스가 11개의 IP를 사용하면 최소 16개 이상의 IP가 필요한 서브넷(/28 이상)이어야 합니다.\n\n옵션 A는 CIDR을 /27로 변경하면 더 적은 주소 공간을 제공하므로 역효과입니다.\n\n옵션 B는 기존 서브넷을 다른 AZ로 확장할 수 없습니다(서브넷은 단일 AZ 리소스).\n\n옵션 C는 탄력적 IP는 공개 IP를 위한 것이며 프라이빗 서브넷 IP 부족 문제를 해결하지 못합니다. 옵션 D만이 추가 IP 주소 공간을 제공합니다.",
     "en_q": "A CloudOps engineer creates a new VPC that includes a public subnet and a private subnet. The CloudOps engineer successfully launches 11 Amazon EC2 instances in the private subnet The CloudOps engineer attempts to launch one more EC2 instance in the same subnet. However, the CloudOps engineer receives an error message that states that not enough free IP addresses are available. What must the CloudOps engineer do to deploy more EC2 instances?",
     "en_opts": {
       "A": "Edit the private subnet to change the CIDR block to /27.",
@@ -1349,7 +1349,7 @@ window.SOA_QUESTIONS = [
       "D": "Amazon CloudWatch Logs에서 로그 그룹을 생성합니다. Lambda 함수 및 로그 그룹으로 사용자 정의 이벤트를 전송하는 Amazon EventBridge 규칙을 생성합니다."
     },
     "answer": "A",
-    "explanation": "이 문제는 EventBridge의 아카이브 기능과 사용자 정의 이벤트 버스의 개념을 테스트합니다. 아카이브는 EventBridge에서 이벤트를 저장하고 나중에 재생(Replay)할 수 있는 기능으로, 시간 또는 이벤트 패턴에 기반하여 필터링할 수 있습니다. 애플리케이션 특정 이벤트는 기본 이벤트 버스가 아닌 사용자 정의 이벤트 버스로 관리하는 것이 베스트 프랙티스입니다. 옵션 B와 C는 기본 이벤트 버스를 사용하므로 권장되지 않습니다. 옵션 D는 CloudWatch Logs를 사용하는데, 이는 구조화된 이벤트 재생 기능을 제공하지 않습니다. EventBridge 아카이브 기능만이 시간/타입 기반 이벤트 재생을 네이티브로 지원합니다.",
+    "explanation": "이 문제는 EventBridge의 아카이브 기능과 사용자 정의 이벤트 버스의 개념을 테스트합니다.\n\n아카이브는 EventBridge에서 이벤트를 저장하고 나중에 재생(Replay)할 수 있는 기능으로, 시간 또는 이벤트 패턴에 기반하여 필터링할 수 있습니다.\n\n애플리케이션 특정 이벤트는 기본 이벤트 버스가 아닌 사용자 정의 이벤트 버스로 관리하는 것이 베스트 프랙티스입니다.\n\n옵션 B와 C는 기본 이벤트 버스를 사용하므로 권장되지 않습니다.\n\n옵션 D는 CloudWatch Logs를 사용하는데, 이는 구조화된 이벤트 재생 기능을 제공하지 않습니다.\n\nEventBridge 아카이브 기능만이 시간/타입 기반 이벤트 재생을 네이티브로 지원합니다.",
     "en_q": "A CloudOps engineer needs to build an event infrastructure for a set of custom application-specific events. The events must be sent to an AWS Lambda function for processing. The CloudOps engineer must record the events to replay later by event type or event time. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Create an Amazon EventBridge custom event bus. Create an archive on the custom event bus. Create a rule to send the custom events to the Lambda function.",
@@ -1371,7 +1371,7 @@ window.SOA_QUESTIONS = [
       "E": "CloudFormation 템플릿은 기존 서비스를 업데이트하는 데만 사용할 수 있습니다."
     },
     "answer": "BD",
-    "explanation": "CloudFormation 템플릿의 리전 간 호환성 문제를 다룹니다. 옵션 B는 올바른 답입니다. AMI는 특정 리전 내에만 존재하므로, us-west-2에서 사용 가능한 AMI를 eu-west-1에서 직접 참조하면 배포 실패합니다. 옵션 D도 맞습니다. 일부 AWS 서비스는 특정 리전에만 제공되므로, 지원되지 않는 서비스를 요청하면 배포가 실패합니다. 옵션 A는 부정확합니다. IAM은 글로벌 서비스이므로 리전 제약이 없습니다. 옵션 C는 권한 문제로, 템플릿 자체의 리전 호환성 문제가 아니라 인증 문제입니다. 옵션 E는 거짓입니다. CloudFormation은 새로운 스택 생성과 업데이트 모두에 사용됩니다.",
+    "explanation": "CloudFormation 템플릿의 리전 간 호환성 문제를 다룹니다.\n\n옵션 B는 올바른 답입니다. AMI는 특정 리전 내에만 존재하므로, us-west-2에서 사용 가능한 AMI를 eu-west-1에서 직접 참조하면 배포 실패합니다. 옵션 D도 맞습니다. 일부 AWS 서비스는 특정 리전에만 제공되므로, 지원되지 않는 서비스를 요청하면 배포가 실패합니다.\n\n옵션 A는 부정확합니다. IAM은 글로벌 서비스이므로 리전 제약이 없습니다.\n\n옵션 C는 권한 문제로, 템플릿 자체의 리전 호환성 문제가 아니라 인증 문제입니다.\n\n옵션 E는 거짓입니다. CloudFormation은 새로운 스택 생성과 업데이트 모두에 사용됩니다.",
     "en_q": "A CloudOps engineer has an AWS CloudFormation template of the company's existing infrastructure in us-west-2. The CloudOps engineer attempts to use the template to launch a new stack in eu-west-1, but the stack only partially deploys, receives an error message, and then rolls back. Why would this template fail to deploy? (Choose two.)",
     "en_opts": {
       "A": "The template referenced an IAM user that is not available in eu-west-1.",
@@ -1393,7 +1393,7 @@ window.SOA_QUESTIONS = [
       "D": "공용 서브넷에 IAM 인스턴스 프로필이 있는 EC2 인스턴스를 배포합니다. EC2 인스턴스에서 서명된 URL을 사용하여 웹사이트 사용자를 위한 S3 버킷에 대한 임시 액세스를 제공합니다."
     },
     "answer": "B",
-    "explanation": "이 문제는 공개 액세스 차단 상태에서 안전하게 S3 콘텐츠를 제공하는 방법을 테스트합니다. CloudFront를 OAC(Origin Access Control)와 함께 사용하면 CloudFront만 S3 버킷에 액세스할 수 있으며, 사용자는 공개 인터넷을 통해 직접 접근할 수 없습니다. 이는 최소 관리 노력으로 보안을 유지할 수 있습니다. 옵션 A는 직원의 수동 개입이 필요하므로 확장성이 떨어집니다. 옵션 C는 공개 액세스를 허용하므로 보안 정책에 위배됩니다. 옵션 D는 가능하지만 직원이 서명된 URL을 생성/배포해야 하므로 옵션 B보다 관리 오버헤드가 높습니다. CloudFront + OAC는 자동화되고 확장 가능한 솔루션입니다.",
+    "explanation": "이 문제는 공개 액세스 차단 상태에서 안전하게 S3 콘텐츠를 제공하는 방법을 테스트합니다. CloudFront를 OAC(Origin Access Control)와 함께 사용하면 CloudFront만 S3 버킷에 액세스할 수 있으며, 사용자는 공개 인터넷을 통해 직접 접근할 수 없습니다. 이는 최소 관리 노력으로 보안을 유지할 수 있습니다.\n\n옵션 A는 직원의 수동 개입이 필요하므로 확장성이 떨어집니다.\n\n옵션 C는 공개 액세스를 허용하므로 보안 정책에 위배됩니다.\n\n옵션 D는 가능하지만 직원이 서명된 URL을 생성/배포해야 하므로 옵션 B보다 관리 오버헤드가 높습니다. CloudFront + OAC는 자동화되고 확장 가능한 솔루션입니다.",
     "en_q": "A company's website runs on an Amazon EC2 Linux instance. The website needs to serve PDF files from an Amazon S3 bucket. All public access to S3 bucket is blocked at the account level. The company needs to allow website users to download the PDF files. Which solution will meet these requirements with the LEAST administrative effort?",
     "en_opts": {
       "A": "Create an IAM role that has a policy that allows s3:list* and s3:get* permissions. Assign the role to the EC2 instance. Assign a company employee to download requested PDF file to the EC2 instance and to deliver the files to website users. Create an AWS Lambda function to periodically delete local files.",
@@ -1414,7 +1414,7 @@ window.SOA_QUESTIONS = [
       "D": "S3 Lifecycle 규칙을 사용하여 객체를 두 번째 리전의 대상 버킷으로 이동합니다."
     },
     "answer": "B",
-    "explanation": "S3 CRR 설정 시 기존 객체와 새로운 객체의 처리 방식이 다릅니다. CRR(Cross-Region Replication)은 기본적으로 설정 이후에 생성되는 새 객체만 복제합니다. 기존 객체를 복제하려면 S3 Batch Replication을 사용해야 합니다. S3 Batch Replication은 실패한 복제 작업을 재시도하는 기능을 제공합니다. 옵션 A의 'live replication'은 실제 AWS 용어가 아닙니다. 옵션 C의 S3 RTC(Replication Time Control)는 복제 시간을 보장하는 기능이지, 기존 객체 복제나 재시도 메커니즘이 아닙니다. 옵션 D의 Lifecycle 규칙은 객체 이동/삭제 정책으로, 리전 간 복제 기능을 제공하지 않습니다.",
+    "explanation": "S3 CRR 설정 시 기존 객체와 새로운 객체의 처리 방식이 다릅니다.\n\nCRR(Cross-Region Replication)은 기본적으로 설정 이후에 생성되는 새 객체만 복제합니다.\n\n기존 객체를 복제하려면 S3 Batch Replication을 사용해야 합니다.\n\nS3 Batch Replication은 실패한 복제 작업을 재시도하는 기능을 제공합니다.\n\n옵션 A의 'live replication'은 실제 AWS 용어가 아닙니다.\n\n옵션 C의 S3 RTC(Replication Time Control)는 복제 시간을 보장하는 기능이지, 기존 객체 복제나 재시도 메커니즘이 아닙니다.\n\n옵션 D의 Lifecycle 규칙은 객체 이동/삭제 정책으로, 리전 간 복제 기능을 제공하지 않습니다.",
     "en_q": "A financial services company stores customer images in an Amazon S3 bucket in the us-east-1 Region. To comply with regulations, the company must ensure that all existing objects are replicated to an S3 bucket in a second AWS Region. If an object replication fails, the company must be able to retry replication for the object. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Configure Amazon S3 Cross-Region Replication (CRR). Use Amazon S3 live replication to replicate existing objects.",
@@ -1435,7 +1435,7 @@ window.SOA_QUESTIONS = [
       "D": "EC2 인스턴스에 대한 기본 모니터링을 구성합니다. 모니터링을 위해 표준 mem_used_percent 메트릭을 사용합니다. mem_used_percent 메트릭을 기반으로 하는 EC2 Auto Scaling 그룹 및 Auto Scaling 정책을 생성합니다."
     },
     "answer": "C",
-    "explanation": "메모리 메트릭은 EC2 기본 모니터링(Basic Monitoring)에서 제공되지 않습니다. 메모리, 디스크, 네트워크 인터페이스 세부 정보 등의 커스텀 메트릭을 수집하려면 CloudWatch Agent를 설치해야 합니다. Agent가 데이터를 업로드하려면 IAM 권한이 필요합니다. 5분 간격 모니터링은 기본 모니터링으로도 충분하므로(1분 간격이 아님) 자세한 모니터링을 구성할 필요는 없습니다. 옵션 A는 자세한 모니터링이 불필요하고 mem_active는 CloudWatch 표준 메트릭이 아닙니다. 옵션 B는 자세한 모니터링이 메모리 메트릭을 기본 제공하지 않으므로 잘못되었습니다. 옵션 D는 IAM 역할이 없어 CloudWatch Agent가 메트릭을 업로드할 수 없습니다. 옵션 C가 가장 완전한 솔루션입니다.",
+    "explanation": "메모리 메트릭은 EC2 기본 모니터링(Basic Monitoring)에서 제공되지 않습니다. 메모리, 디스크, 네트워크 인터페이스 세부 정보 등의 커스텀 메트릭을 수집하려면 CloudWatch Agent를 설치해야 합니다. Agent가 데이터를 업로드하려면 IAM 권한이 필요합니다. 5분 간격 모니터링은 기본 모니터링으로도 충분하므로(1분 간격이 아님) 자세한 모니터링을 구성할 필요는 없습니다.\n\n옵션 A는 자세한 모니터링이 불필요하고 mem_active는 CloudWatch 표준 메트릭이 아닙니다.\n\n옵션 B는 자세한 모니터링이 메모리 메트릭을 기본 제공하지 않으므로 잘못되었습니다.\n\n옵션 D는 IAM 역할이 없어 CloudWatch Agent가 메트릭을 업로드할 수 없습니다.\n\n옵션 C가 가장 완전한 솔루션입니다.",
     "en_q": "A company uses memory-optimized Amazon EC2 instances behind a Network Load Balancer (NLB) to run an application. The company launched the EC2 instances from an AWS provided Red Hat Enterprise Linux (RHEL) Amazon Machine Image (AMI). A CloudOps engineer must monitor RAM utilization in 5-minute intervals. The CloudOps engineer must ensure that the EC2 instances scale in and out appropriately based on incoming load. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Configure detailed monitoring for the EC2 instances. Configure the Amazon CloudWatch agent on the EC2 instances. Create an EC2 Auto Scaling group and Auto Scaling policy that is based on the mem_active metric.",
@@ -1456,7 +1456,7 @@ window.SOA_QUESTIONS = [
       "D": "AWS Firewall Manager를 보안 정책으로 구성하여 보안 요구사항을 충족합니다. AWS Config aggregator와 조직 전체 준수 팩을 사용하여 보안 정책 위반을 감지합니다."
     },
     "answer": "C",
-    "explanation": "이 문제는 AWS Organizations 환경에서 조직 전체 거버넌스를 구현하는 방법을 테스트합니다. AWS Control Tower는 AWS Organizations에 기반한 완전한 계정 거버넌스 솔루션으로, Guardrails를 통해 자동으로 여러 계정에 정책을 적용할 수 있습니다. 'Region deny controls'는 특정 리전에 리소스 배포를 차단하는 Control Tower의 Guardrail입니다. Service Control Policies(SCP)는 IAM과 별도로 작동하며 루트 사용자를 포함한 모든 주체를 제한합니다. CloudTrail 로그 삭제는 SCP로 차단할 수 있습니다. 옵션 A는 각 계정마다 개별 설정이 필요하므로 확장성이 떨어집니다. 옵션 B의 Security Hub는 위협 탐지 도구이지, 리전 제한이나 루트 사용자 제한을 기본 제공하지 않습니다. 옵션 D의 Firewall Manager는 네트워크 보안에 중점을 두므로 요구사항을 완전히 충족하지 못합니다.",
+    "explanation": "이 문제는 AWS Organizations 환경에서 조직 전체 거버넌스를 구현하는 방법을 테스트합니다.\n\nAWS Control Tower는 AWS Organizations에 기반한 완전한 계정 거버넌스 솔루션으로, Guardrails를 통해 자동으로 여러 계정에 정책을 적용할 수 있습니다.\n\n'Region deny controls'는 특정 리전에 리소스 배포를 차단하는 Control Tower의 Guardrail입니다.\n\nService Control Policies(SCP)는 IAM과 별도로 작동하며 루트 사용자를 포함한 모든 주체를 제한합니다.\n\nCloudTrail 로그 삭제는 SCP로 차단할 수 있습니다.\n\n옵션 A는 각 계정마다 개별 설정이 필요하므로 확장성이 떨어집니다.\n\n옵션 B의 Security Hub는 위협 탐지 도구이지, 리전 제한이나 루트 사용자 제한을 기본 제공하지 않습니다.\n\n옵션 D의 Firewall Manager는 네트워크 보안에 중점을 두므로 요구사항을 완전히 충족하지 못합니다.",
     "en_q": "A multinational company uses an organization in AWS Organizations to manage over 200 member accounts across multiple AWS Regions. The company must ensure that all AWS resources meet specific security requirements. The company must not deploy any EC2 instances in the ap-southeast-2 Region. The company must completely block root user actions in all member accounts. The company must prevent any user from deleting AWS CloudTrail logs, including administrators. The company requires a centrally managed solution that the company can automatically apply to all existing and future accounts. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Create AWS Config rules with remediation actions in each account to detect policy violations. Implement IAM permissions boundaries for the account root users.",
@@ -1477,7 +1477,7 @@ window.SOA_QUESTIONS = [
       "D": "SSM Agent의 출력을 사용하여 AWS Config로 EC2 인스턴스의 패치 상태를 모니터링합니다. 패치 설치 여부를 확인하는 구성 준수 규칙을 생성합니다. 모든 인스턴스의 보고서를 생성합니다."
     },
     "answer": "A",
-    "explanation": "Systems Manager Inventory는 EC2 인스턴스 및 온프레미스 서버의 소프트웨어, 업데이트, 구성 정보를 수집하는 기능입니다. SSM Agent가 설치되어 있으면 자동으로 패치 버전을 포함한 메타데이터를 수집할 수 있습니다. 이는 가장 직접적이고 효율적인 방법입니다. 옵션 B의 Run Command는 모든 인스턴스에 명령을 실행해야 하는 추가 오버헤드가 있습니다. 옵션 C와 D는 AWS Config를 사용하는데, 이는 변경 추적과 준수 모니터링에는 좋지만 패치 버전 수집 보고에는 Inventory만큼 효율적이지 않습니다. Inventory는 이 목적을 위해 AWS에서 제공하는 네이티브 도구입니다.",
+    "explanation": "Systems Manager Inventory는 EC2 인스턴스 및 온프레미스 서버의 소프트웨어, 업데이트, 구성 정보를 수집하는 기능입니다.\n\nSSM Agent가 설치되어 있으면 자동으로 패치 버전을 포함한 메타데이터를 수집할 수 있습니다.\n\n이는 가장 직접적이고 효율적인 방법입니다.\n\n옵션 B의 Run Command는 모든 인스턴스에 명령을 실행해야 하는 추가 오버헤드가 있습니다.\n\n옵션 C와 D는 AWS Config를 사용하는데, 이는 변경 추적과 준수 모니터링에는 좋지만 패치 버전 수집 보고에는 Inventory만큼 효율적이지 않습니다.\n\nInventory는 이 목적을 위해 AWS에서 제공하는 네이티브 도구입니다.",
     "en_q": "A company uses hundreds of Amazon EC2 On-Demand Instances and Spot Instances to run production and non-production workloads. The company installs and configures the AWS Systems Manager Agent (SSM Agent) on the EC2 instances. During a recent instance patch operation, some instances were not patched because the instances were either busy or down. The company needs to generate a report that lists the current patch version of all instances. Which solution will meet these requirements in the MOST operationally efficient way?",
     "en_opts": {
       "A": "Use Systems Manager Inventory to collect patch versions. Generate a report of all instances.",
@@ -1498,7 +1498,7 @@ window.SOA_QUESTIONS = [
       "D": "누락된 인스턴스는 Windows 운영 체제를 실행 중입니다."
     },
     "answer": "B",
-    "explanation": "AWS Compute Optimizer는 모든 EC2 인스턴스 유형을 지원하지 않습니다. 매우 새로운 인스턴스 유형(최신 세대)이나 구식 인스턴스 유형의 경우 Compute Optimizer가 충분한 성능 메트릭 데이터를 가지지 않거나 지원 목록에 포함되지 않을 수 있습니다. 문제에서 '일부 인스턴스는 새로 출시된 인스턴스 유형을 사용'한다고 명시했으므로, 이는 Compute Optimizer의 지원 범위를 벗어날 수 있습니다. 옵션 A는 3주 이상 충분한 메트릭이 있으면 분석 가능하므로 부정확합니다. 옵션 C는 최적화된 인스턴스는 대시보드에 '이미 최적화됨'으로 표시되지 누락되지 않습니다. 옵션 D는 거짓입니다. Compute Optimizer는 Windows 인스턴스도 지원합니다.",
+    "explanation": "AWS Compute Optimizer는 모든 EC2 인스턴스 유형을 지원하지 않습니다. 매우 새로운 인스턴스 유형(최신 세대)이나 구식 인스턴스 유형의 경우 Compute Optimizer가 충분한 성능 메트릭 데이터를 가지지 않거나 지원 목록에 포함되지 않을 수 있습니다. 문제에서 '일부 인스턴스는 새로 출시된 인스턴스 유형을 사용'한다고 명시했으므로, 이는 Compute Optimizer의 지원 범위를 벗어날 수 있습니다.\n\n옵션 A는 3주 이상 충분한 메트릭이 있으면 분석 가능하므로 부정확합니다.\n\n옵션 C는 최적화된 인스턴스는 대시보드에 '이미 최적화됨'으로 표시되지 누락되지 않습니다.\n\n옵션 D는 거짓입니다. Compute Optimizer는 Windows 인스턴스도 지원합니다.",
     "en_q": "A CloudOps engineer is using AWS Compute Optimizer to generate recommendations for a fleet of Amazon EC2 instances. Some of the instances use newly released instance types, while other instances use older instance types. After the analysis is complete, the CloudOps engineer notices that some of the EC2 instances are missing from the Compute Optimizer dashboard. What is the likely cause of this issue?",
     "en_opts": {
       "A": "The missing instances have insufficient historical Amazon CloudWatch metric data for analysis.",
@@ -1519,7 +1519,7 @@ window.SOA_QUESTIONS = [
       "D": "AWS Config automatic anomaly detection을 사용합니다."
     },
     "answer": "B",
-    "explanation": "이 문제는 AWS 보안 서비스 간의 기능 차이를 테스트합니다. Amazon GuardDuty는 위협 탐지 서비스로, CloudWatch Logs와 VPC Flow Logs를 분석하여 비정상적인 패턴, 의심스러운 API 호출, 멀웨어 활동 등을 자동으로 감지합니다. 옵션 A의 Inspector는 EC2 인스턴스, ECR 이미지, Lambda 함수의 취약점을 스캔하는 것이지, VPC Flow Logs의 비정상 활동 감지가 아닙니다. 옵션 C의 CloudTrail Insights는 API 호출 패턴의 이상을 감지하지만, 실시간 위협 탐지 서비스가 아닙니다. 옵션 D의 AWS Config는 리소스 구성 준수를 모니터링하는 서비스로, 보안 이벤트 탐지에는 적합하지 않습니다. GuardDuty만이 CloudWatch Logs를 통한 자동 이상 탐지 전문 서비스입니다.",
+    "explanation": "이 문제는 AWS 보안 서비스 간의 기능 차이를 테스트합니다.\n\nAmazon GuardDuty는 위협 탐지 서비스로, CloudWatch Logs와 VPC Flow Logs를 분석하여 비정상적인 패턴, 의심스러운 API 호출, 멀웨어 활동 등을 자동으로 감지합니다.\n\n옵션 A의 Inspector는 EC2 인스턴스, ECR 이미지, Lambda 함수의 취약점을 스캔하는 것이지, VPC Flow Logs의 비정상 활동 감지가 아닙니다.\n\n옵션 C의 CloudTrail Insights는 API 호출 패턴의 이상을 감지하지만, 실시간 위협 탐지 서비스가 아닙니다.\n\n옵션 D의 AWS Config는 리소스 구성 준수를 모니터링하는 서비스로, 보안 이벤트 탐지에는 적합하지 않습니다.\n\nGuardDuty만이 CloudWatch Logs를 통한 자동 이상 탐지 전문 서비스입니다.",
     "en_q": "A company runs a workload in an Amazon VPC. The company configures Amazon CloudWatch Logs for the workload. The company needs a solution to automatically detect unusual API activity and security events in the company's AWS account. Which solution will meet this requirement?",
     "en_opts": {
       "A": "Use Amazon Inspector to scan VPC flow logs.",
@@ -1540,7 +1540,7 @@ window.SOA_QUESTIONS = [
       "D": "이미지가 S3 버킷에 업로드될 때 EC2 인스턴스가 지원하는 Amazon Elastic Container Service(Amazon ECS) 컨테이너의 작업을 호출하도록 S3 Event Notifications를 구성합니다. 이미지를 처리하도록 ECS 작업을 구성합니다."
     },
     "answer": "C",
-    "explanation": "이 문제는 비용 최적화와 운영 효율성을 함께 고려한 솔루션을 테스트합니다. Lambda 함수는 초당 단위로 요금을 부과하므로(약 30~120초 작업), 실행 시간에 대해서만 비용을 지불합니다. 옵션 A의 EC2 인스턴스는 항상 실행되어야 하므로 지속적인 비용이 발생합니다(이미 '항상 켜져 있다'고 명시). 옵션 B의 AWS Glue는 ETL 작업으로, 이미지 처리에는 과도한 리소스입니다. 옵션 D의 ECS도 지속적인 컨테이너 실행 비용이 발생합니다. Lambda는 이벤트 기반 자동화와 종량제 요금 모델로 이 시나리오에 가장 적합합니다. 처리 시간이 15분 이내이므로 Lambda의 시간 제한도 충족합니다.",
+    "explanation": "이 문제는 비용 최적화와 운영 효율성을 함께 고려한 솔루션을 테스트합니다.\n\nLambda 함수는 초당 단위로 요금을 부과하므로(약 30~120초 작업), 실행 시간에 대해서만 비용을 지불합니다.\n\n옵션 A의 EC2 인스턴스는 항상 실행되어야 하므로 지속적인 비용이 발생합니다(이미 '항상 켜져 있다'고 명시). 옵션 B의 AWS Glue는 ETL 작업으로, 이미지 처리에는 과도한 리소스입니다.\n\n옵션 D의 ECS도 지속적인 컨테이너 실행 비용이 발생합니다.\n\nLambda는 이벤트 기반 자동화와 종량제 요금 모델로 이 시나리오에 가장 적합합니다.\n\n처리 시간이 15분 이내이므로 Lambda의 시간 제한도 충족합니다.",
     "en_q": "A company generates hundreds of images and uploads the images to an Amazon S3 bucket. The company manually copies the images to an always-on Amazon EC2 instance for processing. It usually takes between 30 seconds and 120 seconds to process each image. A CloudOps engineer wants to automate the image processing solution to process the images as soon as they arrive in the S3 bucket. Which solution will meet these requirements MOST cost-effectively?",
     "en_opts": {
       "A": "Configure S3 Event Notifications to invoke the EC2 instance when images are uploaded to the S3 bucket. Run the image processing solution on the EC2 instance to process the images.",
@@ -1561,7 +1561,7 @@ window.SOA_QUESTIONS = [
       "D": "수신 계정의 규칙은 이벤트 패턴에 {\"account\": [\"sender-account-id\"]}를 지정해야 하며 수신 계정 ID를 포함해야 합니다."
     },
     "answer": "C",
-    "explanation": "EventBridge의 크로스 계정 이벤트 라우팅에서 발신자가 다른 계정의 이벤트 버스에 이벤트를 전송하려면, 대상 버스의 리소스 기반 정책(Resource-based Policy)이 발신자 계정에 PutEvents 권한을 부여해야 합니다. IAM 역할만으로는 충분하지 않으며, 대상 버스 자체에서도 접근을 명시적으로 허용해야 합니다. 옵션 A는 VPC 내에서만 필요하며, 크로스 계정 통신 기본 조건이 아닙니다. 옵션 B는 거짓입니다. EventBridge는 크로스 리전 이벤트 전송을 지원합니다(Lambda는 타겟이므로 같은 리전일 필요 없음). 옵션 D는 이벤트 필터링을 위한 것이지, 접근 제어와는 무관합니다.",
+    "explanation": "EventBridge의 크로스 계정 이벤트 라우팅에서 발신자가 다른 계정의 이벤트 버스에 이벤트를 전송하려면, 대상 버스의 리소스 기반 정책(Resource-based Policy)이 발신자 계정에 PutEvents 권한을 부여해야 합니다. IAM 역할만으로는 충분하지 않으며, 대상 버스 자체에서도 접근을 명시적으로 허용해야 합니다.\n\n옵션 A는 VPC 내에서만 필요하며, 크로스 계정 통신 기본 조건이 아닙니다.\n\n옵션 B는 거짓입니다. EventBridge는 크로스 리전 이벤트 전송을 지원합니다(Lambda는 타겟이므로 같은 리전일 필요 없음).\n\n옵션 D는 이벤트 필터링을 위한 것이지, 접근 제어와는 무관합니다.",
     "en_q": "A company uses an organization in AWS Organizations to manage multiple AWS accounts. The company needs to send specific events from all the accounts in the organization to a new receiver account so an AWS Lambda function can process the events. A CloudOps engineer needs to configure Amazon EventBridge to route the events to a target event bus in the us-west-2 Region in the new receiver account. The CloudOps engineer creates rules in the sender accounts and the receiver account that match the specified events. The rules do not specify an account parameter in the event pattern. The CloudOps engineer creates IAM roles in the sender accounts to allow PutEvents actions on the target event bus. The first test events that originate from the us-east-1 Region are not being processed by the Lambda function in the receiving account. What is the likely reason the events are not processed?",
     "en_opts": {
       "A": "Interface VPC endpoints for EventBridge are required in the sender accounts and receiver accounts.",
@@ -1582,7 +1582,7 @@ window.SOA_QUESTIONS = [
       "D": "버킷에서 S3 Transfer Acceleration을 활성화합니다."
     },
     "answer": "C",
-    "explanation": "AWS S3 버킷에 버전 관리를 활성화하면, 설정 변경이 전파되어 완전히 활성화되기까지 약 15분의 지연이 발생할 수 있습니다. 이는 S3의 글로벌 인프라 전체에 변경사항을 배포하는 데 필요한 시간입니다. 이 시간 내에 쓰기 작업을 시도하면 일부 요청이 버전 관리 비활성화 상태로 처리될 수 있어 HTTP 404 오류가 발생할 수 있습니다. 옵션 A는 근본적인 해결책이 아니며 버전 관리의 목적을 무시합니다. 옵션 B는 버킷 정책과 무관한 문제입니다. 옵션 D의 Transfer Acceleration은 업로드 성능과 무관합니다. 이는 S3 버전 관리 활성화 후 충분한 시간을 기다려야 한다는 운영 지식을 테스트하는 문제입니다.",
+    "explanation": "AWS S3 버킷에 버전 관리를 활성화하면, 설정 변경이 전파되어 완전히 활성화되기까지 약 15분의 지연이 발생할 수 있습니다. 이는 S3의 글로벌 인프라 전체에 변경사항을 배포하는 데 필요한 시간입니다. 이 시간 내에 쓰기 작업을 시도하면 일부 요청이 버전 관리 비활성화 상태로 처리될 수 있어 HTTP 404 오류가 발생할 수 있습니다.\n\n옵션 A는 근본적인 해결책이 아니며 버전 관리의 목적을 무시합니다.\n\n옵션 B는 버킷 정책과 무관한 문제입니다. 옵션 D의 Transfer Acceleration은 업로드 성능과 무관합니다. 이는 S3 버전 관리 활성화 후 충분한 시간을 기다려야 한다는 운영 지식을 테스트하는 문제입니다.",
     "en_q": "A developer enables versioning on an Amazon S3 bucket. When the developer attempts to perform a write operation on the bucket, the developer encounters an HTTP 404 NoSuchKey error. A CloudOps engineer must resolve this issue. Which solution will meet this requirement?",
     "en_opts": {
       "A": "Disable versioning on the S3 bucket and retry the write operation.",
@@ -1603,7 +1603,7 @@ window.SOA_QUESTIONS = [
       "D": "대상 버킷은 AWS KMS 키(SSE-KMS)를 사용한 서버 측 암호화를 사용해야 합니다."
     },
     "answer": "A",
-    "explanation": "S3 CRR에서 원본 계정과 대상 계정이 다를 때, 복제 후 객체의 소유권이 문제가 될 수 있습니다. 기본적으로 복제된 객체는 여전히 원본 버킷의 소유자(원본 계정)에 의해 소유됩니다. 대상 버킷의 소유자가 객체를 관리할 수 없게 되는 상황이 발생할 수 있습니다. 이를 해결하려면 ObjectOwnerOverrideToBucketOwner 권한을 IAM 역할과 버킷 정책에 추가하여, 복제된 객체의 소유권을 대상 버킷 소유자에게 넘겨야 합니다. 옵션 B는 거짓입니다. SSE-S3는 CRR에서 잘 작동하며, 다중 리전 키는 선택사항입니다. 옵션 C는 필수가 아닙니다. VPC 엔드포인트 없이도 CRR이 작동할 수 있습니다. 옵션 D는 부정확합니다. SSE-S3에서 SSE-KMS로 변경할 필요 없습니다.",
+    "explanation": "S3 CRR에서 원본 계정과 대상 계정이 다를 때, 복제 후 객체의 소유권이 문제가 될 수 있습니다. 기본적으로 복제된 객체는 여전히 원본 버킷의 소유자(원본 계정)에 의해 소유됩니다. 대상 버킷의 소유자가 객체를 관리할 수 없게 되는 상황이 발생할 수 있습니다. 이를 해결하려면 ObjectOwnerOverrideToBucketOwner 권한을 IAM 역할과 버킷 정책에 추가하여, 복제된 객체의 소유권을 대상 버킷 소유자에게 넘겨야 합니다.\n\n옵션 B는 거짓입니다. SSE-S3는 CRR에서 잘 작동하며, 다중 리전 키는 선택사항입니다.\n\n옵션 C는 필수가 아닙니다. VPC 엔드포인트 없이도 CRR이 작동할 수 있습니다.\n\n옵션 D는 부정확합니다. SSE-S3에서 SSE-KMS로 변경할 필요 없습니다.",
     "en_q": "A company is implementing Cross-Region Replication (CRR) for the company's Amazon S3 buckets. The S3 buckets are in the us-east-1 Region. The company uses server-side encryption with Amazon S3 managed keys (SSE-S3) to secure the data in the buckets. A CloudOps engineer creates a new AWS account to store backups in S3 buckets. All backup buckets are in the us-west-2 Region. The CloudOps engineer enables versioning on the source buckets and the destination buckets. The CloudOps engineer creates an IAM role in the source account for s3.amazonaws.com. The CloudOps engineer grants the IAM role permissions to perform read actions in the source buckets, replicate actions in the destination buckets, and encrypt actions that use the destination bucket's key. The destination bucket policy allows the IAM role to perform replicate and read actions. After the replication configuration is complete, the CloudOps engineer notices that objects are not replicating. What is the likely reason the objects are not replicating?",
     "en_opts": {
       "A": "The IAM role and bucket policies must have the ObjectOwnerOverrideToBucketOwner permission.",
@@ -3639,7 +3639,7 @@ window.SOA_QUESTIONS = [
       "D": "AWS Health API를 사용하여 Amazon DynamoDB 테이블에 이벤트를 씁니다."
     },
     "answer": "A",
-    "explanation": "AWS Health의 organizational view는 AWS Organizations의 관리 계정에서 조직 전체의 Personal Health Dashboard 알림을 중앙에서 볼 수 있도록 해주는 기능입니다. 이 기능을 활성화하면 조직 내 모든 계정의 서비스 상태 정보와 알림을 단일 대시보드에서 집계할 수 있으므로, 최소한의 설정으로 요구사항을 충족합니다. 다른 옵션들(B, C, D)은 모두 복잡한 설정이나 개발 작업이 필요하기 때문에 operational effort가 더 많이 소요됩니다. 특히 CloudTrail은 감시 로깅이고, Lambda나 직접 API 호출은 대규모 자동화가 필요합니다.",
+    "explanation": "AWS Health의 organizational view는 AWS Organizations의 관리 계정에서 조직 전체의 Personal Health Dashboard 알림을 중앙에서 볼 수 있도록 해주는 기능입니다.\n\n이 기능을 활성화하면 조직 내 모든 계정의 서비스 상태 정보와 알림을 단일 대시보드에서 집계할 수 있으므로, 최소한의 설정으로 요구사항을 충족합니다.\n\n다른 옵션들(B, C, D)은 모두 복잡한 설정이나 개발 작업이 필요하기 때문에 operational effort가 더 많이 소요됩니다.\n\n특히 CloudTrail은 감시 로깅이고, Lambda나 직접 API 호출은 대규모 자동화가 필요합니다.",
     "en_q": "A company's SysOps administrator regularly checks the AWS Personal Health Dashboard in each of the company's accounts. The accounts are part of an organization in AWS Organizations. The company recently added 10 more accounts to the organization. The SysOps administrator must consolidate the alerts from each account's Personal Health Dashboard. Which solution will meet this requirement with the LEAST amount of effort?",
     "en_opts": {
       "A": "Enable organizational view in AWS Health.",
@@ -3660,7 +3660,7 @@ window.SOA_QUESTIONS = [
       "D": "Amazon EventBridge(Amazon CloudWatch Events) 규칙을 만듭니다. EC2 이벤트 일치 패턴을 구성하여 EC2 요청을 기반으로 메트릭을 만들고 그래프로 표시합니다."
     },
     "answer": "A",
-    "explanation": "ALB의 RequestCount 메트릭은 ALB를 통과한 모든 요청의 수를 추적합니다. 이는 Auto Scaling 그룹의 모든 인스턴스에서의 요청을 자동으로 집계하는 메트릭이므로, 추가 설정 없이 대상 시간 범위(2주)와 기간(1분)으로 조회하면 됩니다. 옵션 B의 CloudWatch 메트릭 수학은 복잡한 쿼리가 필요하고, C는 launch configuration 템플릿에는 이런 기능이 없으며, D의 EventBridge는 EC2 이벤트를 기반으로 하므로 요청 수 메트릭과는 다릅니다. ALB 메트릭을 직접 사용하는 것이 가장 직관적이고 간단합니다.",
+    "explanation": "ALB의 RequestCount 메트릭은 ALB를 통과한 모든 요청의 수를 추적합니다.\n\n이는 Auto Scaling 그룹의 모든 인스턴스에서의 요청을 자동으로 집계하는 메트릭이므로, 추가 설정 없이 대상 시간 범위(2주)와 기간(1분)으로 조회하면 됩니다.\n\n옵션 B의 CloudWatch 메트릭 수학은 복잡한 쿼리가 필요하고, C는 launch configuration 템플릿에는 이런 기능이 없으며, D의 EventBridge는 EC2 이벤트를 기반으로 하므로 요청 수 메트릭과는 다릅니다.\n\nALB 메트릭을 직접 사용하는 것이 가장 직관적이고 간단합니다.",
     "en_q": "A company runs an application on Amazon EC2 instances. The EC2 instances are in an Auto Scaling group and run behind an Application Load Balancer (ALB). The application experiences errors when total requests exceed 100 requests per second. A SysOps administrator must collect information about total requests for a 2-week period to determine when requests exceeded this threshold. What should the SysOps administrator do to collect this data?",
     "en_opts": {
       "A": "Use the ALB's RequestCount metric. Configure a time range of 2 weeks and a period of 1 minute. Examine the chart to determine peak traffic times and volumes.",
@@ -3681,7 +3681,7 @@ window.SOA_QUESTIONS = [
       "D": "온프레미스 도메인의 Amazon Route 53 공개 호스팅 영역을 만듭니다. 온프레미스 도메인에 대한 DNS 요청을 Route 53 공개 호스팅 영역으로 전달하도록 네트워크 ACL을 구성합니다."
     },
     "answer": "B",
-    "explanation": "Route 53 Resolver의 아웃바운드 엔드포인트는 VPC에서 나가는 DNS 쿼리를 온프레미스 DNS 서버로 조건부 전달(conditional forwarding)할 수 있는 기능입니다. 온프레미스 도메인에 대한 DNS 쿼리만 온프레미스 DNS 서버로 보내고, 다른 쿼리는 AWS DNS를 통해 처리됩니다. 옵션 A는 수동으로 EC2에 DNS forwarder를 구성해야 하고, C는 Direct Connect와 무관하며, D는 공개 호스팅 영역을 사용하므로 내부 도메인 해석에 부적절합니다. Route 53 Resolver 아웃바운드 엔드포인트가 이 시나리오의 표준 솔루션입니다.",
+    "explanation": "Route 53 Resolver의 아웃바운드 엔드포인트는 VPC에서 나가는 DNS 쿼리를 온프레미스 DNS 서버로 조건부 전달(conditional forwarding)할 수 있는 기능입니다.\n\n온프레미스 도메인에 대한 DNS 쿼리만 온프레미스 DNS 서버로 보내고, 다른 쿼리는 AWS DNS를 통해 처리됩니다.\n\n옵션 A는 수동으로 EC2에 DNS forwarder를 구성해야 하고, C는 Direct Connect와 무관하며, D는 공개 호스팅 영역을 사용하므로 내부 도메인 해석에 부적절합니다.\n\nRoute 53 Resolver 아웃바운드 엔드포인트가 이 시나리오의 표준 솔루션입니다.",
     "en_q": "A company recently migrated its application to a VPC on AWS. An AWS Site-to-Site VPN connection connects the company's on-premises network to the VPC. The application retrieves customer data from another system that resides on premises. The application uses an on-premises DNS server to resolve domain records. After the migration, the application is not able to connect to the customer data because of name resolution errors. Which solution will give the application the ability to resolve the internal domain names?",
     "en_opts": {
       "A": "Launch EC2 instances in the VPC. On the EC2 instances, deploy a custom DNS forwarder that forwards all DNS requests to the on-premises DNS server. Create an Amazon Route 53 private hosted zone that uses the EC2 instances for name servers.",
@@ -3702,7 +3702,7 @@ window.SOA_QUESTIONS = [
       "D": "배포의 origin 설정에 사용자 지정 HTTP 헤더를 추가합니다. ALB 리스너에서 일치하는 사용자 지정 헤더와 헤더 값을 포함하는 요청을 전달하는 규칙을 추가합니다. 기본 규칙을 추가하여 고정 응답 코드 403을 반환합니다."
     },
     "answer": "D",
-    "explanation": "이 솔루션은 CloudFront와 ALB 사이의 신뢰 관계를 구성하는 방식입니다. CloudFront 배포는 모든 origin 요청에 사용자 지정 HTTP 헤더(예: \"X-Custom-Header: secret-value\")를 추가합니다. ALB의 리스너 규칙은 이 특정 헤더와 값을 확인하고, 일치하면 트래픽을 정상적으로 전달하고, 일치하지 않으면(즉, 직접 ALB에 접근하는 경우) 403을 반환합니다. 옵션 C는 ALB를 교체해야 하는 불필요한 단계를 포함합니다. 옵션 A는 직접 접근을 완전히 차단하지만, 배포 origin 설정이 없습니다. 옵션 B는 Lambda@Edge를 사용하지만 더 복잡하고 필요 없습니다. 옵션 D가 가장 간단하고 효율적입니다.",
+    "explanation": "이 솔루션은 CloudFront와 ALB 사이의 신뢰 관계를 구성하는 방식입니다. CloudFront 배포는 모든 origin 요청에 사용자 지정 HTTP 헤더(예: \"X-Custom-Header: secret-value\")를 추가합니다. ALB의 리스너 규칙은 이 특정 헤더와 값을 확인하고, 일치하면 트래픽을 정상적으로 전달하고, 일치하지 않으면(즉, 직접 ALB에 접근하는 경우) 403을 반환합니다.\n\n옵션 C는 ALB를 교체해야 하는 불필요한 단계를 포함합니다.\n\n옵션 A는 직접 접근을 완전히 차단하지만, 배포 origin 설정이 없습니다.\n\n옵션 B는 Lambda@Edge를 사용하지만 더 복잡하고 필요 없습니다.\n\n옵션 D가 가장 간단하고 효율적입니다.",
     "en_q": "A company's web application is available through an Amazon CloudFront distribution and directly through an internet-facing Application Load Balancer (ALB). A SysOps administrator must make the application accessible only through the CloudFront distribution and not directly through the ALB. The SysOps administrator must make this change without changing the application code. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Modify the ALB type to internal. Set the distribution's origin to the internal ALB domain name.",
@@ -3723,7 +3723,7 @@ window.SOA_QUESTIONS = [
       "D": "AWS Service Health Dashboard를 사용하여 각 Trusted Advisor 서비스 할당량 메트릭을 모니터링합니다. 사용량이 서비스 할당량의 60%를 초과할 때마다 이메일 알림을 하도록 Amazon Simple Notification Service(Amazon SNS) 주제를 구성합니다."
     },
     "answer": "A",
-    "explanation": "CloudWatch 알람은 메트릭 기반 알림을 위한 표준 AWS 서비스입니다. Trusted Advisor의 서비스 할당량 메트릭은 CloudWatch에 자동으로 게시되므로, CloudWatch 알람을 만들어 임계값(60%)에서 트리거할 수 있습니다. SNS는 이메일을 포함한 다양한 알림 채널을 지원하는 올바른 서비스입니다. 옵션 B의 SQS는 메시지 큐이며, 이메일 알림을 위한 것이 아닙니다. 옵션 C와 D의 AWS Service Health Dashboard는 AWS 인프라 상태를 보여주며, 개별 계정의 할당량 메트릭을 모니터링하는 데 사용되지 않습니다. CloudWatch + SNS 조합이 표준 솔루션입니다.",
+    "explanation": "CloudWatch 알람은 메트릭 기반 알림을 위한 표준 AWS 서비스입니다.\n\nTrusted Advisor의 서비스 할당량 메트릭은 CloudWatch에 자동으로 게시되므로, CloudWatch 알람을 만들어 임계값(60%)에서 트리거할 수 있습니다.\n\nSNS는 이메일을 포함한 다양한 알림 채널을 지원하는 올바른 서비스입니다.\n\n옵션 B의 SQS는 메시지 큐이며, 이메일 알림을 위한 것이 아닙니다.\n\n옵션 C와 D의 AWS Service Health Dashboard는 AWS 인프라 상태를 보여주며, 개별 계정의 할당량 메트릭을 모니터링하는 데 사용되지 않습니다.\n\nCloudWatch + SNS 조합이 표준 솔루션입니다.",
     "en_q": "A company runs several workloads on AWS. The company identifies five AWS Trusted Advisor service quota metrics to monitor in a specific AWS Region. The company wants to receive email notification each time resource usage exceeds 60% of one of the service quotas. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Create five Amazon CloudWatch alarms, one for each Trusted Advisor service quota metric. Configure an Amazon Simple Notification Service (Amazon SNS) topic for email notification each time that usage exceeds 60% of one of the service quotas.",
@@ -3744,7 +3744,7 @@ window.SOA_QUESTIONS = [
       "D": "Amazon FSx File Gateway를 설정합니다."
     },
     "answer": "D",
-    "explanation": "Amazon FSx File Gateway는 Windows SMB 파일 공유에 대한 저지연 온프레미스 캐시를 제공합니다. FSx for Windows File Server 백엔드를 통해 온프레미스 사용자와 AWS 리소스 모두가 동일한 파일 공유에 접근할 수 있으며, 로컬 캐싱으로 인해 최소 지연 시간을 보장합니다. 옵션 A의 S3 File Gateway는 객체 스토리지용이며, 옵션 B의 Direct Connect는 네트워크 연결일 뿐 파일 공유 솔루션이 아닙니다. 옵션 C의 DataSync는 일회성 또는 정기적 동기화이며, 실시간 액세스를 제공하지 않습니다. FSx File Gateway가 Windows 파일 공유와 저지연 요구사항을 모두 충족합니다.",
+    "explanation": "Amazon FSx File Gateway는 Windows SMB 파일 공유에 대한 저지연 온프레미스 캐시를 제공합니다.\n\nFSx for Windows File Server 백엔드를 통해 온프레미스 사용자와 AWS 리소스 모두가 동일한 파일 공유에 접근할 수 있으며, 로컬 캐싱으로 인해 최소 지연 시간을 보장합니다.\n\n옵션 A의 S3 File Gateway는 객체 스토리지용이며, 옵션 B의 Direct Connect는 네트워크 연결일 뿐 파일 공유 솔루션이 아닙니다.\n\n옵션 C의 DataSync는 일회성 또는 정기적 동기화이며, 실시간 액세스를 제공하지 않습니다.\n\nFSx File Gateway가 Windows 파일 공유와 저지연 요구사항을 모두 충족합니다.",
     "en_q": "A company needs to implement a managed file system to host Windows file shares for users on premises. Resources in the AWS Cloud also need access to the data on these file shares. A SysOps administrator needs to present the user file shares on premises and make the user file shares available on AWS with minimum latency. What should the SysOps administrator do to meet these requirements?",
     "en_opts": {
       "A": "Set up an Amazon S3 File Gateway.",
@@ -3765,7 +3765,7 @@ window.SOA_QUESTIONS = [
       "D": "사용자 지정 PostgreSQL 확장을 사용하여 데이터베이스에 SSL/TLS를 패치합니다."
     },
     "answer": "C",
-    "explanation": "RDS의 매개변수 그룹에서 \"rds.force_ssl\" 파라미터를 1로 설정하면 데이터베이스에 대한 모든 연결이 SSL/TLS 암호화를 사용하도록 강제됩니다. 이는 데이터베이스 수준에서 연결 암호화를 활성화하는 표준 방법입니다. 옵션 A의 보안 그룹은 SSL 포트(5432)를 허용할 수 있지만, 실제로 SSL을 강제하지는 않습니다. 옵션 B의 KMS 암호화는 저장 데이터(at-rest)의 암호화이며, 전송 중(in-transit) 암호화가 아닙니다. 옵션 D는 PostgreSQL 확장이 필요 없습니다. 사용자 지정 파라미터 그룹의 rds.force_ssl 설정이 올바른 솔루션입니다.",
+    "explanation": "RDS의 매개변수 그룹에서 \"rds.force_ssl\" 파라미터를 1로 설정하면 데이터베이스에 대한 모든 연결이 SSL/TLS 암호화를 사용하도록 강제됩니다.\n\n이는 데이터베이스 수준에서 연결 암호화를 활성화하는 표준 방법입니다.\n\n옵션 A의 보안 그룹은 SSL 포트(5432)를 허용할 수 있지만, 실제로 SSL을 강제하지는 않습니다.\n\n옵션 B의 KMS 암호화는 저장 데이터(at-rest)의 암호화이며, 전송 중(in-transit) 암호화가 아닙니다.\n\n옵션 D는 PostgreSQL 확장이 필요 없습니다.\n\n사용자 지정 파라미터 그룹의 rds.force_ssl 설정이 올바른 솔루션입니다.",
     "en_q": "A company is hosting applications on Amazon EC2 instances. The company is hosting a database on an Amazon RDS for PostgreSQL DB instance. The company requires all connections to the DB instance to be encrypted. What should a SysOps administrator do to meet this requirement?",
     "en_opts": {
       "A": "Allow SSL connections to the database by using an inbound security group rule.",
@@ -3786,7 +3786,7 @@ window.SOA_QUESTIONS = [
       "D": "Savings Plans의 일일 이용률을 추적하기 위해 AWS Budgets를 사용하여 Savings Plans 예산을 만듭니다. 이용률이 주어진 날에 90% 아래로 떨어질 때 이메일 알림을 하도록 Amazon Simple Notification Service(Amazon SNS) 주제를 구성합니다."
     },
     "answer": "D",
-    "explanation": "AWS Budgets는 예산 추적뿐만 아니라 Savings Plans의 이용률을 모니터링하고 임계값 기반 알림을 설정할 수 있습니다. Savings Plans 예산을 만들고 90% 이용률 임계값을 설정한 후 SNS 주제로 알림을 보내면 요구사항을 충족합니다. 옵션 A의 Trusted Advisor 체크는 정기적 체크이며 실시간 모니터링이 아닙니다. 옵션 B의 SavingsPlansUtilization 메트릭은 존재하지 않거나 Budgets보다 덜 직관적입니다. 옵션 C의 Savings Plans 알림은 AWS Budgets보다 기능이 제한적입니다. AWS Budgets가 비용 및 이용률 추적에 최적화된 서비스입니다.",
+    "explanation": "AWS Budgets는 예산 추적뿐만 아니라 Savings Plans의 이용률을 모니터링하고 임계값 기반 알림을 설정할 수 있습니다.\n\nSavings Plans 예산을 만들고 90% 이용률 임계값을 설정한 후 SNS 주제로 알림을 보내면 요구사항을 충족합니다.\n\n옵션 A의 Trusted Advisor 체크는 정기적 체크이며 실시간 모니터링이 아닙니다.\n\n옵션 B의 SavingsPlansUtilization 메트릭은 존재하지 않거나 Budgets보다 덜 직관적입니다.\n\n옵션 C의 Savings Plans 알림은 AWS Budgets보다 기능이 제한적입니다.\n\nAWS Budgets가 비용 및 이용률 추적에 최적화된 서비스입니다.",
     "en_q": "A company recently purchased Savings Plans. The company wants to receive email notification when the company's utilization drops below 90% for a given day. Which solution will meet this requirement?",
     "en_opts": {
       "A": "Create an Amazon CloudWatch alarm to monitor the Savings Plan check in AWS Trusted Advisor. Configure an Amazon Simple Queue Service (Amazon SQS) queue for email notification when the utilization drops below 90% for a given day.",
@@ -3807,7 +3807,7 @@ window.SOA_QUESTIONS = [
       "D": "큐 유형을 SQS 표준에서 SQS FIFO로 수정합니다. 애플리케이션을 업데이트하여 동일한 메시지 본문을 가진 메시지를 보내고 메시지에 DelaySeconds 파라미터를 포함합니다."
     },
     "answer": "A",
-    "explanation": "SQS 표준 큐를 FIFO 큐로 직접 변환할 수 없습니다. 새 FIFO 큐를 생성해야 합니다. SQS FIFO는 다음 두 가지가 필요합니다. 첫째, 모든 메시지는 message group ID를 포함해야 하며, 둘째, 중복 제거를 처리해야 합니다. 고유한 메시지 본문이 있으므로 content-based deduplication을 활성화하면 각 고유한 메시지가 그룹 내에서 한 번만 전달됩니다. 옵션 B는 DelaySeconds가 필요하지 않습니다. 옵션 C와 D는 직접 변환이 불가능하므로 잘못되었습니다.",
+    "explanation": "SQS 표준 큐를 FIFO 큐로 직접 변환할 수 없습니다.\n\n새 FIFO 큐를 생성해야 합니다.\n\nSQS FIFO는 다음 두 가지가 필요합니다.\n\n첫째, 모든 메시지는 message group ID를 포함해야 하며, 둘째, 중복 제거를 처리해야 합니다.\n\n고유한 메시지 본문이 있으므로 content-based deduplication을 활성화하면 각 고유한 메시지가 그룹 내에서 한 번만 전달됩니다.\n\n옵션 B는 DelaySeconds가 필요하지 않습니다.\n\n옵션 C와 D는 직접 변환이 불가능하므로 잘못되었습니다.",
     "en_q": "A company uses an Amazon Simple Queue Service (Amazon SQS) standard queue with its application. The application sends messages to the queue with unique message bodies. The company decides to switch to an SQS FIFO queue. What must the company do to migrate to an SQS FIFO queue?",
     "en_opts": {
       "A": "Create a new SQS FIFO queue. Turn on content-based deduplication on the new FIFO queue. Update the application to include a message group ID in the messages.",
@@ -3829,7 +3829,7 @@ window.SOA_QUESTIONS = [
       "E": "Windows를 위한 태그 값을 사용하여 Systems Manager OpsItem을 만듭니다. Systems Manager Distributor 패키지를 OpsItem에 연결합니다. 패키지 배포에 특정한 유지보수 윈도우를 만듭니다. 유지보수 윈도우를 하루 24시간으로 커버하도록 구성합니다."
     },
     "answer": "AD",
-    "explanation": "정답은 A와 D입니다. 옵션 A: Systems Manager Distributor는 .msi 패키지 같은 애플리케이션 배포와 업데이트를 관리하는 올바른 도구입니다. 옵션 D: State Manager와 AWS-ConfigureAWSPackage 문서를 조합하면 인스턴스에 패키지를 설치하고 정기적으로 업데이트할 수 있습니다. 태그 기반 대상 지정으로 Windows 인스턴스만 선택되고, 1일 일정으로 자동 업데이트를 트리거합니다. 옵션 B는 필수 단계가 아니고, C의 AWS-RunRemoteScript는 일반적인 스크립트 실행이므로 패키지 배포에 최적화되지 않았으며, E의 OpsItem과 유지보수 윈도우는 불필요하게 복잡합니다. Distributor + State Manager + AWS-ConfigureAWSPackage 조합이 최소한의 노력으로 automated deployment를 구성합니다.",
+    "explanation": "정답은 A와 D입니다.\n\n옵션 A: Systems Manager Distributor는 .msi 패키지 같은 애플리케이션 배포와 업데이트를 관리하는 올바른 도구입니다.\n\n옵션 D: State Manager와 AWS-ConfigureAWSPackage 문서를 조합하면 인스턴스에 패키지를 설치하고 정기적으로 업데이트할 수 있습니다.\n\n태그 기반 대상 지정으로 Windows 인스턴스만 선택되고, 1일 일정으로 자동 업데이트를 트리거합니다.\n\n옵션 B는 필수 단계가 아니고, C의 AWS-RunRemoteScript는 일반적인 스크립트 실행이므로 패키지 배포에 최적화되지 않았으며, E의 OpsItem과 유지보수 윈도우는 불필요하게 복잡합니다.\n\nDistributor + State Manager + AWS-ConfigureAWSPackage 조합이 최소한의 노력으로 automated deployment를 구성합니다.",
     "en_q": "A company's SysOps administrator must ensure that all Amazon EC2 Windows instances that are launched in an AWS account have a third-party agent installed. The third-party agent has an .msi package. The company uses AWS Systems Manager for patching, and the Windows instances are tagged appropriately. The third-party agent requires periodic updates as new versions are released. The SysOps administrator must deploy these updates automatically. Which combination of steps will meet these requirements with the LEAST operational effort? (Choose two.)",
     "en_opts": {
       "A": "Create a Systems Manager Distributor package for the third-party agent.",
@@ -3851,7 +3851,7 @@ window.SOA_QUESTIONS = [
       "D": "모든 EC2 인스턴스를 cluster placement group에 추가합니다."
     },
     "answer": "A",
-    "explanation": "Amazon EBS gp2 볼륨의 IOPS는 볼륨 크기에 따라 결정됩니다. gp2는 GB당 3 IOPS를 제공하므로, 1GB 볼륨은 3000 IOPS를 제공합니다. 볼륨 크기를 증가시키면 IOPS도 선형적으로 증가합니다(예: 10GB로 늘리면 30000 IOPS). 이는 인스턴스 타입이나 EBS 타입 변경 없이 즉시 성능을 향상시킬 수 있으므로, 긴 테스트 없이 요구사항을 충족합니다. 옵션 B의 추가 ENI는 네트워크 성능과 관련이 있으며, 옵션 C의 Transfer Acceleration은 S3용이며, 옵션 D의 cluster placement group은 네트워크 지연을 줄이지만 IOPS를 증가시키지 않습니다. EBS 볼륨 크기 증가가 가장 빠르고 효과적입니다.",
+    "explanation": "Amazon EBS gp2 볼륨의 IOPS는 볼륨 크기에 따라 결정됩니다.\n\ngp2는 GB당 3 IOPS를 제공하므로, 1GB 볼륨은 3000 IOPS를 제공합니다.\n\n볼륨 크기를 증가시키면 IOPS도 선형적으로 증가합니다(예: 10GB로 늘리면 30000 IOPS). 이는 인스턴스 타입이나 EBS 타입 변경 없이 즉시 성능을 향상시킬 수 있으므로, 긴 테스트 없이 요구사항을 충족합니다.\n\n옵션 B의 추가 ENI는 네트워크 성능과 관련이 있으며, 옵션 C의 Transfer Acceleration은 S3용이며, 옵션 D의 cluster placement group은 네트워크 지연을 줄이지만 IOPS를 증가시키지 않습니다.\n\nEBS 볼륨 크기 증가가 가장 빠르고 효과적입니다.",
     "en_q": "A company runs hundreds of Amazon EC2 instances in a single AWS Region. Each EC2 instance has two attached 1 GiB General Purpose SSD (gp2) Amazon Elastic Block Store (Amazon EBS) volumes. A critical workload is using all the available IOPS capacity on the EBS volumes. According to company policy, the company cannot change instance types or EBS volume types without completing lengthy acceptance tests to validate that the company's applications will function properly. A SysOps administrator needs to increase the I/O performance of the EBS volumes as quickly as possible. Which action should the SysOps administrator take to meet these requirements?",
     "en_opts": {
       "A": "Increase the size of the 1 GiB EBS volumes.",
@@ -3872,7 +3872,7 @@ window.SOA_QUESTIONS = [
       "D": "새 AWS Key Management Service(AWS KMS) 고객 관리 키를 만듭니다. 자동 키 로테이션을 활성화합니다. RDS DB 인스턴스에 연결된 Amazon Elastic Block Store(Amazon EBS) 볼륨의 암호화를 활성화합니다."
     },
     "answer": "C",
-    "explanation": "AWS RDS는 저장 데이터 암호화를 지원하며, KMS 키를 사용합니다. KMS 고객 관리 키를 생성하고 자동 키 로테이션을 활성화하면 AWS가 연 1회 자동으로 키를 로테이션합니다. 데이터베이스 생성 시 이 KMS 키를 지정하면 모든 데이터가 암호화됩니다. 옵션 A의 TDE는 MySQL 자체 암호화이며 AWS 관리가 아닙니다. 옵션 B의 AWS 관리 키는 자동 로테이션 제어가 불가능합니다. 옵션 D는 EBS 암호화이지만, RDS 데이터베이스 인스턴스의 EBS 볼륨은 자동으로 암호화되지 않으며, 데이터베이스 자체 암호화가 아닙니다. 고객 관리 KMS 키 + 자동 로테이션 + RDS 암호화 활성화가 올바른 솔루션입니다.",
+    "explanation": "AWS RDS는 저장 데이터 암호화를 지원하며, KMS 키를 사용합니다.\n\nKMS 고객 관리 키를 생성하고 자동 키 로테이션을 활성화하면 AWS가 연 1회 자동으로 키를 로테이션합니다.\n\n데이터베이스 생성 시 이 KMS 키를 지정하면 모든 데이터가 암호화됩니다.\n\n옵션 A의 TDE는 MySQL 자체 암호화이며 AWS 관리가 아닙니다.\n\n옵션 B의 AWS 관리 키는 자동 로테이션 제어가 불가능합니다.\n\n옵션 D는 EBS 암호화이지만, RDS 데이터베이스 인스턴스의 EBS 볼륨은 자동으로 암호화되지 않으며, 데이터베이스 자체 암호화가 아닙니다.\n\n고객 관리 KMS 키 + 자동 로테이션 + RDS 암호화 활성화가 올바른 솔루션입니다.",
     "en_q": "A company needs to deploy a new workload on AWS. The company must encrypt all data at rest and must rotate the encryption keys once each year. The workload uses an Amazon RDS for MySQL Multi-AZ database for data storage. Which configuration approach will meet these requirements?",
     "en_opts": {
       "A": "Enable Transparent Data Encryption (TDE) in the MySQL configuration file. Manually rotate the key every 12 months.",
@@ -3893,7 +3893,7 @@ window.SOA_QUESTIONS = [
       "D": "Auto Scaling 그룹을 위해 EC2 상태 확인을 구성합니다. 주 리전의 ALB에 target group을 추가합니다. 보조 리전의 EC2 인스턴스를 대상으로 포함합니다."
     },
     "answer": "A",
-    "explanation": "Route 53의 failover routing policy는 활성화된 리전이 건강하지 않으면 자동으로 보조 리전으로 트래픽을 전환합니다. Alias 레코드는 AWS 리소스(ALB 포함)를 가리킬 수 있으며, \"Evaluate Target Health\"를 Yes로 설정하면 Route 53이 ALB의 상태를 평가합니다. ALB가 건강하지 않으면 failover가 트리거됩니다. 옵션 B의 CNAME은 alias 레코드가 아니므로 AWS 리소스를 직접 가리킬 수 없습니다. 옵션 C와 D는 target group을 구성하지만, 이는 failover 메커니즘이 아니며, 주 리전의 ALB에 보조 리전 인스턴스를 추가하는 것은 잘못된 구조입니다. Route 53 failover routing policy + alias records + Evaluate Target Health가 표준 다중 리전 failover 솔루션입니다.",
+    "explanation": "Route 53의 failover routing policy는 활성화된 리전이 건강하지 않으면 자동으로 보조 리전으로 트래픽을 전환합니다.\n\nAlias 레코드는 AWS 리소스(ALB 포함)를 가리킬 수 있으며, \"Evaluate Target Health\"를 Yes로 설정하면 Route 53이 ALB의 상태를 평가합니다.\n\nALB가 건강하지 않으면 failover가 트리거됩니다.\n\n옵션 B의 CNAME은 alias 레코드가 아니므로 AWS 리소스를 직접 가리킬 수 없습니다.\n\n옵션 C와 D는 target group을 구성하지만, 이는 failover 메커니즘이 아니며, 주 리전의 ALB에 보조 리전 인스턴스를 추가하는 것은 잘못된 구조입니다.\n\nRoute 53 failover routing policy + alias records + Evaluate Target Health가 표준 다중 리전 failover 솔루션입니다.",
     "en_q": "A company has an application that is deployed to two AWS Regions in an active-passive configuration. The application runs on Amazon EC2 instances behind an Application Load Balancer (ALB) in each Region. The instances are in an Amazon EC2 Auto Scaling group in each Region. The application uses an Amazon Route 53 hosted zone for DNS. A SysOps administrator needs to configure automatic failover to the secondary Region. What should the SysOps administrator do to meet these requirements?",
     "en_opts": {
       "A": "Configure Route 53 alias records that point to each ALB. Choose a failover routing policy. Set Evaluate Target Health to Yes.",
@@ -3914,7 +3914,7 @@ window.SOA_QUESTIONS = [
       "D": "EventBridge(CloudWatch Events) 규칙을 구성하여 오류 메시지를 Amazon Simple Notification Service(Amazon SNS) 주제로 보냅니다."
     },
     "answer": "B",
-    "explanation": "EventBridge의 dead-letter queue(DLQ) 기능은 대상으로 전달할 수 없는 이벤트를 SQS 큐에 저장합니다. 이렇게 저장된 메시지는 실패한 요청의 전체 정보를 포함합니다. SQS 큐에서 메시지를 처리하여 오류 세부정보를 분석할 수 있습니다. 이는 minimal operational effort로 구현할 수 있습니다. 옵션 A의 archive와 replay는 이벤트 재실행이지만, 오류의 원인을 알 수 없습니다. 옵션 C는 Lambda 추가 함수 필요하고, 옵션 D의 SNS는 오류 메시지를 보낼 수 없습니다. DLQ가 실패 원인을 추적하는 가장 간단한 방법입니다.",
+    "explanation": "EventBridge의 dead-letter queue(DLQ) 기능은 대상으로 전달할 수 없는 이벤트를 SQS 큐에 저장합니다.\n\n이렇게 저장된 메시지는 실패한 요청의 전체 정보를 포함합니다.\n\nSQS 큐에서 메시지를 처리하여 오류 세부정보를 분석할 수 있습니다.\n\n이는 minimal operational effort로 구현할 수 있습니다.\n\n옵션 A의 archive와 replay는 이벤트 재실행이지만, 오류의 원인을 알 수 없습니다.\n\n옵션 C는 Lambda 추가 함수 필요하고, 옵션 D의 SNS는 오류 메시지를 보낼 수 없습니다.\n\nDLQ가 실패 원인을 추적하는 가장 간단한 방법입니다.",
     "en_q": "A company is implementing a monitoring solution that is based on machine learning. The monitoring solution consumes Amazon EventBridge (Amazon CloudWatch Events) events that are generated by Amazon EC2 Auto Scaling. The monitoring solution provides detection of anomalous behavior such as unanticipated scaling events and is configured as an EventBridge (CloudWatch Events) API destination. During initial testing, the company discovers that the monitoring solution is not receiving events. However, Amazon CloudWatch is showing that the EventBridge (CloudWatch Events) rule is being invoked. A SysOps administrator must implement a solution to retrieve client error details to help resolve this issue. Which solution will meet these requirements with the LEAST operational effort?",
     "en_opts": {
       "A": "Create an EventBridge (CloudWatch Events) archive for the event pattern to replay the events. Increase the logging on the monitoring solution. Use replay to invoke the monitoring solution. Examine the error details.",
@@ -3935,7 +3935,7 @@ window.SOA_QUESTIONS = [
       "D": "새 S3 버킷에서 S3 Object Lock을 governance mode로 활성화합니다. 모든 백업을 새 S3 버킷에 3개월의 retention period로 배치합니다."
     },
     "answer": "B",
-    "explanation": "S3 Object Lock의 compliance mode는 WORM(Write-Once, Read-Many) 보호를 제공하므로, 보존 기간(retention period) 동안 어떤 사용자도 객체를 삭제할 수 없습니다. 관리자도 예외가 아닙니다. 3개월의 보존 기간을 설정하면 정확히 요구사항을 충족합니다. 옵션 A는 3개월 후 IAM 정책을 수동으로 제거해야 하므로 자동화되지 않습니다. 옵션 C의 Lifecycle 규칙은 백업을 보호하지 않습니다. 옵션 D의 governance mode는 사용자가 보존 기간을 단축할 수 있으므로, compliance mode보다 덜 안전합니다. S3 Object Lock compliance mode가 장기 아카이브 보호의 표준입니다.",
+    "explanation": "S3 Object Lock의 compliance mode는 WORM(Write-Once, Read-Many) 보호를 제공하므로, 보존 기간(retention period) 동안 어떤 사용자도 객체를 삭제할 수 없습니다.\n\n관리자도 예외가 아닙니다.\n\n3개월의 보존 기간을 설정하면 정확히 요구사항을 충족합니다.\n\n옵션 A는 3개월 후 IAM 정책을 수동으로 제거해야 하므로 자동화되지 않습니다.\n\n옵션 C의 Lifecycle 규칙은 백업을 보호하지 않습니다.\n\n옵션 D의 governance mode는 사용자가 보존 기간을 단축할 수 있으므로, compliance mode보다 덜 안전합니다.\n\nS3 Object Lock compliance mode가 장기 아카이브 보호의 표준입니다.",
     "en_q": "A company is storing backups in an Amazon S3 bucket. The backups must not be deleted for at least 3 months after the backups are created. What should a SysOps administrator do to meet this requirement?",
     "en_opts": {
       "A": "Configure an IAM policy that denies the s3:DeleteObject action for all users. Three months after an object is written, remove the policy.",
@@ -3956,7 +3956,7 @@ window.SOA_QUESTIONS = [
       "D": "VPC flow log를 설정합니다. AWS Lambda 함수에 대한 구독 필터를 설정하여 데이터 전송을 분석합니다. 비용이 임계값의 75%에 도달할 때 이메일 배포 목록에 알림을 보내도록 Lambda 함수를 구성합니다."
     },
     "answer": "C",
-    "explanation": "AWS Budgets는 비용 추적 및 비용 기반 알림을 위한 서비스입니다. 데이터 전송 비용에 대한 비용 예산을 만들고 75% 임계값을 설정한 후 알림을 구성하면 요구사항을 충족합니다. 옵션 A의 Cost and Usage Report는 사후 분석이며 실시간 알림이 아닙니다. 옵션 B의 CloudWatch billing alarm은 기능이 제한적입니다. 옵션 D의 VPC flow log는 트래픽을 추적하지만 비용 계산은 자동화되지 않습니다. AWS Budgets가 비용 기반 알림의 표준 솔루션입니다.",
+    "explanation": "AWS Budgets는 비용 추적 및 비용 기반 알림을 위한 서비스입니다.\n\n데이터 전송 비용에 대한 비용 예산을 만들고 75% 임계값을 설정한 후 알림을 구성하면 요구사항을 충족합니다.\n\n옵션 A의 Cost and Usage Report는 사후 분석이며 실시간 알림이 아닙니다.\n\n옵션 B의 CloudWatch billing alarm은 기능이 제한적입니다.\n\n옵션 D의 VPC flow log는 트래픽을 추적하지만 비용 계산은 자동화되지 않습니다.\n\nAWS Budgets가 비용 기반 알림의 표준 솔루션입니다.",
     "en_q": "A SysOps administrator needs to track the costs of data transfer between AWS Regions. The SysOps administrator must implement a solution to send alerts to an email distribution list when transfer costs reach 75% of a specific threshold. What should the SysOps administrator do to meet these requirements?",
     "en_opts": {
       "A": "Create an AWS Cost and Usage Report. Analyze the results in Amazon Athena. Configure an alarm to publish a message to an Amazon Simple Notification Service (Amazon SNS) topic when costs reach 75% of the threshold. Subscribe the email distribution list to the topic.",
@@ -3977,7 +3977,7 @@ window.SOA_QUESTIONS = [
       "D": "Amazon S3 Standard-Infrequent Access(S3 Standard-IA)에 데이터를 저장합니다. 다중 인증(MFA)을 구성합니다."
     },
     "answer": "B",
-    "explanation": "Amazon S3 Glacier와 vault lock policy는 WORM 보호를 제공하므로, 데이터를 읽을 수는 있지만 수정하거나 삭제할 수 없습니다. 10년 장기 아카이브와 편집 보호 요구사항을 모두 충족합니다. Glacier는 아카이브 저장소로 설계되었고, 비용 효율적이며, 규정 준수 목적에 적합합니다. 옵션 A의 EBS는 아카이브용이 아니며, 옵션 C와 D의 S3 Standard-IA는 WORM 보호를 제공하지 않습니다. Vault lock policy가 편집 방지의 핵심입니다.",
+    "explanation": "Amazon S3 Glacier와 vault lock policy는 WORM 보호를 제공하므로, 데이터를 읽을 수는 있지만 수정하거나 삭제할 수 없습니다.\n\n10년 장기 아카이브와 편집 보호 요구사항을 모두 충족합니다.\n\nGlacier는 아카이브 저장소로 설계되었고, 비용 효율적이며, 규정 준수 목적에 적합합니다.\n\n옵션 A의 EBS는 아카이브용이 아니며, 옵션 C와 D의 S3 Standard-IA는 WORM 보호를 제공하지 않습니다.\n\nVault lock policy가 편집 방지의 핵심입니다.",
     "en_q": "A company needs to archive all audit logs for 10 years. The company must protect the logs from any future edits. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Store the data in an Amazon Elastic Block Store (Amazon EBS) volume. Configure AWS Key Management Service (AWS KMS) encryption.",
@@ -3998,7 +3998,7 @@ window.SOA_QUESTIONS = [
       "D": "필요한 코드를 사용자 지정 레이어에 로드합니다."
     },
     "answer": "C",
-    "explanation": "AWS Lambda는 할당된 메모리에 비례하여 CPU를 할당합니다. 메모리를 증가시키면 CPU 성능도 증가합니다. CPU 집약적 작업의 경우 메모리(및 따라서 CPU)를 증가시키는 것이 성능을 개선하는 가장 직접적인 방법입니다. 옵션 A의 hyperthreading은 Lambda에서 제어할 수 없습니다. 옵션 B의 AWS 관리 암호화 비활성화는 보안을 해치며 성능 향상이 미미합니다. 옵션 D의 사용자 지정 레이어는 코드 배포와 관련이 있지만 CPU 성능과는 무관합니다. 메모리 증가가 Lambda의 CPU 성능을 향상시키는 표준 방법입니다.",
+    "explanation": "AWS Lambda는 할당된 메모리에 비례하여 CPU를 할당합니다.\n\n메모리를 증가시키면 CPU 성능도 증가합니다.\n\nCPU 집약적 작업의 경우 메모리(및 따라서 CPU)를 증가시키는 것이 성능을 개선하는 가장 직접적인 방법입니다.\n\n옵션 A의 hyperthreading은 Lambda에서 제어할 수 없습니다.\n\n옵션 B의 AWS 관리 암호화 비활성화는 보안을 해치며 성능 향상이 미미합니다.\n\n옵션 D의 사용자 지정 레이어는 코드 배포와 관련이 있지만 CPU 성능과는 무관합니다.\n\n메모리 증가가 Lambda의 CPU 성능을 향상시키는 표준 방법입니다.",
     "en_q": "A company's AWS Lambda function is experiencing performance issues. The Lambda function performs many CPU-intensive operations. The Lambda function is not running fast enough and is creating bottlenecks in the system. What should a SysOps administrator do to resolve this issue?",
     "en_opts": {
       "A": "In the CPU launch options for the Lambda function, activate hyperthreading.",
@@ -4019,7 +4019,7 @@ window.SOA_QUESTIONS = [
       "D": "지난 시간 동안 로그 이벤트의 404 코드 수를 계산하는 CloudWatch Logs Insights 쿼리를 실행하는 스크립트를 만듭니다."
     },
     "answer": "A",
-    "explanation": "CloudWatch Logs metric filter는 로그 데이터를 분석하고 특정 패턴(예: \"404\")과 일치하는 로그를 기반으로 메트릭을 자동으로 생성합니다. 이 메트릭은 CloudWatch 대시보드와 알람에서 사용할 수 있습니다. 설정 후 지속적이고 자동적으로 작동하므로 operational effort가 최소입니다. 옵션 B의 subscription filter는 로그를 다른 서비스(Lambda, Kinesis 등)로 스트리밍하지만, 메트릭 생성이 아닙니다. 옵션 C와 D의 Lambda/스크립트는 수동 실행이나 별도 스케줄링이 필요하므로, 자동화가 덜 효율적입니다. Metric filter가 가장 간단하고 자동화된 솔루션입니다.",
+    "explanation": "CloudWatch Logs metric filter는 로그 데이터를 분석하고 특정 패턴(예: \"404\")과 일치하는 로그를 기반으로 메트릭을 자동으로 생성합니다.\n\n이 메트릭은 CloudWatch 대시보드와 알람에서 사용할 수 있습니다.\n\n설정 후 지속적이고 자동적으로 작동하므로 operational effort가 최소입니다.\n\n옵션 B의 subscription filter는 로그를 다른 서비스(Lambda, Kinesis 등)로 스트리밍하지만, 메트릭 생성이 아닙니다.\n\n옵션 C와 D의 Lambda/스크립트는 수동 실행이나 별도 스케줄링이 필요하므로, 자동화가 덜 효율적입니다.\n\nMetric filter가 가장 간단하고 자동화된 솔루션입니다.",
     "en_q": "A company hosts a web application on an Amazon EC2 instance. The web server logs are published to Amazon CloudWatch Logs. The log events have the same structure and include the HTTP response codes that are associated with the user requests. The company needs to monitor the number of times that the web server returns an HTTP 404 response. What is the MOST operationally efficient solution that meets these requirements?",
     "en_opts": {
       "A": "Create a CloudWatch Logs metric filter that counts the number of times that the web server returns an HTTP 404 response.",
@@ -4040,7 +4040,7 @@ window.SOA_QUESTIONS = [
       "D": "새 AWS 비용 및 사용량 보고서를 만듭니다. 리소스 ID를 포함합니다."
     },
     "answer": "B",
-    "explanation": "AWS에서는 비용 추적을 위해 두 가지 유형의 태그를 지원합니다. AWS 생성 태그는 AWS에서 자동으로 생성되는 태그(예: aws:cloudformation:stack-name)이고, 사용자 정의 태그는 사용자가 직접 생성하고 할당하는 태그입니다. 회사에서 정의한 태그를 청구 보고서에 나타나도록 하려면 이러한 사용자 정의 태그를 Cost Allocation Tags로 활성화해야 합니다. Billing 콘솔에서 Tags 메뉴로 이동하여 사용자 정의 태그를 \"Activate\" 버튼으로 활성화하면, AWS 비용 및 사용량 보고서(CUR)에서 이 태그로 필터링하고 비용을 분석할 수 있습니다. AWS 생성 비용 할당 태그는 이미 활성화되어 있으며 사용자가 활성화할 수 없습니다. 비용 범주는 일반적으로 비용 이상 현상 탐지나 특정 비용 분석 시나리오에 사용되며, AWS 비용 및 사용량 보고서는 비용 데이터의 기본 소스이지만 태그 활성화와는 별개입니다.",
+    "explanation": "AWS에서는 비용 추적을 위해 두 가지 유형의 태그를 지원합니다.\n\nAWS 생성 태그는 AWS에서 자동으로 생성되는 태그(예: aws:cloudformation:stack-name)이고, 사용자 정의 태그는 사용자가 직접 생성하고 할당하는 태그입니다.\n\n회사에서 정의한 태그를 청구 보고서에 나타나도록 하려면 이러한 사용자 정의 태그를 Cost Allocation Tags로 활성화해야 합니다.\n\nBilling 콘솔에서 Tags 메뉴로 이동하여 사용자 정의 태그를 \"Activate\" 버튼으로 활성화하면, AWS 비용 및 사용량 보고서(CUR)에서 이 태그로 필터링하고 비용을 분석할 수 있습니다.\n\nAWS 생성 비용 할당 태그는 이미 활성화되어 있으며 사용자가 활성화할 수 없습니다.\n\n비용 범주는 일반적으로 비용 이상 현상 탐지나 특정 비용 분석 시나리오에 사용되며, AWS 비용 및 사용량 보고서는 비용 데이터의 기본 소스이지만 태그 활성화와는 별개입니다.",
     "en_q": "A company is attempting to manage its costs in the AWS Cloud. A SysOps administrator needs specific company-defined tags that are assigned to resources to appear on the billing report. What should the SysOps administrator do to meet this requirement?",
     "en_opts": {
       "A": "Activate the tags as AWS generated cost allocation tags.",
@@ -4061,7 +4061,7 @@ window.SOA_QUESTIONS = [
       "D": "AWS Lambda 함수를 Python 런타임으로 예약합니다. EBS 볼륨 스냅샷을 만들고, 암호화되지 않은 스냅샷을 암호화하고, 스냅샷을 다른 리전으로 복사하도록 Lambda 함수를 구성합니다."
     },
     "answer": "A",
-    "explanation": "Amazon Data Lifecycle Manager(DLM)는 EBS 스냅샷의 생성, 보존, 삭제를 자동화하는 가장 효율적인 방법입니다. DLM을 사용하면 라이프사이클 정책을 정의하여 정기적으로 스냅샷을 생성하고 자동으로 다른 리전으로 복사할 수 있습니다. DLM에서 스냅샷 복사본을 생성할 때 \"Encrypt snapshot copies\" 옵션을 활성화하면 KMS 키를 사용하여 자동으로 암호화됩니다. 이는 관리 오버헤드가 최소이며, 암호화된 및 암호화되지 않은 모든 볼륨의 데이터를 암호화된 스냅샷으로 보장합니다. 옵션 B는 암호화되지 않은 스냅샷을 만드는 것으로 부적절하고, 옵션 C는 S3로의 복사는 스냅샷 관리에 덜 효율적이며, 옵션 D는 Lambda를 통한 수동 관리로 오버헤드가 더 큽니다.",
+    "explanation": "Amazon Data Lifecycle Manager(DLM)는 EBS 스냅샷의 생성, 보존, 삭제를 자동화하는 가장 효율적인 방법입니다. DLM을 사용하면 라이프사이클 정책을 정의하여 정기적으로 스냅샷을 생성하고 자동으로 다른 리전으로 복사할 수 있습니다. DLM에서 스냅샷 복사본을 생성할 때 \"Encrypt snapshot copies\" 옵션을 활성화하면 KMS 키를 사용하여 자동으로 암호화됩니다. 이는 관리 오버헤드가 최소이며, 암호화된 및 암호화되지 않은 모든 볼륨의 데이터를 암호화된 스냅샷으로 보장합니다.\n\n옵션 B는 암호화되지 않은 스냅샷을 만드는 것으로 부적절하고,\n\n옵션 C는 S3로의 복사는 스냅샷 관리에 덜 효율적이며,\n\n옵션 D는 Lambda를 통한 수동 관리로 오버헤드가 더 큽니다.",
     "en_q": "A company is expanding globally and needs to back up data on Amazon Elastic Block Store (Amazon EBS) volumes to a different AWS Region. Most of the EBS volumes that store the data are encrypted, but some of the EBS volumes are unencrypted. The company needs the backup data from all the EBS volumes to be encrypted. Which solution will meet these requirements with the LEAST management overhead?",
     "en_opts": {
       "A": "Configure a lifecycle policy in Amazon Data Lifecycle Manager (Amazon DLM) to create the EBS volume snapshots with cross-Region backups enabled. Encrypt the snapshot copies by using AWS Key Management Service (AWS KMS).",
@@ -4082,7 +4082,7 @@ window.SOA_QUESTIONS = [
       "D": "eks-connector.yaml 파일"
     },
     "answer": "A",
-    "explanation": "kubectl이 EKS 클러스터와 통신하려면 kubeconfig 파일이 필요합니다. kubeconfig 파일은 클러스터의 API 서버 엔드포인트, 인증 정보, 컨텍스트 등을 포함하는 구성 파일입니다. AWS EKS에서 클러스터를 생성한 후 AWS CLI 명령어 \"aws eks update-kubeconfig\"를 실행하면 로컬 ~/.kube/config 파일이 자동으로 업데이트됩니다. kube-proxy 애드온은 쿠버네티스 클러스터 내에서 네트워크 프록시 역할을 수행하지만, kubectl 클라이언트가 API 서버와 통신하기 위해 필수적이지 않습니다. Fargate 프로파일은 EKS에서 Fargate를 사용할 때 포드가 실행될 namespace와 label을 정의하지만, kubectl 통신과는 무관합니다. eks-connector.yaml은 존재하지 않는 파일입니다.",
+    "explanation": "kubectl이 EKS 클러스터와 통신하려면 kubeconfig 파일이 필요합니다.\n\nkubeconfig 파일은 클러스터의 API 서버 엔드포인트, 인증 정보, 컨텍스트 등을 포함하는 구성 파일입니다.\n\nAWS EKS에서 클러스터를 생성한 후 AWS CLI 명령어 \"aws eks update-kubeconfig\"를 실행하면 로컬 ~/.kube/config 파일이 자동으로 업데이트됩니다.\n\nkube-proxy 애드온은 쿠버네티스 클러스터 내에서 네트워크 프록시 역할을 수행하지만, kubectl 클라이언트가 API 서버와 통신하기 위해 필수적이지 않습니다.\n\nFargate 프로파일은 EKS에서 Fargate를 사용할 때 포드가 실행될 namespace와 label을 정의하지만, kubectl 통신과는 무관합니다.\n\neks-connector.yaml은 존재하지 않는 파일입니다.",
     "en_q": "A SysOps administrator creates an Amazon Elastic Kubernetes Service (Amazon EKS) cluster that uses AWS Fargate. The cluster is deployed successfully. The SysOps administrator needs to manage the cluster by using the kubectl command line tool. Which of the following must be configured on the SysOps administrator's machine so that kubectl can communicate with the cluster API server?",
     "en_opts": {
       "A": "The kubeconfig file",
@@ -4103,7 +4103,7 @@ window.SOA_QUESTIONS = [
       "D": "처음 90일 동안 S3 Standard에 데이터를 저장합니다. S3 Lifecycle 규칙을 설정하여 90일 후 데이터를 S3 Glacier Deep Archive로 이동합니다."
     },
     "answer": "A",
-    "explanation": "이 문제는 비용 효율성과 성능 요구 사항 간의 균형을 맞춰야 합니다. 처음 90일간 데이터는 자주 액세스하지 않지만 밀리초 단위 응답 시간이 필요하므로, S3 Standard-IA가 S3 Standard보다 비용이 저렴하면서도 높은 가용성(99.9%)과 빠른 검색 시간을 제공합니다. One Zone-IA는 더 저렴하지만 단일 가용 영역에만 저장되므로 \"항상 사용 가능\"하다는 요구 사항에 맞지 않습니다. 90일 후에는 5시간 이내 검색 시간을 충족해야 하므로, S3 Glacier Flexible Retrieval(표준 검색 1-5분, 대량 검색 5-12시간)이 S3 Glacier Deep Archive(표준 검색 12시간, 대량 검색 48시간)보다 적합합니다. 따라서 Standard-IA에서 Glacier Flexible Retrieval로의 전환이 최적입니다.",
+    "explanation": "이 문제는 비용 효율성과 성능 요구 사항 간의 균형을 맞춰야 합니다.\n\n처음 90일간 데이터는 자주 액세스하지 않지만 밀리초 단위 응답 시간이 필요하므로, S3 Standard-IA가 S3 Standard보다 비용이 저렴하면서도 높은 가용성(99.9%)과 빠른 검색 시간을 제공합니다.\n\nOne Zone-IA는 더 저렴하지만 단일 가용 영역에만 저장되므로 \"항상 사용 가능\"하다는 요구 사항에 맞지 않습니다.\n\n90일 후에는 5시간 이내 검색 시간을 충족해야 하므로, S3 Glacier Flexible Retrieval(표준 검색 1-5분, 대량 검색 5-12시간)이 S3 Glacier Deep Archive(표준 검색 12시간, 대량 검색 48시간)보다 적합합니다.\n\n따라서 Standard-IA에서 Glacier Flexible Retrieval로의 전환이 최적입니다.",
     "en_q": "A company wants to collect data from an application to use for analytics. For the first 90 days, the data will be infrequently accessed but must remain highly available. During this time, the company's analytics team requires access to the data in milliseconds. However, after 90 days, the company must retain the data for the long term at a lower cost. The retrieval time after 90 days must be less than 5 hours. Which solution will meet these requirements MOST cost-effectively?",
     "en_opts": {
       "A": "Store the data in S3 Standard-Infrequent Access (S3 Standard-IA) for the first 90 days. Set up an S3 Lifecycle rule to move the data to S3 Glacier Flexible Retrieval after 90 days.",
@@ -4124,7 +4124,7 @@ window.SOA_QUESTIONS = [
       "D": "AWS CloudTrail을 켭니다. AWS Identity and Access Management Access Analyzer를 사용하여 정책을 생성합니다."
     },
     "answer": "D",
-    "explanation": "IAM Access Analyzer의 Policy Generator 기능은 CloudTrail 로그를 분석하여 실제 사용된 API 호출을 기반으로 최소 권한 정책을 생성합니다. 이 기능은 Over-provisioned 권한을 축소하는 데 매우 효과적입니다. 먼저 CloudTrail을 활성화하여 애플리케이션의 모든 API 호출을 기록한 후, IAM Access Analyzer의 Policy Generator를 사용하여 CloudTrail 로그를 분석합니다. 이를 통해 실제로 사용되는 API만을 포함하는 정책이 생성됩니다. get-generated-policy CLI 명령은 이미 생성된 정책을 가져오는 명령이지 정책을 생성하는 것이 아니며, Security Hub는 보안 구성 검토 도구이지 IAM 정책 생성 도구가 아니고, EventBridge는 이벤트 라우팅 서비스입니다.",
+    "explanation": "IAM Access Analyzer의 Policy Generator 기능은 CloudTrail 로그를 분석하여 실제 사용된 API 호출을 기반으로 최소 권한 정책을 생성합니다.\n\n이 기능은 Over-provisioned 권한을 축소하는 데 매우 효과적입니다.\n\n먼저 CloudTrail을 활성화하여 애플리케이션의 모든 API 호출을 기록한 후, IAM Access Analyzer의 Policy Generator를 사용하여 CloudTrail 로그를 분석합니다.\n\n이를 통해 실제로 사용되는 API만을 포함하는 정책이 생성됩니다.\n\nget-generated-policy CLI 명령은 이미 생성된 정책을 가져오는 명령이지 정책을 생성하는 것이 아니며, Security Hub는 보안 구성 검토 도구이지 IAM 정책 생성 도구가 아니고, EventBridge는 이벤트 라우팅 서비스입니다.",
     "en_q": "A company's application currently uses an IAM role that allows all access to all AWS services. A SysOps administrator must ensure that the company's IAM policies allow only the permissions that the application requires. How can the SysOps administrator create a policy to meet this requirement?",
     "en_opts": {
       "A": "Turn on AWS CloudTrail. Generate a policy by using AWS Security Hub.",
@@ -4145,7 +4145,7 @@ window.SOA_QUESTIONS = [
       "D": "시작 템플릿을 사용하여 2개의 Amazon EC2 Auto Scaling 그룹을 정의합니다. 시작 템플릿에서 제공된 AMI를 사용합니다. 한 Auto Scaling 그룹에는 3개의 온디맨드 인스턴스를 구성합니다. 다른 Auto Scaling 그룹에는 3개의 Spot 인스턴스를 구성합니다. Spot 인스턴스가 있는 Auto Scaling 그룹의 시작 템플릿에서 최대 Spot Instance 가격을 구성합니다."
     },
     "answer": "B",
-    "explanation": "이 문제는 온디맨드와 Spot 인스턴스를 혼합하여 사용해야 하는 시나리오입니다. 최신 AWS 모범 사례는 시작 구성보다 시작 템플릿을 사용하는 것입니다. 시작 템플릿은 더 많은 기능(예: 여러 인스턴스 타입 지원, VPC 기본 지원)을 제공하며 Auto Scaling 그룹에서 온디맨드와 Spot 인스턴스를 동일한 그룹 내에서 혼합할 수 있습니다. 옵션 B는 단일 Auto Scaling 그룹을 사용하여 관리 오버헤드를 최소화하면서도 필요한 기능을 모두 제공합니다. 옵션 A는 시작 구성을 사용하므로 레거시입니다. 옵션 C와 D는 두 개의 Auto Scaling 그룹으로 관리 복잡성을 증가시킵니다.",
+    "explanation": "이 문제는 온디맨드와 Spot 인스턴스를 혼합하여 사용해야 하는 시나리오입니다. 최신 AWS 모범 사례는 시작 구성보다 시작 템플릿을 사용하는 것입니다. 시작 템플릿은 더 많은 기능(예: 여러 인스턴스 타입 지원, VPC 기본 지원)을 제공하며 Auto Scaling 그룹에서 온디맨드와 Spot 인스턴스를 동일한 그룹 내에서 혼합할 수 있습니다.\n\n옵션 B는 단일 Auto Scaling 그룹을 사용하여 관리 오버헤드를 최소화하면서도 필요한 기능을 모두 제공합니다.\n\n옵션 A는 시작 구성을 사용하므로 레거시입니다. 옵션 C와 D는 두 개의 Auto Scaling 그룹으로 관리 복잡성을 증가시킵니다.",
     "en_q": "A company is deploying a third-party unit testing solution that is delivered as an Amazon EC2 Amazon Machine Image (AMI). All system configuration data is stored in Amazon DynamoDB. The testing results are stored in Amazon S3. A minimum of three EC2 instances are required to operate the product. The company's testing team wants to use an additional three EC2 instances when the Spot Instance prices are at a certain threshold. A SysOps administrator must implement a highly available solution that provides this functionality. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Define an Amazon EC2 Auto Scaling group by using a launch configuration. Use the provided AMI in the launch configuration. Configure three On-Demand Instances and three Spot Instances. Configure a maximum Spot Instance price in the launch configuration.",
@@ -4166,7 +4166,7 @@ window.SOA_QUESTIONS = [
       "D": "AWS::CloudWatch::Dashboard 리소스를 정의하도록 CloudFormation 템플릿을 업데이트합니다. DashboardName 속성에 기존 대시보드의 이름을 지정합니다."
     },
     "answer": "B",
-    "explanation": "CloudFormation을 사용하여 CloudWatch 대시보드를 자동으로 생성하려면 AWS::CloudWatch::Dashboard 리소스를 템플릿에 정의해야 합니다. 기존 대시보드의 구성을 복제하는 가장 효과적인 방법은 CloudWatch 콘솔에서 대시보드를 JSON 형식으로 내보낸 후, 그 JSON을 DashboardBody 속성에 포함하는 것입니다. DashboardBody는 대시보드의 전체 구조를 정의하는 JSON 문자열을 받습니다. 이렇게 하면 각 CloudFormation 스택이 배포될 때 동일한 구조의 새 대시보드가 자동으로 생성됩니다. 옵션 A는 CloudFormation 템플릿이 아닌 외부 스크립트를 사용하므로 자동화가 덜 일관되고, 옵션 C와 D는 기존 대시보드를 참조하려고 시도하지만 이는 새 대시보드 생성을 자동화하지 않습니다.",
+    "explanation": "CloudFormation을 사용하여 CloudWatch 대시보드를 자동으로 생성하려면 AWS::CloudWatch::Dashboard 리소스를 템플릿에 정의해야 합니다.\n\n기존 대시보드의 구성을 복제하는 가장 효과적인 방법은 CloudWatch 콘솔에서 대시보드를 JSON 형식으로 내보낸 후, 그 JSON을 DashboardBody 속성에 포함하는 것입니다.\n\nDashboardBody는 대시보드의 전체 구조를 정의하는 JSON 문자열을 받습니다.\n\n이렇게 하면 각 CloudFormation 스택이 배포될 때 동일한 구조의 새 대시보드가 자동으로 생성됩니다.\n\n옵션 A는 CloudFormation 템플릿이 아닌 외부 스크립트를 사용하므로 자동화가 덜 일관되고, 옵션 C와 D는 기존 대시보드를 참조하려고 시도하지만 이는 새 대시보드 생성을 자동화하지 않습니다.",
     "en_q": "A SysOps administrator creates an AWS CloudFormation template to define an application stack that can be deployed in multiple AWS Regions. The SysOps administrator also creates an Amazon CloudWatch dashboard by using the AWS Management Console. Each deployment of the application requires its own CloudWatch dashboard. How can the SysOps administrator automate the creation of the CloudWatch dashboard each time the application is deployed?",
     "en_opts": {
       "A": "Create a script by using the AWS CLI to run the aws cloudformation put-dashboard command with the name of the dashboard. Run the command each time a new CloudFormation stack is created.",
@@ -4187,7 +4187,7 @@ window.SOA_QUESTIONS = [
       "D": "모든 인스턴스를 전용 배치 그룹에 배치합니다."
     },
     "answer": "A",
-    "explanation": "이 문제에서 핵심 요구 사항은 \"다른 고객이나 회사 내 다른 AWS 계정과 하드웨어를 공유하지 않는 것\"입니다. Dedicated Hosts는 AWS 고객(다른 회사)이나 같은 회사의 다른 AWS 계정과 하드웨어를 공유하지 않으므로 이 요구 사항을 완벽히 충족합니다. Dedicated Instances는 다른 AWS 고객과는 하드웨어를 공유하지 않지만, 같은 AWS 계정 내의 다른 Dedicated Instances와는 공유될 수 있으므로 \"회사 내 다른 AWS 계정과 공유하지 않는다\"는 요구 사항을 충족하지 못합니다. Reserved Instances는 가격 책정 모델일 뿐 물리적 격리를 보장하지 않으며, 배치 그룹은 인스턴스들의 물리적 근접성을 제어할 뿐 격리를 보장하지 않습니다.",
+    "explanation": "이 문제에서 핵심 요구 사항은 \"다른 고객이나 회사 내 다른 AWS 계정과 하드웨어를 공유하지 않는 것\"입니다.\n\nDedicated Hosts는 AWS 고객(다른 회사)이나 같은 회사의 다른 AWS 계정과 하드웨어를 공유하지 않으므로 이 요구 사항을 완벽히 충족합니다.\n\nDedicated Instances는 다른 AWS 고객과는 하드웨어를 공유하지 않지만, 같은 AWS 계정 내의 다른 Dedicated Instances와는 공유될 수 있으므로 \"회사 내 다른 AWS 계정과 공유하지 않는다\"는 요구 사항을 충족하지 못합니다.\n\nReserved Instances는 가격 책정 모델일 뿐 물리적 격리를 보장하지 않으며, 배치 그룹은 인스턴스들의 물리적 근접성을 제어할 뿐 격리를 보장하지 않습니다.",
     "en_q": "A company updates its security policy to clarify cloud hosting arrangements for regulated workloads. Workloads that are identified as sensitive must run on hardware that is not shared with other customers or with other AWS accounts within the company. Which solution will ensure compliance with this policy?",
     "en_opts": {
       "A": "Deploy workloads only to Dedicated Hosts.",
@@ -4208,7 +4208,7 @@ window.SOA_QUESTIONS = [
       "D": "각 AWS 리전에 Amazon API Gateway API를 만듭니다. 콘텐츠를 로컬로 캐시합니다."
     },
     "answer": "C",
-    "explanation": "지리적으로 분산된 사용자들이 먼 위치의 서버에서 정적 콘텐츠를 로드하는 성능 문제를 해결하는 최적의 솔루션은 CDN(Content Delivery Network)을 사용하는 것입니다. Amazon CloudFront는 AWS의 글로벌 CDN 서비스로, 전 세계 엣지 로케이션에 콘텐츠를 캐시하여 사용자와 가장 가까운 엣지 로케이션에서 콘텐츠를 제공합니다. 이를 통해 네트워크 지연을 최소화하고 사용자 경험을 크게 향상시킵니다. PrivateLink는 프라이빗 연결을 위한 기술이며 공개 인터넷 사용자에게는 적합하지 않고, S3 Transfer Acceleration은 S3로의 업로드 속도 개선에 주로 사용되며, API Gateway는 CloudFront보다 효율적인 정적 콘텐츠 배포 솔루션이 아닙니다.",
+    "explanation": "지리적으로 분산된 사용자들이 먼 위치의 서버에서 정적 콘텐츠를 로드하는 성능 문제를 해결하는 최적의 솔루션은 CDN(Content Delivery Network)을 사용하는 것입니다.\n\nAmazon CloudFront는 AWS의 글로벌 CDN 서비스로, 전 세계 엣지 로케이션에 콘텐츠를 캐시하여 사용자와 가장 가까운 엣지 로케이션에서 콘텐츠를 제공합니다.\n\n이를 통해 네트워크 지연을 최소화하고 사용자 경험을 크게 향상시킵니다.\n\nPrivateLink는 프라이빗 연결을 위한 기술이며 공개 인터넷 사용자에게는 적합하지 않고, S3 Transfer Acceleration은 S3로의 업로드 속도 개선에 주로 사용되며, API Gateway는 CloudFront보다 효율적인 정적 콘텐츠 배포 솔루션이 아닙니다.",
     "en_q": "A company runs a website from Sydney, Australia. Users in the United States (US) and Europe are reporting that images and videos are taking a long time to load. However, local testing in Australia indicates no performance issues. The website has a large amount of static content in the form of images and videos that are stored in Amazon S3. Which solution will result in the MOST improvement in the user experience for users in the US and Europe?",
     "en_opts": {
       "A": "Configure AWS PrivateLink for Amazon S3.",
@@ -4229,7 +4229,7 @@ window.SOA_QUESTIONS = [
       "D": "EC2 인스턴스에 대한 상세 모니터링을 구성합니다. 디스크 공간의 메트릭 알람과 DiskReadOps 메트릭의 메트릭 알람을 만듭니다. 2개의 메트릭 알람을 포함하는 복합 알람을 만들어 SNS 주제에 알림을 게시합니다."
     },
     "answer": "A",
-    "explanation": "문제의 핵심은 \"두 조건이 모두 만족할 때만\" 알림을 받아야 한다는 것입니다. 디스크 공간 메트릭은 EC2 인스턴스의 운영 체제 내에서 수집되므로, CloudWatch 에이전트를 통해 커스텀 메트릭으로 CloudWatch로 전송해야 합니다. DiskReadOps는 EBS 메트릭으로 자동으로 수집됩니다. 복합 알람(Composite Alarm)은 여러 메트릭 알람의 상태를 조합하여 AND/OR 로직으로 평가할 수 있습니다. 옵션 A는 CloudWatch 에이전트를 설치하여 디스크 메트릭을 수집하고 복합 알람으로 AND 조건을 만드므로 올바릅니다. 옵션 B는 각 알람이 개별적으로 알림을 보내므로 AND 조건을 충족하지 못하고, 옵션 C는 EBSByteBalance%가 존재하지 않는 메트릭이며, 옵션 D는 상세 모니터링이 디스크 메트릭과 무관합니다.",
+    "explanation": "문제의 핵심은 \"두 조건이 모두 만족할 때만\" 알림을 받아야 한다는 것입니다. 디스크 공간 메트릭은 EC2 인스턴스의 운영 체제 내에서 수집되므로, CloudWatch 에이전트를 통해 커스텀 메트릭으로 CloudWatch로 전송해야 합니다. DiskReadOps는 EBS 메트릭으로 자동으로 수집됩니다. 복합 알람(Composite Alarm)은 여러 메트릭 알람의 상태를 조합하여 AND/OR 로직으로 평가할 수 있습니다.\n\n옵션 A는 CloudWatch 에이전트를 설치하여 디스크 메트릭을 수집하고 복합 알람으로 AND 조건을 만드므로 올바릅니다.\n\n옵션 B는 각 알람이 개별적으로 알림을 보내므로 AND 조건을 충족하지 못하고,\n\n옵션 C는 EBSByteBalance%가 존재하지 않는 메트릭이며,\n\n옵션 D는 상세 모니터링이 디스크 메트릭과 무관합니다.",
     "en_q": "A SysOps administrator wants to monitor the free disk space that is available on a set of Amazon EC2 instances that have Amazon Elastic Block Store (Amazon EBS) volumes attached. The SysOps administrator wants to receive a notification when the used disk space of the EBS volumes exceeds a threshold value, but only when the DiskReadOps metric also exceeds a threshold value. The SysOps administrator has set up an Amazon Simple Notification Service (Amazon SNS) topic. How can the SysOps administrator receive notification only when both metrics exceed their threshold values?",
     "en_opts": {
       "A": "Install the Amazon CloudWatch agent on the EC2 instances. Create a metric alarm for the disk space and a metric alarm for the DiskReadOps metric. Create a composite alarm that includes the two metric alarms to publish a notification to the SNS topic.",
@@ -4250,7 +4250,7 @@ window.SOA_QUESTIONS = [
       "D": "S3 Object Lambda를 사용하여 S3 ACL을 검사하고 공개 S3 ACL을 비공개로 변경합니다."
     },
     "answer": "A",
-    "explanation": "S3 Block Public Access는 AWS가 제공하는 가장 강력하고 효율적인 S3 보안 기능입니다. 이를 계정 수준에서 활성화하면 계정의 모든 S3 버킷에 대해 공개 액세스가 자동으로 차단됩니다. 4가지 설정(버킷 정책 차단, ACL 차단, 모든 공개 액세스 무시)이 있으며, 이들을 모두 활성화하면 실수로 인한 공개 노출을 완벽하게 방지합니다. 이는 가장 운영 효율적이고 관리하기 쉬운 솔루션입니다. EventBridge는 이벤트 라우팅 서비스이며 S3 액세스 제어에 직접 영향을 주지 않고, Inspector는 주로 EC2 취약점 스캔 도구이며, S3 Object Lambda는 객체 변환에 사용되므로 이들은 모두 부적절합니다.",
+    "explanation": "S3 Block Public Access는 AWS가 제공하는 가장 강력하고 효율적인 S3 보안 기능입니다.\n\n이를 계정 수준에서 활성화하면 계정의 모든 S3 버킷에 대해 공개 액세스가 자동으로 차단됩니다.\n\n4가지 설정(버킷 정책 차단, ACL 차단, 모든 공개 액세스 무시)이 있으며, 이들을 모두 활성화하면 실수로 인한 공개 노출을 완벽하게 방지합니다.\n\n이는 가장 운영 효율적이고 관리하기 쉬운 솔루션입니다.\n\nEventBridge는 이벤트 라우팅 서비스이며 S3 액세스 제어에 직접 영향을 주지 않고, Inspector는 주로 EC2 취약점 스캔 도구이며, S3 Object Lambda는 객체 변환에 사용되므로 이들은 모두 부적절합니다.",
     "en_q": "A company updates its security policy to prohibit the public exposure of any data in Amazon S3 buckets in the company's account. What should a SysOps administrator do to meet this requirement?",
     "en_opts": {
       "A": "Turn on S3 Block Public Access from the account level.",
@@ -4271,7 +4271,7 @@ window.SOA_QUESTIONS = [
       "D": "비밀번호 찾기 프로세스를 사용하여 이메일 주소를 확인합니다. 새 비밀번호 및 MFA 장치를 설정합니다."
     },
     "answer": "A",
-    "explanation": "MFA 장치가 손실된 경우, 루트 사용자는 이메일과 전화 번호 확인을 통해 로그인할 수 있습니다. AWS 계정의 루트 사용자는 MFA 없이 이메일과 전화로 신원을 확인하여 로그인할 수 있는 보안 복구 메커니즘이 있습니다. 로그인 후 새 MFA 장치를 설정하고 비밀번호를 변경하면 됩니다. 옵션 B와 C는 IAM 사용자로 루트 사용자의 MFA를 직접 제거할 수 없으며, IAM 사용자가 루트 계정 자체의 MFA를 재설정하는 권한을 갖기 위해서는 해당 권한이 정책에 명시적으로 있어야 하는데 일반적으로 보안상 이를 제한합니다. 옵션 D의 비밀번호 찾기는 루트 사용자의 MFA 문제 해결에 직접적인 도움이 되지 않습니다.",
+    "explanation": "MFA 장치가 손실된 경우, 루트 사용자는 이메일과 전화 번호 확인을 통해 로그인할 수 있습니다.\n\nAWS 계정의 루트 사용자는 MFA 없이 이메일과 전화로 신원을 확인하여 로그인할 수 있는 보안 복구 메커니즘이 있습니다.\n\n로그인 후 새 MFA 장치를 설정하고 비밀번호를 변경하면 됩니다.\n\n옵션 B와 C는 IAM 사용자로 루트 사용자의 MFA를 직접 제거할 수 없으며, IAM 사용자가 루트 계정 자체의 MFA를 재설정하는 권한을 갖기 위해서는 해당 권한이 정책에 명시적으로 있어야 하는데 일반적으로 보안상 이를 제한합니다.\n\n옵션 D의 비밀번호 찾기는 루트 사용자의 MFA 문제 해결에 직접적인 도움이 되지 않습니다.",
     "en_q": "A company's SysOps administrator needs to change the AWS Support plan for one of the company's AWS accounts. The account has multi-factor authentication (MFA) activated, and the MFA device is lost. What should the SysOps administrator do to sign in?",
     "en_opts": {
       "A": "Sign in as a root user by using email and phone verification. Set up a new MFA device. Change the root user password.",
@@ -4292,7 +4292,7 @@ window.SOA_QUESTIONS = [
       "D": "타사 IdP를 AWS Organizations과 직접 통합합니다."
     },
     "answer": "B",
-    "explanation": "다중 계정 환경에서 중앙 집중식 사용자 액세스 관리를 위해서는 AWS Single Sign-On(SSO)이 가장 적합합니다. AWS SSO는 AWS Organizations과 통합되어 모든 계정을 관리할 수 있으며, SAML 2.0 IdP와의 페더레이션을 지원합니다. SSO를 활성화하고 타사 SAML 2.0 IdP와 연결하면, 사용자들은 회사의 디렉토리 서비스를 통해 모든 AWS 계정에 액세스할 수 있습니다. Amazon Cognito는 애플리케이션 수준의 사용자 관리 서비스이며 AWS Organizations과 통합되지 않으며, 각 계정마다 개별적으로 IAM 페더레이션을 설정하는 것은 관리 복잡성이 높으며, AWS Organizations은 타사 IdP와 직접 통합되지 않습니다.",
+    "explanation": "다중 계정 환경에서 중앙 집중식 사용자 액세스 관리를 위해서는 AWS Single Sign-On(SSO)이 가장 적합합니다.\n\nAWS SSO는 AWS Organizations과 통합되어 모든 계정을 관리할 수 있으며, SAML 2.0 IdP와의 페더레이션을 지원합니다.\n\nSSO를 활성화하고 타사 SAML 2.0 IdP와 연결하면, 사용자들은 회사의 디렉토리 서비스를 통해 모든 AWS 계정에 액세스할 수 있습니다.\n\nAmazon Cognito는 애플리케이션 수준의 사용자 관리 서비스이며 AWS Organizations과 통합되지 않으며, 각 계정마다 개별적으로 IAM 페더레이션을 설정하는 것은 관리 복잡성이 높으며, AWS Organizations은 타사 IdP와 직접 통합되지 않습니다.",
     "en_q": "A company is creating a new multi-account architecture. A SysOps administrator must implement a login solution to centrally manage user access and permissions across all AWS accounts. The solution must be integrated with AWS Organizations and must be connected to a third-party Security Assertion Markup Language (SAML) 2.0 identity provider (IdP). What should the SysOps administrator do to meet these requirements?",
     "en_opts": {
       "A": "Configure an Amazon Cognito user pool. Integrate the user pool with the third-party IdP.",
@@ -4313,7 +4313,7 @@ window.SOA_QUESTIONS = [
       "D": "AWS CLI를 사용하여 조직의 모든 계정에서 AWS Config를 켜는 스크립트를 만듭니다. 조직의 관리 계정에서 스크립트를 실행합니다."
     },
     "answer": "A",
-    "explanation": "다중 계정 환경에서 여러 리전에 일관된 AWS 리소스를 배포하는 가장 효율적인 방법은 AWS CloudFormation Stack Sets입니다. Stack Sets를 사용하면 단일 CloudFormation 템플릿으로 여러 계정과 리전에 스택 인스턴스를 동시에 배포할 수 있습니다. AWS Config를 켜기 위해 CloudFormation 템플릿에서 AWS::Config::ConfigurationRecorder와 AWS::Config::DeliveryChannel 리소스를 정의하고, Stack Sets로 배포하면 모든 계정과 리전에 자동으로 적용됩니다. Stack Sets는 자동 롤아웃, 병렬 배포, 실패 처리 등을 지원합니다. 스택 정책은 스택 업데이트 중 리소스 변경을 제어하는 것이지 배포하는 것이 아니며, SCPs는 권한 정책으로 리소스를 생성하는 것이 아니고, 수동 CLI 스크립트는 관리 오버헤드가 높습니다.",
+    "explanation": "다중 계정 환경에서 여러 리전에 일관된 AWS 리소스를 배포하는 가장 효율적인 방법은 AWS CloudFormation Stack Sets입니다.\n\nStack Sets를 사용하면 단일 CloudFormation 템플릿으로 여러 계정과 리전에 스택 인스턴스를 동시에 배포할 수 있습니다.\n\nAWS Config를 켜기 위해 CloudFormation 템플릿에서 AWS::Config::ConfigurationRecorder와 AWS::Config::DeliveryChannel 리소스를 정의하고, Stack Sets로 배포하면 모든 계정과 리전에 자동으로 적용됩니다.\n\nStack Sets는 자동 롤아웃, 병렬 배포, 실패 처리 등을 지원합니다.\n\n스택 정책은 스택 업데이트 중 리소스 변경을 제어하는 것이지 배포하는 것이 아니며, SCPs는 권한 정책으로 리소스를 생성하는 것이 아니고, 수동 CLI 스크립트는 관리 오버헤드가 높습니다.",
     "en_q": "A company is managing many accounts by using a single organization in AWS Organizations. The organization has all features enabled. The company wants to turn on AWS Config in all the accounts of the organization and in all AWS Regions. What should a SysOps administrator do to meet these requirements in the MOST operationally efficient way?",
     "en_opts": {
       "A": "Use AWS CloudFormation Stack Sets to deploy stack instances that turn on AWS Config in all accounts and in all Regions.",
@@ -4335,7 +4335,7 @@ window.SOA_QUESTIONS = [
       "E": "스택에 여전히 객체가 있는 Amazon S3 버킷이 있습니다."
     },
     "answer": "DE",
-    "explanation": "CloudFormation 스택의 DELETE_FAILED 상태는 스택 삭제 중에 특정 리소스를 삭제할 수 없을 때 발생합니다. 옵션 D는 보안 그룹이 여전히 다른 리소스(예: EC2 인스턴스의 ENI)에 의해 사용 중인 경우 삭제할 수 없으므로 DELETE_FAILED를 유발합니다. 옵션 E는 S3 버킷이 비어있지 않으면 CloudFormation에서 삭제할 수 없기 때문입니다. 옵션 A는 타임아웃 문제이지만, CloudFormation은 일반적으로 삭제 작업을 중단하지 않고 재시도합니다. 옵션 B는 중첩된 스택이 자동으로 삭제 순서에 따라 처리되며, 옵션 C의 --disable-rollback은 생성 중 실패 시 롤백하지 않는 옵션일 뿐 삭제에는 영향을 주지 않습니다.",
+    "explanation": "CloudFormation 스택의 DELETE_FAILED 상태는 스택 삭제 중에 특정 리소스를 삭제할 수 없을 때 발생합니다.\n\n옵션 D는 보안 그룹이 여전히 다른 리소스(예: EC2 인스턴스의 ENI)에 의해 사용 중인 경우 삭제할 수 없으므로 DELETE_FAILED를 유발합니다.\n\n옵션 E는 S3 버킷이 비어있지 않으면 CloudFormation에서 삭제할 수 없기 때문입니다.\n\n옵션 A는 타임아웃 문제이지만, CloudFormation은 일반적으로 삭제 작업을 중단하지 않고 재시도합니다.\n\n옵션 B는 중첩된 스택이 자동으로 삭제 순서에 따라 처리되며, 옵션 C의 --disable-rollback은 생성 중 실패 시 롤백하지 않는 옵션일 뿐 삭제에는 영향을 주지 않습니다.",
     "en_q": "A SysOps administrator needs to delete an AWS CloudFormation stack that is no longer in use. The CloudFormation stack is in the DELETE_FAILED state. The SysOps administrator has validated the permissions that are required to delete the CloudFormation stack. Which of the following are possible causes of the DELETE_FAILED state? (Choose two.)",
     "en_opts": {
       "A": "The configured timeout to delete the stack was too low for the delete operation to complete.",
@@ -4357,7 +4357,7 @@ window.SOA_QUESTIONS = [
       "D": "공개 액세스가 차단되지 않은 Amazon S3 버킷에 디지털 콘텐츠를 저장합니다. CloudFront를 통한 콘텐츠의 제한된 제공을 위해 서명된 쿠키를 사용합니다."
     },
     "answer": "B",
-    "explanation": "CloudFront를 통해 인증된 사용자만 콘텐츠에 액세스하도록 하려면 여러 계층의 보안이 필요합니다. 첫째, S3 버킷을 공개 액세스로부터 보호하기 위해 Block Public Access를 활성화해야 합니다. 둘째, Origin Access Identity(OAI)를 사용하여 CloudFront만 S3 버킷의 콘텐츠에 액세스할 수 있도록 합니다. 셋째, CloudFront에서 서명된 URL을 사용하여 승인된 사용자만 콘텐츠에 액세스할 수 있도록 제한합니다. 옵션 A는 S3 버킷이 공개이므로 부적절하고, 옵션 C의 필드 수준 암호화는 액세스 제어와 무관하며, 옵션 D는 S3 버킷이 공개이므로 OAI 없이는 보안이 불완전합니다.",
+    "explanation": "CloudFront를 통해 인증된 사용자만 콘텐츠에 액세스하도록 하려면 여러 계층의 보안이 필요합니다. 첫째, S3 버킷을 공개 액세스로부터 보호하기 위해 Block Public Access를 활성화해야 합니다. 둘째, Origin Access Identity(OAI)를 사용하여 CloudFront만 S3 버킷의 콘텐츠에 액세스할 수 있도록 합니다. 셋째, CloudFront에서 서명된 URL을 사용하여 승인된 사용자만 콘텐츠에 액세스할 수 있도록 제한합니다.\n\n옵션 A는 S3 버킷이 공개이므로 부적절하고, 옵션 C의 필드 수준 암호화는 액세스 제어와 무관하며,\n\n옵션 D는 S3 버킷이 공개이므로 OAI 없이는 보안이 불완전합니다.",
     "en_q": "A SysOps administrator must ensure that a company's Amazon EC2 instances auto scale as expected. The SysOps administrator configures a solution that will deliver digital content to a set of authorized users through Amazon CloudFront. Unauthorized users must be restricted from access. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Store the digital content in an Amazon S3 bucket that does not have public access blocked. Use signed URLs to access the S3 bucket through CloudFront.",
@@ -4378,7 +4378,7 @@ window.SOA_QUESTIONS = [
       "D": "Lambda 함수 실행 역할을 업데이트하여 complete-lifecycle-action 이벤트를 호출할 권한을 가지도록 합니다."
     },
     "answer": "A",
-    "explanation": "EventBridge에서 Lambda 함수를 호출하려면 EventBridge에 Lambda 함수를 호출할 수 있는 권한이 필요합니다. 이를 위해 Lambda 함수에 리소스 기반 정책(Resource-based Policy)을 추가하여 EventBridge 규칙이 함수를 호출할 수 있도록 허용해야 합니다. AWS 콘솔에서는 \"Add permission\" 버튼을 통해 EventBridge를 principal로 하는 권한을 추가할 수 있습니다. 옵션 B의 CONTINUE 액션은 라이프사이클 훅 타임아웃 처리와 관련이 있지만 Lambda 호출 문제와는 무관하고, 옵션 C의 재시도 정책은 권한 부재 문제를 해결하지 못하며, 옵션 D는 Lambda 함수가 complete-lifecycle-action을 호출할 권한(실행 역할)은 필요하지만, 먼저 Lambda 함수가 호출되어야 하므로 우선 순위가 낮습니다.",
+    "explanation": "EventBridge에서 Lambda 함수를 호출하려면 EventBridge에 Lambda 함수를 호출할 수 있는 권한이 필요합니다.\n\n이를 위해 Lambda 함수에 리소스 기반 정책(Resource-based Policy)을 추가하여 EventBridge 규칙이 함수를 호출할 수 있도록 허용해야 합니다.\n\nAWS 콘솔에서는 \"Add permission\" 버튼을 통해 EventBridge를 principal로 하는 권한을 추가할 수 있습니다.\n\n옵션 B의 CONTINUE 액션은 라이프사이클 훅 타임아웃 처리와 관련이 있지만 Lambda 호출 문제와는 무관하고, 옵션 C의 재시도 정책은 권한 부재 문제를 해결하지 못하며,\n\n옵션 D는 Lambda 함수가 complete-lifecycle-action을 호출할 권한(실행 역할)은 필요하지만, 먼저 Lambda 함수가 호출되어야 하므로 우선 순위가 낮습니다.",
     "en_q": "A SysOps administrator must ensure that a company's Amazon EC2 instances auto scale as expected. The SysOps administrator configures an Amazon EC2 Auto Scaling lifecycle hook to send an event to Amazon EventBridge (Amazon CloudWatch Events), which then invokes an AWS Lambda function to configure the EC2 instances. When the configuration is complete, the Lambda function calls the complete-lifecycle-action event to put the EC2 instances into service. In testing, the SysOps administrator discovers that the Lambda function is not invoked when the EC2 instances auto scale. What should the SysOps administrator do to resolve this issue?",
     "en_opts": {
       "A": "Add a permission to the Lambda function so that it can be invoked by the EventBridge (CloudWatch Events) rule.",
@@ -4399,7 +4399,7 @@ window.SOA_QUESTIONS = [
       "D": "사용자가 get-session-token 명령에서 임시 자격증명을 사용하여 API 호출에 서명하도록 요청합니다."
     },
     "answer": "D",
-    "explanation": "CLI를 통한 API 호출에 MFA를 강제하려면 사용자가 장기 자격증명(액세스 키)이 아닌 임시 자격증명을 사용해야 합니다. AWS STS의 get-session-token 명령을 사용하면 MFA 확인 후 임시 자격증명(액세스 키, 비밀 키, 세션 토큰)을 발급합니다. 이 임시 자격증명으로 서명된 API 호출만이 IAM 정책의 MFA 조건을 만족합니다. 임시 자격증명에는 세션 토큰이 포함되며, IAM 정책에서 aws:MultiFactorAuthPresent 조건을 통해 이를 검증할 수 있습니다. 옵션 A는 IAM 역할에 MFA를 활성화할 수 없으며, 옵션 B는 콘솔 로그인과 CLI 호출 사이의 세션이 별개이므로 MFA 강제가 되지 않고, 옵션 C는 잘못된 정보입니다(MFA는 CLI에도 지원됨).",
+    "explanation": "CLI를 통한 API 호출에 MFA를 강제하려면 사용자가 장기 자격증명(액세스 키)이 아닌 임시 자격증명을 사용해야 합니다. AWS STS의 get-session-token 명령을 사용하면 MFA 확인 후 임시 자격증명(액세스 키, 비밀 키, 세션 토큰)을 발급합니다. 이 임시 자격증명으로 서명된 API 호출만이 IAM 정책의 MFA 조건을 만족합니다. 임시 자격증명에는 세션 토큰이 포함되며, IAM 정책에서 aws:MultiFactorAuthPresent 조건을 통해 이를 검증할 수 있습니다.\n\n옵션 A는 IAM 역할에 MFA를 활성화할 수 없으며,\n\n옵션 B는 콘솔 로그인과 CLI 호출 사이의 세션이 별개이므로 MFA 강제가 되지 않고,\n\n옵션 C는 잘못된 정보입니다(MFA는 CLI에도 지원됨).",
     "en_q": "A company has mandated the use of multi-factor authentication (MFA) for all IAM users, and requires users to make all API calls using the CLI. However, users are not prompted to enter MFA tokens, and are able to run CLI commands without MFA. In an attempt to enforce MFA, the company attached an IAM policy to all users that denies API calls that have not been authenticated with MFA. What additional step must be taken to ensure that API calls are authenticated using MFA?",
     "en_opts": {
       "A": "Enable MFA on IAM roles, and require IAM users to use role credentials to sign API calls.",
@@ -4420,7 +4420,7 @@ window.SOA_QUESTIONS = [
       "D": "AWS Config에서 s3-bucket-public-read-prohibited 관리 규칙을 활성화합니다. AWS Config 규칙을 Amazon Simple Notification Service(Amazon SNS) 주제에 구독합니다."
     },
     "answer": "D",
-    "explanation": "이 문제는 지속적인 컴플라이언스 모니터링을 요구합니다. AWS Config의 관리 규칙 \"s3-bucket-public-read-prohibited\"는 S3 버킷의 공개 읽기 액세스를 지속적으로 모니터링합니다. 규칙이 위반되면(즉, 버킷이 공개 읽기 액세스로 변경되면) AWS Config는 자동으로 이벤트를 발생시키고 SNS 주제로 알림을 보낼 수 있습니다. 이는 가장 자동화되고 운영 효율적인 방법입니다. Lambda 함수나 cron 스크립트는 정기적으로 실행되므로 변경을 즉시 감지하지 못할 수 있으며 관리 오버헤드도 높습니다. S3 Event Notifications는 객체 수준의 이벤트만 감지하며 버킷 정책 변경은 감지하지 않습니다.",
+    "explanation": "이 문제는 지속적인 컴플라이언스 모니터링을 요구합니다.\n\nAWS Config의 관리 규칙 \"s3-bucket-public-read-prohibited\"는 S3 버킷의 공개 읽기 액세스를 지속적으로 모니터링합니다.\n\n규칙이 위반되면(즉, 버킷이 공개 읽기 액세스로 변경되면) AWS Config는 자동으로 이벤트를 발생시키고 SNS 주제로 알림을 보낼 수 있습니다.\n\n이는 가장 자동화되고 운영 효율적인 방법입니다.\n\nLambda 함수나 cron 스크립트는 정기적으로 실행되므로 변경을 즉시 감지하지 못할 수 있으며 관리 오버헤드도 높습니다.\n\nS3 Event Notifications는 객체 수준의 이벤트만 감지하며 버킷 정책 변경은 감지하지 않습니다.",
     "en_q": "A SysOps administrator has blocked public access to all company Amazon S3 buckets. The SysOps administrator wants to be notified when an S3 bucket becomes publicly readable in the future. What is the MOST operationally efficient way to meet this requirement?",
     "en_opts": {
       "A": "Create an AWS Lambda function that periodically checks the public access settings for each S3 bucket. Set up Amazon Simple Notification Service (Amazon SNS) to send notifications.",
@@ -5246,7 +5246,7 @@ window.SOA_QUESTIONS = [
       "E": "삭제 명령을 실행할 때 요청에 x-amz-bypass-legal-retention:true 헤더를 포함시킵니다."
     },
     "answer": "CD",
-    "explanation": "S3 Object Lock의 거버넌스 모드에서 객체를 삭제하려면 두 가지 조건이 필요합니다. 첫째, s3:BypassGovernanceRetention 권한을 가진 IAM 역할을 맡아야 하며, 둘째 x-amz-bypass-governance-retention:true 헤더를 delete 명령에 포함시켜야 합니다. 거버넌스 모드는 법적 보유(Legal Hold)와 달리, 적절한 권한과 헤더가 있으면 관리자가 보유 기간을 무시하고 객체를 삭제할 수 있습니다. Legal Retention과 Governance Retention은 별도의 메커니즘이므로 BypassLegalRetention은 이 경우 관련이 없습니다. 또한 Retain Until Date를 증가시키는 것은 보유 기간을 연장하기만 하므로 삭제에 도움이 되지 않습니다.",
+    "explanation": "S3 Object Lock의 거버넌스 모드에서 객체를 삭제하려면 두 가지 조건이 필요합니다.\n\n첫째, s3:BypassGovernanceRetention 권한을 가진 IAM 역할을 맡아야 하며, 둘째 x-amz-bypass-governance-retention:true 헤더를 delete 명령에 포함시켜야 합니다.\n\n거버넌스 모드는 법적 보유(Legal Hold)와 달리, 적절한 권한과 헤더가 있으면 관리자가 보유 기간을 무시하고 객체를 삭제할 수 있습니다.\n\nLegal Retention과 Governance Retention은 별도의 메커니즘이므로 BypassLegalRetention은 이 경우 관련이 없습니다.\n\n또한 Retain Until Date를 증가시키는 것은 보유 기간을 연장하기만 하므로 삭제에 도움이 되지 않습니다.",
     "en_q": "A company migrates a write-once, ready-many (WORM) drive to an Amazon S3 bucket that has S3 Object Lock configured in governance mode. During the migration, the company copies unneeded data to the S3 bucket. A SysOps administrator attempts to delete the unneeded data from the S3 bucket by using the AWS CLI. However, the SysOps administrator receives an error. Which combination of steps should the SysOps administrator take to successfully delete the unneeded data? (Choose two.)",
     "en_opts": {
       "A": "Increase the Retain Until Date.",
@@ -5269,7 +5269,7 @@ window.SOA_QUESTIONS = [
       "E": "데이터베이스 서브넷의 네트워크 ACL에서 MySQL/Aurora(3306) 유형의 아웃바운드 Allow 규칙을 생성하고 대상을 세 번째 웹 서브넷으로 지정합니다."
     },
     "answer": "CD",
-    "explanation": "새로운 웹 서브넷이 추가되었지만 데이터베이스 서브넷의 네트워크 ACL이 아직 이를 허용하지 않습니다. 데이터베이스 통신 문제를 해결하려면 두 방향의 트래픽을 허용해야 합니다. 옵션 C는 웹 서브넷에서 데이터베이스의 3306 포트로 들어오는 요청을 허용합니다. 옵션 D는 데이터베이스에서 웹 서브넷으로의 응답 트래픽(임시 포트 범위)을 허용합니다. 네트워크 ACL은 상태 비저장이므로 인바운드와 아웃바운드 규칙을 모두 구성해야 합니다. 웹 서브넷의 기본 ACL은 이미 모든 트래픽을 허용하므로 추가 구성이 필요 없습니다.",
+    "explanation": "새로운 웹 서브넷이 추가되었지만 데이터베이스 서브넷의 네트워크 ACL이 아직 이를 허용하지 않습니다. 데이터베이스 통신 문제를 해결하려면 두 방향의 트래픽을 허용해야 합니다.\n\n옵션 C는 웹 서브넷에서 데이터베이스의 3306 포트로 들어오는 요청을 허용합니다.\n\n옵션 D는 데이터베이스에서 웹 서브넷으로의 응답 트래픽(임시 포트 범위)을 허용합니다. 네트워크 ACL은 상태 비저장이므로 인바운드와 아웃바운드 규칙을 모두 구성해야 합니다. 웹 서브넷의 기본 ACL은 이미 모든 트래픽을 허용하므로 추가 구성이 필요 없습니다.",
     "en_q": "A company website contains a web tier and a database tier on AWS. The web tier consists of Amazon EC2 instances that run in an Auto Scaling group across two Availability Zones. The database tier runs on an Amazon RDS for MySQL Multi-AZ DB instance. The database subnet network ACLs are restricted to only the web subnets that need access to the database. The web subnets use the default network ACL with the default rules. The company's operations team has added a third subnet to the Auto Scaling group configuration. After an Auto Scaling event occurs, some users report that they intermittently receive an error message. The error message states that the server cannot connect to the database. The operations team has confirmed that the route tables are correct and that the required ports are open on all security groups. Which combination of actions should a SysOps administrator take so that the web servers can communicate with the DB instance? (Choose two.)",
     "en_opts": {
       "A": "On the default ACL, create inbound Allow rules of type TCP with the ephemeral port range and the source as the database subnets.",
@@ -5291,7 +5291,7 @@ window.SOA_QUESTIONS = [
       "D": "aws acm put-ssl-certificate --load-balancer-name my-load-balancer --load-balancer-port 443 --ssl-certificate-id arn:aws:iam::123456789012:server-certificate/new-server-cert"
     },
     "answer": "B",
-    "explanation": "Classic Load Balancer(ELB)에 SSL 인증서를 배포하려면 set-load-balancer-listener-ssl-certificate 명령을 사용해야 합니다. 옵션 A의 kms modify-listener는 KMS와는 관련이 없고 존재하지 않는 명령입니다. 옵션 C의 ec2 put-ssl-certificate는 EC2 관련 명령이 아니며 load balancer 인증서 설정에 사용되지 않습니다. 옵션 D의 acm put-ssl-certificate도 존재하지 않는 명령입니다. 올바른 명령은 elb 서비스의 set-load-balancer-listener-ssl-certificate로 load-balancer-name, load-balancer-port, ssl-certificate-id 파라미터를 포함해야 합니다.",
+    "explanation": "Classic Load Balancer(ELB)에 SSL 인증서를 배포하려면 set-load-balancer-listener-ssl-certificate 명령을 사용해야 합니다.\n\n옵션 A의 kms modify-listener는 KMS와는 관련이 없고 존재하지 않는 명령입니다.\n\n옵션 C의 ec2 put-ssl-certificate는 EC2 관련 명령이 아니며 load balancer 인증서 설정에 사용되지 않습니다.\n\n옵션 D의 acm put-ssl-certificate도 존재하지 않는 명령입니다.\n\n올바른 명령은 elb 서비스의 set-load-balancer-listener-ssl-certificate로 load-balancer-name, load-balancer-port, ssl-certificate-id 파라미터를 포함해야 합니다.",
     "en_q": "A SysOps administrator has been able to consolidate multiple, secure websites onto a single server, and each site is running on a different port. The administrator now wants to start a duplicate server in a second Availability Zone and put both behind a load balancer for high availability. What would be the command line necessary to deploy one of the sites' certificates to the load balancer?",
     "en_opts": {
       "A": "aws kms modify-listener –-load-balancer-name my-load-balancer -–certificates CertificateArn=arn:aws:iam::123456789012:server-certifiate/my-new-server-cert",
@@ -5312,7 +5312,7 @@ window.SOA_QUESTIONS = [
       "D": "EventBridge 예약 규칙을 사용하여 EC2 CreateImage API 작업을 호출합니다."
     },
     "answer": "C",
-    "explanation": "EC2 Image Builder는 AMI 생성 프로세스를 완전히 자동화하고 관리합니다. 사용자 지정 레시피로 애플리케이션 설치, 테스트, 취약성 스캔을 통합 파이프라인으로 수행합니다. 이는 정기적인 업데이트와 자동 스캔을 기본 제공합니다. Packer는 강력하지만 수동으로 스크립트를 유지보수해야 하고 취약성 스캔 통합이 번거롭습니다. 수동 AMI 생성(옵션 B)은 반복적이지 않으며 스캔을 포함하지 않습니다. CreateImage API(옵션 D)는 단순히 AMI를 생성할 뿐 애플리케이션 설치나 스캔을 수행하지 않습니다. EC2 Image Builder가 SysOps 작업에서 가장 효율적입니다.",
+    "explanation": "EC2 Image Builder는 AMI 생성 프로세스를 완전히 자동화하고 관리합니다.\n\n사용자 지정 레시피로 애플리케이션 설치, 테스트, 취약성 스캔을 통합 파이프라인으로 수행합니다.\n\n이는 정기적인 업데이트와 자동 스캔을 기본 제공합니다.\n\nPacker는 강력하지만 수동으로 스크립트를 유지보수해야 하고 취약성 스캔 통합이 번거롭습니다.\n\n수동 AMI 생성(옵션 B)은 반복적이지 않으며 스캔을 포함하지 않습니다.\n\nCreateImage API(옵션 D)는 단순히 AMI를 생성할 뿐 애플리케이션 설치나 스캔을 수행하지 않습니다.\n\nEC2 Image Builder가 SysOps 작업에서 가장 효율적입니다.",
     "en_q": "A SysOps administrator is preparing to deploy an application to Amazon EC2 instances that are in an Auto Scaling group. The application requires dependencies to be installed. Application updates are issued weekly. The SysOps administrator needs to implement a solution to incorporate the application updates on a regular basis. The solution also must conduct a vulnerability scan during Amazon Machine Image (AMI) creation. What is the MOST operationally efficient solution that meets these requirements?",
     "en_opts": {
       "A": "Create a script that uses Packer. Schedule a cron job to run the script.",
@@ -5333,7 +5333,7 @@ window.SOA_QUESTIONS = [
       "D": "RDS 인스턴스를 백업하는 새로운 CloudFormation 템플릿을 생성하고 스택을 삭제하기 전에 이 템플릿을 실행합니다."
     },
     "answer": "C",
-    "explanation": "CloudFormation의 DeletionPolicy 속성(Snapshot)을 RDS 리소스에 설정하면, 스택 삭제 시 자동으로 스냅샷을 생성하고 보존합니다. 이는 안정적이고 자동화된 방식입니다. 스크립트(옵션 A)는 5분 간격으로 실행되므로 비효율적이고 불필요한 스냅샷이 많이 생성됩니다. Lambda 수동 호출(옵션 B)은 삭제 시점을 자동으로 감지할 수 없으므로 관리자 개입이 필요합니다. 별도 템플릿(옵션 D)은 복잡하고 자동화되지 않습니다. DeletionPolicy는 CloudFormation의 표준 방식으로 스택 삭제 시 자동으로 스냅샷을 생성합니다.",
+    "explanation": "CloudFormation의 DeletionPolicy 속성(Snapshot)을 RDS 리소스에 설정하면, 스택 삭제 시 자동으로 스냅샷을 생성하고 보존합니다.\n\n이는 안정적이고 자동화된 방식입니다.\n\n스크립트(옵션 A)는 5분 간격으로 실행되므로 비효율적이고 불필요한 스냅샷이 많이 생성됩니다.\n\nLambda 수동 호출(옵션 B)은 삭제 시점을 자동으로 감지할 수 없으므로 관리자 개입이 필요합니다.\n\n별도 템플릿(옵션 D)은 복잡하고 자동화되지 않습니다.\n\nDeletionPolicy는 CloudFormation의 표준 방식으로 스택 삭제 시 자동으로 스냅샷을 생성합니다.",
     "en_q": "An AWS CloudFormation template creates an Amazon RDS instance. This template is used to build up development environments as needed and then delete the stack when the environment is no longer required. The RDS-persisted data must be retained for further use, even after the CloudFormation stack is deleted. How can this be achieved in a reliable and efficient way?",
     "en_opts": {
       "A": "Write a script to continue backing up the RDS instance every five minutes.",
@@ -5354,7 +5354,7 @@ window.SOA_QUESTIONS = [
       "D": "적절한 이벤트를 필터링하는 Amazon EventBridge 규칙을 생성하고 AWS Step Functions 상태 머신을 대상으로 지정합니다. Step Functions에서 AWS Lambda 함수와 AWS Glue 작업을 생성하여 이벤트를 변환하고 HTTPS 엔드포인트로 보냅니다."
     },
     "answer": "A",
-    "explanation": "EventBridge API 대상은 HTTPS 엔드포인트로 직접 이벤트를 보낼 수 있으며, 입력 변환기로 JSON 데이터를 변환할 수 있습니다. 이는 가장 간단하고 빠른 구현입니다. Kinesis + Lambda + Glue(옵션 B)는 너무 복잡하고 여러 서비스를 필요로 합니다. SNS(옵션 C)는 HTTP 기반 변환을 충분히 지원하지 않습니다. Step Functions(옵션 D)도 과도하게 복잡합니다. EventBridge API 대상과 입력 변환기 조합이 개발 시간이 가장 짧습니다.",
+    "explanation": "EventBridge API 대상은 HTTPS 엔드포인트로 직접 이벤트를 보낼 수 있으며, 입력 변환기로 JSON 데이터를 변환할 수 있습니다.\n\n이는 가장 간단하고 빠른 구현입니다.\n\nKinesis + Lambda + Glue(옵션 B)는 너무 복잡하고 여러 서비스를 필요로 합니다.\n\nSNS(옵션 C)는 HTTP 기반 변환을 충분히 지원하지 않습니다.\n\nStep Functions(옵션 D)도 과도하게 복잡합니다.\n\nEventBridge API 대상과 입력 변환기 조합이 개발 시간이 가장 짧습니다.",
     "en_q": "AnyCompany has acquired Example Corp and is attempting to consolidate the business systems of both companies. AnyCompany's IT department needs to integrate with Example Corp's IT ticketing system. A SysOps administrator must implement a solution that uses Amazon CloudWatch alarms for Amazon EC2 instances in AnyCompany's account to create new tickets in Example Corp's ticketing system. The ticketing system provides an HTTPS endpoint for the creation of new tickets. The ticketing system accepts messages in the following JSON format: Which approach to creating tickets from the CloudWatch alarms will meet these requirements with the LEAST development time?",
     "en_opts": {
       "A": "Create an Amazon EventBridge rule that filters appropriate events and specifies EventBridge API destinations as a target. Configure EventBridge API destinations to send events to the HTTPS endpoint. In the EventBridge rule, create an input transformer to convert the source to a compatible output for the ticketing system.",
@@ -5375,7 +5375,7 @@ window.SOA_QUESTIONS = [
       "D": "Spot Instance Advisor를 사용하여 최적의 Spot 할당 전략을 결정합니다."
     },
     "answer": "C",
-    "explanation": "Capacity Optimized 할당 전략은 Spot 인스턴스가 중단될 가능성이 가장 낮은 풀에서 시작되도록 선택합니다. 이는 요청된 인스턴스 수에 대해 가장 높은 가용성을 가진 풀을 선택합니다. 이 전략은 Spot 인스턴스의 중단 위험을 최소화하면서 비용 효율성을 유지합니다. 최대 용량까지(옵션 A)는 전략이 아니며 비효율적입니다. Diversified(옵션 B)는 여러 풀에 분산하지만 용량 최적화만큼 효율적이지 않습니다. Spot Instance Advisor(옵션 D)는 도구이지 할당 전략이 아닙니다.",
+    "explanation": "Capacity Optimized 할당 전략은 Spot 인스턴스가 중단될 가능성이 가장 낮은 풀에서 시작되도록 선택합니다.\n\n이는 요청된 인스턴스 수에 대해 가장 높은 가용성을 가진 풀을 선택합니다.\n\n이 전략은 Spot 인스턴스의 중단 위험을 최소화하면서 비용 효율성을 유지합니다.\n\n최대 용량까지(옵션 A)는 전략이 아니며 비효율적입니다.\n\nDiversified(옵션 B)는 여러 풀에 분산하지만 용량 최적화만큼 효율적이지 않습니다.\n\nSpot Instance Advisor(옵션 D)는 도구이지 할당 전략이 아닙니다.",
     "en_q": "A SysOps administrator needs to provision a new fleet of Amazon EC2 Spot Instances in an Amazon EC2 Auto Scaling group. The Auto Scaling group will use a wide range of instance types. The configured fleet must come from pools that have the most availability for the number of instances that are launched. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Launch the Spot Instances up to the maximum capacity of the Auto Scaling group.",
@@ -5396,7 +5396,7 @@ window.SOA_QUESTIONS = [
       "D": "AMI를 새로운 Amazon S3 버킷으로 복사하고 추가 리전에 대한 AMI 액세스 권한을 할당합니다."
     },
     "answer": "A",
-    "explanation": "AMI는 리전별로 존재합니다. 다른 리전에서 사용하려면 copy-image 명령으로 AMI를 각 리전에 복사해야 합니다. 이는 메타데이터와 스냅샷을 포함한 전체 AMI를 복사합니다. 공개(옵션 B)는 Community AMI로 만들기만 하며 특정 리전에 복사되지 않습니다. 공유(옵션 C)는 같은 리전 내에서만 권한을 공유하고 다른 리전 액세스를 허용하지 않습니다. S3(옵션 D)는 AMI를 S3에 저장할 수 없으며 이는 가능한 방법이 아닙니다.",
+    "explanation": "AMI는 리전별로 존재합니다.\n\n다른 리전에서 사용하려면 copy-image 명령으로 AMI를 각 리전에 복사해야 합니다.\n\n이는 메타데이터와 스냅샷을 포함한 전체 AMI를 복사합니다.\n\n공개(옵션 B)는 Community AMI로 만들기만 하며 특정 리전에 복사되지 않습니다.\n\n공유(옵션 C)는 같은 리전 내에서만 권한을 공유하고 다른 리전 액세스를 허용하지 않습니다.\n\nS3(옵션 D)는 AMI를 S3에 저장할 수 없으며 이는 가능한 방법이 아닙니다.",
     "en_q": "A SysOps administrator creates a custom Amazon Machine Image (AMI) in the eu-west-2 Region and uses the AMI to launch Amazon EC2 instances. The SysOps administrator needs to use the same AMI to launch EC2 instances in two other Regions: us-east-1 and us-east-2. What must the SysOps administrator do to use the custom AMI in the additional Regions?",
     "en_opts": {
       "A": "Copy the AMI to the additional Regions.",
@@ -5417,7 +5417,7 @@ window.SOA_QUESTIONS = [
       "D": "AWS Serverless Application Model(AWS SAM) 템플릿을 생성합니다. 템플릿을 모든 멤버 계정에 배포합니다."
     },
     "answer": "C",
-    "explanation": "CloudFormation StackSets는 조직의 여러 계정과 리전에 CloudFormation 스택을 배포하도록 설계되었습니다. 관리 계정에서 StackSets를 생성하면 멤버 계정에 자동으로 배포됩니다. 변경 세트(옵션 A)는 단일 계정의 변경 사항을 미리 보기만 합니다. 중첩 스택(옵션 B)은 단일 스택 내에서만 사용됩니다. SAM(옵션 D)은 서버리스 애플리케이션을 위한 것이며 다중 계정 배포에 최적화되지 않았습니다. StackSets가 이 용도로 표준입니다.",
+    "explanation": "CloudFormation StackSets는 조직의 여러 계정과 리전에 CloudFormation 스택을 배포하도록 설계되었습니다.\n\n관리 계정에서 StackSets를 생성하면 멤버 계정에 자동으로 배포됩니다.\n\n변경 세트(옵션 A)는 단일 계정의 변경 사항을 미리 보기만 합니다.\n\n중첩 스택(옵션 B)은 단일 스택 내에서만 사용됩니다.\n\nSAM(옵션 D)은 서버리스 애플리케이션을 위한 것이며 다중 계정 배포에 최적화되지 않았습니다.\n\nStackSets가 이 용도로 표준입니다.",
     "en_q": "A company has many accounts in an organization in AWS Organizations. The company must automate resource provisioning from the organization's management account to the member accounts. Which solution will meet this requirement?",
     "en_opts": {
       "A": "Create an AWS CloudFormation change set. Deploy the change set to all member accounts.",
@@ -5438,7 +5438,7 @@ window.SOA_QUESTIONS = [
       "D": "AWS KMS 관리형 암호화 키(SSE-KMS)를 사용하여 서버 측 암호화로 Amazon S3의 사용자 데이터를 암호화합니다."
     },
     "answer": "D",
-    "explanation": "SSE-KMS는 AWS KMS를 통해 암호화를 관리하므로 CloudTrail에서 키 사용에 대한 감사 추적을 자동으로 기록합니다. 누가 언제 어떤 키를 사용했는지 추적할 수 있습니다. 클라이언트 측 암호화(옵션 A)는 감사 추적을 제공하지 않습니다. SSE-S3(옵션 B)는 AWS가 키를 관리하므로 감시 불가능합니다. SSE-C(옵션 C)는 고객이 키를 제공하고 관리하므로 감사 추적을 주지 않습니다. SSE-KMS만이 AWS 관리형이면서도 CloudTrail을 통한 감사 추적을 제공합니다.",
+    "explanation": "SSE-KMS는 AWS KMS를 통해 암호화를 관리하므로 CloudTrail에서 키 사용에 대한 감사 추적을 자동으로 기록합니다.\n\n누가 언제 어떤 키를 사용했는지 추적할 수 있습니다.\n\n클라이언트 측 암호화(옵션 A)는 감사 추적을 제공하지 않습니다.\n\nSSE-S3(옵션 B)는 AWS가 키를 관리하므로 감시 불가능합니다.\n\nSSE-C(옵션 C)는 고객이 키를 제공하고 관리하므로 감사 추적을 주지 않습니다.\n\nSSE-KMS만이 AWS 관리형이면서도 CloudTrail을 통한 감사 추적을 제공합니다.",
     "en_q": "A company is building an interactive application for personal finance. The application stores financial data in Amazon S3, and the data must be encrypted. The company does not want to provide its own encryption keys. However, the company wants to maintain an audit trail that shows when an encryption key was used and who used the key. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Use client-side encryption with client-provided keys. Upload the encrypted user data to Amazon S3.",
@@ -5460,7 +5460,7 @@ window.SOA_QUESTIONS = [
       "E": "사용자의 IAM 정책이 s3:PutObject 작업을 명시적으로 거부합니다."
     },
     "answer": "AC",
-    "explanation": "CloudFormation 스택 생성을 위해서는 두 가지 권한이 필수입니다. 첫째, cloudformation:CreateStack 권한으로 스택을 생성해야 하고, 둘째 s3:CreateBucket 권한으로 S3 버킷을 생성해야 합니다. 이 둘 중 하나라도 없으면 스택 생성이 실패합니다. CreateStackSet(옵션 B)은 StackSet을 위한 권한이므로 일반 스택에는 필요 없습니다. ListBucket(옵션 D)과 PutObject(옵션 E)는 버킷이 이미 존재할 때 필요한 권한이지, 생성 단계에는 직접적으로 필요하지 않습니다.",
+    "explanation": "CloudFormation 스택 생성을 위해서는 두 가지 권한이 필수입니다.\n\n첫째, cloudformation:CreateStack 권한으로 스택을 생성해야 하고, 둘째 s3:CreateBucket 권한으로 S3 버킷을 생성해야 합니다.\n\n이 둘 중 하나라도 없으면 스택 생성이 실패합니다.\n\nCreateStackSet(옵션 B)은 StackSet을 위한 권한이므로 일반 스택에는 필요 없습니다.\n\nListBucket(옵션 D)과 PutObject(옵션 E)는 버킷이 이미 존재할 때 필요한 권한이지, 생성 단계에는 직접적으로 필요하지 않습니다.",
     "en_q": "A company has an AWS CloudFormation template that creates an Amazon S3 bucket. A user authenticates to the corporate AWS account with their Active Directory credentials and attempts to deploy the CloudFormation template. However, the stack creation fails. Which factors could cause this failure? (Choose two.)",
     "en_opts": {
       "A": "The user's IAM policy does not allow the cloudformation:CreateStack action.",
@@ -5483,7 +5483,7 @@ window.SOA_QUESTIONS = [
       "E": "pg_dump 유틸리티를 사용하여 원본 RDS DB 클러스터에서 Amazon EC2 인스턴스로 데이터를 내보냅니다. 새 RDS DB 클러스터를 생성합니다. pg_restore 유틸리티를 사용하여 EC2 인스턴스에서 새 RDS DB 클러스터로 데이터를 가져옵니다."
     },
     "answer": "AC",
-    "explanation": "자동 스냅샷(옵션 A)은 이미 존재하므로 스냅샷에서 복원하기만 하면 되고, 운영 오버헤드가 최소입니다. 읽기 전용 복제본(옵션 C)은 최신 데이터를 거의 실시간으로 가지며 독립 실행형 클러스터로 승격할 수 있습니다. 이 두 가지 모두 24시간 이내의 데이터를 제공합니다. S3 백업(옵션 B)과 DMS(옵션 D)는 수동 작업이 더 필요하고 복잡합니다. pg_dump/pg_restore(옵션 E)는 다운타임을 야기합니다.",
+    "explanation": "자동 스냅샷(옵션 A)은 이미 존재하므로 스냅샷에서 복원하기만 하면 되고, 운영 오버헤드가 최소입니다.\n\n읽기 전용 복제본(옵션 C)은 최신 데이터를 거의 실시간으로 가지며 독립 실행형 클러스터로 승격할 수 있습니다.\n\n이 두 가지 모두 24시간 이내의 데이터를 제공합니다.\n\nS3 백업(옵션 B)과 DMS(옵션 D)는 수동 작업이 더 필요하고 복잡합니다.\n\npg_dump/pg_restore(옵션 E)는 다운타임을 야기합니다.",
     "en_q": "An Amazon RDS for PostgreSQL DB cluster has automated backups turned on with a 7-day retention period. A SysOps administrator needs to create a new RDS DB cluster by using data that is no more than 24 hours old from the original DB cluster. Which solutions will meet these requirements with the LEAST operational overhead? (Choose two.)",
     "en_opts": {
       "A": "Identify the most recent automated snapshot. Restore the snapshot to a new RDS DB cluster.",
@@ -5506,7 +5506,7 @@ window.SOA_QUESTIONS = [
       "E": "ALB와 연결된 대상 그룹이 고정 세션으로 구성됩니다."
     },
     "answer": "BD",
-    "explanation": "DNS가 여전히 ALB를 가리키면(옵션 B), 사용자들은 CloudFront를 거치지 않고 직접 ALB에 접근합니다. CloudFront를 사용하려면 DNS를 CloudFront 배포 도메인으로 변경해야 합니다. TTL이 0초(옵션 D)로 설정되면 CloudFront가 콘텐츠를 캐시하지 않고 매번 원본에 요청하므로 캐싱 이점이 없습니다. OAI(옵션 A)는 S3에 필요하며 ALB에는 필요 없습니다. 보안 그룹(옵션 C)과 고정 세션(옵션 E)은 이 문제를 직접 야기하지 않습니다.",
+    "explanation": "DNS가 여전히 ALB를 가리키면(옵션 B), 사용자들은 CloudFront를 거치지 않고 직접 ALB에 접근합니다.\n\nCloudFront를 사용하려면 DNS를 CloudFront 배포 도메인으로 변경해야 합니다.\n\nTTL이 0초(옵션 D)로 설정되면 CloudFront가 콘텐츠를 캐시하지 않고 매번 원본에 요청하므로 캐싱 이점이 없습니다.\n\nOAI(옵션 A)는 S3에 필요하며 ALB에는 필요 없습니다.\n\n보안 그룹(옵션 C)과 고정 세션(옵션 E)은 이 문제를 직접 야기하지 않습니다.",
     "en_q": "A company is managing a website with a global user base hosted on Amazon EC2 with an Application Load Balancer (ALB). To reduce the load on the web servers, a SysOps administrator configures an Amazon CloudFront distribution with the ALB as the origin. After a week of monitoring the solution, the administrator notices that requests are still being served by the ALB and there is no change in the web server load. What are possible causes for this problem? (Choose two.)",
     "en_opts": {
       "A": "CloudFront does not have the ALB configured as the origin access identity.",
@@ -5529,7 +5529,7 @@ window.SOA_QUESTIONS = [
       "E": "example.com에 대한 CNAME 레코드를 구성하여 ALB의 CNAME을 가리킵니다."
     },
     "answer": "CD",
-    "explanation": "Route 53에서 ALB를 가리킬 때는 별칭 레코드를 사용해야 합니다. 별칭 레코드는 ALB의 DNS 이름(CNAME)을 직접 참조할 수 있습니다. example.com(옵션 C)은 별칭을 통해 ALB를 가리키고, www.example.com(옵션 D)은 example.com 별칭을 가리킵니다. A 레코드(옵션 A, B)는 고정 IP 주소를 가리키므로 ALB에 적합하지 않습니다. CNAME(옵션 E)은 루트 도메인(example.com)에 사용할 수 없습니다.",
+    "explanation": "Route 53에서 ALB를 가리킬 때는 별칭 레코드를 사용해야 합니다.\n\n별칭 레코드는 ALB의 DNS 이름(CNAME)을 직접 참조할 수 있습니다.\n\nexample.com(옵션 C)은 별칭을 통해 ALB를 가리키고, www.example.com(옵션 D)은 example.com 별칭을 가리킵니다.\n\nA 레코드(옵션 A, B)는 고정 IP 주소를 가리키므로 ALB에 적합하지 않습니다.\n\nCNAME(옵션 E)은 루트 도메인(example.com)에 사용할 수 없습니다.",
     "en_q": "A SysOps administrator needs to configure the Amazon Route 53 hosted zone for example.com and www.example.com to point to an Application Load Balancer (ALB). Which combination of actions should the SysOps administrator take to meet these requirements? (Choose two.)",
     "en_opts": {
       "A": "Configure an A record for example.com to point to the IP address of the ALB.",
@@ -5551,7 +5551,7 @@ window.SOA_QUESTIONS = [
       "D": "Route 53의 private 호스팅 영역을 온프레미스 DNS 서버를 참조하는 PTR 레코드로 편집합니다. 온프레미스 네트워크의 DNS 서버를 구성하여 private 호스팅 영역의 도메인 이름에 대한 DNS 쿼리를 VPC CIDR IPv4 네트워크 범위의 기본값에 2를 더한 값으로 조건부 전달합니다."
     },
     "answer": "A",
-    "explanation": "Route 53 Resolver의 인바운드 엔드포인트는 온프레미스 DNS 서버에서 AWS의 private 호스팅 영역으로의 DNS 쿼리를 가능하게 합니다. 온프레미스 DNS 서버는 특정 도메인에 대한 쿼리를 인바운드 엔드포인트로 조건부 전달합니다. 아웃바운드 엔드포인트(옵션 B)는 AWS에서 온프레미스로의 쿼리 전달에 사용되므로 반대 방향입니다. TXT(옵션 C)와 PTR(옵션 D) 레코드는 DNS 전달 구성에 사용되지 않습니다.",
+    "explanation": "Route 53 Resolver의 인바운드 엔드포인트는 온프레미스 DNS 서버에서 AWS의 private 호스팅 영역으로의 DNS 쿼리를 가능하게 합니다.\n\n온프레미스 DNS 서버는 특정 도메인에 대한 쿼리를 인바운드 엔드포인트로 조건부 전달합니다.\n\n아웃바운드 엔드포인트(옵션 B)는 AWS에서 온프레미스로의 쿼리 전달에 사용되므로 반대 방향입니다.\n\nTXT(옵션 C)와 PTR(옵션 D) 레코드는 DNS 전달 구성에 사용되지 않습니다.",
     "en_q": "A company has a hybrid environment. The company has set up an AWS Direct Connect connection between the company's on-premises data center and a workload that runs in a VPC. The company uses Amazon Route 53 for DNS on AWS. The company uses a private hosted zone to manage DNS names for a set of services that are hosted on AWS. The company wants the on-premises servers to use Route 53 for DNS resolution of the private hosted zone. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Create a Route 53 inbound endpoint. Ensure that security groups and routing allow the traffic from the on-premises data center. Configure the DNS server on the on-premises network to conditionally forward DNS queries for the private hosted zone's domain name to the IP addresses of the inbound endpoint.",
@@ -5572,7 +5572,7 @@ window.SOA_QUESTIONS = [
       "D": "evaluate target health를 yes로 설정하여 각 서버에 대한 별칭 레코드를 생성합니다. Route 53 TCP 상태 확인과 레코드를 연결합니다."
     },
     "answer": "A",
-    "explanation": "온프레미스 서버에 대해 HTTP 2xx/3xx 상태 코드 기반 상태 확인을 수행하려면 HTTP 상태 확인이 필요합니다. A 레코드는 온프레미스 서버의 고정 IP 주소를 사용하므로 적절합니다. TCP 상태 확인(옵션 B)은 단순 연결 확인만 수행하며 HTTP 상태 코드를 확인하지 않습니다. 별칭 레코드(옵션 C, D)는 AWS 리소스(ELB, CloudFront, API Gateway 등)를 대상으로 하며 온프레미스 서버에는 사용할 수 없습니다.",
+    "explanation": "온프레미스 서버에 대해 HTTP 2xx/3xx 상태 코드 기반 상태 확인을 수행하려면 HTTP 상태 확인이 필요합니다.\n\nA 레코드는 온프레미스 서버의 고정 IP 주소를 사용하므로 적절합니다.\n\nTCP 상태 확인(옵션 B)은 단순 연결 확인만 수행하며 HTTP 상태 코드를 확인하지 않습니다.\n\n별칭 레코드(옵션 C, D)는 AWS 리소스(ELB, CloudFront, API Gateway 등)를 대상으로 하며 온프레미스 서버에는 사용할 수 없습니다.",
     "en_q": "A SysOps administrator is evaluating Amazon Route 53 DNS options to address concerns about high availability for an on-premises website. The website consists of two servers: a primary active server and a secondary passive server. Route 53 should route traffic to the primary server if the associated health check returns 2xx or 3xx HTTP codes. All other traffic should be directed to the secondary passive server. The failover record type, set ID, and routing policy have been set appropriately for both primary and secondary servers. Which next step should be taken to configure Route 53?",
     "en_opts": {
       "A": "Create an A record for each server. Associate the records with the Route 53 HTTP health check.",
@@ -5593,7 +5593,7 @@ window.SOA_QUESTIONS = [
       "D": "EC2 인스턴스가 AWS 서비스를 호출할 수 있도록 허용하는 IAM 역할을 생성하고 연결합니다. sqs:SendMessage 권한, sqs:ReceiveMessage 권한, sqs:DeleteMessage 권한을 적절한 큐에 허용하는 IAM 정책을 역할에 연결합니다."
     },
     "answer": "D",
-    "explanation": "IAM 역할을 사용하는 것이 가장 안전한 방식입니다. EC2 인스턴스는 자동으로 임시 보안 자격 증명을 받으므로 장기 키를 저장할 필요가 없습니다. CloudTrail에서도 역할 사용이 더 잘 추적됩니다. 옵션 D는 최소 권한 원칙을 따르며 오직 필요한 권한만 허용합니다. 옵션 A와 B는 IAM 사용자 키를 노출하므로 보안 위험입니다. 옵션 C의 sqs:*는 과도한 권한입니다.",
+    "explanation": "IAM 역할을 사용하는 것이 가장 안전한 방식입니다.\n\nEC2 인스턴스는 자동으로 임시 보안 자격 증명을 받으므로 장기 키를 저장할 필요가 없습니다.\n\nCloudTrail에서도 역할 사용이 더 잘 추적됩니다.\n\n옵션 D는 최소 권한 원칙을 따르며 오직 필요한 권한만 허용합니다.\n\n옵션 A와 B는 IAM 사용자 키를 노출하므로 보안 위험입니다.\n\n옵션 C의 sqs:*는 과도한 권한입니다.",
     "en_q": "An Amazon EC2 instance is running an application that uses Amazon Simple Queue Service (Amazon SQS) queues. A SysOps administrator must ensure that the application can read, write, and delete messages from the SQS queues. Which solution will meet these requirements in the MOST secure manner?",
     "en_opts": {
       "A": "Create an IAM user with an IAM policy that allows the sqs:SendMessage permission, the sqs:ReceiveMessage permission, and the sqs:DeleteMessage permission to the appropriate queues. Embed the IAM user's credentials in the application's configuration",
@@ -5614,7 +5614,7 @@ window.SOA_QUESTIONS = [
       "D": "AWS Global Accelerator에서 액셀러레이터를 생성합니다. 포트 443에 대한 리스너 구성을 설정합니다. 엔드포인트 유형을 S3 버킷으로 트래픽을 전달하도록 설정합니다."
     },
     "answer": "A",
-    "explanation": "CloudFront와 OAI(Origin Access Identity)를 사용하면 S3 버킷을 비공개로 유지하면서도 CloudFront 배포를 통해 공개적으로 콘텐츠를 제공할 수 있습니다. OAI는 CloudFront만 S3에 액세스할 수 있도록 제한합니다. 정적 웹사이트 호스팅(옵션 B)은 버킷을 공개해야 하므로 정책 위반입니다. ALB(옵션 C)는 S3을 원본으로 지원하지 않습니다. Global Accelerator(옵션 D)도 S3 웹 호스팅에 적합하지 않습니다.",
+    "explanation": "CloudFront와 OAI(Origin Access Identity)를 사용하면 S3 버킷을 비공개로 유지하면서도 CloudFront 배포를 통해 공개적으로 콘텐츠를 제공할 수 있습니다.\n\nOAI는 CloudFront만 S3에 액세스할 수 있도록 제한합니다.\n\n정적 웹사이트 호스팅(옵션 B)은 버킷을 공개해야 하므로 정책 위반입니다.\n\nALB(옵션 C)는 S3을 원본으로 지원하지 않습니다.\n\nGlobal Accelerator(옵션 D)도 S3 웹 호스팅에 적합하지 않습니다.",
     "en_q": "A SysOps administrator needs to configure an Amazon S3 bucket to host a web application. The SysOps administrator has created the S3 bucket and has copied the static files for the web application to the S3 bucket. The company has a policy that all $3 buckets must not be public. What should the SysOps administrator do to meet these requirements?",
     "en_opts": {
       "A": "Create an Amazon CloudFront distribution. Configure the S3 bucket as an origin with an origin access identity (OAI). Give the OAI the s3:GetObject permission in the S3 bucket policy.",
@@ -5636,7 +5636,7 @@ window.SOA_QUESTIONS = [
       "E": "CloudFront 원본에 대해 CloudFront Origin Shield를 구성합니다."
     },
     "answer": "AC",
-    "explanation": "모든 트래픽이 암호화되려면 두 가지가 필요합니다. 첫째, Viewer Protocol Policy를 \"Redirect HTTP to HTTPS\"(옵션 A)로 설정하여 클라이언트의 모든 HTTP 요청을 HTTPS로 강제합니다. 둘째, CloudFront 배포에 대체 도메인 이름으로 www.example.com을 추가하고(옵션 C), ACM 인증서를 선택하여 HTTPS 인증서를 연결합니다. AWS WAF(옵션 D)는 보안이지만 암호화와 무관합니다. Origin Shield(옵션 E)는 캐시 성능을 개선하지만 암호화와 무관합니다. 옵션 B는 HTTP를 허용하므로 암호화를 보장하지 않습니다.",
+    "explanation": "모든 트래픽이 암호화되려면 두 가지가 필요합니다.\n\n첫째, Viewer Protocol Policy를 \"Redirect HTTP to HTTPS\"(옵션 A)로 설정하여 클라이언트의 모든 HTTP 요청을 HTTPS로 강제합니다.\n\n둘째, CloudFront 배포에 대체 도메인 이름으로 www.example.com을 추가하고(옵션 C), ACM 인증서를 선택하여 HTTPS 인증서를 연결합니다.\n\nAWS WAF(옵션 D)는 보안이지만 암호화와 무관합니다.\n\nOrigin Shield(옵션 E)는 캐시 성능을 개선하지만 암호화와 무관합니다.\n\n옵션 B는 HTTP를 허용하므로 암호화를 보장하지 않습니다.",
     "en_q": "A company is building a web application on AWS. The company is using Amazon CloudFront with a domain name of www.example.com. All traffic to CloudFront must be encrypted in transit. The company already has provisioned an SSL certificate for www.example.com in AWS Certificate Manager (ACM). Which combination of steps should a SysOps administrator take to encrypt the traffic in transit? (Choose two.)",
     "en_opts": {
       "A": "For each cache behavior in the CloudFront distribution, modify the Viewer Protocol Policy setting to redirect HTTP to HTTPS.",
@@ -7675,7 +7675,7 @@ window.SOA_QUESTIONS = [
       "D": "제거 정책을 가장 자주 사용하는 키를 제거하도록 변경합니다."
     },
     "answer": "D",
-    "explanation": "이 문제는 ElastiCache의 캐시 제거(Eviction) 정책 이해도를 평가합니다. 현재 eviction policy가 TTL 상관없이 모든 키를 무작위로 제거하고 있어 캐시 적중률이 낮습니다. 캐시 적중률을 개선하면서 비용을 증가시키지 않으려면 더 지능적인 제거 정책이 필요합니다.\n\nAllKeys-LRU, AllKeys-LFU 등의 정책은 자주 사용되는 데이터를 우선 보존합니다. 특히 LFU(Least Frequently Used)는 접근 빈도가 낮은 키를 먼저 제거하여 인기 상품 쿼리는 메모리에 유지됩니다. 옵션 A(노드 추가)는 비용 증가를 초래하므로 부적합합니다. 옵션 B(TTL 증가)는 정책 문제를 해결하지 못합니다. 옵션 C는 여전히 무작위 제거로 비효율적입니다. 정답은 D로, 가장 자주 사용된 키(Most Frequently Used)를 보존하는 LFU 정책이 캐시 적중률을 최대화합니다.",
+    "explanation": "이 문제는 ElastiCache의 캐시 제거(Eviction) 정책 이해도를 평가합니다. 현재 eviction policy가 TTL 상관없이 모든 키를 무작위로 제거하고 있어 캐시 적중률이 낮습니다. 캐시 적중률을 개선하면서 비용을 증가시키지 않으려면 더 지능적인 제거 정책이 필요합니다.\n\nAllKeys-LRU, AllKeys-LFU 등의 정책은 자주 사용되는 데이터를 우선 보존합니다. 특히 LFU(Least Frequently Used)는 접근 빈도가 낮은 키를 먼저 제거하여 인기 상품 쿼리는 메모리에 유지됩니다. 옵션 A(노드 추가)는 비용 증가를 초래하므로 부적합합니다. 옵션 B(TTL 증가)는 정책 문제를 해결하지 못합니다.\n\n옵션 C는 여전히 무작위 제거로 비효율적입니다. 정답은 D로, 가장 자주 사용된 키(Most Frequently Used)를 보존하는 LFU 정책이 캐시 적중률을 최대화합니다.",
     "en_q": "An ecommerce company uses an Amazon ElastiCache for Redis cluster for in-memory caching of popular product queries on a shopping website. The cache eviction policy is randomly evicting keys whether or not a TTL is set. A SysOps administrator must improve the cache hit ratio without increasing costs. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Add another node to the ElastiCache cluster.",
@@ -7696,7 +7696,7 @@ window.SOA_QUESTIONS = [
       "D": "ALB를 Network Load Balancer로 교체합니다."
     },
     "answer": "B",
-    "explanation": "이 문제는 ALB의 session affinity(스티키 세션) 개념을 다룹니다. 사용자가 자주 로그인하도록 강제되는 것은 각 요청이 다른 EC2 인스턴스로 라우팅되기 때문입니다. 웹 애플리케이션이 세션 상태를 메모리에만 저장하는 경우, ALB가 요청을 분산시킬 때마다 서로 다른 서버의 세션 데이터에 접근하게 되어 인증이 실패합니다.\n\nSticky Sessions(Session Affinity)는 특정 클라이언트의 요청을 항상 같은 대상 인스턴스로 라우팅하여 이 문제를 해결합니다. ALB는 쿠키 기반 또는 기간 기반 sticky session을 지원합니다. 옵션 A(CloudFront)는 정적 콘텐츠 캐싱에 도움이 되지만 세션 문제는 해결하지 못합니다. 옵션 C(배치 그룹)와 D(NLB)는 문제의 원인과 무관합니다. 정답은 B입니다.",
+    "explanation": "이 문제는 ALB의 session affinity(스티키 세션) 개념을 다룹니다.\n\n사용자가 자주 로그인하도록 강제되는 것은 각 요청이 다른 EC2 인스턴스로 라우팅되기 때문입니다.\n\n웹 애플리케이션이 세션 상태를 메모리에만 저장하는 경우, ALB가 요청을 분산시킬 때마다 서로 다른 서버의 세션 데이터에 접근하게 되어 인증이 실패합니다.\n\nSticky Sessions(Session Affinity)는 특정 클라이언트의 요청을 항상 같은 대상 인스턴스로 라우팅하여 이 문제를 해결합니다.\n\nALB는 쿠키 기반 또는 기간 기반 sticky session을 지원합니다.\n\n옵션 A(CloudFront)는 정적 콘텐츠 캐싱에 도움이 되지만 세션 문제는 해결하지 못합니다.\n\n옵션 C(배치 그룹)와 D(NLB)는 문제의 원인과 무관합니다.\n\n정답은 B입니다.",
     "en_q": "A company deployed a new web application on multiple Amazon EC2 instances behind an Application Load Balancer (ALB). The EC2 instances run in an Auto Scaling group. Users report that they are frequently being prompted to log in. What should a SysOps administrator do to resolve this issue?",
     "en_opts": {
       "A": "Configure an Amazon CloudFront distribution with the ALB as the origin.",

@@ -13,7 +13,7 @@ window.AIP_QUESTIONS = [
       "D": "Bedrock 모델 평가 작업으로 공정성 비교, CloudWatch 알람으로 InvocationsIntervened 메트릭 모니터링"
     },
     "answer": "C",
-    "explanation": "【핵심 용어】▸ SageMaker Clarify — 편향 감지와 공정성 메트릭 분석 전문 서비스 ▸ CloudWatch 합성 알람 — 여러 메트릭을 결합하여 종합 평가 가능【정답 포인트】▸ 공정성 평가 → SageMaker Clarify 필수 ▸ 메트릭 모니터링 → CloudWatch 메트릭과 알람 ▸ Bedrock Latency와 Clarify 편향 메트릭을 합성 알람으로 결합하면 종합적 공정성 평가 대시보드 구성【오답 체크】(A) 커스텀 Lambda 포스트프로세싱은 개발 오버헤드 증가 (B) Guardrails는 콘텐츠 필터링용이지 공정성 평가 서비스 아님 (D) 모델 평가 작업은 일회성이며 실시간 모니터링 미지원【시험 포인트】공정성 메트릭 = SageMaker Clarify + CloudWatch 패턴 인식",
+    "explanation": "【핵심 용어】\n▸ SageMaker Clarify — 편향 감지와 공정성 메트릭 분석 전문 서비스\n▸ CloudWatch 합성 알람 — 여러 메트릭을 결합하여 종합 평가 가능\n\n【정답 포인트】\n▸ 공정성 평가 → SageMaker Clarify 필수\n▸ 메트릭 모니터링 → CloudWatch 메트릭과 알람\n▸ Bedrock Latency와 Clarify 편향 메트릭을 합성 알람으로 결합하면 종합적 공정성 평가 대시보드 구성\n\n【오답 체크】\n(A) 커스텀 Lambda 포스트프로세싱은 개발 오버헤드 증가\n(B) Guardrails는 콘텐츠 필터링용이지 공정성 평가 서비스 아님\n(D) 모델 평가 작업은 일회성이며 실시간 모니터링 미지원\n\n【시험 포인트】\n공정성 메트릭 = SageMaker Clarify + CloudWatch 패턴 인식",
     "en_q": "A retail company has a generative AI (GenAI) product recommendation application that uses Amazon Bedrock. The application suggests products to customers based on browsing history and demographics. The company needs to implement fairness evaluation across multiple demographic groups to detect and measure bias in recommendations between two prompt approaches. The company wants to collect and monitor fairness metrics in real time. The company must receive an alert if the fairness metrics show a discrepancy of more than 15% between demographic groups. The company must receive weekly reports that compare the performance of the two prompt approaches. Which solution will meet these requirements with the LEAST custom development effort?",
     "en_opts": {
       "A": "Configure an Amazon CloudWatch dashboard to display default metrics from Amazon Bedrock API calls. Create custom metrics based on model outputs. Set up Amazon EventBridge rules to invoke AWS lambda functions that perform post-processing analysis on model responses and publish custom fairness metrics.",
@@ -35,7 +35,7 @@ window.AIP_QUESTIONS = [
       "F": "높은 grounding 점수 임계값 설정"
     },
     "answer": "ADF",
-    "explanation": "【핵심 용어】▸ Denied Topics — 특정 주제/패턴 차단 ▸ Custom Word Filters — 특정 단어(경쟁사명) 차단 ▸ Grounding Score — 응답의 팩트 기반 신뢰도 점수【정답 포인트】▸ (A) 고위험 패턴 → Denied Topics로 차단 ▸ (D) 경쟁사명 → Custom Word Filters로 입력/출력 모두 차단 ▸ (F) 높은 Grounding 점수 임계값 → 팩트 확인 안 된 응답 필터링【오답 체크】(B) 콘텐츠 필터는 해로운 콘텐츠(폭력, 혐오) 필터링용이지 고위험 패턴은 Denied Topics로 처리 (C) 경쟁사명은 콘텐츠 필터 아닌 커스텀 단어 필터 (E) 낮은 점수는 응답 품질 저하【시험 포인트】패턴=Denied Topics, 단어=Custom Filters, 팩트=높은Grounding",
+    "explanation": "【핵심 용어】\n▸ Denied Topics — 특정 주제/패턴 차단\n▸ Custom Word Filters — 특정 단어(경쟁사명) 차단\n▸ Grounding Score — 응답의 팩트 기반 신뢰도 점수\n\n【정답 포인트】\n▸\n(A) 고위험 패턴 → Denied Topics로 차단\n▸\n(D) 경쟁사명 → Custom Word Filters로 입력/출력 모두 차단\n▸ (F) 높은 Grounding 점수 임계값 → 팩트 확인 안 된 응답 필터링\n\n【오답 체크】\n(B) 콘텐츠 필터는 해로운 콘텐츠(폭력, 혐오) 필터링용이지 고위험 패턴은 Denied Topics로 처리\n(C) 경쟁사명은 콘텐츠 필터 아닌 커스텀 단어 필터\n(E) 낮은 점수는 응답 품질 저하\n\n【시험 포인트】\n패턴=Denied Topics, 단어=Custom Filters, 팩트=높은Grounding",
     "en_q": "A finance company is developing an AI assistant to help clients plan investments and manage their portfolios. The company identifies several high-risk conversation patterns such as requests for specific stock recommendations or guaranteed returns. High-risk conversation patterns could lead to regulatory violations if the company cannot implement appropriate controls. The company must ensure that the AI assistant does not provide inappropriate financial advice, generate content about competitors, or make claims that are not factually grounded in the company's approved financial guidance. The company wants to use Amazon Bedrock Guardrails to implement a solution. Which combination of steps will meet these requirements? (Choose three.)",
     "en_opts": {
       "A": "Add the high-risk conversation patterns to a denied topics guardrail.",
@@ -57,7 +57,7 @@ window.AIP_QUESTIONS = [
       "D": "RetrieveAndGenerate API를 InvokeModelWithResponseStream API로 변경, API Gateway WebSocket API 사용"
     },
     "answer": "A",
-    "explanation": "【핵심 용어】▸ AWS Amplify AI Kit — 스트리밍 응답 최적화 전용 라이브러리 ▸ GraphQL Streaming — 부분 응답 실시간 전달 ▸ ResponseStream — 토큰 단위 응답 스트리밍【정답 포인트】▸ 장시간 처리(15~45초) → 스트리밍으로 체감 지연 감소 ▸ Amplify AI Kit은 GraphQL + 스트리밍 최적화 전문 ▸ 클라이언트 렌더링 최적화로 완전 응답 대기 불필요【오답 체크】(B) 타임아웃 증가는 근본 해결 아님 (C) SQS는 비동기 처리로 지연 증가 (D) WebSocket은 직접 API Gateway 통합이지 GraphQL 기반 아님【시험 포인트】장시간 응답 = 스트리밍 + Amplify AI Kit 패턴",
+    "explanation": "【핵심 용어】\n▸ AWS Amplify AI Kit — 스트리밍 응답 최적화 전용 라이브러리\n▸ GraphQL Streaming — 부분 응답 실시간 전달\n▸ ResponseStream — 토큰 단위 응답 스트리밍\n\n【정답 포인트】\n▸ 장시간 처리(15~45초) → 스트리밍으로 체감 지연 감소\n▸ Amplify AI Kit은 GraphQL + 스트리밍 최적화 전문\n▸ 클라이언트 렌더링 최적화로 완전 응답 대기 불필요\n\n【오답 체크】\n(B) 타임아웃 증가는 근본 해결 아님\n(C) SQS는 비동기 처리로 지연 증가\n(D) WebSocket은 직접 API Gateway 통합이지 GraphQL 기반 아님\n\n【시험 포인트】\n장시간 응답 = 스트리밍 + Amplify AI Kit 패턴",
     "en_q": "A company has deployed an AI assistant as a React application that uses AWS Amplify, an AWS AppSync GraphQL API, and Amazon Bedrock Knowledge Bases. The application uses the GraphQL API to call the Amazon Bedrock RetrieveAndGenerate API for knowledge base interactions. The company configures an AWS Lambda resolver to use the RequestResponse invocation type. Application users report frequent timeouts and slow response times. Users report these problems more frequently for complex questions that require longer processing. The company needs a solution to fix these performance issues and enhance the user experience. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Use AWS Amplify AI Kit to implement streaming responses from the GraphQL API and to optimize client-side rendering.",
@@ -77,7 +77,7 @@ window.AIP_QUESTIONS = [
       "D": "API Gateway Lambda 인증자로 AppConfig에 저장된 라우팅 규칙 평가, 모델별 Lambda 함수로 라우팅"
     },
     "answer": "C",
-    "explanation": "【핵심 용어】▸ AWS AppConfig Agent — 실시간 구성 조회 및 즉시 전파 ▸ 환경 변수 — 배포 필요, 시간 지연 ▸ Stage Variables — 수동 업데이트 필요【정답 포인트】▸ 실시간 변경 필요 → AppConfig의 자동 동기화 ▸ 수천 개 동시 요청 → 중앙 집중식 구성 관리 ▸ 시간 단위 변경 → 코드 배포 없이 AppConfig만 수정【오답 체크】(A) 환경 변수는 배포 필요, 즉시 전파 불가 (B) Stage 변수는 수동 업데이트 + 배포 (D) 인증자는 라우팅용이 아닌 인증용【시험 포인트】실시간 동적 라우팅 = AppConfig + Lambda 패턴",
+    "explanation": "【핵심 용어】\n▸ AWS AppConfig Agent — 실시간 구성 조회 및 즉시 전파\n▸ 환경 변수 — 배포 필요, 시간 지연\n▸ Stage Variables — 수동 업데이트 필요\n\n【정답 포인트】\n▸ 실시간 변경 필요 → AppConfig의 자동 동기화\n▸ 수천 개 동시 요청 → 중앙 집중식 구성 관리\n▸ 시간 단위 변경 → 코드 배포 없이 AppConfig만 수정\n\n【오답 체크】\n(A) 환경 변수는 배포 필요, 즉시 전파 불가\n(B) Stage 변수는 수동 업데이트 + 배포\n(D) 인증자는 라우팅용이 아닌 인증용\n\n【시험 포인트】\n실시간 동적 라우팅 = AppConfig + Lambda 패턴",
     "en_q": "An ecommerce company operates a global product recommendation system that needs to switch between multiple foundation models (FM) in Amazon Bedrock based on regulations, cost optimization, and performance requirements. The company must apply custom controls based on proprietary business logic, including dynamic cost thresholds, AWS Region-specific compliance rules, and real-time A/B testing across multiple FMs. The system must be able to switch between FMs without deploying new code. The system must route user requests based on complex rules including user tier, transaction value, regulatory zone, and real-time cost metrics that change hourly and require immediate propagation across thousands of concurrent requests. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Deploy an AWS Lambda function that uses environment variables to store routing rules and Amazon Bedrock FM IDs. Use the Lambda console to update the environment variables when business requirements change. Configure an Amazon API Gateway REST API to read request parameters to make routing decisions.",
@@ -97,7 +97,7 @@ window.AIP_QUESTIONS = [
       "D": "DynamoDB에 커스텀 프롬프트 템플릿 저장, Lambda 함수로 유닛별 프롬프트 선택, 두 번째 Lambda로 Comprehend 필터링"
     },
     "answer": "A",
-    "explanation": "【핵심 용어】▸ Bedrock Prompt Management — 프롬프트 버전 관리, 중앙 집중식 템플릿 ▸ Bedrock Guardrails — 포스트프로세싱 불필요, 모델 레벨 제어 ▸ Category Filters — 사전 정의된 필터【정답 포인트】▸ 중앙 관리 → Prompt Management 필수 ▸ 포스트프로세싱 오버헤드 최소 → Guardrails로 모델 인스턴스에서 차단 ▸ 톤 조정 → 프롬프트 변형(템플릿 상속)으로 처리【오답 체크】(B) Guardrails의 오디언스 기반 임계값 조정은 고급 기능이지만 (A)가 더 간단 (C/D) DynamoDB + Lambda = 유지보수 오버헤드 증가【시험 포인트】중앙 관리 = Prompt Management + Guardrails 패턴",
+    "explanation": "【핵심 용어】\n▸ Bedrock Prompt Management — 프롬프트 버전 관리, 중앙 집중식 템플릿\n▸ Bedrock Guardrails — 포스트프로세싱 불필요, 모델 레벨 제어\n▸ Category Filters — 사전 정의된 필터\n\n【정답 포인트】\n▸ 중앙 관리 → Prompt Management 필수\n▸ 포스트프로세싱 오버헤드 최소 → Guardrails로 모델 인스턴스에서 차단\n▸ 톤 조정 → 프롬프트 변형(템플릿 상속)으로 처리\n\n【오답 체크】\n(B) Guardrails의 오디언스 기반 임계값 조정은 고급 기능이지만 (A)가 더 간단 (C/D) DynamoDB + Lambda = 유지보수 오버헤드 증가\n\n【시험 포인트】\n중앙 관리 = Prompt Management + Guardrails 패턴",
     "en_q": "A company is developing an internal generative AI (GenAI) assistant that uses Amazon Bedrock to summarize corporate documents for multiple business units. The GenAI assistant must generate responses in a consistent format that includes a document summary, classification of business risks, and terms that are flagged for review. The GenAI assistant must adapt the tone of responses for each user's business unit, such as legal, human resources, or finance. The GenAI assistant must block hate speech, inappropriate topics, and sensitive information such as personal health information. The company needs a solution to centrally manage prompt variants across business units and teams. The company wants to minimize ongoing orchestration efforts and maintenance for post-processing logic. The company also wants to have the ability to adjust content moderation criteria for the GenAI assistant over time. Which solution will meet these requirements with the LEAST maintenance overhead?",
     "en_opts": {
       "A": "Use Amazon Bedrock Prompt Management to configure reusable templates and business unit-specific prompt variants. Apply Amazon Bedrock guardrails that have category filters and sensitive term lists to block prohibited content.",
@@ -117,7 +117,7 @@ window.AIP_QUESTIONS = [
       "D": "Amazon Neptune Analytics 그래프 데이터베이스로 임베딩 벡터 인덱스 구성, Bedrock으로 그래프 기반 검색 수행"
     },
     "answer": "A",
-    "explanation": "【핵심 용어】▸ OpenSearch Serverless — 벡터 검색 + 메타데이터 필터링 + 서버리스 ▸ Knowledge Bases — Bedrock의 RAG 통합 서비스 ▸ Metadata Filtering — 구조화된 데이터로 검색 범위 축소【정답 포인트】▸ 1천만 임베딩 저장소 → OpenSearch Serverless 스케일링 적합 ▸ 메타데이터 필터링 필수 → OpenSearch 네이티브 지원 ▸ 운영 오버헤드 최소 → Serverless(자동 스케일) + Knowledge Bases 통합【오답 체크】(B) Aurora는 관리 오버헤드 증가, pgvector는 프로덕션 규모 제한 (C) S3 Vectors는 메타데이터 필터링 미지원 (D) Neptune은 그래프 DB로 벡터 검색 전문 아님【시험 포인트】대규모 벡터 + 메타데이터 = OpenSearch Serverless + Knowledge Bases",
+    "explanation": "【핵심 용어】\n▸ OpenSearch Serverless — 벡터 검색 + 메타데이터 필터링 + 서버리스\n▸ Knowledge Bases — Bedrock의 RAG 통합 서비스\n▸ Metadata Filtering — 구조화된 데이터로 검색 범위 축소\n\n【정답 포인트】\n▸ 1천만 임베딩 저장소 → OpenSearch Serverless 스케일링 적합\n▸ 메타데이터 필터링 필수 → OpenSearch 네이티브 지원\n▸ 운영 오버헤드 최소 → Serverless(자동 스케일) + Knowledge Bases 통합\n\n【오답 체크】\n(B) Aurora는 관리 오버헤드 증가, pgvector는 프로덕션 규모 제한\n(C) S3 Vectors는 메타데이터 필터링 미지원\n(D) Neptune은 그래프 DB로 벡터 검색 전문 아님\n\n【시험 포인트】\n대규모 벡터 + 메타데이터 = OpenSearch Serverless + Knowledge Bases",
     "en_q": "A financial services company is building a customer support application that retrieves relevant financial regulation documents from a database based on semantic similarities to user queries. The application must integrate with Amazon Bedrock to generate responses. The application must be able to search documents that are in English, Spanish, and Portuguese. The application must filter documents by metadata such as publication date, regulatory agency, and document type. The database stores approximately 10 million document embeddings. To minimize operational overhead, the company wants a solution that minimizes management and maintenance effort. The application must provide low-latency responses for real-time customer interactions. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Use Amazon OpenSearch Serverless to provide vector search capabilities and metadata filtering. Connect to Amazon Bedrock Knowledge Bases to enable Retrieval Augmented Generation (RAG) capabilities that use an Anthropic Claude foundation model (FM).",
@@ -137,7 +137,7 @@ window.AIP_QUESTIONS = [
       "D": "초기 벡터 검색 결과를 SageMaker AI로 호스팅된 ML 모델로 재순위화하는 두 단계 검색 아키텍처 구현"
     },
     "answer": "A",
-    "explanation": "【핵심 용어】▸ Hybrid Search — 벡터(의미) + 키워드(정확) 결합 검색 ▸ Vector Similarity — 의미론적 유사도 ▸ Keyword Matching — 정확 용어 매칭【정답 포인트】▸ 의료 용어/약자 = 키워드 매칭 필수 ▸ 의미 이해 = 벡터 검색 보존 ▸ OpenSearch 네이티브 하이브리드 검색 지원 → 추가 인프라 불필요【오답 체크】(B) 임베딩 차원 증가는 의료 용어 문제 해결 안 함 (C) Kendra는 다른 검색 엔진, 마이그레이션 오버헤드 (D) SageMaker 재순위화는 지연 증가, 운영 복잡성 높음【시험 포인트】정확 + 의미 = 하이브리드 검색 패턴",
+    "explanation": "【핵심 용어】\n▸ Hybrid Search — 벡터(의미) + 키워드(정확) 결합 검색\n▸ Vector Similarity — 의미론적 유사도\n▸ Keyword Matching — 정확 용어 매칭\n\n【정답 포인트】\n▸ 의료 용어/약자 = 키워드 매칭 필수\n▸ 의미 이해 = 벡터 검색 보존\n▸ OpenSearch 네이티브 하이브리드 검색 지원 → 추가 인프라 불필요\n\n【오답 체크】\n(B) 임베딩 차원 증가는 의료 용어 문제 해결 안 함\n(C) Kendra는 다른 검색 엔진, 마이그레이션 오버헤드\n(D) SageMaker 재순위화는 지연 증가, 운영 복잡성 높음\n\n【시험 포인트】\n정확 + 의미 = 하이브리드 검색 패턴",
     "en_q": "A medical company is building a generative AI (GenAI) application that uses RAG to provide evidence-based medical information. The application uses Amazon OpenSearch Service to retrieve vector embeddings. Users report that searches frequently miss results that contain exact medical terms and acronyms and return too many semantically similar but irrelevant documents. The company needs to improve retrieval quality and maintain low end user latency, even as the document collection grows to millions of documents. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Configure hybrid search by combining vector similarity with keyword matching to improve semantic understanding and exact term and acronym matching.",
@@ -157,7 +157,7 @@ window.AIP_QUESTIONS = [
       "D": "Bedrock/S3 VPC 엔드포인트 구성, IAM 경로 기반 정책만으로 데이터 레이크 접근 관리, CloudTrail 로그를 CloudWatch Logs로 전송, 크로스 리전 읽기 공개 폴백 허용"
     },
     "answer": "A",
-    "explanation": "【핵심 용어】▸ Interface VPC Endpoint — Bedrock의 프라이빗 연결 ▸ Lake Formation LF-tag — 열 수준 세분화 접근 제어 ▸ 크로스 계정 그랜트 — 계정 간 권한 위임【정답 포인트】▸ 프라이빗 연결 필수 → Interface Endpoint for Bedrock ▸ 열 수준 제어 → Lake Formation LF-tag 기반 제어 ▸ IAM 조건으로 승인된 엔드포인트만 호출 강제【오답 체크】(B) NAT 게이트웨이는 공개 인터넷 경유로 프라이빗 연결 아님 (C) 공개 엔드포인트 사용, 데이터베이스 수준은 열 수준 미지원 (D) IAM 경로 정책은 세분화 제어 미지원【시험 포인트】프라이빗 + 열 수준 = Interface Endpoint + Lake Formation LF-tag",
+    "explanation": "【핵심 용어】\n▸ Interface VPC Endpoint — Bedrock의 프라이빗 연결\n▸ Lake Formation LF-tag — 열 수준 세분화 접근 제어\n▸ 크로스 계정 그랜트 — 계정 간 권한 위임\n\n【정답 포인트】\n▸ 프라이빗 연결 필수 → Interface Endpoint for Bedrock\n▸ 열 수준 제어 → Lake Formation LF-tag 기반 제어\n▸ IAM 조건으로 승인된 엔드포인트만 호출 강제\n\n【오답 체크】\n(B) NAT 게이트웨이는 공개 인터넷 경유로 프라이빗 연결 아님\n(C) 공개 엔드포인트 사용, 데이터베이스 수준은 열 수준 미지원\n(D) IAM 경로 정책은 세분화 제어 미지원\n\n【시험 포인트】\n프라이빗 + 열 수준 = Interface Endpoint + Lake Formation LF-tag",
     "en_q": "A company runs a generative AI (GenAI)-powered summarization application in an application AWS account that uses Amazon Bedrock. The application architecture includes an Amazon API Gateway REST API that forwards requests to AWS Lambda functions that are attached to private VPC subnets. The application summarizes sensitive customer records that the company stores in a governed data lake in a centralized data storage account. The company has enabled Amazon S3, Amazon Athena, and AWS Glue in the data storage account. The company must ensure that calls that the application makes to Amazon Bedrock use only private connectivity between the company's application VPC and Amazon Bedrock. The company's data lake must provide fine-grained column-level access across the company's AWS accounts. Which solution will meet these requirements?",
     "en_opts": {
       "A": "In the application account, create interface VPC endpoints for Amazon Bedrock runtimes. Run Lambda functions in private subnets. Use IAM conditions on inference and data-plane policies to allow calls only to approved endpoints and roles. In the data storage account, use AWS Lake Formation LF-tag-based access control to create table and column-level cross-account grants.",
@@ -177,7 +177,7 @@ window.AIP_QUESTIONS = [
       "D": "SageMaker Canvas + S3 프롬프트 템플릿, CloudFormation으로 버전 제어 구현, AWS Config로 승인 정책 강제"
     },
     "answer": "B",
-    "explanation": "【핵심 용어】▸ Bedrock Prompt Management — 프롬프트 버전 관리, 파라미터화, 중앙 관리 전문 ▸ CloudTrail — 감시 로깅 ▸ IAM Policies — 승인 권한 제어【정답 포인트】▸ 수백 템플릿 관리 → Prompt Management 네이티브 지원 ▸ 버전 제어 + 파라미터화 → Prompt Management 내장 기능 ▸ CloudTrail + IAM = 감시 + 승인 권한 제어 ▸ 다중 리전 배포 → Prompt Management 리전 간 복제 지원【오답 체크】(A) Studio는 프롬프트 생성용, 대규모 관리 미지원 (C) Step Functions + S3는 메인 솔루션 아님 (D) SageMaker Canvas는 저코드 도구, 거버넌스 전문 아님【시험 포인트】프롬프트 거버넌스 = Prompt Management + CloudTrail + IAM",
+    "explanation": "【핵심 용어】\n▸ Bedrock Prompt Management — 프롬프트 버전 관리, 파라미터화, 중앙 관리 전문\n▸ CloudTrail — 감시 로깅\n▸ IAM Policies — 승인 권한 제어\n\n【정답 포인트】\n▸ 수백 템플릿 관리 → Prompt Management 네이티브 지원\n▸ 버전 제어 + 파라미터화 → Prompt Management 내장 기능\n▸ CloudTrail + IAM = 감시 + 승인 권한 제어\n▸ 다중 리전 배포 → Prompt Management 리전 간 복제 지원\n\n【오답 체크】\n(A) Studio는 프롬프트 생성용, 대규모 관리 미지원\n(C) Step Functions + S3는 메인 솔루션 아님\n(D) SageMaker Canvas는 저코드 도구, 거버넌스 전문 아님\n\n【시험 포인트】\n프롬프트 거버넌스 = Prompt Management + CloudTrail + IAM",
     "en_q": "A media company must use Amazon Bedrock to implement a robust governance process for AI-generated content. The company needs to manage hundreds of prompt templates. Multiple teams use the templates across multiple AWS Regions to generate content. The solution must provide version control with approval workflows that include notifications for pending reviews. The solution must also provide detailed audit trails that document prompt activities and consistent prompt parameterization to enforce quality standards. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Configure Amazon Bedrock Studio prompt templates. Use Amazon CloudWatch to create dashboards that display prompt usage metrics. Store the approval status of content in Amazon DynamoDB. Use AWS Lambda functions to enforce approvals.",
@@ -197,7 +197,7 @@ window.AIP_QUESTIONS = [
       "D": "API Gateway HTTP API + Lambda 통합, HTTP API에서 DynamoDB에 완전 응답 캐시, 다중 paginated GET 요청으로 클라이언트 제공"
     },
     "answer": "A",
-    "explanation": "【핵심 용어】▸ WebSocket API — 양방향 통신, 스트리밍 지원 ▸ InvokeModelWithResponseStream — 토큰 단위 스트리밍 ▸ 부분 응답 — 지연 시간 체감 단축【정답 포인트】▸ 실시간 스트리밍 표시 → WebSocket + ResponseStream 필수 ▸ 15~45초 응답 → 부분 응답 스트리밍으로 UX 개선 ▸ 수천 동시 사용자 → WebSocket의 양방향 효율성 우수【오답 체크】(B) 폴링은 지연 증가, 문자 단위 스트리밍 불가 (C) 직접 클라이언트 호출은 권한 관리/감시 불가 (D) HTTP API + DynamoDB 캐시는 스트리밍 솔루션 아님【시험 포인트】실시간 스트리밍 = WebSocket + ResponseStream 패턴",
+    "explanation": "【핵심 용어】\n▸ WebSocket API — 양방향 통신, 스트리밍 지원\n▸ InvokeModelWithResponseStream — 토큰 단위 스트리밍\n▸ 부분 응답 — 지연 시간 체감 단축\n\n【정답 포인트】\n▸ 실시간 스트리밍 표시 → WebSocket + ResponseStream 필수\n▸ 15~45초 응답 → 부분 응답 스트리밍으로 UX 개선\n▸ 수천 동시 사용자 → WebSocket의 양방향 효율성 우수\n\n【오답 체크】\n(B) 폴링은 지연 증가, 문자 단위 스트리밍 불가\n(C) 직접 클라이언트 호출은 권한 관리/감시 불가\n(D) HTTP API + DynamoDB 캐시는 스트리밍 솔루션 아님\n\n【시험 포인트】\n실시간 스트리밍 = WebSocket + ResponseStream 패턴",
     "en_q": "A company is developing a customer support application that uses Amazon Bedrock foundation models (FMs) to provide real-time AI assistance to the company's employees. The application must display AI-generated responses character by character as the responses are generated. The application needs to support thousands of concurrent users with minimal latency. The responses typically take 15 to 45 seconds to finish. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Configure an Amazon API Gateway WebSocket API with an AWS Lambda integration. Configure the WebSocket API to invoke the Amazon Bedrock InvokeModelWithResponseStream API and stream partial responses through WebSocket connections.",
@@ -218,7 +218,7 @@ window.AIP_QUESTIONS = [
       "E": "Amazon Nova Pro FM을 지정하는 Bedrock 애플리케이션 추론 프로필 생성, 응답 형식을 설명에 지정, 각 입력 변수에 태그 추가, 프로필을 flow의 prompts 노드에 추가"
     },
     "answer": "AD",
-    "explanation": "【핵심 용어】▸ Bedrock Prompt Management 변수 — 필수 입력 캡처 ▸ Detect 응답 — 차단하지 않고 감지만 수행 ▸ Hate Content Filter — 괴롭힘 언어 감지【정답 포인트】▸ (A) 필수 입력 4개 → 변수로 지정, 응답 형식 지정 ▸ (D) 괴롭힘 감지 → 'insults' 필터로 'detect' 응답 설정(차단 아님) ▸ Flow의 prompts 노드에 적용【오답 체크】(B) 'Block' 응답이면 차단되어 요구사항 미충족 (C) Prompt Router는 라우팅용이지 입력 관리 아님 (E) Inference Profile은 모델 선택용이지 입력 변수 관리 아님【시험 포인트】필수 입력 = 변수, 감지만 = detect 필터 응답",
+    "explanation": "【핵심 용어】\n▸ Bedrock Prompt Management 변수 — 필수 입력 캡처\n▸ Detect 응답 — 차단하지 않고 감지만 수행\n▸ Hate Content Filter — 괴롭힘 언어 감지\n\n【정답 포인트】\n▸\n(A) 필수 입력 4개 → 변수로 지정, 응답 형식 지정\n▸\n(D) 괴롭힘 감지 → 'insults' 필터로 'detect' 응답 설정(차단 아님)\n▸ Flow의 prompts 노드에 적용\n\n【오답 체크】\n(B) 'Block' 응답이면 차단되어 요구사항 미충족\n(C) Prompt Router는 라우팅용이지 입력 관리 아님\n(E) Inference Profile은 모델 선택용이지 입력 변수 관리 아님\n\n【시험 포인트】\n필수 입력 = 변수, 감지만 = detect 필터 응답",
     "en_q": "A company is using Amazon Bedrock to design an application to help researchers apply for grants. The application is based on an Amazon Nova Pro foundation model (FM). The application contains four required inputs and must provide responses in a consistent text format. The company wants to receive a notification in Amazon Bedrock if a response contains bullying language. However, the company does not want to block all flagged responses. The company creates an Amazon Bedrock flow that takes an input prompt and sends it to the Amazon Nova Pro FM. The Amazon Nova Pro FM provides a response. Which additional steps must the company take to meet these requirements? (Choose two.)",
     "en_opts": {
       "A": "Use Amazon Bedrock Prompt Management to specify the required inputs as variables. Select an Amazon Nova Pro FM. Specify the output format for the response. Add the prompt to the prompts node of the flow.",
@@ -239,7 +239,7 @@ window.AIP_QUESTIONS = [
       "D": "자동 LLM-as-a-judge 평가로 초기 응답 검사 + edge case 대상 인간 검토, SageMaker Feature Store로 평가 데이터셋 유지, Bedrock 내장 평가로 검색 precision/환각률 추적"
     },
     "answer": "D",
-    "explanation": "【핵심 용어】▸ LLM-as-a-judge — 자동 평가로 초기 검사 ▸ 인간 검토 — edge case 대상으로 비용 최소화 ▸ SageMaker Feature Store — 평가 데이터셋 관리 ▸ Bedrock 내장 평가 — precision/hallucination 메트릭【정답 포인트】▸ 고정확도 필요 → 하이브리드 평가(자동 + 인간) ▸ 인간 검토 비용 감소 → edge case 대상만 검토 ▸ SageMaker Feature Store + Bedrock 평가 = 체계적 평가 파이프라인【오답 체크】(A) Comprehend는 엔티티 추출용, 응답 정확도 평가 아님 (B) LLM 기반만으로는 비용 최적화 미충족 (C) Synthetics는 정기 테스트용, 실제 평가 솔루션 아님【시험 포인트】정확성+환각+비용 = 하이브리드 평가(LLM + 인간) + Feature Store",
+    "explanation": "【핵심 용어】\n▸ LLM-as-a-judge — 자동 평가로 초기 검사\n▸ 인간 검토 — edge case 대상으로 비용 최소화\n▸ SageMaker Feature Store — 평가 데이터셋 관리\n▸ Bedrock 내장 평가 — precision/hallucination 메트릭\n\n【정답 포인트】\n▸ 고정확도 필요 → 하이브리드 평가(자동 + 인간)\n▸ 인간 검토 비용 감소 → edge case 대상만 검토\n▸ SageMaker Feature Store + Bedrock 평가 = 체계적 평가 파이프라인\n\n【오답 체크】\n(A) Comprehend는 엔티티 추출용, 응답 정확도 평가 아님\n(B) LLM 기반만으로는 비용 최적화 미충족\n(C) Synthetics는 정기 테스트용, 실제 평가 솔루션 아님\n\n【시험 포인트】\n정확성+환각+비용 = 하이브리드 평가(LLM + 인간) + Feature Store",
     "en_q": "A healthcare company is using Amazon Bedrock to build a Retrieval Augmented Generation (RAG) application that helps practitioners make clinical decisions. The application must achieve high accuracy for patient information retrievals, identify hallucinations in generated content, and reduce human review costs. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Use Amazon Comprehend to analyze and classify RAG responses and to extract medical entities and relationships. Use AWS Step Functions to orchestrate automated evaluations. Configure Amazon CloudWatch metrics to track entity recognition confidence scores. Configure CloudWatch to send an alert when accuracy falls below specified thresholds.",
@@ -260,7 +260,7 @@ window.AIP_QUESTIONS = [
       "E": "기존 SCP를 확장하여 eu.* 추론 프로필에 CRI 활성화"
     },
     "answer": "BD",
-    "explanation": "【핵심 용어】▸ CRI(Cross-Region Inference) — 특정 리전의 모델을 다른 리전에서 호출 ▸ eu.amazon.nova-pro-v1:0 — EU 내 CRI 추론 프로필 ▸ SCP — 서비스 제어 정책으로 리전 제한【정답 포인트】▸ (B) SCP 확장 → eu.amazon.nova-pro-v1:0 CRI 프로필에 대한 호출 허용 ▸ (D) 개발자 권한 검증 → eu-central-1뿐 아니라 모든 EU 리전의 CRI 엔드포인트 호출 가능해야 함 ▸ CRI = eu-central-1 모델을 다른 EU 리전에서 호출 가능【오답 체크】(A) AdministratorAccess는 SCP 우회 불가, 거버넌스 상실 (C) eu-west-3은 eu-central-1이 아님, 정책 위반 (E) eu.* 와일드카드는 범위 너무 넓음【시험 포인트】EU CRI = eu.amazon.nova-pro-v1:0 + 모든 EU 리전 권한",
+    "explanation": "【핵심 용어】\n▸ CRI(Cross-Region Inference) — 특정 리전의 모델을 다른 리전에서 호출\n▸ eu.amazon.nova-pro-v1:0 — EU 내 CRI 추론 프로필\n▸ SCP — 서비스 제어 정책으로 리전 제한\n\n【정답 포인트】\n▸\n(B) SCP 확장 → eu.amazon.nova-pro-v1:0 CRI 프로필에 대한 호출 허용\n▸\n(D) 개발자 권한 검증 → eu-central-1뿐 아니라 모든 EU 리전의 CRI 엔드포인트 호출 가능해야 함\n▸ CRI = eu-central-1 모델을 다른 EU 리전에서 호출 가능\n\n【오답 체크】\n(A) AdministratorAccess는 SCP 우회 불가, 거버넌스 상실\n(C) eu-west-3은 eu-central-1이 아님, 정책 위반\n(E) eu.* 와일드카드는 범위 너무 넓음\n\n【시험 포인트】\nEU CRI = eu.amazon.nova-pro-v1:0 + 모든 EU 리전 권한",
     "en_q": "Company configures a landing zone in AWS Control Tower. The company handles sensitive data that must remain within the European Union. The company must use only the eu-central-1 Region. The company uses SCPs to enforce data residency policies. GenAI developers at the company are assigned IAM roles that have full permissions for Amazon Bedrock. The company must ensure that GenAI developers can use the Amazon Nova Pro model through Amazon Bedrock only by using cross-Region inference (CRI) and only in eu-central-1. The company enables model access for the GenAI developer IAM roles in Amazon Bedrock. However, when a GenAI developer attempts to invoke the model through the Amazon Bedrock Chat/Text playground, the GenAI developer receives the following error. User: arn:aws:sts::123456789012:assumed-role/AssumedDevRole/DevUserName Action: bedrock:InvokeModelWithResponseStream On resource(s): arn:aws:bedrock:eu-west-3::foundation-model/amazon.nova-pro-v1:0 Context: a service control policy explicitly denies the action The company needs a solution to resolve the error. The solution must retain the company's existing governance controls and must provide precise access control. The solution must comply with the company's existing data residency policies. Which combination of solutions will meet these requirements? (Choose two.)",
     "en_opts": {
       "A": "Add an AdministratorAccess policy to the GenAI developer IAM role.",
@@ -281,7 +281,7 @@ window.AIP_QUESTIONS = [
       "D": "사용 사례별 별도 guardrail: 유해 콘텐츠 필터용, 투자 조언 토픽 필터용, PII 민감 정보 필터용, Step Functions로 순차 chaining, 콘텐츠 분류 기반 조건부 로직"
     },
     "answer": "C",
-    "explanation": "【핵심 용어】▸ 중간 필터(Medium) — 거짓양성 최소화 ▸ Denied Topics — 투자 조언 차단 ▸ Mask/Block Actions — PII 응답 마스킹, 입력 차단 ▸ Audit Messages — 감사 로깅【정답 포인트】▸ 거짓양성 최소 → 중간 필터 설정 ▸ 투자 조언 차단 → 명확한 정의/샘플 포함으로 정확도 향상 ▸ PII 처리 → 응답에서 마스킹(정보 제공), 입력에서 차단(수집 방지) ▸ 감시 로그 → 커스텀 차단 메시지 + 입력/출력 평가 활성화【오답 체크】(A) 높은 필터 = 거짓양성 증가 (B) 다중 guardrail chaining 복잡, 단일 guardrail 추천 (D) guardrail 4개 chaining = 운영 오버헤드 증가【시험 포인트】정확+유연 = 중간필터 + 명확한정의 + Mask/Block 조합",
+    "explanation": "【핵심 용어】\n▸ 중간 필터(Medium) — 거짓양성 최소화\n▸ Denied Topics — 투자 조언 차단\n▸ Mask/Block Actions — PII 응답 마스킹, 입력 차단\n▸ Audit Messages — 감사 로깅\n\n【정답 포인트】\n▸ 거짓양성 최소 → 중간 필터 설정\n▸ 투자 조언 차단 → 명확한 정의/샘플 포함으로 정확도 향상\n▸ PII 처리 → 응답에서 마스킹(정보 제공), 입력에서 차단(수집 방지)\n▸ 감시 로그 → 커스텀 차단 메시지 + 입력/출력 평가 활성화\n\n【오답 체크】\n(A) 높은 필터 = 거짓양성 증가\n(B) 다중 guardrail chaining 복잡, 단일 guardrail 추천\n(D) guardrail 4개 chaining = 운영 오버헤드 증가\n\n【시험 포인트】\n정확+유연 = 중간필터 + 명확한정의 + Mask/Block 조합",
     "en_q": "A financial services company is developing a customer service AI assistant by using Amazon Bedrock. The AI assistant must not discuss investment advice with users. The AI assistant must block harmful content, mask personally identifiable information (PII), and maintain audit trails for compliance reporting. The AI assistant must apply content filtering to both user inputs and model responses based on content sensitivity. The company requires an Amazon Bedrock guardrail configuration that will effectively enforce policies with minimal false positives. The solution must provide multiple handling strategies for multiple types of sensitive content. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Configure a single guardrail and set content filters to high for all categories. Set up denied topics for investment advice and include sample phrases to block. Set up sensitive information filters that apply the block action for all PII entities. Apply the guardrail to all model inference calls.",
@@ -301,7 +301,7 @@ window.AIP_QUESTIONS = [
       "D": "Amazon OpenSearch Service에 제품 카탈로그 저장, 모델 추천을 제품 카탈로그와 검증, DynamoDB로 응답 캐싱 구현"
     },
     "answer": "C",
-    "explanation": "【핵심 용어】▸ Knowledge Base — 소유 데이터로 모델 기초 제공 ▸ RAG — 생성 전 관련 문서 검색하여 환각 방지 ▸ PerformanceConfigLatency — 검색 성능 최적화 설정【정답 포인트】▸ 제품 카탈로그 없음 → Knowledge Base에 카탈로그 저장 필수 ▸ 무관 추천 → RAG로 검색 기반 응답 생성 ▸ 느린 응답 → Latency 최적화 파라미터 사용【오답 체크】(A) Guardrails는 안전성/규정 준수용, 카탈로그 불일치 해결 미지원 (B) 프롬프트만으로는 없는 제품 추천 방지 불가 (D) OpenSearch + 수동 검증은 RAG 솔루션 아님【시험 포인트】카탈로그 정렬 + 지연 = Knowledge Base + RAG + Latency최적화",
+    "explanation": "【핵심 용어】\n▸ Knowledge Base — 소유 데이터로 모델 기초 제공\n▸ RAG — 생성 전 관련 문서 검색하여 환각 방지\n▸ PerformanceConfigLatency — 검색 성능 최적화 설정\n\n【정답 포인트】\n▸ 제품 카탈로그 없음 → Knowledge Base에 카탈로그 저장 필수\n▸ 무관 추천 → RAG로 검색 기반 응답 생성\n▸ 느린 응답 → Latency 최적화 파라미터 사용\n\n【오답 체크】\n(A) Guardrails는 안전성/규정 준수용, 카탈로그 불일치 해결 미지원\n(B) 프롬프트만으로는 없는 제품 추천 방지 불가\n(D) OpenSearch + 수동 검증은 RAG 솔루션 아님\n\n【시험 포인트】\n카탈로그 정렬 + 지연 = Knowledge Base + RAG + Latency최적화",
     "en_q": "An ecommerce company is developing a generative AI (GenAI) solution that uses Amazon Bedrock with Anthropic Claude to recommend products to customers. Customers report that some of the recommended products are not available for sale on the website or are not relevant to the customer. Customers also report that the solutions takes a long time to generate some recommendations. The company investigates the issues and finds that most interactions between customers and the product recommendation solution are unique. The company confirms that the solutions recommends products that are not in the company's product catalog. The company must resolve these issues. Which solution will meet this requirement?",
     "en_opts": {
       "A": "Increase grounding within Amazon Bedrock Guardrails. Enable Automated Reasoning checks. Set up provisioned throughput.",
@@ -322,7 +322,7 @@ window.AIP_QUESTIONS = [
       "E": "Amazon Kendra + Bedrock으로 커스텀 RAG 파이프라인 구축, Lambda로 도구 호출 오케스트레이션, S3에 에이전트 상태 저장"
     },
     "answer": "AB",
-    "explanation": "【핵심 용어】▸ Bedrock AgentCore — 메모리, 세션, ID, 이벤트 처리 통합 ▸ 액션 등록 — API Gateway/EventBridge를 통한 선언형 통합 ▸ 커스텀 오케스트레이션 제거 — 확장성 향상【정답 포인트】▸ (A) AgentCore = 메모리+세션+ID+이벤트 처리 전담 ▸ (B) AgentCore가 Lambda/REST API를 액션으로 자동 호출, 오케스트레이션 코드 불필요 ▸ 확장성 = 선언형 구성 + 서버리스【오답 체크】(C) Step Functions + DynamoDB는 커스텀 오케스트레이션 = 확장 제한 (D) ECS는 관리 오버헤드 증가 (E) RAG 파이프라인은 에이전트 솔루션 아님【시험 포인트】확장성 = AgentCore(메모리+세션) + 액션 등록(자동 호출)",
+    "explanation": "【핵심 용어】\n▸ Bedrock AgentCore — 메모리, 세션, ID, 이벤트 처리 통합\n▸ 액션 등록 — API Gateway/EventBridge를 통한 선언형 통합\n▸ 커스텀 오케스트레이션 제거 — 확장성 향상\n\n【정답 포인트】\n▸\n(A) AgentCore = 메모리+세션+ID+이벤트 처리 전담\n▸\n(B) AgentCore가 Lambda/REST API를 액션으로 자동 호출, 오케스트레이션 코드 불필요\n▸ 확장성 = 선언형 구성 + 서버리스\n\n【오답 체크】\n(C) Step Functions + DynamoDB는 커스텀 오케스트레이션 = 확장 제한\n(D) ECS는 관리 오버헤드 증가\n(E) RAG 파이프라인은 에이전트 솔루션 아님\n\n【시험 포인트】\n확장성 = AgentCore(메모리+세션) + 액션 등록(자동 호출)",
     "en_q": "A company is using AWS Lambda and REST APIs to build a reasoning agent to automate support workflows. The system must preserve memory across interactions, share the relevant agent state, and support event-driven invocation and synchronous invocation. The system must also enforce access control and session-based permissions. Which combination of steps provides the MOST scalable solution? (Choose two.)",
     "en_opts": {
       "A": "Use Amazon Bedrock AgentCore to manage memory and session-aware reasoning. Deploy the agent with built-in identity support, event handling, and observability.",
@@ -343,7 +343,7 @@ window.AIP_QUESTIONS = [
       "D": "DynamoDB로 재무 데이터 저장, Lambda 함수로 입력 질문 기반 관련 레코드 조회, SageMaker AI로 응답 생성"
     },
     "answer": "A",
-    "explanation": "【핵심 용어】▸ Graph RAG — 그래프 구조로 다중 홉 관계 자동 추적 ▸ Neptune Analytics — 고성능 그래프 쿼리 엔진 ▸ 다중 홉 관계 — 간접 관계 파악【정답 포인트】▸ 다중 홉 관계 필수 → 그래프 기반 모델링 필수 ▸ Graph RAG → Bedrock Knowledge Bases + Neptune으로 통합 ▸ 자동 관계 식별 → 수동 매핑 제거, 3초 응답 달성【오답 체크】(B) 순차적 벡터 쿼리는 다중 홉 관계 추적 제한 (C) 수동 관계 매핑 = 운영 오버헤드 증가 (D) DynamoDB는 관계 쿼리 전문 아님【시험 포인트】다중 홉 관계 = Graph RAG + Neptune Analytics",
+    "explanation": "【핵심 용어】\n▸ Graph RAG — 그래프 구조로 다중 홉 관계 자동 추적\n▸ Neptune Analytics — 고성능 그래프 쿼리 엔진\n▸ 다중 홉 관계 — 간접 관계 파악\n\n【정답 포인트】\n▸ 다중 홉 관계 필수 → 그래프 기반 모델링 필수\n▸ Graph RAG → Bedrock Knowledge Bases + Neptune으로 통합\n▸ 자동 관계 식별 → 수동 매핑 제거, 3초 응답 달성\n\n【오답 체크】\n(B) 순차적 벡터 쿼리는 다중 홉 관계 추적 제한\n(C) 수동 관계 매핑 = 운영 오버헤드 증가\n(D) DynamoDB는 관계 쿼리 전문 아님\n\n【시험 포인트】\n다중 홉 관계 = Graph RAG + Neptune Analytics",
     "en_q": "A financial services company is developing a Retrieval Augmented Generation (RAG) application to help investment analysts query complex financial relationships across multiple investment vehicles, market sectors, and regulatory environments. The dataset contains highly interconnected entities that have multi-hop relationships. The analysts must be able to examine the relationships holistically to provide accurate investment guidance. The application must deliver comprehensive answers that capture indirect relationships between financial entities. The application must produce responses in less than 3 seconds. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Use Amazon Bedrock Knowledge Bases with Graph RAG and Amazon Neptune Analytics to store the financial data. Analyze the multi-hop relationships between entities and automatically identify related information across documents.",
@@ -363,7 +363,7 @@ window.AIP_QUESTIONS = [
       "D": "CloudTrail로 모든 Bedrock API 호출 로깅, QuickSight 커스텀 대시보드로 토큰 사용 패턴 시각화, SageMaker Model Monitor로 생성 요약의 품질 drift 감지"
     },
     "answer": "C",
-    "explanation": "【핵심 용어】▸ Bedrock Guardrails Contextual Grounding — 환각 감지 전문 ▸ CloudWatch Anomaly Detection — 실시간 이상 탐지 ▸ 모델 호출 로그 → 감시 기반【정답 포인트】▸ 환각 감지 → Guardrails contextual grounding 체크(내장 기능) ▸ 토큰 사용 이상 → CloudWatch 이상 감지 알람 ▸ 최소 개발 → Bedrock 내장 기능 조합【오답 체크】(A) Glue/Athena는 배치 처리, 실시간 모니터링 미지원 (B) 평가 작업은 정기적 실행, 실시간 성능 저하 (D) QuickSight/SageMaker는 추가 개발 필요【시험 포인트】환각+비용 모니터링 = Guardrails grounding + CloudWatch 이상 감지",
+    "explanation": "【핵심 용어】\n▸ Bedrock Guardrails Contextual Grounding — 환각 감지 전문\n▸ CloudWatch Anomaly Detection — 실시간 이상 탐지\n▸ 모델 호출 로그 → 감시 기반\n\n【정답 포인트】\n▸ 환각 감지 → Guardrails contextual grounding 체크(내장 기능)\n▸ 토큰 사용 이상 → CloudWatch 이상 감지 알람\n▸ 최소 개발 → Bedrock 내장 기능 조합\n\n【오답 체크】\n(A) Glue/Athena는 배치 처리, 실시간 모니터링 미지원\n(B) 평가 작업은 정기적 실행, 실시간 성능 저하\n(D) QuickSight/SageMaker는 추가 개발 필요\n\n【시험 포인트】\n환각+비용 모니터링 = Guardrails grounding + CloudWatch 이상 감지",
     "en_q": "A healthcare company uses Amazon Bedrock to deploy an application that generates summaries of clinical documents. The application experiences inconsistent response quality with occasional factual hallucinations. Monthly costs exceed the company's projections by 40%. A GenAI developer must implement a near real-time monitoring solution to detect hallucinations, identify abnormal token consumption, and provide early warnings of cost anomalies. The solution must require minimal custom development work and maintenance overhead. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Configure Amazon CloudWatch alarms to monitor InputTokenCount and OutputTokenCount metrics to detect anomalies. Store model invocation logs in an Amazon S3 bucket. Use AWS Glue and Amazon Athena to identify potential hallucinations.",
@@ -383,7 +383,7 @@ window.AIP_QUESTIONS = [
       "D": "AWS Glue Data Catalog로 모든 데이터 소스 등록, 메타데이터 태그 적용하여 데이터 소스 속성 부여, CloudTrail로 서비스 전반의 접근/활동 로깅"
     },
     "answer": "D",
-    "explanation": "【핵심 용어】▸ AWS Glue Data Catalog — 데이터 소스 중앙 등록, 메타데이터 관리 ▸ Metadata Tags — 출처 속성 부여 ▸ CloudTrail — 전 서비스 접근/활동 감시【정답 포인트】▸ 데이터 소스 등록 → Glue Data Catalog 통합 카탈로그 ▸ 메타데이터 태깅 → Glue의 태그 기능으로 출처 명확화 ▸ 전체 감시 → CloudTrail이 모든 AWS 서비스 API 호출 기록【오답 체크】(A) Lake Formation은 접근 제어 전담, 등록용이 아님 (B) CloudWatch Logs는 애플리케이션만 기록, 서비스 간 활동 미포함 (C) S3 객체 태깅은 저수준, Glue Catalog 메타데이터와 비교 확장성 낮음【시험 포인트】추적성 = Glue Catalog(등록+태깅) + CloudTrail(전체 감시)",
+    "explanation": "【핵심 용어】\n▸ AWS Glue Data Catalog — 데이터 소스 중앙 등록, 메타데이터 관리\n▸ Metadata Tags — 출처 속성 부여\n▸ CloudTrail — 전 서비스 접근/활동 감시\n\n【정답 포인트】\n▸ 데이터 소스 등록 → Glue Data Catalog 통합 카탈로그\n▸ 메타데이터 태깅 → Glue의 태그 기능으로 출처 명확화\n▸ 전체 감시 → CloudTrail이 모든 AWS 서비스 API 호출 기록\n\n【오답 체크】\n(A) Lake Formation은 접근 제어 전담, 등록용이 아님\n(B) CloudWatch Logs는 애플리케이션만 기록, 서비스 간 활동 미포함\n(C) S3 객체 태깅은 저수준, Glue Catalog 메타데이터와 비교 확장성 낮음\n\n【시험 포인트】\n추적성 = Glue Catalog(등록+태깅) + CloudTrail(전체 감시)",
     "en_q": "A company is building a generative AI (GenAI) application that produces content based on a variety of internal and external data sources. The company wants to ensure that the generated output is fully traceable. The application must support data source registration and enable metadata tagging to attribute content to its original source. The application must also maintain audit logs of data access and usage throughout the pipeline. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Use AWS Lake Formation to catalog data sources and control access. Apply metadata tags directly in Amazon S3. Use AWS CloudTrail to monitor API activity.",
@@ -403,7 +403,7 @@ window.AIP_QUESTIONS = [
       "D": "보고서를 순차적으로 처리하는 컨테이너를 실행하는 Amazon ECS 클러스터를 배포합니다. 로드 밸런서를 사용하여 배치 워크로드를 배포합니다. CPU 사용률을 기반으로 한 자동 스케일링 정책을 구성합니다."
     },
     "answer": "B",
-    "explanation": "이 문제는 시간 제약(10초)이 있는 다중 분석 작업(재무 분석, 감정 분석, 규정 준수 검증)의 병렬 처리를 요구합니다. Step Functions의 Parallel 상태는 여러 Lambda 함수를 동시에 실행하여 전체 처리 시간을 단축합니다. 45초에서 10초로 줄이려면 3개 분석이 병렬로 실행되어야 합니다. 옵션 A는 순차 처리(\"sequentially\")로 시간을 줄일 수 없습니다. 옵션 C의 SQS 큐도 여전히 순차 처리입니다. 옵션 D는 ECS의 오버헤드가 높아 10초 내 달성이 어렵습니다. Step Functions Parallel 상태는 각 Lambda가 독립적으로 Bedrock을 호출하게 하고, CloudWatch 메트릭은 성능 모니터링을 제공합니다.",
+    "explanation": "이 문제는 시간 제약(10초)이 있는 다중 분석 작업(재무 분석, 감정 분석, 규정 준수 검증)의 병렬 처리를 요구합니다. Step Functions의 Parallel 상태는 여러 Lambda 함수를 동시에 실행하여 전체 처리 시간을 단축합니다. 45초에서 10초로 줄이려면 3개 분석이 병렬로 실행되어야 합니다.\n\n옵션 A는 순차 처리(\"sequentially\")로 시간을 줄일 수 없습니다. 옵션 C의 SQS 큐도 여전히 순차 처리입니다.\n\n옵션 D는 ECS의 오버헤드가 높아 10초 내 달성이 어렵습니다. Step Functions Parallel 상태는 각 Lambda가 독립적으로 Bedrock을 호출하게 하고, CloudWatch 메트릭은 성능 모니터링을 제공합니다.",
     "en_q": "A financial services company needs to build a document analysis system that uses Amazon Bedrock to process quarterly reports. The system must analyze financial data, perform sentiment analysis, and validate compliance across batches of reports. Each batch contains 5 reports. Each report requires multiple foundation model (FM) calls. The solution must finish the analysis within 10 seconds for each batch. Current sequential processing takes 45 seconds for each batch. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Use AWS Lambda functions with provisioned concurrency to process each analysis type sequentially. Configure the Lambda function timeouts to 10 seconds. Configure automatic retries with exponential backoff.",
@@ -423,7 +423,7 @@ window.AIP_QUESTIONS = [
       "D": "해로운 콘텐츠를 방지하기 위해 사용자 정의 콘텐츠 필터를 사용하도록 Amazon Bedrock Guardrails을 구성합니다. 콘텐츠 필터를 높음으로 설정합니다. 알려진 공격 패턴을 방지하기 위해 단어 필터를 사용합니다. 장애 조치 기능을 제공하기 위해 크로스 리전 Guardrail 복제를 구성합니다. 규정 준수 감사를 위해 로그를 AWS CloudTrail에 저장합니다."
     },
     "answer": "A",
-    "explanation": "Amazon Bedrock Guardrails는 프롬프트 인젝션 공격에 대한 심층 방어를 제공하는 전용 보안 기능입니다. Guardrail 프로필을 사용하면 크로스 리전에서 일관된 보안 정책을 적용할 수 있으며, 이는 장애 조치 요구 사항을 충족합니다. CloudWatch Logs는 Guardrail 개입 이벤트의 상세한 감사 로그를 수집합니다. 옵션 B의 AWS WAF는 API 레이어에서만 작동하므로 LLM 레벨의 프롬프트 인젝션을 방지하지 못합니다. 옵션 C는 Bedrock Guardrails의 기본 기능을 사용하지 않습니다. 옵션 D는 \"크로스 리전 Guardrail 복제\"라는 존재하지 않는 기능을 언급합니다. Guardrails는 Bedrock의 기본 보안 솔루션이며 CloudWatch Logs와 통합되어 감사를 지원합니다.",
+    "explanation": "Amazon Bedrock Guardrails는 프롬프트 인젝션 공격에 대한 심층 방어를 제공하는 전용 보안 기능입니다. Guardrail 프로필을 사용하면 크로스 리전에서 일관된 보안 정책을 적용할 수 있으며, 이는 장애 조치 요구 사항을 충족합니다. CloudWatch Logs는 Guardrail 개입 이벤트의 상세한 감사 로그를 수집합니다. 옵션 B의 AWS WAF는 API 레이어에서만 작동하므로 LLM 레벨의 프롬프트 인젝션을 방지하지 못합니다.\n\n옵션 C는 Bedrock Guardrails의 기본 기능을 사용하지 않습니다.\n\n옵션 D는 \"크로스 리전 Guardrail 복제\"라는 존재하지 않는 기능을 언급합니다. Guardrails는 Bedrock의 기본 보안 솔루션이며 CloudWatch Logs와 통합되어 감사를 지원합니다.",
     "en_q": "A company is using Amazon Bedrock to build a customer-facing AI assistant to handle sensitive customer inquiries. The company must use defense-in-depth safety controls to block sophisticated prompt injection attacks. The company must keep audit logs of all safety interventions. The AI assistant must have cross-Region failover capabilities. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Configure Amazon Bedrock guardrails to use content filters to protect against prompt injection attacks. Set the content filters to high. Use a guardrail profile to implement cross-Region guardrail inference. Use Amazon CloudWatch Logs with custom metrics to capture detailed guardrail intervention events.",
@@ -443,7 +443,7 @@ window.AIP_QUESTIONS = [
       "D": "추론 로그를 추적하기 위해 Amazon OpenSearch Service를 사용합니다. OpenSearch Service를 구성하여 AWS Systems Manager 자동화 실행책을 호출하여 추론 로그를 기반으로 트래픽을 이동하도록 Amazon Bedrock 모델 엔드포인트를 업데이트합니다."
     },
     "answer": "A",
-    "explanation": "카나리 배포는 Step Functions를 사용한 오케스트레이션이 가장 적합합니다. Parallel 상태가 아닌 sequential 워크플로우로 단계적 트래픽 이동을 구현할 수 있으며, Lambda로 CloudWatch 메트릭을 확인하여 조건부 롤백을 수행합니다. EventBridge는 새 모델 릴리스 이벤트를 트리거하는 데 사용됩니다. Provisioned throughput은 일관된 성능을 보장합니다. 옵션 B는 외부 로직의 모니터링 메커니즘이 명확하지 않습니다. 옵션 C는 SageMaker를 Bedrock 모델 배포에 사용하는데, 이는 아키텍처 복잡성을 증가시킵니다. 옵션 D는 OpenSearch로 추론 로그를 기반으로 실시간 트래픽 조정을 자동화하기 어렵습니다. Step Functions Parallel 상태가 아닌 워크플로우는 각 단계를 제어하고 모니터링할 수 있습니다.",
+    "explanation": "카나리 배포는 Step Functions를 사용한 오케스트레이션이 가장 적합합니다. Parallel 상태가 아닌 sequential 워크플로우로 단계적 트래픽 이동을 구현할 수 있으며, Lambda로 CloudWatch 메트릭을 확인하여 조건부 롤백을 수행합니다. EventBridge는 새 모델 릴리스 이벤트를 트리거하는 데 사용됩니다. Provisioned throughput은 일관된 성능을 보장합니다.\n\n옵션 B는 외부 로직의 모니터링 메커니즘이 명확하지 않습니다.\n\n옵션 C는 SageMaker를 Bedrock 모델 배포에 사용하는데, 이는 아키텍처 복잡성을 증가시킵니다.\n\n옵션 D는 OpenSearch로 추론 로그를 기반으로 실시간 트래픽 조정을 자동화하기 어렵습니다. Step Functions Parallel 상태가 아닌 워크플로우는 각 단계를 제어하고 모니터링할 수 있습니다.",
     "en_q": "A company is designing a canary deployment strategy for a payment processing API. The system must support automated gradual traffic shifting between multiple Amazon Bedrock models based on real-time inference metrics, historical traffic patterns, and service health. The solution must be able to gradually increase traffic to new model versions. The system must increase traffic if metrics remain healthy and decrease traffic if the performance degrades below acceptable thresholds. The company needs to comprehensively monitor inference latency and error rates during the deployment phase. The company must also be able to halt deployments and revert to a previous model version without any manual intervention. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Use Amazon Bedrock with provisioned throughput to host the versions of the model. Configure an Amazon EventBridge rule to invoke an AWS Step Functions workflow when a new model version is released. Configure the workflow to shift traffic in stages, wait for a specified time period, and invoke an AWS Lambda function to check Amazon CloudWatch performance metrics. Configure the workflow to increase traffic if the metrics meet thresholds and to trigger a traffic rollback if performance metrics fall below thresholds.",
@@ -463,7 +463,7 @@ window.AIP_QUESTIONS = [
       "D": "애플리케이션을 수정하여 InvokeModel API 대신 InvokeModelWithResponseStream API를 사용합니다."
     },
     "answer": "B",
-    "explanation": "프로비저닝된 처리량의 핵심은 CreateProvisionedModelThroughput API가 반환하는 ARN을 invoke_model() 호출에서 사용해야 한다는 것입니다. 모델 ID 문자열(\"anthropic.claude-v2\")을 사용하면 온디맨드 API를 호출하므로 프로비저닝된 용량이 사용되지 않습니다. ARN을 사용하면 Bedrock이 프로비저닝된 처리량 풀에서 요청을 처리합니다. 옵션 A는 문제의 근본 원인을 해결하지 않습니다. 옵션 C의 재시도는 온디맨드 제한만 악화시킵니다. 옵션 D는 처리량 문제와 무관합니다. Provisioned throughput은 ARN 기반 호출로만 활성화됩니다.",
+    "explanation": "프로비저닝된 처리량의 핵심은 CreateProvisionedModelThroughput API가 반환하는 ARN을 invoke_model() 호출에서 사용해야 한다는 것입니다. 모델 ID 문자열(\"anthropic.claude-v2\")을 사용하면 온디맨드 API를 호출하므로 프로비저닝된 용량이 사용되지 않습니다. ARN을 사용하면 Bedrock이 프로비저닝된 처리량 풀에서 요청을 처리합니다.\n\n옵션 A는 문제의 근본 원인을 해결하지 않습니다. 옵션 C의 재시도는 온디맨드 제한만 악화시킵니다.\n\n옵션 D는 처리량 문제와 무관합니다. Provisioned throughput은 ARN 기반 호출로만 활성화됩니다.",
     "en_q": "A financial services company uses an AI application to process financial documents by using Amazon Bedrock. During business hours, the application handles approximately 10,000 requests each hour, which requires consistent throughput. The company uses the CreateProvisionedModelThroughput API to purchase provisioned throughput. Amazon CloudWatch metrics show that the provisioned capacity is unused while on-demand requests are being throttled. The company finds the following code in the application: python response = bedrock_runtime.invoke_model(modelId=\"anthropic.claude-v2\", body=json.dumps(payload)) The company needs the application to use the provisioned throughput and to resolve the throttling issues. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Increase the number of model units (MUs) in the provisioned throughput configuration.",
@@ -483,7 +483,7 @@ window.AIP_QUESTIONS = [
       "D": "Amazon Bedrock과 Anthropic Claude 모델 및 사고 연쇄 추론을 사용합니다. Amazon Bedrock Knowledge Bases API로 사용자 정의 검색 추적을 구성합니다. Amazon CloudWatch를 사용하여 응답 지연 시간 메트릭을 모니터링합니다."
     },
     "answer": "A",
-    "explanation": "Amazon Bedrock Knowledge Bases는 RAG 구현에서 소스 속성을 기본 제공하는 가장 간단한 솔루션입니다. Source attribution 기능은 생성된 응답과 함께 검색된 문서의 출처를 자동으로 반환합니다. 이는 운영 오버헤드를 최소화하고, 3초 미만의 응답 시간을 달성할 수 있으며, 감사 추적을 제공합니다. 옵션 B의 Extended thinking은 추론 과정을 설명하지만 소스 인용은 자동화되지 않습니다. 옵션 C는 SageMaker 관리 오버헤드가 높습니다. 옵션 D는 수동 구현이 필요합니다. Knowledge Bases의 built-in RAG는 검색 기반 생성으로 환각을 줄이고 인용을 제공합니다.",
+    "explanation": "Amazon Bedrock Knowledge Bases는 RAG 구현에서 소스 속성을 기본 제공하는 가장 간단한 솔루션입니다. Source attribution 기능은 생성된 응답과 함께 검색된 문서의 출처를 자동으로 반환합니다. 이는 운영 오버헤드를 최소화하고, 3초 미만의 응답 시간을 달성할 수 있으며, 감사 추적을 제공합니다. 옵션 B의 Extended thinking은 추론 과정을 설명하지만 소스 인용은 자동화되지 않습니다.\n\n옵션 C는 SageMaker 관리 오버헤드가 높습니다.\n\n옵션 D는 수동 구현이 필요합니다. Knowledge Bases의 built-in RAG는 검색 기반 생성으로 환각을 줄이고 인용을 제공합니다.",
     "en_q": "A company is building an AI advisory application by using Amazon Bedrock. The application will provide recommendations to customers. The company needs the application to explain its reasoning process and cite specific sources for data. The application must retrieve information from company data sources and show step-by-step reasoning for recommendations. The application must also link data claims to source documents and maintain response latency under 3 seconds. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Use Amazon Bedrock Knowledge Bases with source attribution enabled. Use the Anthropic Claude Messages API with RAG to set high-relevance thresholds for source documents. Store reasoning and citations in Amazon S3 for auditing purposes.",
@@ -503,7 +503,7 @@ window.AIP_QUESTIONS = [
       "D": "모든 Amazon Bedrock API 호출에 대한 프록시를 만들기 위해 Amazon API Gateway를 사용합니다. 미리 정의된 토큰 할당량이 있는 사용자 정의 사용 계획에 기반한 요청 제한을 구성합니다. API Gateway를 구성하여 토큰 한계를 초과할 요청을 거부합니다."
     },
     "answer": "A",
-    "explanation": "Bedrock에서 토큰을 추적하는 가장 효과적인 방법은 InvokeModel 이전에 Lambda에서 토큰을 계산하는 것입니다. 각 모델은 고유한 토크나이저를 가지므로 모델별 토크나이저가 필요합니다. CloudWatch 메트릭은 실시간 모니터링과 경보를 가능하게 하고, DynamoDB는 비용 할당 추적을 위한 상세한 기록을 제공합니다. 분당 5,000+ 요청을 처리하려면 DynamoDB의 쓰기 처리량이 필요합니다. 옵션 B의 Guardrails은 토큰 할당량을 사전에 추적하지 않습니다. 옵션 C는 실패 후 분석만 제공합니다. 옵션 D는 API Gateway의 제한이 토큰 레벨에서 작동하지 않습니다. 사전 계산 + CloudWatch 메트릭 + DynamoDB 저장소는 완벽한 토큰 관리를 제공합니다.",
+    "explanation": "Bedrock에서 토큰을 추적하는 가장 효과적인 방법은 InvokeModel 이전에 Lambda에서 토큰을 계산하는 것입니다. 각 모델은 고유한 토크나이저를 가지므로 모델별 토크나이저가 필요합니다. CloudWatch 메트릭은 실시간 모니터링과 경보를 가능하게 하고, DynamoDB는 비용 할당 추적을 위한 상세한 기록을 제공합니다. 분당 5,000+ 요청을 처리하려면 DynamoDB의 쓰기 처리량이 필요합니다. 옵션 B의 Guardrails은 토큰 할당량을 사전에 추적하지 않습니다.\n\n옵션 C는 실패 후 분석만 제공합니다.\n\n옵션 D는 API Gateway의 제한이 토큰 레벨에서 작동하지 않습니다. 사전 계산 + CloudWatch 메트릭 + DynamoDB 저장소는 완벽한 토큰 관리를 제공합니다.",
     "en_q": "A financial services company uses multiple foundation models (FMs) through Amazon Bedrock for its generative AI (GenAI) applications. To comply with a new regulation for GenAI use with sensitive financial data, the company needs a token management solution. The token management solution must proactively alert when applications approach model-specific token limits. The solution must also process more than 5,000 requests each minute and maintain token usage metrics to allocate costs across business units. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Develop model-specific tokenizers in an AWS Lambda function. Configure the Lambda function to estimate token usage before sending requests to Amazon Bedrock. Configure the Lambda function to publish metrics to Amazon CloudWatch and trigger alarms when requests approach thresholds. Store detailed token usage in Amazon DynamoDB to report costs.",
@@ -523,7 +523,7 @@ window.AIP_QUESTIONS = [
       "D": "Amazon Bedrock 에이전트를 주문 관리 API와 통합하는 액션 그룹과 함께 사용합니다. Retrieval Augmentation Generation(RAG)을 사용하여 제품 문서를 검색하도록 Amazon Bedrock knowledge base를 에이전트와 연결합니다. 감사 기록을 캡처하도록 추적 이벤트를 활성화합니다."
     },
     "answer": "D",
-    "explanation": "Amazon Bedrock Agents는 외부 API 통합(주문 관리)과 지식 기반(제품 문서) 접근을 자동으로 처리합니다. 에이전트는 다중 턴 상호 작용을 위한 메모리 관리를 자동으로 지원하고, action groups는 주문 API 호출을 간단하게 합니다. Knowledge base의 RAG는 50,000개 문서를 효율적으로 검색하고, trace events는 완전한 감사 기록을 자동으로 수집합니다. 옵션 A는 카테고리별 모델 관리로 오버헤드가 높습니다. 옵션 B의 continued pre-training은 Bedrock에서 지원하지 않습니다. 옵션 C는 Kendra와 SageMaker의 복잡한 조합입니다. Bedrock Agents는 이러한 모든 기능을 built-in으로 제공하며 operational overhead가 최소입니다.",
+    "explanation": "Amazon Bedrock Agents는 외부 API 통합(주문 관리)과 지식 기반(제품 문서) 접근을 자동으로 처리합니다. 에이전트는 다중 턴 상호 작용을 위한 메모리 관리를 자동으로 지원하고, action groups는 주문 API 호출을 간단하게 합니다. Knowledge base의 RAG는 50,000개 문서를 효율적으로 검색하고, trace events는 완전한 감사 기록을 자동으로 수집합니다.\n\n옵션 A는 카테고리별 모델 관리로 오버헤드가 높습니다. 옵션 B의 continued pre-training은 Bedrock에서 지원하지 않습니다.\n\n옵션 C는 Kendra와 SageMaker의 복잡한 조합입니다. Bedrock Agents는 이러한 모든 기능을 built-in으로 제공하며 operational overhead가 최소입니다.",
     "en_q": "A retail company is developing a customer service application that must process 10,000 daily queries about products, orders, and warranties. The application must be able to respond to queries about 50,000 product documents that are updated every day. The application must integrate with an order management API to check the status of orders and to help process returns. The application must maintain context throughout multi-turn interactions with customers. The company must collect complete audit trails for application responses. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Deploy a fine-tuned Amazon Bedrock Anthropic Claude model for each product category. Create AWS Lambda functions to connect each model to the order management API. Store conversation history in Amazon DynamoDB.",
@@ -543,7 +543,7 @@ window.AIP_QUESTIONS = [
       "D": "각 에이전트의 처리를 처리하도록 별도의 Step Functions 상태 머신을 구성합니다. 상태 머신 간 실행 흐름을 조정하도록 Amazon EventBridge를 사용합니다. 출력을 위해 S3 참조를 이벤트 데이터로 사용합니다."
     },
     "answer": "B",
-    "explanation": "Step Functions의 256KB 제한을 극복하는 가장 간단한 방법은 S3 URI 참조를 상태 간에 전달하는 것입니다. Amazon Bedrock은 S3 URI를 입력 매개변수로 직접 지원하므로, ResultPath와 ResultSelector를 사용하여 대용량 중간 출력을 S3에 저장하고 참조만 전달할 수 있습니다. 이는 ReAct 패턴을 유지하면서 operational overhead를 최소화합니다. 옵션 A의 DynamoDB는 Map 상태 추가로 복잡성이 증가합니다. 옵션 C의 압축은 각 단계에서 오버헤드를 증가시킵니다. 옵션 D의 분리된 상태 머신은 EventBridge 조정 오버헤드가 높습니다. Bedrock의 S3 URI 지원은 이 시나리오에 가장 적합합니다.",
+    "explanation": "Step Functions의 256KB 제한을 극복하는 가장 간단한 방법은 S3 URI 참조를 상태 간에 전달하는 것입니다.\n\nAmazon Bedrock은 S3 URI를 입력 매개변수로 직접 지원하므로, ResultPath와 ResultSelector를 사용하여 대용량 중간 출력을 S3에 저장하고 참조만 전달할 수 있습니다.\n\n이는 ReAct 패턴을 유지하면서 operational overhead를 최소화합니다.\n\n옵션 A의 DynamoDB는 Map 상태 추가로 복잡성이 증가합니다.\n\n옵션 C의 압축은 각 단계에서 오버헤드를 증가시킵니다.\n\n옵션 D의 분리된 상태 머신은 EventBridge 조정 오버헤드가 높습니다.\n\nBedrock의 S3 URI 지원은 이 시나리오에 가장 적합합니다.",
     "en_q": "An ecommerce company is using Amazon Bedrock to build a generative AI (GenAI) application. The application uses AWS Step Functions to orchestrate a multi-agent workflow to produce detailed product descriptions. The workflow consists of three sequential states: a description generator, a technical specifications validator, and a brand voice consistency checker. Each state produces intermediate reasoning traces and outputs that are passed to the next state. The application uses an Amazon S3 bucket for process storage and to store outputs. During testing, the company discovers that outputs between Step Functions states frequently exceed the 256 KB quota and cause workflow failures. A GenAI Developer needs to revise the application architecture to efficiently handle the Step Functions 256 KB quota and maintain workflow observability. The revised architecture must preserve the existing multi-agent reasoning and acting (ReAct) pattern. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Store intermediate outputs in Amazon DynamoDB. Pass only references between states. Create a Map state that retrieves the complete data from DynamoDB when required for each agent's processing step.",
@@ -563,7 +563,7 @@ window.AIP_QUESTIONS = [
       "D": "식당 데이터를 사용자 정의 수집 파이프라인을 사용하여 Amazon Bedrock knowledge base로 마이그레이션합니다. knowledge base를 구성하여 식당 정보에서 임베딩을 자동으로 생성합니다. Amazon Bedrock Retrieve API와 자연어 입력을 사용하여 knowledge base를 직접 쿼리하도록 built-in 벡터 검색 기능을 사용합니다."
     },
     "answer": "B",
-    "explanation": "OpenSearch Service는 대규모 벡터 검색(2천만 식당, 2억 리뷰)에 최적화되어 있으며, k-NN 검색은 500ms 응답 시간을 달성할 수 있습니다. Bedrock FM으로 벡터 임베딩을 생성하면 의미론적 이해를 제공하고, OpenSearch는 자동 스케일링과 비용 효율성을 지원합니다. 매시간 데이터 업데이트는 OpenSearch의 refresh 기능으로 처리됩니다. 옵션 A의 키워드 검색은 자연어 쿼리를 처리하지 못합니다. 옵션 C의 pgvector는 2천만 행의 벡터 검색에 성능 문제가 있습니다. 옵션 D의 Knowledge Base는 2백만 문서 이상의 대규모 검색에는 적합하지 않습니다. OpenSearch + Bedrock embeddings는 확장성과 성능의 최적 조합입니다.",
+    "explanation": "OpenSearch Service는 대규모 벡터 검색(2천만 식당, 2억 리뷰)에 최적화되어 있으며, k-NN 검색은 500ms 응답 시간을 달성할 수 있습니다.\n\nBedrock FM으로 벡터 임베딩을 생성하면 의미론적 이해를 제공하고, OpenSearch는 자동 스케일링과 비용 효율성을 지원합니다.\n\n매시간 데이터 업데이트는 OpenSearch의 refresh 기능으로 처리됩니다.\n\n옵션 A의 키워드 검색은 자연어 쿼리를 처리하지 못합니다.\n\n옵션 C의 pgvector는 2천만 행의 벡터 검색에 성능 문제가 있습니다.\n\n옵션 D의 Knowledge Base는 2백만 문서 이상의 대규모 검색에는 적합하지 않습니다.\n\nOpenSearch + Bedrock embeddings는 확장성과 성능의 최적 조합입니다.",
     "en_q": "A company provides a service that helps users from around the world discover new restaurants. The service has 50 million monthly active users. The company wants to implement a semantic search solution across a database that contains 20 million restaurants and 200 million reviews. The company currently stores the data in a PostgresQL database. The solution must support complex natural language queries and return results for at least 95% of queries within 500 ms. The solution must maintain data freshness for restaurant details that update hourly. The solution must also scale cost-effectively during peak usage periods. Which solution will meet these requirements with the LEAST development effort?",
     "en_opts": {
       "A": "Migrate the restaurant data to Amazon OpenSearch Service. Implement keyword-based search rules that use custom analyzers and relevance tuning to find restaurants based on attributes such as cuisine type, feature, and location. Create Amazon API Gateway HTTP API endpoints to transform user queries into structured search parameters.",
@@ -583,7 +583,7 @@ window.AIP_QUESTIONS = [
       "D": "Amazon Bedrock Flows에서 사용자 정의 프롬프트 평가 흐름을 생성합니다. Amazon Comprehend Medical을 사용하여 각 버전의 팩트 정확성을 분석하고 채점합니다."
     },
     "answer": "B",
-    "explanation": "프롬프트 개발의 모범 사례는 코드 리포지토리에서 버전 관리하고 자동화된 테스트를 수행하는 것입니다. 복잡한 임상 문서를 포함한 테스트 스위트는 프롬프트가 단순 사례뿐 아니라 복잡한 경우도 처리하는지 확인합니다. 정량화 가능한 메트릭(BLEU, ROUGE, 임상 정확성)을 사용하여 버전을 비교할 수 있습니다. 이는 과거 기록, 성능 비교, 불일치 진단을 모두 제공합니다. 옵션 A의 Prompt management는 기본 UI만 제공합니다. 옵션 C의 A/B 테스트는 선택적 메트릭만 제공합니다. 옵션 D의 Bedrock Flows는 평가가 복잡합니다. 버전 관리된 코드 리포지토리 + 자동 테스트는 과학적이고 추적 가능한 접근입니다.",
+    "explanation": "프롬프트 개발의 모범 사례는 코드 리포지토리에서 버전 관리하고 자동화된 테스트를 수행하는 것입니다.\n\n복잡한 임상 문서를 포함한 테스트 스위트는 프롬프트가 단순 사례뿐 아니라 복잡한 경우도 처리하는지 확인합니다.\n\n정량화 가능한 메트릭(BLEU, ROUGE, 임상 정확성)을 사용하여 버전을 비교할 수 있습니다.\n\n이는 과거 기록, 성능 비교, 불일치 진단을 모두 제공합니다.\n\n옵션 A의 Prompt management는 기본 UI만 제공합니다.\n\n옵션 C의 A/B 테스트는 선택적 메트릭만 제공합니다.\n\n옵션 D의 Bedrock Flows는 평가가 복잡합니다.\n\n버전 관리된 코드 리포지토리 + 자동 테스트는 과학적이고 추적 가능한 접근입니다.",
     "en_q": "A medical company uses Amazon Bedrock to power a clinical documentation summarization system. The system produces inconsistent summaries when handling complex clinical documents. The system performed well on simple clinical documents. The company needs a solution that diagnoses inconsistencies, compares prompt performance against established metrics, and maintains historical records of prompt versions. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Create multiple prompt variants by using Prompt management in Amazon Bedrock. Manually test the prompts with simple clinical documents. Deploy the highest performing version by using the Amazon Bedrock console.",
@@ -604,7 +604,7 @@ window.AIP_QUESTIONS = [
       "E": "Amazon Bedrock 모델에 한 번에 전체 문서를 요약하도록 프롬프트합니다."
     },
     "answer": "AB",
-    "explanation": "환각을 줄이는 두 가지 효과적인 방법은 사고 연쇄(CoT)와 RAG입니다. 옵션 A의 제로샷 CoT는 모델이 단계별로 추론하도록 강제하여 사실 확인 기회를 제공합니다. 옵션 B의 RAG는 생성을 소스 콘텐츠에 고정하여 환각 가능성을 크게 줄입니다. 의미론적 청킹은 관련 콘텐츠를 검색하도록 하고, 조정된 임베딩은 검색 품질을 향상합니다. 시간당 1,000+ 문서와 3초 처리는 이 두 기법으로 달성 가능합니다. 옵션 C의 Guardrails은 환각을 방지하지 않고 차단만 합니다. 옵션 D의 높은 온도는 환각을 증가시킵니다. 옵션 E는 환각 원인인 전체 문서 처리입니다. CoT + RAG의 조합은 사실성을 보장합니다.",
+    "explanation": "환각을 줄이는 두 가지 효과적인 방법은 사고 연쇄(CoT)와 RAG입니다.\n\n옵션 A의 제로샷 CoT는 모델이 단계별로 추론하도록 강제하여 사실 확인 기회를 제공합니다.\n\n옵션 B의 RAG는 생성을 소스 콘텐츠에 고정하여 환각 가능성을 크게 줄입니다.\n\n의미론적 청킹은 관련 콘텐츠를 검색하도록 하고, 조정된 임베딩은 검색 품질을 향상합니다.\n\n시간당 1,000+ 문서와 3초 처리는 이 두 기법으로 달성 가능합니다.\n\n옵션 C의 Guardrails은 환각을 방지하지 않고 차단만 합니다.\n\n옵션 D의 높은 온도는 환각을 증가시킵니다.\n\n옵션 E는 환각 원인인 전체 문서 처리입니다.\n\nCoT + RAG의 조합은 사실성을 보장합니다.",
     "en_q": "A company uses Amazon Bedrock to generate technical content for customers. The company has recently experienced a surge in hallucination outputs when the company's model generates summaries of long technical documents. The model outputs include inaccurate or fabricated details. The company's current solution uses a large foundation model (FM) with a basic one-shot prompt that includes the full document in a single input. The company needs a solution that will reduce hallucinations and meet factual accuracy goals. The solution must process more than 1,000 documents each hour and deliver summaries within 3 seconds for each document. Which combination of solutions will meet these requirements? (Choose two.)",
     "en_opts": {
       "A": "Implement zero-shot chain-of-thought (CoT) instructions that require step-by-step reasoning with explicit fact verification before the model generates each summary.",
@@ -625,7 +625,7 @@ window.AIP_QUESTIONS = [
       "D": "관찰성 플러그인이 있는 Amazon OpenSearch Service를 사용합니다. Amazon Kinesis를 사용하여 모델 메트릭 및 로그를 수집합니다. 사용자 정의 Piped Processing Language(PPL) 쿼리를 생성하여 모델 동작 패턴을 분석합니다. 실시간으로 이상을 시각화하도록 운영 대시보드를 구축합니다."
     },
     "answer": "C",
-    "explanation": "Amazon CloudWatch Application Insights는 EC2 기반 애플리케이션의 이상 탐지를 자동으로 수행합니다. CloudWatch embedded metric format으로 권장 사항 품질, 토큰 사용량, 응답 지연 시간 같은 FM 특화 메트릭을 수집하고, 이상 탐지로 기준선과의 편차를 감지합니다. CloudWatch Logs Insights는 로그 패턴을 빠르게 분석합니다. 이 조합은 10분 이내의 경보를 달성할 수 있습니다. 옵션 A는 컨테이너 중심 메트릭만 제공합니다. 옵션 B는 X-Ray가 FM 메트릭을 추적하지 않습니다. 옵션 D는 OpenSearch 설정이 복잡합니다. Application Insights는 AWS 네이티브 이상 탐지를 제공하며 빠른 경보 구성을 가능하게 합니다.",
+    "explanation": "Amazon CloudWatch Application Insights는 EC2 기반 애플리케이션의 이상 탐지를 자동으로 수행합니다. CloudWatch embedded metric format으로 권장 사항 품질, 토큰 사용량, 응답 지연 시간 같은 FM 특화 메트릭을 수집하고, 이상 탐지로 기준선과의 편차를 감지합니다. CloudWatch Logs Insights는 로그 패턴을 빠르게 분석합니다. 이 조합은 10분 이내의 경보를 달성할 수 있습니다.\n\n옵션 A는 컨테이너 중심 메트릭만 제공합니다.\n\n옵션 B는 X-Ray가 FM 메트릭을 추적하지 않습니다.\n\n옵션 D는 OpenSearch 설정이 복잡합니다. Application Insights는 AWS 네이티브 이상 탐지를 제공하며 빠른 경보 구성을 가능하게 합니다.",
     "en_q": "A company is developing a recommendation system. The system's applications run on Amazon EC2 instances. The applications make API calls to Amazon Bedrock foundation models (FMs) to analyze customer behavior and generate personalized product recommendations. The system is experiencing intermittent issues. Some recommendations do not match customer preferences. The company needs an observability solution to monitor operational metrics and detect patterns of operational performance degradation compared to established baselines. The solution must also generate alerts with correlation data within 10 minutes when FM behavior deviates from expected patterns. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Configure Amazon CloudWatch Container Insights for the application infrastructure. Set up CloudWatch alarms for latency thresholds. Add custom metrics for token counts by using the CloudWatch embedded metric format. Create CloudWatch dashboards to visualize the data.",
@@ -645,7 +645,7 @@ window.AIP_QUESTIONS = [
       "D": "문서 토큰 수를 분석하는 FM의 토크나이저를 사용하는 사전 처리 AWS Lambda 함수를 생성합니다. Lambda 함수를 구성하여 문서를 컨텍스트 윈도우의 80% 내에 맞는 동일한 세그먼트로 분할합니다. Lambda 함수를 구성하여 각 세그먼트를 독립적으로 처리한 후 결과를 집계합니다."
     },
     "answer": "C",
-    "explanation": "의미론적 청킹은 문법적 또는 의미론적 경계에서 문서를 나누므로 재맥락화 손실이 최소화됩니다. 95% breakpoint percentile과 3문장 버퍼는 의미론적 응집성을 보존합니다. RetrieveAndGenerate API는 사용자 쿼리와 가장 관련된 청크를 동적으로 선택하여 컨텍스트 윈도우를 최대한 활용합니다. 임베딩 유사성은 관련성이 높은 청크 선택을 보장합니다. 옵션 A의 고정 크기 청킹은 의미 경계를 무시합니다. 옵션 B의 계층적 청킹은 구현 복잡도가 높습니다. 옵션 D의 동등 세그먼트는 의미론적 분석이 없습니다. 의미론적 청킹 + RetrieveAndGenerate는 대문서 처리의 표준입니다.",
+    "explanation": "의미론적 청킹은 문법적 또는 의미론적 경계에서 문서를 나누므로 재맥락화 손실이 최소화됩니다.\n\n95% breakpoint percentile과 3문장 버퍼는 의미론적 응집성을 보존합니다.\n\nRetrieveAndGenerate API는 사용자 쿼리와 가장 관련된 청크를 동적으로 선택하여 컨텍스트 윈도우를 최대한 활용합니다.\n\n임베딩 유사성은 관련성이 높은 청크 선택을 보장합니다.\n\n옵션 A의 고정 크기 청킹은 의미 경계를 무시합니다.\n\n옵션 B의 계층적 청킹은 구현 복잡도가 높습니다.\n\n옵션 D의 동등 세그먼트는 의미론적 분석이 없습니다.\n\n의미론적 청킹 + RetrieveAndGenerate는 대문서 처리의 표준입니다.",
     "en_q": "An enterprise application uses an Amazon Bedrock foundation model (FM) to process and analyze 50 to 200 pages of technical documents. Users are experiencing inconsistent responses and receiving truncated outputs when processing documents that exceed the FM's context window limits. Which solution will resolve this problem?",
     "en_opts": {
       "A": "Configure fixed-size chunking at 4,000 tokens for each chunk with 20% overlap. Use application-level logic to link multiple chunks sequentially until the FM's maximum context window of 200,000 tokens is reached before making inference calls.",
@@ -665,7 +665,7 @@ window.AIP_QUESTIONS = [
       "D": "배치 처리에 최적화된 Amazon SageMaker AI 서버리스 엔드포인트에 중간 크기 언어 모델을 배포합니다."
     },
     "answer": "B",
-    "explanation": "500,000개의 동시 통화와 200ms 지연 시간 요구 사항은 저지연 모델이 필수입니다. Bedrock의 실시간 최적화 모델(예: Claude 3.5 Haiku)은 빠른 추론을 제공합니다. 프로비저닝된 처리량은 월간 계산 예산을 제어하고, 자동 스케일링은 5백만 동시 연결을 처리할 수 있습니다. 옵션 A의 대형 복잡한 모델은 200ms를 달성할 수 없습니다. 옵션 C의 SageMaker 전용 GPU는 높은 비용과 스케일링 어려움이 있습니다. 옵션 D의 서버리스는 배치 최적화로 실시간 요구를 충족하지 못합니다. Bedrock의 실시간 모델 + 프로비저닝된 처리량은 이 시나리오에 최적입니다.",
+    "explanation": "500,000개의 동시 통화와 200ms 지연 시간 요구 사항은 저지연 모델이 필수입니다.\n\nBedrock의 실시간 최적화 모델(예: Claude 3.5 Haiku)은 빠른 추론을 제공합니다.\n\n프로비저닝된 처리량은 월간 계산 예산을 제어하고, 자동 스케일링은 5백만 동시 연결을 처리할 수 있습니다.\n\n옵션 A의 대형 복잡한 모델은 200ms를 달성할 수 없습니다.\n\n옵션 C의 SageMaker 전용 GPU는 높은 비용과 스케일링 어려움이 있습니다.\n\n옵션 D의 서버리스는 배치 최적화로 실시간 요구를 충족하지 못합니다.\n\nBedrock의 실시간 모델 + 프로비저닝된 처리량은 이 시나리오에 최적입니다.",
     "en_q": "A company is developing a generative AI (GenAI) application that analyzes customer service calls in real-time and generates suggested responses for human customer service agents. The application must process 500,000 concurrent calls during peak hours with less than 200 ms end-to-end latency for each suggestion. The company uses existing architecture to transcribe customer call audio streams. The application must not exceed a pre-defined monthly compute budget and must maintain auto scaling capabilities. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Deploy a large, complex reasoning model on Amazon Bedrock. Purchase provisioned throughput and optimize for batch processing.",
@@ -686,7 +686,7 @@ window.AIP_QUESTIONS = [
       "E": "Amazon SageMaker AI 노트북 작업을 일정에 따라 fmevals 또는 ragas 프레임워크를 사용하여 실행합니다. S3 버킷의 데이터세트를 사용하는 평가를 실행하기 위해 노트북에서 Python 코드를 작성합니다. FM에 직접 InvokeModel API 호출을 수행하고 평가를 위해 응답을 처리합니다. 텍스트 생성의 정확도 메트릭으로 실제 세계 지식(RWK) 점수를 사용하고 요약의 독성을 사용하여 작업 상태 및 결과를 Amazon CloudWatch Logs에 게시합니다. 사용자 정의 CloudWatch Logs Insights 대시보드를 생성합니다."
     },
     "answer": "AC",
-    "explanation": "Amazon Bedrock 평가는 S3 데이터세트 + IAM 권한 + CORS(옵션 A)를 사용하여 직접 실행됩니다. Amazon Bedrock 콘솔의 Model Evaluation 기능은 eCommerce 데이터세트를 업로드하고 RWK와 BERT Score 메트릭을 선택하여 실행할 수 있습니다. 옵션 C는 필요하지 않습니다(이것은 Amazon Q의 ACL이며, Bedrock 평가가 아닙니다). 대신, 가장 간단한 것은 A(S3 + IAM + CORS)와 Bedrock 콘솔 또는 Python 스크립트(옵션 E는 과도함)를 사용하는 것입니다. 하지만 선택지를 다시 보면, 옵션 C는 잘못된 정맥(Bedrock 콘솔의 Model Evaluation이 아닌 Bedrock 에이전트의 Knowledge Base ACL을 설명함)이므로, 올바른 조합은 A(S3 + CORS)와 E(직접 Python 평가)입니다. 그러나 최소 오버헤드는 A + Bedrock 콘솔(암시적)입니다.",
+    "explanation": "Amazon Bedrock 평가는 S3 데이터세트 + IAM 권한 + CORS(옵션 A)를 사용하여 직접 실행됩니다. Amazon Bedrock 콘솔의 Model Evaluation 기능은 eCommerce 데이터세트를 업로드하고 RWK와 BERT Score 메트릭을 선택하여 실행할 수 있습니다.\n\n옵션 C는 필요하지 않습니다(이것은 Amazon Q의 ACL이며, Bedrock 평가가 아닙니다). 대신, 가장 간단한 것은 A(S3 + IAM + CORS)와 Bedrock 콘솔 또는 Python 스크립트(\n\n옵션 E는 과도함)를 사용하는 것입니다. 하지만 선택지를 다시 보면,\n\n옵션 C는 잘못된 정맥(Bedrock 콘솔의 Model Evaluation이 아닌 Bedrock 에이전트의 Knowledge Base ACL을 설명함)이므로, 올바른 조합은 A(S3 + CORS)와 E(직접 Python 평가)입니다. 그러나 최소 오버헤드는 A + Bedrock 콘솔(암시적)입니다.",
     "en_q": "An ecommerce company is building an internal platform to develop generative AI applications by using Amazon Bedrock foundation models (FMs). Developers need to select models based on evaluations that are aligned to ecommerce use cases. The platform must display accuracy metrics for text generation and summarization in dashboards. The company has custom ecommerce datasets to use as standardized evaluation inputs. Which combination of steps will meet these requirements with the LEAST operational overhead? (Choose two.)",
     "en_opts": {
       "A": "Import the datasets to an Amazon S3 bucket. Provide appropriate IAM permissions and cross-origin resource sharing (CORS) permissions to give the evaluation jobs access to the datasets.",
@@ -707,7 +707,7 @@ window.AIP_QUESTIONS = [
       "D": "AI 권장 사항을 인간 기술자에게 검토하도록 라우팅하기 위해 사용자 정의 이벤트 패턴을 사용하여 Amazon EventBridge 규칙을 구성합니다. AWS Glue 작업을 생성하여 인간 기술자 승인 큐를 처리합니다. 모든 인간 기술자 검토 결정을 캐시하기 위해 Amazon ElastiCache를 사용합니다."
     },
     "answer": "B",
-    "explanation": "AWS Step Functions의 waitForTaskToken API는 인간 검토 워크플로우를 위한 표준 패턴입니다. 워크플로우는 waitForTaskToken에서 일시 중지되고, 인간이 검토를 완료한 후 Lambda가 SendTaskSuccess를 호출하여 재개합니다. DynamoDB는 모든 검토 결정의 감사 기록을 저장합니다. 이는 규정 준수 요구 사항(인간 검토)과 감사 추적을 모두 충족합니다. 옵션 A는 SQS만으로는 상태를 추적할 수 없습니다. 옵션 C의 Glue는 workflow management를 제공하지 않습니다. 옵션 D의 EventBridge + Glue + ElastiCache는 과도하게 복잡합니다. Step Functions의 waitForTaskToken은 인간 승인 워크플로우를 위한 AWS 베스트 프랙티스입니다.",
+    "explanation": "AWS Step Functions의 waitForTaskToken API는 인간 검토 워크플로우를 위한 표준 패턴입니다.\n\n워크플로우는 waitForTaskToken에서 일시 중지되고, 인간이 검토를 완료한 후 Lambda가 SendTaskSuccess를 호출하여 재개합니다.\n\nDynamoDB는 모든 검토 결정의 감사 기록을 저장합니다.\n\n이는 규정 준수 요구 사항(인간 검토)과 감사 추적을 모두 충족합니다.\n\n옵션\nA는 SQS만으로는 상태를 추적할 수 없습니다.\n\n옵션 C의 Glue는 workflow management를 제공하지 않습니다.\n\n옵션 D의 EventBridge + Glue + ElastiCache는 과도하게 복잡합니다.\n\nStep Functions의 waitForTaskToken은 인간 승인 워크플로우를 위한 AWS 베스트 프랙티스입니다.",
     "en_q": "An elevator service company has developed an AI assistant application by using Amazon Bedrock. The application generates elevator maintenance recommendations to support the company's elevator technicians. The company uses Amazon Kinesis Data Streams to collect the elevator sensor data. New regulatory rules require that a human technician must review all AI-generated recommendations. The company needs to establish human oversight workflows to review and approve AI recommendations. The company must store all human technician review decisions for audit purposes. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Create a custom approval workflow by using AWS Lambda functions and Amazon SQS queues for human review of AI recommendations. Store all review decisions in Amazon DynamoDB for audit purposes.",
@@ -729,7 +729,7 @@ window.AIP_QUESTIONS = [
       "F": "Amazon Bedrock이 수행한 모델 채점 결정을 기반으로 공정성 및 편향 보고서를 생성하기 위해 Amazon SageMaker Clarify를 사용합니다."
     },
     "answer": "ABD",
-    "explanation": "옵션 A는 Textract + A2I로 리전 내 추출 및 인간 검토를 처리합니다. 옵션 B는 PII 마스킹과 Guardrails로 보안 및 규정 준수를 보장하고, 리전 IAM으로 데이터 거주를 강제합니다. 옵션 D는 S3 메타데이터 및 태깅으로 감시 요구 사항을 충족하고, 리전 제약을 구현합니다. 옵션 C의 Kendra/OpenSearch는 구조화된 추출에 과도합니다. 옵션 E의 Glue Data Quality는 필수 아니며, Step Functions는 이미 A2I에 포함됩니다. 옵션 F의 SageMaker Clarify는 편향 감지이지만 이 시나리오의 핵심 요구 사항이 아닙니다. A(추출 + 인간 검토) + B(PII + Guardrails + IAM) + D(감시 + 거주)는 모든 요구 사항을 충족합니다.",
+    "explanation": "옵션 A는 Textract + A2I로 리전 내 추출 및 인간 검토를 처리합니다.\n\n옵션 B는 PII 마스킹과 Guardrails로 보안 및 규정 준수를 보장하고, 리전 IAM으로 데이터 거주를 강제합니다.\n\n옵션 D는 S3 메타데이터 및 태깅으로 감시 요구 사항을 충족하고, 리전 제약을 구현합니다. 옵션 C의 Kendra/OpenSearch는 구조화된 추출에 과도합니다. 옵션 E의 Glue Data Quality는 필수 아니며, Step Functions는 이미 A2I에 포함됩니다. 옵션 F의 SageMaker Clarify는 편향 감지이지만 이 시나리오의 핵심 요구 사항이 아닙니다. A(추출 + 인간 검토) + B(PII + Guardrails + IAM) + D(감시 + 거주)는 모든 요구 사항을 충족합니다.",
     "en_q": "A bank is building a generative AI (GenAI) application that uses Amazon Bedrock to assess loan applications by using scanned financial documents. The application must extract structured data from the documents. The application must redact personally identifiable information (PII) before inference. The application must use foundation models (FMs) to generate approvals. The application must route low-confidence document extraction results to human reviewers who are within the same AWS Region as the loan applicant. The company must ensure that the application complies with strict Regional data residency and auditability requirements. The application must be able to scale to handle 25,000 applications each day and provide 99.9% availability. Which combination of solutions will meet these requirements? (Choose three.)",
     "en_opts": {
       "A": "Deploy Amazon Textract and Amazon Augmented AI (Amazon A2I) within the same Region to extract relevant data from the scanned documents. Route low-confidence pages to human reviewers.",
@@ -751,7 +751,7 @@ window.AIP_QUESTIONS = [
       "D": "S3 버킷의 최상위 수준에서 metadata.json이라는 메타데이터 파일을 생성합니다. 파일에 각 부서의 접두사의 S3 경로를 지정하는 AccessControlList 객체를 추가합니다. 각 부서의 접두사에 액세스해야 하는 IAM Identity Center 그룹을 지정합니다. 데이터 소스 메타데이터 설정에서 파일 위치를 참조합니다."
     },
     "answer": "B",
-    "explanation": "Amazon Q Business는 S3 버킷의 최상위에 있는 acl.json 파일을 사용하여 IAM Identity Center 그룹 기반 액세스 제어를 구현합니다. 단일 acl.json은 각 부서 접두사를 IAM 그룹에 매핑하므로 운영 오버헤드가 최소입니다. 옵션 A의 다중 acl.json은 각 부서마다 유지해야 합니다. 옵션 C의 StringNotEquals는 Amazon Q의 액세스 제어 메커니즘이 아닙니다. 옵션 D의 metadata.json은 Amazon Q에서 지원되지 않습니다. Amazon Q의 공식 문서는 최상위 acl.json을 사용하는 방법을 설명합니다.",
+    "explanation": "Amazon Q Business는 S3 버킷의 최상위에 있는 acl.json 파일을 사용하여 IAM Identity Center 그룹 기반 액세스 제어를 구현합니다.\n\n단일 acl.json은 각 부서 접두사를 IAM 그룹에 매핑하므로 운영 오버헤드가 최소입니다.\n\n옵션 A의 다중 acl.json은 각 부서마다 유지해야 합니다.\n\n옵션 C의 StringNotEquals는 Amazon Q의 액세스 제어 메커니즘이 아닙니다.\n\n옵션 D의 metadata.json은 Amazon Q에서 지원되지 않습니다.\n\nAmazon Q의 공식 문서는 최상위 acl.json을 사용하는 방법을 설명합니다.",
     "en_q": "A software company is using Amazon Q Business to build an AI assistant that allows employees to access company information and personal information by using natural language prompts. The company stores this information in an Amazon S3 bucket. Each department in the company has a dedicated prefix in the S3 bucket. Each object name includes the S3 prefix of the department that it belongs to. Each department can belong to only a single group in AWS IAM Identity Center. Each employee belongs to a single department. The company configures Amazon Q Business to access data stored in an S3 bucket as a data source. The company needs to ensure that the AI assistant respects access controls based on the user's IAM Identity Center group membership. Which solution will meet this requirement with the LEAST operational overhead?",
     "en_opts": {
       "A": "Create a JSON file named acl.json in each department folder. In each file, create access control entries that specify the IAM Identity Center group that should have access to that department's data. Indicate the location of the JSON file in the Access Control section of the data source settings.",
@@ -771,7 +771,7 @@ window.AIP_QUESTIONS = [
       "D": "Amazon Bedrock knowledge base와 Retrieve API 호출 및 InvokeModel API 호출을 사용하여 승인된 임상 소스 문서를 검색합니다. 검색된 출처와 비교하기 위해 검증 로직을 구현하고 출처를 인용합니다."
     },
     "answer": "B",
-    "explanation": "Amazon Bedrock Knowledge Base의 RetrieveAndGenerate API는 환각 방지 및 소스 인용을 위한 가장 간단한 솔루션입니다. Knowledge Base는 승인된 임상 문서를 저장하고, RetrieveAndGenerate는 관련 문서를 검색한 후 응답을 생성하며 출처를 자동으로 인용합니다. 이는 최소한의 운영 오버헤드로 사실 정확성과 인용을 보장합니다. 옵션 A의 Kendra는 검색만 수행하고 인용은 수동으로 구현해야 합니다. 옵션 C의 Comprehend Medical은 엔티티 추출이며 인용과 무관합니다. 옵션 D는 Retrieve + InvokeModel의 수동 조합으로 더 복잡합니다. RetrieveAndGenerate는 Bedrock의 built-in RAG 기능이며 의료 시나리오에 이상적입니다.",
+    "explanation": "Amazon Bedrock Knowledge Base의 RetrieveAndGenerate API는 환각 방지 및 소스 인용을 위한 가장 간단한 솔루션입니다.\n\nKnowledge Base는 승인된 임상 문서를 저장하고, RetrieveAndGenerate는 관련 문서를 검색한 후 응답을 생성하며 출처를 자동으로 인용합니다.\n\n이는 최소한의 운영 오버헤드로 사실 정확성과 인용을 보장합니다.\n\n옵션 A의 Kendra는 검색만 수행하고 인용은 수동으로 구현해야 합니다.\n\n옵션 C의 Comprehend Medical은 엔티티 추출이며 인용과 무관합니다.\n\n옵션 D는 Retrieve + InvokeModel의 수동 조합으로 더 복잡합니다.\n\nRetrieveAndGenerate는 Bedrock의 built-in RAG 기능이며 의료 시나리오에 이상적입니다.",
     "en_q": "A healthcare company is using Amazon Bedrock to build a system to help practitioners make clinical decisions. The system must provide treatment recommendations to physicians based only on approved medical documentation and must cite specific sources. The system must not hallucinate or produce factually incorrect information. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Integrate Amazon Bedrock with Amazon Kendra to retrieve approved documents. Implement custom post-processing to compare generated responses against source documents and to include citations.",
@@ -791,7 +791,7 @@ window.AIP_QUESTIONS = [
       "D": "Amazon Transcribe 스트리밍 API를 AWS Lambda 함수와 사용하여 각 오디오 세그먼트를 전사합니다. Lambda 함수를 InvokeModel API로 Amazon Bedrock의 Amazon Titan Embeddings 모델을 호출하도록 구성합니다. Amazon SNS 주제에 결과를 게시하도록 함수를 구성합니다."
     },
     "answer": "B",
-    "explanation": "실시간 스트리밍 어시스턴트에서 1초 이하의 지연시간 요구사항을 충족하려면 다단계 아키텍처가 필요합니다. 정답 B는 세 가지 핵심 요소를 모두 해결합니다. 첫째, Amazon Transcribe의 부분 결과(partial results) 기능은 고객이 말을 완료하기 전에 인식된 텍스트 조각을 즉시 반환하여 초기 지연을 최소화합니다. 둘째, InvokeModelWithResponseStream API는 Amazon Bedrock 응답을 스트리밍하여 전체 응답을 기다리지 않고 토큰 단위로 결과를 전송합니다. 셋째, WebSocket API는 양방향 실시간 통신을 지원하여 상담원이 즉시 제안을 받을 수 있습니다. 반면 A는 전체 문장 단위를 기다리므로 지연이 길고, C는 일괄 처리로 실시간 요구사항을 충족할 수 없으며, D는 임베딩 모델을 사용하여 생성 기능을 제공하지 못합니다.",
+    "explanation": "실시간 스트리밍 어시스턴트에서 1초 이하의 지연시간 요구사항을 충족하려면 다단계 아키텍처가 필요합니다.\n\n정답 B는 세 가지 핵심 요소를 모두 해결합니다.\n\n첫째, Amazon Transcribe의 부분 결과(partial results) 기능은 고객이 말을 완료하기 전에 인식된 텍스트 조각을 즉시 반환하여 초기 지연을 최소화합니다.\n\n둘째, InvokeModelWithResponseStream API는 Amazon Bedrock 응답을 스트리밍하여 전체 응답을 기다리지 않고 토큰 단위로 결과를 전송합니다.\n\n셋째, WebSocket API는 양방향 실시간 통신을 지원하여 상담원이 즉시 제안을 받을 수 있습니다.\n\n반면 A는 전체 문장 단위를 기다리므로 지연이 길고, C는 일괄 처리로 실시간 요구사항을 충족할 수 없으며, D는 임베딩 모델을 사용하여 생성 기능을 제공하지 못합니다.",
     "en_q": "A financial services company is developing a real-time generative AI (GenAI) assistant to support human call center agents. The GenAI assistant must transcribe live customer speech, analyze context, and provide incremental suggestions to call center agents while a customer is still speaking. To preserve responsiveness, the GenAI assistant must maintain end-to-end latency under 1 second from speech to initial response display. The architecture must use only managed AWS services and must support bidirectional streaming to ensure that call center agents receive updates in real time. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Use the Amazon Transcribe streaming API to transcribe calls. Pass the text to Amazon Comprehend to perform sentiment analysis. Feed the results to Anthropic Claude on Amazon Bedrock by using the InvokeModel API. Store results in Amazon DynamoDB. Use a WebSocket API to display the results.",
@@ -811,7 +811,7 @@ window.AIP_QUESTIONS = [
       "D": "내장 Amazon Bedrock guardrails를 사용하여 콘텐츠를 필터링하는 AWS Step Functions 워크플로우를 생성합니다. Amazon Comprehend PII 감지를 사용하여 콘텐츠를 전처리합니다. Amazon Rekognition 이미지 조정을 사용합니다."
     },
     "answer": "D",
-    "explanation": "정답 D는 Amazon Bedrock guardrails를 활용하여 관리형 서비스만으로 콘텐츠 필터링을 최소화합니다. Bedrock guardrails는 모델 입력 및 출력에서 부적절한 콘텐츠와 PII를 자동으로 감지하고 차단하는 기본 제공 기능입니다. AWS Step Functions 워크플로우는 PII 감지, 콘텐츠 조정, Bedrock 호출을 순차적으로 조정하므로 복잡한 커스텀 로직이 필요 없습니다. Amazon Comprehend는 PII를 선택적으로 감지하고, Amazon Rekognition은 이미지 조정을 수행합니다. A는 CloudWatch 알람 기반이므로 비효율적이고, B는 SageMaker 모델을 커스텀 구축해야 해서 오버헤드가 크며, C는 인증 단계에 필터링을 배치하여 성능이 떨어집니다. Bedrock guardrails는 인프라 관리 없이 확장 가능한 콘텐츠 필터링을 제공합니다.",
+    "explanation": "정답 D는 Amazon Bedrock guardrails를 활용하여 관리형 서비스만으로 콘텐츠 필터링을 최소화합니다.\n\nBedrock guardrails는 모델 입력 및 출력에서 부적절한 콘텐츠와 PII를 자동으로 감지하고 차단하는 기본 제공 기능입니다.\n\nAWS Step Functions 워크플로우는 PII 감지, 콘텐츠 조정, Bedrock 호출을 순차적으로 조정하므로 복잡한 커스텀 로직이 필요 없습니다.\n\nAmazon Comprehend는 PII를 선택적으로 감지하고, Amazon Rekognition은 이미지 조정을 수행합니다.\n\nA는 CloudWatch 알람 기반이므로 비효율적이고, B는 SageMaker 모델을 커스텀 구축해야 해서 오버헤드가 크며, C는 인증 단계에 필터링을 배치하여 성능이 떨어집니다.\n\nBedrock guardrails는 인프라 관리 없이 확장 가능한 콘텐츠 필터링을 제공합니다.",
     "en_q": "A media company is launching a platform that allows thousands of users every hour to upload images and text content. The platform uses Amazon Bedrock to process the uploaded content to generate creative compositions. The company needs a solution to ensure that the platform does not process or produce inappropriate content. The platform must not expose personally identifiable information (PII) in the compositions. The solution must integrate with the company's existing Amazon S3 storage workflow. Which solution will meet these requirements with the LEAST infrastructure management overhead?",
     "en_opts": {
       "A": "Enable the Enhanced Monitoring tool. Use an Amazon CloudWatch alarm to filter traffic to the platform. Use Amazon Comprehend PII detection to pre-process the data. Create a CloudWatch alarm to monitor for Amazon Comprehend PII detection events. Create an AWS Step Functions workflow that includes an Amazon Rekognition image moderation step.",
@@ -831,7 +831,7 @@ window.AIP_QUESTIONS = [
       "D": "Amazon Q Developer 커스터마이제이션을 생성하고 승인된 데이터 소스를 포함합니다. 개발자들이 이 커스터마이제이션을 사용하여 애플리케이션을 개발하도록 보장합니다."
     },
     "answer": "D",
-    "explanation": "정답 D는 Amazon Q Developer 커스터마이제이션 기능을 활용하여 조직 전체에 일관된 승인된 리소스를 배포합니다. 커스터마이제이션은 프로젝트 수준의 변경 없이 조직 수준에서 라이브러리, 알고리즘, 코드 스타일을 정의합니다. 개발자 팀이 이 커스터마이제이션을 사용하면 모든 제안이 승인된 리소스에 기반합니다. A는 Git 리포지토리를 프로젝트에 로컬 포함시켜야 하므로 프로젝트 수준 수정이 필요하고, B와 C는 폴더 이름 컨벤션에 의존하지만 Amazon Q Developer의 공식 커스터마이제이션 메커니즘이 아닙니다. D는 조직 차원의 정책을 모든 프로젝트에 자동 적용하므로 확장성과 유지보수 측면에서 우수합니다.",
+    "explanation": "정답 D는 Amazon Q Developer 커스터마이제이션 기능을 활용하여 조직 전체에 일관된 승인된 리소스를 배포합니다.\n\n커스터마이제이션은 프로젝트 수준의 변경 없이 조직 수준에서 라이브러리, 알고리즘, 코드 스타일을 정의합니다.\n\n개발자 팀이 이 커스터마이제이션을 사용하면 모든 제안이 승인된 리소스에 기반합니다.\n\nA는 Git 리포지토리를 프로젝트에 로컬 포함시켜야 하므로 프로젝트 수준 수정이 필요하고, B와 C는 폴더 이름 컨벤션에 의존하지만 Amazon Q Developer의 공식 커스터마이제이션 메커니즘이 아닙니다.\n\nD는 조직 차원의 정책을 모든 프로젝트에 자동 적용하므로 확장성과 유지보수 측면에서 우수합니다.",
     "en_q": "A company has set up Amazon Q Developer Pro licenses for all developers at the company. The company maintains a list of approved resources that developers must use when developing applications. The approved resources include internal libraries, proprietary algorithmic techniques, and sample code with approved styling. A new team of developers is using Amazon Q Developer to develop a new Java-based application. The company must ensure that the new developer team uses the company's approved resources. The company does not want to make project-level modifications. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Create a Git repository that contains all of the approved internal libraries, algorithms, and code samples. Include this Git repository in the application project locally as part of the workspace. Ensure that the developers use the @workspace context to retrieve suggestions from the Git repository.",
@@ -851,7 +851,7 @@ window.AIP_QUESTIONS = [
       "D": "AWS Lambda 함수를 사용하여 사용자 정의 프롬프트 라우팅 메커니즘으로 요청을 전처리합니다. 자주 묻는 질문을 처리하기 위해 Amazon DynamoDB를 캐싱 계층으로 사용합니다."
     },
     "answer": "A",
-    "explanation": "정답 A는 프롬프트 캐싱(prompt caching)을 활용하여 가장 비용 효율적인 솔루션을 제공합니다. 프롬프트 캐싱은 시스템 프롬프트, 문맥, 또는 반복되는 입력을 캐시하여 토큰 비용을 크게 절감합니다. 40%의 유사한 문의는 캐시된 프롬프트를 재사용함으로써 API 비용을 감소시킵니다. 지연시간 최적화 설정은 추론 성능을 향상시킵니다. B는 피크 시간대를 위해 프로비저닝된 처리량을 구매하므로 고정 비용이 높고, ElastiCache는 추가 관리 오버헤드를 증가시킵니다. C는 Agents와 지식 기반 설정으로 복잡도가 높으며, D는 Lambda와 DynamoDB로 인한 추가 비용이 발생합니다. 프롬프트 캐싱은 Bedrock 내장 기능으로서 비용 절감과 성능 향상을 동시에 달성합니다.",
+    "explanation": "정답 A는 프롬프트 캐싱(prompt caching)을 활용하여 가장 비용 효율적인 솔루션을 제공합니다.\n\n프롬프트 캐싱은 시스템 프롬프트, 문맥, 또는 반복되는 입력을 캐시하여 토큰 비용을 크게 절감합니다.\n\n40%의 유사한 문의는 캐시된 프롬프트를 재사용함으로써 API 비용을 감소시킵니다.\n\n지연시간 최적화 설정은 추론 성능을 향상시킵니다.\n\nB는 피크 시간대를 위해 프로비저닝된 처리량을 구매하므로 고정 비용이 높고, ElastiCache는 추가 관리 오버헤드를 증가시킵니다.\n\nC는 Agents와 지식 기반 설정으로 복잡도가 높으며, D는 Lambda와 DynamoDB로 인한 추가 비용이 발생합니다.\n\n프롬프트 캐싱은 Bedrock 내장 기능으로서 비용 절감과 성능 향상을 동시에 달성합니다.",
     "en_q": "An ecommerce company is using Amazon Bedrock to build a customer service AI assistant. The AI assistant needs to process over 50,000 customer inquiries every day. The AI assistant occasionally experiences traffic spikes of up to 150,000 inquiries every day during promotional events. Analysis shows that 40% of inquiries follow similar patterns that share the same context. A GenAI developer must design a solution that will ensure low latency and consistent performance for the AI assistant during traffic spikes. Which solution will meet these requirements MOST cost-effectively?",
     "en_opts": {
       "A": "Configure latency-optimized inference by setting the latency parameter to optimized in the performance configuration of the request to Amazon Bedrock. Use prompt caching to handle the repetitive inquiries.",
@@ -871,7 +871,7 @@ window.AIP_QUESTIONS = [
       "D": "OpenSearch Service에서 Amazon DynamoDB로 마이그레이션합니다. 법적 개념의 빠른 조회를 위해 키워드 기반 인덱스를 구현합니다."
     },
     "answer": "C",
-    "explanation": "정답 C는 의미론적 청킹(semantic chunking)을 도입하여 RAG 성능의 근본 원인을 해결합니다. 고정 토큰 청킹으로 인해 법적 주장이 분할되면 검색 관련성이 떨어지고 LLM이 완전한 문맥 없이 응답합니다. 의미론적 경계(완전한 조항, 섹션, 주장)에 따라 청킹하면 각 벡터가 의미적으로 완전한 단위를 나타내므로 검색 정확도가 향상됩니다. 이는 p95 지연시간을 줄이고 생성 품질을 개선합니다. A는 고차원 벡터로 저장 공간과 검색 복잡도를 증가시키므로 역효과입니다. B는 정적 요약으로 동적 쿼리 대응이 불가능하고, D는 벡터 검색의 이점을 포기합니다. 의미론적 청킹은 검색 품질과 성능을 동시에 개선하는 핵심 RAG 최적화입니다.",
+    "explanation": "정답 C는 의미론적 청킹(semantic chunking)을 도입하여 RAG 성능의 근본 원인을 해결합니다.\n\n고정 토큰 청킹으로 인해 법적 주장이 분할되면 검색 관련성이 떨어지고 LLM이 완전한 문맥 없이 응답합니다.\n\n의미론적 경계(완전한 조항, 섹션, 주장)에 따라 청킹하면 각 벡터가 의미적으로 완전한 단위를 나타내므로 검색 정확도가 향상됩니다.\n\n이는 p95 지연시간을 줄이고 생성 품질을 개선합니다.\n\nA는 고차원 벡터로 저장 공간과 검색 복잡도를 증가시키므로 역효과입니다.\n\nB는 정적 요약으로 동적 쿼리 대응이 불가능하고, D는 벡터 검색의 이점을 포기합니다.\n\n의미론적 청킹은 검색 품질과 성능을 동시에 개선하는 핵심 RAG 최적화입니다.",
     "en_q": "A legal research company has a Retrieval Augmented Generation (RAG) application that uses Amazon Bedrock and Amazon OpenSearch Service. The application stores 768-dimensional vector embeddings for 15 million legal documents, including statutes, court rulings, and case summaries. The company's current chunking strategy segments text into fixed-length blocks of 500 tokens. The current chunking strategy often splits contextually linked information such as legal arguments, court opinions, or statute references across separate chunks. Researchers report that generated outputs frequently omit key context or cite outdated legal information. Recent application logs show a 40% increase in response times. The p95 latency metric exceeds 2 seconds. The company expects storage needs for the application to grow from 90 GB to 360 GB within a year. The company needs a solution to improve retrieval relevance and system performance at scale. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Increase the embedding vector dimensionality from 768 to 4,096 without changing the existing chunking or pre-processing strategy.",
@@ -891,7 +891,7 @@ window.AIP_QUESTIONS = [
       "D": "AWS Lambda 함수를 사용하여 Amazon Bedrock 추론 API를 호출합니다. 명확화 단계를 조율하기 위해 Amazon SQS 큐를 사용합니다. 대화 기록을 Amazon ElastiCache(Redis OSS) 클러스터에 저장합니다. 저장 시 암호화를 구성합니다."
     },
     "answer": "B",
-    "explanation": "정답 B는 AWS Step Functions Standard 워크플로우로 대화 흐름의 상태를 관리하고 DynamoDB로 확장성 있는 저장소를 제공합니다. Step Functions Standard는 장기 실행되는 워크플로우와 콜백 대기를 지원하므로 사용자의 명확화 입력을 기다릴 수 있습니다. DynamoDB는 온디맨드 용량 모드로 수천 개의 동시 세션을 처리하면서 비용을 최소화합니다. 서버 측 암호화는 저장된 대화를 보호합니다. A는 Express 워크플로우로 상태 저장이 제한되고, C는 S3에 개별 JSON 파일 저장으로 조회 성능이 떨어지며, D는 ElastiCache 메모리 제약과 상태 관리의 복잡성이 있습니다. Step Functions는 대화 상태 머신 패턴의 표준 솔루션입니다.",
+    "explanation": "정답 B는 AWS Step Functions Standard 워크플로우로 대화 흐름의 상태를 관리하고 DynamoDB로 확장성 있는 저장소를 제공합니다.\n\nStep Functions Standard는 장기 실행되는 워크플로우와 콜백 대기를 지원하므로 사용자의 명확화 입력을 기다릴 수 있습니다.\n\nDynamoDB는 온디맨드 용량 모드로 수천 개의 동시 세션을 처리하면서 비용을 최소화합니다.\n\n서버 측 암호화는 저장된 대화를 보호합니다.\n\nA는 Express 워크플로우로 상태 저장이 제한되고, C는 S3에 개별 JSON 파일 저장으로 조회 성능이 떨어지며, D는 ElastiCache 메모리 제약과 상태 관리의 복잡성이 있습니다.\n\nStep Functions는 대화 상태 머신 패턴의 표준 솔루션입니다.",
     "en_q": "A company is developing a generative AI (GenAI)-powered customer support application that uses Amazon Bedrock foundation models (FMs). The application must maintain conversational context across multiple interactions with the same user. The application must run clarification workflows to handle ambiguous user queries. The company must store encrypted records of each user conversation to use for personalization. The application must be able to handle thousands of concurrent users while responding to each user quickly. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Use an AWS Step Functions Express workflow to orchestrate conversation flow. Invoke AWS Lambda functions to run clarification logic. Store conversation history in Amazon RDS and use session IDs as the primary key.",
@@ -911,7 +911,7 @@ window.AIP_QUESTIONS = [
       "D": "데이터 전처리 작업을 조율하기 위해 AWS Step Functions 워크플로우를 생성합니다. Amazon EC2 인스턴스에서 사용자 정의 코드를 실행하여 데이터를 처리합니다. Amazon SageMaker Model Monitor를 사용하여 데이터 품질을 모니터링합니다. 처리된 데이터를 Amazon Bedrock에 로드합니다."
     },
     "answer": "B",
-    "explanation": "정답 B는 AWS Glue를 통합 데이터 전처리 플랫폼으로 활용하여 최소 개발 노력을 제공합니다. AWS Glue 크롤러는 S3 데이터를 자동으로 카탈로그하고, Glue ETL 작업은 PySpark/Scala로 확장 가능한 변환을 실행하며, AWS Glue Data Quality는 내장 규칙으로 데이터 검증과 모니터링을 제공합니다. 이 모든 기능이 통합되어 있어 별도 도구 구성이 최소화됩니다. A는 Data Wrangler로 시각적 설계는 가능하지만 복잡한 청킹 로직에는 부족하고, C는 Comprehend(엔티티만), Lambda, Athena를 분산 관리해야 하며, D는 EC2 인스턴스 관리와 SageMaker Model Monitor 설정으로 오버헤드가 큽니다. Glue는 데이터 카탈로깅, 변환, 품질 검증의 일관된 workflow를 제공합니다.",
+    "explanation": "정답 B는 AWS Glue를 통합 데이터 전처리 플랫폼으로 활용하여 최소 개발 노력을 제공합니다.\n\nAWS Glue 크롤러는 S3 데이터를 자동으로 카탈로그하고, Glue ETL 작업은 PySpark/Scala로 확장 가능한 변환을 실행하며, AWS Glue Data Quality는 내장 규칙으로 데이터 검증과 모니터링을 제공합니다.\n\n이 모든 기능이 통합되어 있어 별도 도구 구성이 최소화됩니다.\n\nA는 Data Wrangler로 시각적 설계는 가능하지만 복잡한 청킹 로직에는 부족하고, C는 Comprehend(엔티티만), Lambda, Athena를 분산 관리해야 하며, D는 EC2 인스턴스 관리와 SageMaker Model Monitor 설정으로 오버헤드가 큽니다.\n\nGlue는 데이터 카탈로깅, 변환, 품질 검증의 일관된 workflow를 제공합니다.",
     "en_q": "A financial services company needs to pre-process unstructured data such as customer transcripts, financial reports, and documentation. The company stores the unstructured data in Amazon S3 to support an Amazon Bedrock application. The company must validate data quality, create auditable metadata, monitor data metrics, and customize text chunking to optimize foundation model (FM) performance. Which solution will meet these requirements with the LEAST development effort?",
     "en_opts": {
       "A": "Use Amazon SageMaker Data Wrangler to create a data flow. Configure Amazon CloudWatch metrics and alarms to monitor data quality. Use a custom AWS Lambda function to pre-process the data. Load processed data into Amazon Bedrock.",
@@ -931,7 +931,7 @@ window.AIP_QUESTIONS = [
       "D": "Amazon Q Business 인덱스로 마이그레이션하여 검색 중 구조화된 메타데이터 필터링과 문서 분류를 수행합니다."
     },
     "answer": "C",
-    "explanation": "정답 C는 Amazon Bedrock 지식 기반의 메타데이터 필터링 기능을 활용하여 최소 아키텍처 변경으로 검색 정확도를 개선합니다. S3 객체 메타데이터(날짜, 콘텐츠 유형, 카테고리 등)를 인덱싱하면 벡터 검색 범위를 제한할 수 있습니다. 예를 들어 '긴급 뉴스' 필터와 '최근 7일' 날짜 필터를 적용하면 평가할 문서 수를 대폭 감소시킵니다. 이는 기존 Bedrock 지식 기반 내에서 구성만으로 가능하므로 아키텍처 변경이 최소화됩니다. A는 도메인 모델 재훈련으로 비용과 시간이 많이 들고, B는 완전한 마이그레이션이 필요하며, D는 Amazon Q Business로 전환하는 큰 변경입니다. 메타데이터 필터링은 Bedrock 지식 기반의 native 기능입니다.",
+    "explanation": "정답 C는 Amazon Bedrock 지식 기반의 메타데이터 필터링 기능을 활용하여 최소 아키텍처 변경으로 검색 정확도를 개선합니다.\n\nS3 객체 메타데이터(날짜, 콘텐츠 유형, 카테고리 등)를 인덱싱하면 벡터 검색 범위를 제한할 수 있습니다.\n\n예를 들어 '긴급 뉴스' 필터와 '최근 7일' 날짜 필터를 적용하면 평가할 문서 수를 대폭 감소시킵니다.\n\n이는 기존 Bedrock 지식 기반 내에서 구성만으로 가능하므로 아키텍처 변경이 최소화됩니다.\n\nA는 도메인 모델 재훈련으로 비용과 시간이 많이 들고, B는 완전한 마이그레이션이 필요하며, D는 Amazon Q Business로 전환하는 큰 변경입니다.\n\n메타데이터 필터링은 Bedrock 지식 기반의 native 기능입니다.",
     "en_q": "A company uses Amazon Bedrock to build a Retrieval Augmented Generation (RAG) system. The RAG system uses an Amazon Bedrock knowledge base that is based on an Amazon S3 bucket as the data source for emergency news video content. The system retrieves transcripts, archived reports, and related documents from the S3 bucket. The RAG system uses state-of-the-art embedding models and a high-performing retrieval setup. However, users report slow responses and irrelevant results, which cause decreased user satisfaction. The company notices that vector searches are evaluating too many documents across too many content types and over long periods of time. The company determines that the underlying models will not benefit from additional fine tuning. The company must improve retrieval accuracy by applying smarter constraints. The company wants a solution that requires minimal changes to the existing architecture. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Enhance embeddings by using a domain-adapted model that is specifically trained on emergency news content for improved vector similarity.",
@@ -951,7 +951,7 @@ window.AIP_QUESTIONS = [
       "D": "Inverted File with Flat Compression(IVFFlat) 인덱스와 높은 probe 값을 가진 Amazon DocumentDB 클러스터를 시작합니다. 클러스터의 연결을 레플리카 세트로 구성하고 레플리카 인스턴스로 읽기를 분산합니다."
     },
     "answer": "A",
-    "explanation": "정답 A는 작은 데이터셋에 최적화된 솔루션을 제공합니다. Amazon MemoryDB의 Flat 알고리즘은 모든 벡터에 대해 정확한 유사도를 계산하므로 작은 인덱스에서 최고 정확도를 제공합니다. 인덱스 수가 적으면(문제에서 언급) Flat 알고리즘의 O(n) 복잡도도 실제로는 빠릅니다. 수평 확장은 동시 쿼리를 처리합니다. B의 HNSW는 대규모 데이터셋(수백만 벡터)에서 수렴 성능을 보이지만, 수평 확장이 아닌 수직 확장만 언급되어 확장성이 제한됩니다. C와 D의 IVFFlat는 근사 알고리즘으로 정확도가 낮습니다. 작은 전용 데이터셋에서는 Flat 알고리즘으로 정확도와 성능을 모두 달성할 수 있습니다.",
+    "explanation": "정답 A는 작은 데이터셋에 최적화된 솔루션을 제공합니다.\n\nAmazon MemoryDB의 Flat 알고리즘은 모든 벡터에 대해 정확한 유사도를 계산하므로 작은 인덱스에서 최고 정확도를 제공합니다.\n\n인덱스 수가 적으면(문제에서 언급) Flat 알고리즘의 O(n) 복잡도도 실제로는 빠릅니다.\n\n수평 확장은 동시 쿼리를 처리합니다.\n\nB의 HNSW는 대규모 데이터셋(수백만 벡터)에서 수렴 성능을 보이지만, 수평 확장이 아닌 수직 확장만 언급되어 확장성이 제한됩니다.\n\nC와 D의 IVFFlat는 근사 알고리즘으로 정확도가 낮습니다.\n\n작은 전용 데이터셋에서는 Flat 알고리즘으로 정확도와 성능을 모두 달성할 수 있습니다.",
     "en_q": "A financial services company is creating a Retrieval Augmented Generation (RAG) application that uses Amazon Bedrock to generate summaries of market activities. The application relies on a vector database that stores a small proprietary dataset that has a low index count. The application must perform similarity searches. The Amazon Bedrock model's responses must maximize accuracy and maintain high performance. The company needs to configure the vector database and integrate it with the application. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Launch an Amazon MemoryDB cluster and configure the index by using the Flat algorithm. Configure a horizontal scaling policy based on performance metrics.",
@@ -971,7 +971,7 @@ window.AIP_QUESTIONS = [
       "D": "AWS Step Functions를 사용하여 Amazon Comprehend로 PII를 감지하고 Amazon Bedrock으로 임베딩을 생성하는 워크로드를 조율하는 데이터 처리 파이프라인을 구현합니다. Amazon OpenSearch Serverless와 직접 통합하여 벡터를 저장하고 유사도 검색 기능을 제공합니다."
     },
     "answer": "D",
-    "explanation": "정답 D는 AWS Step Functions의 조율 기능으로 최소 운영 오버헤드를 제공합니다. Step Functions는 Amazon Comprehend(PII 감지)와 Amazon Bedrock(임베딩 생성) 단계를 순차적으로 조정하므로 복잡한 병렬 처리 로직을 작성할 필요가 없습니다. Amazon OpenSearch Serverless는 서버 관리 없이 벡터 저장 및 검색을 제공합니다. 50GB 데이터를 4시간에 처리하려면 병렬 처리가 필요하지만, Step Functions는 Lambda 함수 배열 맵을 통해 이를 선언적으로 처리합니다. A는 Lambda 함수 개발과 동시성 튜닝이 필요하고, B는 SageMaker Processing 클러스터 설정이 필요하며, C는 EMR 클러스터 관리 오버헤드가 높습니다. Step Functions + OpenSearch Serverless는 관리형 서비스로서 운영 복잡도가 최소화됩니다.",
+    "explanation": "정답 D는 AWS Step Functions의 조율 기능으로 최소 운영 오버헤드를 제공합니다.\n\nStep Functions는 Amazon Comprehend(PII 감지)와 Amazon Bedrock(임베딩 생성) 단계를 순차적으로 조정하므로 복잡한 병렬 처리 로직을 작성할 필요가 없습니다.\n\nAmazon OpenSearch Serverless는 서버 관리 없이 벡터 저장 및 검색을 제공합니다.\n\n50GB 데이터를 4시간에 처리하려면 병렬 처리가 필요하지만, Step Functions는 Lambda 함수 배열 맵을 통해 이를 선언적으로 처리합니다.\n\nA는 Lambda 함수 개발과 동시성 튜닝이 필요하고, B는 SageMaker Processing 클러스터 설정이 필요하며, C는 EMR 클러스터 관리 오버헤드가 높습니다.\n\nStep Functions + OpenSearch Serverless는 관리형 서비스로서 운영 복잡도가 최소화됩니다.",
     "en_q": "A GenAI developer is building a Retrieval Augmented Generation (RAG)-based customer support application that uses Amazon Bedrock foundation models (FMs). The application needs to process 50 GB of historical customer conversations that are stored in an Amazon S3 bucket as JSON files. The application must use the processed data as its retrieval corpus. The application's data processing workflow must extract relevant data from customer support documents, remove customer personally identifiable information (PII), and generate embeddings for vector storage. The processing workflow must be cost-effective and must finish within 4 hours. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Use AWS Lambda and Amazon Comprehend to process files in parallel, remove PII, and call Amazon Bedrock APIs to generate vectors. Configure Lambda concurrency limits and memory settings to optimize throughput.",
@@ -991,7 +991,7 @@ window.AIP_QUESTIONS = [
       "D": "모델 구성을 저장하기 위해 Amazon ElastiCache(Redis OSS) 클러스터를 생성합니다. 짧은 TTL 값을 설정합니다. Lambda 함수에서 사용자 정의 검증 로직을 실행합니다. Amazon CloudWatch 메트릭을 사용하여 구성 사용량을 모니터링합니다."
     },
     "answer": "C",
-    "explanation": "정답 C는 AWS AppConfig의 종합적인 구성 관리 기능을 활용합니다. AppConfig는 기능 플래그로 A/B 테스트와 카나리 배포를 지원하므로 코드 재배포 없이 모델 또는 매개변수를 전환할 수 있습니다. JSON 스키마 검증은 온도, 최대 토큰 같은 모델 매개변수가 유효한 범위 내에 있는지 배포 전에 확인합니다. AppConfig Agent는 Lambda에서 구성을 로컬 캐싱하여 빠른 액세스를 보장합니다. A는 Parameter Store 폴링과 EventBridge 트리거로 복잡하고, B는 각 요청마다 DynamoDB 쿼리로 지연시간이 증가하며, D는 캐시 일관성 관리와 검증 로직을 수동으로 구현해야 합니다. AppConfig는 고객 계층 기반 동적 라우팅과 A/B 테스트의 표준 솔루션입니다.",
+    "explanation": "정답 C는 AWS AppConfig의 종합적인 구성 관리 기능을 활용합니다.\n\nAppConfig는 기능 플래그로 A/B 테스트와 카나리 배포를 지원하므로 코드 재배포 없이 모델 또는 매개변수를 전환할 수 있습니다.\n\nJSON 스키마 검증은 온도, 최대 토큰 같은 모델 매개변수가 유효한 범위 내에 있는지 배포 전에 확인합니다.\n\nAppConfig Agent는 Lambda에서 구성을 로컬 캐싱하여 빠른 액세스를 보장합니다.\n\nA는 Parameter Store 폴링과 EventBridge 트리거로 복잡하고, B는 각 요청마다 DynamoDB 쿼리로 지연시간이 증가하며, D는 캐시 일관성 관리와 검증 로직을 수동으로 구현해야 합니다.\n\nAppConfig는 고객 계층 기반 동적 라우팅과 A/B 테스트의 표준 솔루션입니다.",
     "en_q": "A financial services company is developing a generative AI (GenAI) application that serves both premium customers and standard customers. The application uses AWS Lambda functions behind an Amazon API Gateway REST API to process requests. The company needs to dynamically switch between AI models based on which customer tier each user belongs to. The company also wants to perform A/B testing for new features without redeploying code. The company needs to validate model parameters like temperature and maximum token limits before applying changes. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Create an AWS Systems Manager Parameter Store parameters for each configuration. Use Lambda functions to poll for parameter updates. Use Amazon EventBridge events to trigger redeployments when configurations change.",
@@ -1011,7 +1011,7 @@ window.AIP_QUESTIONS = [
       "D": "모든 요청에 대해 Amazon S3 버킷을 사용하여 배치 추론을 구현합니다. 여러 지역에서 Amazon SQS를 사용하여 비동기 검색 프로세스를 설정합니다."
     },
     "answer": "B",
-    "explanation": "정답 B는 Amazon Bedrock의 교차 지역 추론 프로필을 활용하여 글로벌 처리량 병목을 해결합니다. 교차 지역 추론 프로필은 여러 AWS 지역의 가용 용량에 따라 요청을 자동으로 분산하므로 단일 지역의 용량 제약을 극복합니다. 토큰 배칭은 여러 요청을 함께 처리하여 모델 호출 오버헤드를 감소시키고 처리량을 증가시킵니다. 이 조합으로 피크 트래픽(30,000 req/hr)을 안정적으로 처리하면서 2초 응답 시간을 유지할 수 있습니다. A는 단일 지역 프로비저닝으로 확장성이 제한되고, C는 Lambda 오토 스케일링이 추론 용량이 아닌 구성 계층만 처리하며, D는 배치 처리로 실시간 응답 요구사항을 충족할 수 없습니다. 교차 지역 추론은 Bedrock의 핵심 확장성 기능입니다.",
+    "explanation": "정답 B는 Amazon Bedrock의 교차 지역 추론 프로필을 활용하여 글로벌 처리량 병목을 해결합니다.\n\n교차 지역 추론 프로필은 여러 AWS 지역의 가용 용량에 따라 요청을 자동으로 분산하므로 단일 지역의 용량 제약을 극복합니다.\n\n토큰 배칭은 여러 요청을 함께 처리하여 모델 호출 오버헤드를 감소시키고 처리량을 증가시킵니다.\n\n이 조합으로 피크 트래픽(30,000 req/hr)을 안정적으로 처리하면서 2초 응답 시간을 유지할 수 있습니다.\n\nA는 단일 지역 프로비저닝으로 확장성이 제한되고, C는 Lambda 오토 스케일링이 추론 용량이 아닌 구성 계층만 처리하며, D는 배치 처리로 실시간 응답 요구사항을 충족할 수 없습니다.\n\n교차 지역 추론은 Bedrock의 핵심 확장성 기능입니다.",
     "en_q": "A company is using Amazon Bedrock and Anthropic Claude 3 Haiku to develop an AI assistant. The AI assistant normally processes 10,000 requests each hour but experiences surges of up 30,000 requests each hour during peak usage periods. The AI assistant must respond within 2 seconds while operating across multiple AWS Regions. The company observes that during peak usage periods, the AI assistant experiences throughput bottlenecks that cause increased latency and occasional request timeouts. The company must resolve the performance issues. Which solution will meet this requirement?",
     "en_opts": {
       "A": "Purchase provisioned throughput and sufficient model units (MUs) in a single Region. Configure the application to retry failed requests with exponential backoff.",
@@ -1031,7 +1031,7 @@ window.AIP_QUESTIONS = [
       "D": "Lambda 레이어를 사용하여 MCP 서버를 호스트합니다. Lambda 레이어를 AI 에이전트 Lambda 함수에 추가합니다. AI 에이전트 솔루션을 구성하여 STDIO 전송을 사용하여 MCP 서버로 요청을 보내도록 합니다. AI 에이전트의 MCP 구성에서 Lambda 레이어 ARN을 명령으로 지정합니다. 사용자 자격증명을 환경 변수로 지정합니다."
     },
     "answer": "C",
-    "explanation": "정답 C는 Amazon API Gateway와 Amazon Cognito를 통합하여 MCP 서버에 대한 보안 액세스를 제공합니다. Lambda 함수는 MCP 서버 로직을 호스트하고, API Gateway는 이를 HTTP 엔드포인트로 노출합니다. Amazon Cognito는 OAuth 2.1을 구현하여 인증 및 권한 부여를 제어합니다. Streamable HTTP 전송은 MCP 클라이언트와 서버 간 양방향 스트리밍 통신을 지원합니다. 따라서 권한이 있는 사용자만 토큰을 통해 MCP 서버에 액세스할 수 있습니다. A는 권한 제어 메커니즘이 없고, B는 STDIO 전송으로 원격 인증이 불가능하며, D는 Lambda 레이어가 배포 단위이므로 런타임 인증을 구현할 수 없습니다. API Gateway + Cognito는 서비스 간 보안 통신의 표준 패턴입니다.",
+    "explanation": "정답 C는 Amazon API Gateway와 Amazon Cognito를 통합하여 MCP 서버에 대한 보안 액세스를 제공합니다.\n\nLambda 함수는 MCP 서버 로직을 호스트하고, API Gateway는 이를 HTTP 엔드포인트로 노출합니다.\n\nAmazon Cognito는 OAuth 2.1을 구현하여 인증 및 권한 부여를 제어합니다.\n\nStreamable HTTP 전송은 MCP 클라이언트와 서버 간 양방향 스트리밍 통신을 지원합니다.\n\n따라서 권한이 있는 사용자만 토큰을 통해 MCP 서버에 액세스할 수 있습니다.\n\nA는 권한 제어 메커니즘이 없고, B는 STDIO 전송으로 원격 인증이 불가능하며, D는 Lambda 레이어가 배포 단위이므로 런타임 인증을 구현할 수 없습니다.\n\nAPI Gateway + Cognito는 서비스 간 보안 통신의 표준 패턴입니다.",
     "en_q": "A company uses AWS Lambda functions to build an AI agent solution. A GenAI developer must set up a Model Context Protocol (MCP) server that accesses user information. The GenAI developer must also configure the AI agent to use the new MCP server. The GenAI developer must ensure that only authorized users can access the MCP server. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Use a Lambda function to host the MCP server. Grant the AI agent Lambda functions permission to invoke the Lambda function that hosts the MCP server. Configure the AI agent's MCP client to invoke the MCP server asynchronously.",
@@ -1051,7 +1051,7 @@ window.AIP_QUESTIONS = [
       "D": "에이전트와 보상 Lambda 함수에 대한 호출을 조율하기 위해 두 번째 Lambda 함수를 생성합니다. 두 번째 Lambda 함수를 실행하는 하나의 작업이 있는 AWS Step Functions 상태 머신을 생성합니다. 작업 단계에 대해 재시도 및 catch 브랜치를 설정합니다."
     },
     "answer": "B",
-    "explanation": "정답 B는 AWS Step Functions를 사용하여 복잡한 멀티 에이전트 워크플로우를 선언적으로 관리합니다. 검색, 추천, 주문 에이전트와 보상 계산 Lambda 함수를 4개의 순차적 작업으로 정의하면, 각 단계의 실패를 독립적으로 처리할 수 있습니다. 각 작업의 재시도 및 catch 브랜치는 일시적 오류 복구와 우아한 성능 저하를 제공합니다. Step Functions는 상태 추적, 타임아웃, 장기 실행 워크플로우를 기본 지원합니다. A는 API Gateway와 Lambda로 기본적인 호출만 가능하고 에러 처리 복잡도가 높으며, C는 각 에이전트의 재시도 로직을 중복으로 관리해야 하고, D는 하나의 Lambda 함수가 모든 조율을 담당하여 오류 처리 세분화가 어렵습니다. Step Functions는 멀티 에이전트 오케스트레이션의 표준 솔루션입니다.",
+    "explanation": "정답 B는 AWS Step Functions를 사용하여 복잡한 멀티 에이전트 워크플로우를 선언적으로 관리합니다.\n\n검색, 추천, 주문 에이전트와 보상 계산 Lambda 함수를 4개의 순차적 작업으로 정의하면, 각 단계의 실패를 독립적으로 처리할 수 있습니다.\n\n각 작업의 재시도 및 catch 브랜치는 일시적 오류 복구와 우아한 성능 저하를 제공합니다.\n\nStep Functions는 상태 추적, 타임아웃, 장기 실행 워크플로우를 기본 지원합니다.\n\nA는 API Gateway와 Lambda로 기본적인 호출만 가능하고 에러 처리 복잡도가 높으며, C는 각 에이전트의 재시도 로직을 중복으로 관리해야 하고, D는 하나의 Lambda 함수가 모든 조율을 담당하여 오류 처리 세분화가 어렵습니다.\n\nStep Functions는 멀티 에이전트 오케스트레이션의 표준 솔루션입니다.",
     "en_q": "A company wants to create an annual rewards program for its customers. The rewards that customers earn vary based on different parameters such as the categories of the items ordered and the customers' purchase history. The company needs a generative AI (GenAI) solution that uses three Amazon Bedrock agents to help customers during online catalog browsing. The agents must use knowledge bases and action groups to handle the search, recommendation, and order modules. The modules must operate sequentially. An AWS Lambda function must calculate estimated rewards for each recommended item. The solution must provide graceful degradation during service disruptions. Which solution will meet these requirements with the MOST operational efficiency?",
     "en_opts": {
       "A": "Define an Amazon API Gateway REST API behind each agent. Create a second Lambda function to orchestrate the calls to the agents and the rewards Lambda function. Configure the second Lambda function with a retry/fallback mechanism.",
@@ -1071,7 +1071,7 @@ window.AIP_QUESTIONS = [
       "D": "단일 액션 그룹이 있는 Amazon Bedrock 에이전트를 생성합니다. S3 버킷에서 통신을 검색하고, 통신을 파싱하며 Amazon Bedrock 모델을 호출하고, 모델 응답을 S3 버킷으로 저장하도록 액션 그룹에 세 개의 AWS Lambda 함수를 구성합니다."
     },
     "answer": "B",
-    "explanation": "정답 B는 AWS Step Functions Express 워크플로우를 사용하여 S3 검색, 파싱, 모델 호출, 응답 저장을 순차적으로 정의합니다. Step Functions는 GetObject와 PutObject의 native S3 통합을 제공하므로 Lambda 함수 작성 없이 서비스를 직접 호출할 수 있습니다. Pass 단계의 내장 함수로 JSON 파싱을 수행합니다. Express 워크플로우는 단기 실행(최대 1시간) 사용 사례에 최적화되었으며, 빠른 응답과 낮은 비용을 제공합니다. A는 Amazon Bedrock Flows가 아직 완성도가 낮고 파싱 표현식과 에이전트의 조합이 복잡하며, C와 D는 에이전트의 액션 그룹으로 외부 시스템 호출과 파싱 로직을 구현해야 해서 비효율적입니다. Step Functions 네이티브 통합은 단순하고 신뢰성 있는 솔루션입니다.",
+    "explanation": "정답 B는 AWS Step Functions Express 워크플로우를 사용하여 S3 검색, 파싱, 모델 호출, 응답 저장을 순차적으로 정의합니다.\n\nStep Functions는 GetObject와 PutObject의 native S3 통합을 제공하므로 Lambda 함수 작성 없이 서비스를 직접 호출할 수 있습니다.\n\nPass 단계의 내장 함수로 JSON 파싱을 수행합니다.\n\nExpress 워크플로우는 단기 실행(최대 1시간) 사용 사례에 최적화되었으며, 빠른 응답과 낮은 비용을 제공합니다.\n\nA는 Amazon Bedrock Flows가 아직 완성도가 낮고 파싱 표현식과 에이전트의 조합이 복잡하며, C와 D는 에이전트의 액션 그룹으로 외부 시스템 호출과 파싱 로직을 구현해야 해서 비효율적입니다.\n\nStep Functions 네이티브 통합은 단순하고 신뢰성 있는 솔루션입니다.",
     "en_q": "A company is creating a workflow to review customer-facing communications before the company sends the communications. The company uses a pre-defined message template to generate the communications and stores the communications in an Amazon S3 bucket. The workflow needs to capture a specific portion from the template and send it to an Amazon Bedrock model. The workflow must store model responses back to the original S3 bucket. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Create a flow in Amazon Bedrock Flows. Configure S3 action nodes at the beginning and end of the flow to retrieve and store the communications and the model responses. In the middle of the flow, configure an expression to parse each communication. Configure an agent step to send the parsed input to the model for review.",
@@ -1091,7 +1091,7 @@ window.AIP_QUESTIONS = [
       "D": "Amazon CloudWatch에서 AI 어시스턴트의 응답 패턴을 모니터링하도록 구성합니다. 잠재적 준수 위반에 대해 CloudWatch 알람을 구성합니다. 플래그된 상호작용을 검토할 인적 평가자 팀을 구성합니다."
     },
     "answer": "B",
-    "explanation": "정답 B는 Amazon Bedrock의 평가 및 guardrails 기능을 활용하여 자동화와 인적 검토를 효율적으로 결합합니다. Amazon Bedrock 평가는 Anthropic Claude Sonnet을 판사 모델로 사용하여 응답의 정확성, 관련성, 대화형 품질을 자동으로 점수화합니다. 사용자 정의 guardrails는 금융 규제 준수 규칙을 정의하고 위반을 자동으로 감지합니다. Amazon A2I는 플래그된 중요한 상호작용(정확도 낮음, 준수 문제 등)을 금융 전문가에게 라우팅하여 비용 효율적인 검토를 제공합니다. A는 완전 수동으로 확장성이 없고, C는 Lex와 정적 데이터베이스로 금융 규제 준수 체계를 구현할 수 없으며, D는 CloudWatch 알람으로 지표 기반 모니터링만 가능하고 응답 품질을 평가하지 않습니다. Amazon Bedrock 평가는 GenAI 애플리케이션의 표준 품질 평가 솔루션입니다.",
+    "explanation": "정답 B는 Amazon Bedrock의 평가 및 guardrails 기능을 활용하여 자동화와 인적 검토를 효율적으로 결합합니다.\n\nAmazon Bedrock 평가는 Anthropic Claude Sonnet을 판사 모델로 사용하여 응답의 정확성, 관련성, 대화형 품질을 자동으로 점수화합니다.\n\n사용자 정의 guardrails는 금융 규제 준수 규칙을 정의하고 위반을 자동으로 감지합니다.\n\nAmazon A2I는 플래그된 중요한 상호작용(정확도 낮음, 준수 문제 등)을 금융 전문가에게 라우팅하여 비용 효율적인 검토를 제공합니다.\n\nA는 완전 수동으로 확장성이 없고, C는 Lex와 정적 데이터베이스로 금융 규제 준수 체계를 구현할 수 없으며, D는 CloudWatch 알람으로 지표 기반 모니터링만 가능하고 응답 품질을 평가하지 않습니다.\n\nAmazon Bedrock 평가는 GenAI 애플리케이션의 표준 품질 평가 솔루션입니다.",
     "en_q": "A financial technology company is using Amazon Bedrock to build an assessment system for the company's customer service AI assistant. The AI assistant must provide financial recommendations that are factually accurate, compliant with financial regulations, and conversationally appropriate. The company needs to combine automated quality evaluations at scale with targeted human reviews of critical interactions. What solution will meet these requirements?",
     "en_opts": {
       "A": "Configure a pipeline in which financial experts manually score all responses for accuracy, compliance, and conversational quality. Use Amazon SageMaker notebooks to analyze results to identify improvement areas.",
@@ -1111,7 +1111,7 @@ window.AIP_QUESTIONS = [
       "D": "각 부서에 대해 병렬로 실행되는 여러 개의 독립적 감독 에이전트를 구현합니다. 각 감독 에이전트에 대해 여러 협력 에이전트를 구성합니다. 모든 에이전트를 동일한 지식 기반과 통합합니다. 외부 라우팅 로직을 사용하여 여러 감독 에이전트의 응답을 병합합니다."
     },
     "answer": "A",
-    "explanation": "정답 A는 감독-협력 에이전트 패턴으로 확장성과 도메인 특화를 달성합니다. 감독 에이전트는 환자의 쿼리를 자연어 분류로 임상, 보험, 예약, 청구 카테고리로 판단합니다. 각 협력 에이전트는 자신의 부서별 지식 기반과 RAG를 통해 전문화된 응답을 제공합니다. 별도의 지식 기반과 IAM 필터링으로 데이터 격리와 접근 제어를 보장합니다. 이 아키텍처는 새로운 부서 추가 시 새 협력 에이전트와 지식 기반만 추가하면 되므로 확장이 용이합니다. B는 부서마다 감독 에이전트를 복제하여 비효율적이고, C는 단일 범용 에이전트로 도메인 특화가 제한되며, D는 모든 에이전트가 동일 지식 기반을 사용하므로 데이터 격리와 특화가 불가능합니다. 계층적 멀티 에이전트 아키텍처는 의료 같은 도메인별 시스템의 표준 패턴입니다.",
+    "explanation": "정답 A는 감독-협력 에이전트 패턴으로 확장성과 도메인 특화를 달성합니다.\n\n감독 에이전트는 환자의 쿼리를 자연어 분류로 임상, 보험, 예약, 청구 카테고리로 판단합니다.\n\n각 협력 에이전트는 자신의 부서별 지식 기반과 RAG를 통해 전문화된 응답을 제공합니다.\n\n별도의 지식 기반과 IAM 필터링으로 데이터 격리와 접근 제어를 보장합니다.\n\n이 아키텍처는 새로운 부서 추가 시 새 협력 에이전트와 지식 기반만 추가하면 되므로 확장이 용이합니다.\n\nB는 부서마다 감독 에이전트를 복제하여 비효율적이고, C는 단일 범용 에이전트로 도메인 특화가 제한되며, D는 모든 에이전트가 동일 지식 기반을 사용하므로 데이터 격리와 특화가 불가능합니다.\n\n계층적 멀티 에이전트 아키텍처는 의료 같은 도메인별 시스템의 표준 패턴입니다.",
     "en_q": "A healthcare company is using Amazon Bedrock to develop a real-time patient care AI assistant to respond to queries for separate departments that handle clinical inquiries, insurance verification, appointment scheduling, and insurance claims. The company wants to use a multi-agent architecture. The company must ensure that the AI assistant is scalable and can onboard new features for patients. The AI assistant must be able to handle thousands of parallel patient interactions. The company must ensure that patients receive appropriate domain-specific responses to queries. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Isolate data for each agent by using separate knowledge bases. Use IAM filtering to control access to each knowledge base. Deploy a supervisor agent to perform natural language intent classification on patient inquiries. Configure the supervisor agent to route queries to specialized collaborator agents to respond to department-specific queries. Configure each specialized collaborator agent to use Retrieval Augmented Generation (RAG) with the agent's department-specific knowledge base.",
@@ -1131,7 +1131,7 @@ window.AIP_QUESTIONS = [
       "D": "프로덕션 환경에 대한 하나의 AWS CDK 애플리케이션을 생성합니다. aws_bedrock.ProvisionedModel.fromProvisionedModelArn() 메서드를 사용하여 Amazon Bedrock FM을 호출하도록 애플리케이션을 구성합니다. AWS CodePipeline에서 파이프라인을 생성합니다. AWS CodeBuild 배포 액션을 사용하여 프로덕션 환경에 배포합니다. 개발 환경의 경우 프로덕션 애플리케이션 코드를 참고하여 수동으로 리소스를 다시 생성합니다."
     },
     "answer": "C",
-    "explanation": "정답 C는 단일 CDK 애플리케이션으로 개발/프로덕션 환경을 관리하면서 FM 선택 유연성을 제공합니다. fromFoundationModelId() 메서드는 FM을 하드코드하지 않고 런타임에 FM ID를 지정할 수 있으므로, CodePipeline의 배포 단계별로 다른 FM을 구성할 수 있습니다. 예를 들어 개발 환경에서는 Claude 3 Haiku, 프로덕션에서는 Claude 3 Sonnet을 테스트할 수 있습니다. 제품 소유자는 코드 재배포 없이 환경 변수 또는 파라미터로 FM을 전환할 수 있습니다. A는 여러 파이프라인으로 관리 복잡도가 높고, B는 각 환경별 CDK 애플리케이션 중복으로 유지보수가 어려우며, D는 개발 환경을 수동 관리해야 합니다. 단일 CDK + 환경별 배포 단계는 IaC의 표준 패턴입니다.",
+    "explanation": "정답 C는 단일 CDK 애플리케이션으로 개발/프로덕션 환경을 관리하면서 FM 선택 유연성을 제공합니다.\n\nfromFoundationModelId() 메서드는 FM을 하드코드하지 않고 런타임에 FM ID를 지정할 수 있으므로, CodePipeline의 배포 단계별로 다른 FM을 구성할 수 있습니다.\n\n예를 들어 개발 환경에서는 Claude 3 Haiku, 프로덕션에서는 Claude 3 Sonnet을 테스트할 수 있습니다.\n\n제품 소유자는 코드 재배포 없이 환경 변수 또는 파라미터로 FM을 전환할 수 있습니다.\n\nA는 여러 파이프라인으로 관리 복잡도가 높고, B는 각 환경별 CDK 애플리케이션 중복으로 유지보수가 어려우며, D는 개발 환경을 수동 관리해야 합니다.\n\n단일 CDK + 환경별 배포 단계는 IaC의 표준 패턴입니다.",
     "en_q": "A company uses an AI assistant application to summarize the company's website content and provide information to customers. The company plans to use Amazon Bedrock to give the application access to a foundation model (FM). The company needs to deploy the AI assistant application to a development environment and a production environment. The solution must integrate the environments with the FM. The company wants to test the effectiveness of various FMs in each environment. The solution must provide product owners with the ability to easily switch between FMs for testing purposes in each environment. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Create one AWS CDK application. Create multiple pipelines in AWS CodePipeline. Configure each pipeline to have its own settings for each FM. Configure the application to invoke the Amazon Bedrock FMs by using the aws_bedrock.ProvisionedModel.fromProvisionedModelArn() method.",
@@ -1151,7 +1151,7 @@ window.AIP_QUESTIONS = [
       "D": "여러 지식 기반을 사용하는 중앙화된 Amazon Bedrock 에이전트를 구축합니다. AWS IAM Identity Center와 호텔별 권한 세트를 구현하여 호텔 직원 데이터 액세스를 제어합니다."
     },
     "answer": "C",
-    "explanation": "정답 C는 멀티 계정 구조로 호텔별 데이터 격리와 액세스 제어를 달성하면서 성능과 실시간성을 보장합니다. 각 호텔마다 별도의 Amazon Bedrock 지식 기반을 AWS 계정에 배포하면, AWS IAM을 통해 호텔별 액세스 제어가 자동으로 이루어집니다. 직접 데이터 수집(direct data ingestion)은 PMS 데이터베이스의 변경을 감지하여 지식 기반을 거의 실시간으로 업데이트합니다. 덜 중요한 정보(예: 호텔 규칙, 서비스)는 정기적 동기화로 비용을 절감합니다. A는 모든 호텔 데이터를 단일 지식 기반에 저장하므로 데이터 격리가 불완전하고, B는 중앙화로 인해 각 호텔의 변경 피드백이 지연될 수 있으며, D는 단일 에이전트와 다중 지식 기반으로 확장성이 제한됩니다. 멀티 계정 + 직접 수집은 엔터프라이즈 멀티테넌트 시스템의 표준 패턴입니다.",
+    "explanation": "정답 C는 멀티 계정 구조로 호텔별 데이터 격리와 액세스 제어를 달성하면서 성능과 실시간성을 보장합니다.\n\n각 호텔마다 별도의 Amazon Bedrock 지식 기반을 AWS 계정에 배포하면, AWS IAM을 통해 호텔별 액세스 제어가 자동으로 이루어집니다.\n\n직접 데이터 수집(direct data ingestion)은 PMS 데이터베이스의 변경을 감지하여 지식 기반을 거의 실시간으로 업데이트합니다.\n\n덜 중요한 정보(예: 호텔 규칙, 서비스)는 정기적 동기화로 비용을 절감합니다.\n\nA는 모든 호텔 데이터를 단일 지식 기반에 저장하므로 데이터 격리가 불완전하고, B는 중앙화로 인해 각 호텔의 변경 피드백이 지연될 수 있으며, D는 단일 에이전트와 다중 지식 기반으로 확장성이 제한됩니다.\n\n멀티 계정 + 직접 수집은 엔터프라이즈 멀티테넌트 시스템의 표준 패턴입니다.",
     "en_q": "A hotel company wants to enhance a legacy Java-based property management system (PMS) by adding AI capabilities. The company wants to use Amazon Bedrock Knowledge Bases to provide staff with room availability information and hotel-specific details. The solution must maintain separate access controls for each hotel that the company manages. The solution must provide room availability information in near real time and must maintain consistent performance during peak usage periods. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Deploy a single Amazon Bedrock knowledge base that contains combined data for all hotels. Configure AWS Lambda functions to synchronize data from each hotel's PMS database through direct API connections. Implement AWS CloudTrail logging with hotel-specific filters to audit access logs for each hotel's data.",
@@ -1171,7 +1171,7 @@ window.AIP_QUESTIONS = [
       "D": "활성 모델 제공자를 Amazon S3에서 호스팅되는 JSON 파일에 저장합니다. AWS AppConfig를 사용하여 S3 파일을 호스팅된 구성 소스로 참조합니다."
     },
     "answer": "B",
-    "explanation": "【핵심 용어】▸ AppConfig — 구성 버전 관리, 점진적 롤아웃, 유효성 검사 및 롤백 지원 ▸ Parameter Store — 정적 값 저장만, 배포 전략 미지원【정답 포인트】▸ AppConfig는 안전한 배포 전략 제공 ▸ 유효성 검사기로 잘못된 구성 배포 방지 ▸ 모니터링 기반 자동 롤백 지원 ▸ Lambda가 런타임에 최신 구성값 동적 읽음【오답 체크】(A) Parameter Store는 버전 관리와 배포 전략 미지원 (C) API Gateway 하드코딩은 구성 변경 시 코드 수정 필요 (D) S3 + AppConfig는 불필요하게 복잡【시험 포인트】동적 구성 전환: AppConfig(권장) vs Parameter Store(제한적)",
+    "explanation": "【핵심 용어】\n▸ AppConfig — 구성 버전 관리, 점진적 롤아웃, 유효성 검사 및 롤백 지원\n▸ Parameter Store — 정적 값 저장만, 배포 전략 미지원\n\n【정답 포인트】\n▸ AppConfig는 안전한 배포 전략 제공\n▸ 유효성 검사기로 잘못된 구성 배포 방지\n▸ 모니터링 기반 자동 롤백 지원\n▸ Lambda가 런타임에 최신 구성값 동적 읽음\n\n【오답 체크】\n(A) Parameter Store는 버전 관리와 배포 전략 미지원\n(C) API Gateway 하드코딩은 구성 변경 시 코드 수정 필요\n(D) S3 + AppConfig는 불필요하게 복잡\n\n【시험 포인트】\n동적 구성 전환: AppConfig(권장) vs Parameter Store(제한적)",
     "en_q": "A company is implementing a serverless inference API by using AWS Lambda. The API will dynamically invoke multiple AI models hosted on Amazon Bedrock. The company needs to design a solution that can switch between model providers without modifying or redeploying Lambda code in real time. The design must include safe rollout of configuration changes and validation and rollback capabilities. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Store the active model provider in AWS Systems Manager Parameter Store. Configure a Lambda function to read the parameter at runtime to determine which model to invoke.",
@@ -1191,7 +1191,7 @@ window.AIP_QUESTIONS = [
       "D": "Amazon Bedrock 클라이언트 요청 타임아웃을 30초로 설정합니다."
     },
     "answer": "B",
-    "explanation": "【핵심 용어】▸ 지수 백오프 지터 — 부하 분산 ▸ 회로 차단기 — 오류율 높을 때 재시도 중단【정답 포인트】▸ 적응형 재시도가 변화하는 서비스 가용성에 대응 ▸ 회로 차단기가 피크 시간에 과부하 방지【시험 포인트】Bedrock 호출 시 적응형 재시도 + 회로 차단기가 핵심",
+    "explanation": "【핵심 용어】\n▸ 지수 백오프 지터 — 부하 분산\n▸ 회로 차단기 — 오류율 높을 때 재시도 중단\n\n【정답 포인트】\n▸ 적응형 재시도가 변화하는 서비스 가용성에 대응\n▸ 회로 차단기가 피크 시간에 과부하 방지\n\n【시험 포인트】\nBedrock 호출 시 적응형 재시도 + 회로 차단기가 핵심",
     "en_q": "A company is building a generative AI (GenAI) application that uses Amazon Bedrock APIs to process complex customer inquiries.",
     "en_opts": {
       "A": "Implement a standard retry strategy with 1-second fixed delay.",
@@ -1211,7 +1211,7 @@ window.AIP_QUESTIONS = [
       "D": "정규 표현식 제어를 사용합니다."
     },
     "answer": "C",
-    "explanation": "【핵심 용어】▸ Bedrock Guardrails — PII 감지, 민감 정보 필터링【정답 포인트】▸ Guardrails은 프롬프트와 응답 모두에서 PII를 자동 감지/필터【시험 포인트】Bedrock Guardrails는 PII 보호의 표준 솔루션",
+    "explanation": "【핵심 용어】\n▸ Bedrock Guardrails — PII 감지, 민감 정보 필터링\n\n【정답 포인트】\n▸ Guardrails은 프롬프트와 응답 모두에서 PII를 자동 감지/필터\n\n【시험 포인트】\nBedrock Guardrails는 PII 보호의 표준 솔루션",
     "en_q": "A bank is developing a generative AI-powered AI assistant.",
     "en_opts": {
       "A": "Use Amazon Macie.",
@@ -1231,7 +1231,7 @@ window.AIP_QUESTIONS = [
       "D": "Amazon S3 버킷에 저장합니다."
     },
     "answer": "A",
-    "explanation": "【핵심 용어】▸ Bedrock Agents — 추적 지원【정답 포인트】▸ 에이전트 추적이 모든 호출 기록【시험 포인트】Bedrock Agents는 투명성과 감사의 기본",
+    "explanation": "【핵심 용어】\n▸ Bedrock Agents — 추적 지원\n\n【정답 포인트】\n▸ 에이전트 추적이 모든 호출 기록\n\n【시험 포인트】\nBedrock Agents는 투명성과 감사의 기본",
     "en_q": "A financial services company is developing a customer service AI assistant application.",
     "en_opts": {
       "A": "Enable tracing for Bedrock agents.",
@@ -1251,7 +1251,7 @@ window.AIP_QUESTIONS = [
       "D": "Amazon Kendra를 구성합니다."
     },
     "answer": "A",
-    "explanation": "【핵심 용어】▸ Amazon Q Business — 엔터프라이즈 검색, 데이터 소유권 보장【정답 포인트】▸ Q Business가 각 고객이 자신의 인덱스 소유권 유지【시험 포인트】Q Business는 다중 고객 안전 위임의 표준",
+    "explanation": "【핵심 용어】\n▸ Amazon Q Business — 엔터프라이즈 검색, 데이터 소유권 보장\n\n【정답 포인트】\n▸ Q Business가 각 고객이 자신의 인덱스 소유권 유지\n\n【시험 포인트】\nQ Business는 다중 고객 안전 위임의 표준",
     "en_q": "Example Corp provides a personalized video generation service.",
     "en_opts": {
       "A": "Set up Amazon Q Business index.",
@@ -1271,7 +1271,7 @@ window.AIP_QUESTIONS = [
       "D": "Amazon OpenSearch + RDS"
     },
     "answer": "B",
-    "explanation": "【핵심 용어】▸ Hybrid Search — 벡터 + 키워드 검색【정답 포인트】▸ 벡터 검색이 의미론적 관계 감지▸ 키워드 검색이 특정 용어 정확히 매칭【시험 포인트】법률 문서 = OpenSearch 하이브리드 + Bedrock 재순위",
+    "explanation": "【핵심 용어】\n▸ Hybrid Search — 벡터 + 키워드 검색\n\n【정답 포인트】\n▸ 벡터 검색이 의미론적 관계 감지\n▸ 키워드 검색이 특정 용어 정확히 매칭\n\n【시험 포인트】\n법률 문서 = OpenSearch 하이브리드 + Bedrock 재순위",
     "en_q": "A company is building a legal research AI assistant.",
     "en_opts": {
       "A": "Bedrock KB with default vector search.",
@@ -1292,7 +1292,7 @@ window.AIP_QUESTIONS = [
       "E": "EventBridge + Firehose + OpenSearch"
     },
     "answer": "BC",
-    "explanation": "【핵심 용어】▸ Logs Insights — 쿼리 기반 분석【정답 포인트】(B) 토큰 소비 상세 분석 + 지속적 모니터링 (C) 네이티브 메트릭 + 경고 기능",
+    "explanation": "【핵심 용어】\n▸ Logs Insights — 쿼리 기반 분석\n\n【정답 포인트】\n(B) 토큰 소비 상세 분석 + 지속적 모니터링\n(C) 네이티브 메트릭 + 경고 기능",
     "en_q": "A company deploys multiple Bedrock applications. (Choose two)",
     "en_opts": {
       "A": "CloudWatch metrics → QuickSight.",
@@ -1314,7 +1314,7 @@ window.AIP_QUESTIONS = [
       "E": "SageMaker JumpStart"
     },
     "answer": "BC",
-    "explanation": "【핵심 용어】▸ SageMaker Neo — 엣지 배포【정답 포인트】(B) 배치 일관된 처리량 (C) 온프레미스 + 클라우드 하이브리드",
+    "explanation": "【핵심 용어】\n▸ SageMaker Neo — 엣지 배포\n\n【정답 포인트】\n(B) 배치 일관된 처리량\n(C) 온프레미스 + 클라우드 하이브리드",
     "en_q": "A company is designing a solution for multiple workloads. (Choose two)",
     "en_opts": {
       "A": "Lambda + SageMaker async.",
@@ -1335,7 +1335,7 @@ window.AIP_QUESTIONS = [
       "D": "공유 설계 문서 + Macie"
     },
     "answer": "B",
-    "explanation": "【핵심 용어】▸ CloudFormation 템플릿 — 코드형 인프라【정답 포인트】▸ 중앙 저장소 버전 관리 ▸ CI/CD + Guard = 자동 배포 + 일관성",
+    "explanation": "【핵심 용어】\n▸ CloudFormation 템플릿 — 코드형 인프라\n\n【정답 포인트】\n▸ 중앙 저장소 버전 관리\n▸ CI/CD + Guard = 자동 배포 + 일관성",
     "en_q": "A company is planning multi-unit deployment.",
     "en_opts": {
       "A": "API Gateway + CloudFormation.",
@@ -1355,7 +1355,7 @@ window.AIP_QUESTIONS = [
       "D": "Bedrock 모델 평가 작업 + 다국어 테스트"
     },
     "answer": "D",
-    "explanation": "【핵심 용어】▸ Model Evaluation Jobs — 병렬 평가【정답 포인트】▸ 15,000+ 대화 병렬 처리 ▸ 45분 이내 완료 ▸ CI/CD 통합으로 자동 차단",
+    "explanation": "【핵심 용어】\n▸ Model Evaluation Jobs — 병렬 평가\n\n【정답 포인트】\n▸ 15,000+ 대화 병렬 처리\n▸ 45분 이내 완료\n▸ CI/CD 통합으로 자동 차단",
     "en_q": "A company upgraded its Bedrock FM.",
     "en_opts": {
       "A": "Distributed traffic simulation.",
@@ -1375,7 +1375,7 @@ window.AIP_QUESTIONS = [
       "D": "S3 + Lambda + 수동 업데이트"
     },
     "answer": "C",
-    "explanation": "【핵심 용어】▸ Anomaly Detection Alarms — 자동 기준선 조정【정답 포인트】▸ 도구별 호출 패턴 자동 추출 ▸ 비정상 패턴 자동 감지 ▸ 트래픽 변화에 자동 조정",
+    "explanation": "【핵심 용어】\n▸ Anomaly Detection Alarms — 자동 기준선 조정\n\n【정답 포인트】\n▸ 도구별 호출 패턴 자동 추출\n▸ 비정상 패턴 자동 감지\n▸ 트래픽 변화에 자동 조정",
     "en_q": "A company develops a GenAI application with token consumption surges.",
     "en_opts": {
       "A": "CloudWatch + static alarms.",
@@ -1395,7 +1395,7 @@ window.AIP_QUESTIONS = [
       "D": "프로비저닝된 처리량 + 애플리케이션 코드 재시도"
     },
     "answer": "B",
-    "explanation": "【핵심 용어】▸ Cross-Region Profiles — 지역별 추론【정답 포인트】▸ 프로필 ID로 지리 코드 지정 ▸ 데이터 거주권 자동 준수 ▸ 자동 페일오버 지원【시험 포인트】Bedrock Profiles = 지역별 규정 준수의 표준",
+    "explanation": "【핵심 용어】\n▸ Cross-Region Profiles — 지역별 추론\n\n【정답 포인트】\n▸ 프로필 ID로 지리 코드 지정\n▸ 데이터 거주권 자동 준수\n▸ 자동 페일오버 지원\n\n【시험 포인트】\nBedrock Profiles = 지역별 규정 준수의 표준",
     "en_q": "A company develops an AI app with cross-Region needs.",
     "en_opts": {
       "A": "Separate Bedrock instances.",
@@ -1415,7 +1415,7 @@ window.AIP_QUESTIONS = [
       "D": "Local Zone + S3 Express"
     },
     "answer": "B",
-    "explanation": "【핵심 용어】▸ Knowledge Bases — RAG 통합【정답 포인트】▸ 각 리전 배포로 저지연 ▸ 각 리전 S3 저장으로 거주권 준수",
+    "explanation": "【핵심 용어】\n▸ Knowledge Bases — RAG 통합\n\n【정답 포인트】\n▸ 각 리전 배포로 저지연\n▸ 각 리전 S3 저장으로 거주권 준수",
     "en_q": "An international company builds RAG-based AI.",
     "en_opts": {
       "A": "Cross-Region + Kendra.",
@@ -1435,7 +1435,7 @@ window.AIP_QUESTIONS = [
       "D": "Converse API + IAM + 메시지 배열"
     },
     "answer": "D",
-    "explanation": "【핵심 용어】▸ Converse API — 다중 턴 관리【정답 포인트】▸ IAM 역할 공통 인증 ▸ 메시지 배열로 컨텍스트 유지 ▸ 네이티브 SDK 간단한 구현",
+    "explanation": "【핵심 용어】\n▸ Converse API — 다중 턴 관리\n\n【정답 포인트】\n▸ IAM 역할 공통 인증\n▸ 메시지 배열로 컨텍스트 유지\n▸ 네이티브 SDK 간단한 구현",
     "en_q": "A company builds financial report GenAI app.",
     "en_opts": {
       "A": "InvokeModel + separate auth.",
@@ -1455,7 +1455,7 @@ window.AIP_QUESTIONS = [
       "D": "호출 로깅 + 모델 버전"
     },
     "answer": "C",
-    "explanation": "【핵심 용어】▸ 크로스 리전 엔드포인트 — 리전 간 부하 분산【정답 포인트】▸ 각 시간대 피크 시간에 부하 분산 ▸ 온디맨드 확장으로 저트래픽 시간 비용 절감",
+    "explanation": "【핵심 용어】\n▸ 크로스 리전 엔드포인트 — 리전 간 부하 분산\n\n【정답 포인트】\n▸ 각 시간대 피크 시간에 부하 분산\n▸ 온디맨드 확장으로 저트래픽 시간 비용 절감",
     "en_q": "A company builds student note summary app.",
     "en_opts": {
       "A": "CloudWatch + provisioned throughput.",
@@ -1475,7 +1475,7 @@ window.AIP_QUESTIONS = [
       "D": "API Gateway HTTP + OAuth"
     },
     "answer": "C",
-    "explanation": "【핵심 용어】▸ Lambda URL — 네이티브 엔드포인트【정답 포인트】▸ Streamable HTTP = MCP 프로토콜 호환 ▸ 최소 운영 오버헤드",
+    "explanation": "【핵심 용어】\n▸ Lambda URL — 네이티브 엔드포인트\n\n【정답 포인트】\n▸ Streamable HTTP = MCP 프로토콜 호환\n▸ 최소 운영 오버헤드",
     "en_q": "A company deploys MCP servers on Lambda.",
     "en_opts": {
       "A": "Lambda Invoke + IAM.",
@@ -1495,7 +1495,7 @@ window.AIP_QUESTIONS = [
       "D": "적응형 재시도 + CloudTrail"
     },
     "answer": "B",
-    "explanation": "【핵심 용어】▸ X-Ray Annotations — FM 특성 추적【정답 포인트】▸ 표준 재시도 + 지수 백오프 = 일시적 오류 처리 ▸ X-Ray = 분산 추적 + Annotations = FM 특성 식별",
+    "explanation": "【핵심 용어】\n▸ X-Ray Annotations — FM 특성 추적\n\n【정답 포인트】\n▸ 표준 재시도 + 지수 백오프 = 일시적 오류 처리\n▸ X-Ray = 분산 추적 + Annotations = FM 특성 식별",
     "en_q": "A company has Bedrock app failures.",
     "en_opts": {
       "A": "Fixed delay + alarms.",
@@ -1515,7 +1515,7 @@ window.AIP_QUESTIONS = [
       "D": "CloudTrail Insights + Macie"
     },
     "answer": "B",
-    "explanation": "【핵심 용어】▸ CloudTrail Lake — 중앙 감사【정답 포인트】▸ ABAC = 세밀한 접근 제어 ▸ 3계층 감사 = CloudTrail + S3 + CloudWatch",
+    "explanation": "【핵심 용어】\n▸ CloudTrail Lake — 중앙 감사\n\n【정답 포인트】\n▸ ABAC = 세밀한 접근 제어\n▸ 3계층 감사 = CloudTrail + S3 + CloudWatch",
     "en_q": "A company builds video analysis platform.",
     "en_opts": {
       "A": "VPC + Guardrails.",
@@ -1535,7 +1535,7 @@ window.AIP_QUESTIONS = [
       "D": "Step Functions Standard + SageMaker Pipelines"
     },
     "answer": "D",
-    "explanation": "【핵심 용어】▸ Step Functions Standard — 장기 실행 워크플로우【정답 포인트】▸ Lambda 이벤트 감지 → SageMaker Pipelines 실행 ▸ 상태 추적 가능한 완전 자동화",
+    "explanation": "【핵심 용어】\n▸ Step Functions Standard — 장기 실행 워크플로우\n\n【정답 포인트】\n▸ Lambda 이벤트 감지 → SageMaker Pipelines 실행\n▸ 상태 추적 가능한 완전 자동화",
     "en_q": "Insurance company auto-retrains on S3 upload.",
     "en_opts": {
       "A": "Glue + endpoint.",
@@ -1555,7 +1555,7 @@ window.AIP_QUESTIONS = [
       "D": "검색 품질을 평가하는 여러 검색 전용 평가 작업을 사용하는 파이프라인을 설정합니다. Amazon Nova Pro를 LLM-as-a-judge 모델로 사용하는 두 FM에 대한 별도의 평가 작업을 생성합니다. 충실성 및 인용 정확도 메트릭을 기반으로 평가합니다."
     },
     "answer": "B",
-    "explanation": "이 문제는 Amazon Bedrock의 평가 기능을 통한 RAG 시스템 최적화를 다룹니다. 정답 B는 검색-생성 평가 작업(retrieve-and-generate evaluation job)을 사용하여 청킹 전략과 FM 품질을 동시에 검증합니다. LLM-as-a-judge 메트릭(1-5 척도)은 생성된 응답의 품질을 정량화하며, Claude Sonnet을 평가기로 사용하면 신뢰성 있는 평가가 가능합니다. 평가 데이터셋에 각 청킹 전략을 포함하면 어떤 전략이 최적인지 비교할 수 있습니다. A는 검색만 평가하므로 생성 품질을 놓치고, C는 수동 검토로 확장성이 떨어지며, D는 Amazon Nova Pro가 평가기로 적합하지 않습니다. AIP-C01 시험의 핵심은 Bedrock의 평가 자동화와 메트릭 선택 이해입니다.",
+    "explanation": "이 문제는 Amazon Bedrock의 평가 기능을 통한 RAG 시스템 최적화를 다룹니다.\n\n정답 B는 검색-생성 평가 작업(retrieve-and-generate evaluation job)을 사용하여 청킹 전략과 FM 품질을 동시에 검증합니다.\n\nLLM-as-a-judge 메트릭(1-5 척도)은 생성된 응답의 품질을 정량화하며, Claude Sonnet을 평가기로 사용하면 신뢰성 있는 평가가 가능합니다.\n\n평가 데이터셋에 각 청킹 전략을 포함하면 어떤 전략이 최적인지 비교할 수 있습니다.\n\nA는 검색만 평가하므로 생성 품질을 놓치고, C는 수동 검토로 확장성이 떨어지며, D는 Amazon Nova Pro가 평가기로 적합하지 않습니다.\n\nAIP-C01 시험의 핵심은 Bedrock의 평가 자동화와 메트릭 선택 이해입니다.",
     "en_q": "A company uses Amazon Bedrock to implement a Retrieval Augmented Generation (RAG)-based system to serve medical information to users. The company needs to compare multiple chunking strategies, evaluate the generation quality of two foundation models (FMs), and enforce quality thresholds for deployment. Which Amazon Bedrock evaluation configuration will meet these requirements?",
     "en_opts": {
       "A": "Create a retrieve-only evaluation job that uses a supported version of Anthropic Claude Sonnet as the evaluator model. Configure metrics for context relevance and context coverage. Define deployment thresholds in a separate CI/CD pipeline.",
@@ -1575,7 +1575,7 @@ window.AIP_QUESTIONS = [
       "D": "Amazon Q Business를 구성하여 Amazon S3, Amazon Kinesis, Amazon SageMaker Feature Store에서 데이터를 연합합니다. Amazon EventBridge를 구성하여 데이터 수집 작업을 호출합니다. 사용자에게 반환하기 전에 윤리적 규정 준수를 위해 대형 언어 모델(LLM) 출력을 필터링하는 사용자 정의 AWS Lambda 함수를 사용합니다."
     },
     "answer": "B",
-    "explanation": "멀티모달 데이터 처리와 안전성 제어가 핵심입니다. 정답 B는 세 가지 요구사항을 모두 충족합니다: (1) SageMaker Processing과 Transcribe로 비디오, 오디오, 센서 데이터를 전처리하고 요약 생성, (2) RAG 지식 기반으로 정보 접근 제한 및 할루시네이션 방지, (3) Bedrock guardrails로 추측성 출력 차단, (4) AppConfig로 중앙 집중식 프롬프트 관리, (5) CloudTrail로 감시 로깅. A는 전처리 없이 원본 데이터를 사용하고 보안정책 미적용, C는 추측성 필터링 메커니즘 부재, D는 Amazon Q Business가 멀티모달 데이터 처리에 최적화되지 않았습니다. Bedrock guardrails와 RAG 아키텍처의 조합이 AIP-C01에서 자주 출제됩니다.",
+    "explanation": "멀티모달 데이터 처리와 안전성 제어가 핵심입니다.\n\n정답 B는 세 가지 요구사항을 모두 충족합니다: (1) SageMaker Processing과 Transcribe로 비디오, 오디오, 센서 데이터를 전처리하고 요약 생성, (2) RAG 지식 기반으로 정보 접근 제한 및 할루시네이션 방지, (3) Bedrock guardrails로 추측성 출력 차단, (4) AppConfig로 중앙 집중식 프롬프트 관리, (5) CloudTrail로 감시 로깅. A는 전처리 없이 원본 데이터를 사용하고 보안정책 미적용, C는 추측성 필터링 메커니즘 부재, D는 Amazon Q Business가 멀티모달 데이터 처리에 최적화되지 않았습니다.\n\nBedrock guardrails와 RAG 아키텍처의 조합이 AIP-C01에서 자주 출제됩니다.",
     "en_q": "A wildlife conservation agency operates zoos globally. The agency uses various sensors, trackers, and audiovisual recorders to monitor animal behavior. The agency wants to launch a generative AI (GenAI) assistant that can ingest multimodal data to study animal behavior. The GenAI assistant must support natural language queries, avoid speculative behavioral interpretations, and maintain audit logs for ethical research audits. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Ingest raw videos into Amazon Rekognition to detect animal postures and expressions. Use Amazon Data Firehose to stream sensor and GPS data into an Amazon S3 data lake. Prompt an Amazon Bedrock foundation model (FM) by using basic templates that are stored in AWS Systems Manager Parameter Store. Use IAM policies to control access. Use AWS CloudTrail for audit logging.",
@@ -1596,7 +1596,7 @@ window.AIP_QUESTIONS = [
       "E": "마스킹 필터링 정책이 있는 사용자 정의 Amazon Bedrock 보안정책을 생성합니다. Stack Sets를 사용하여 조직의 각 계정에 보안정책을 배포합니다."
     },
     "answer": "BD",
-    "explanation": "AWS Organizations 환경에서 다중 계정 거버넌스와 Bedrock 보안정책 시행을 다룹니다. 정답은 B와 D의 조합입니다. B는 SCP를 사용하여 조직 수준에서 모든 계정의 직원들이 보안정책 식별자를 명시적으로 지정하도록 강제합니다(정책 강제). D는 차단 필터링 정책을 가진 사용자 정의 보안정책을 CloudFormation Stack Sets로 모든 계정에 배포하여 구체적인 콘텐츠 필터링을 구현합니다. A는 권한 경계와 SCP의 조합이지만 보안정책 배포 메커니즘이 없고, C는 두 가지 개념을 섞어서 설계 일관성이 떨어집니다. E는 마스킹(redaction)인데 시험의 요구사항은 '방지'이므로 차단이 더 적절합니다. 다중 선택 문제로서 조직 수준 통제(B)와 계정 수준 배포(D)의 이중 전략이 핵심입니다.",
+    "explanation": "AWS Organizations 환경에서 다중 계정 거버넌스와 Bedrock 보안정책 시행을 다룹니다.\n\n정답은 B와 D의 조합입니다.\n\nB는 SCP를 사용하여 조직 수준에서 모든 계정의 직원들이 보안정책 식별자를 명시적으로 지정하도록 강제합니다(정책 강제). D는 차단 필터링 정책을 가진 사용자 정의 보안정책을 CloudFormation Stack Sets로 모든 계정에 배포하여 구체적인 콘텐츠 필터링을 구현합니다.\n\nA는 권한 경계와 SCP의 조합이지만 보안정책 배포 메커니즘이 없고, C는 두 가지 개념을 섞어서 설계 일관성이 떨어집니다.\n\nE는 마스킹(redaction)인데 시험의 요구사항은 '방지'이므로 차단이 더 적절합니다.\n\n다중 선택 문제로서 조직 수준 통제(B)와 계정 수준 배포(D)의 이중 전략이 핵심입니다.",
     "en_q": "A company uses an organization in AWS Organizations with all features enabled to manage multiple AWS accounts. Employees use Amazon Bedrock across multiple accounts. The company must prevent specific topics and proprietary information from being included in prompts to Amazon Bedrock models. The company must ensure that employees can use only approved Amazon Bedrock models. The company centrally manages IAM roles for employees. Which combination of solutions will meet these requirements? (Choose two.)",
     "en_opts": {
       "A": "Create an IAM permissions boundary for each employee's IAM role. Configure the permissions boundary to require an approved Amazon Bedrock guardrail identifier to invoke Amazon Bedrock models. Create an SCP that allows employees to use only approved models.",
@@ -1617,7 +1617,7 @@ window.AIP_QUESTIONS = [
       "D": "Amazon API Gateway REST API를 Amazon Bedrock을 호출하는 AWS Lambda 함수와 통합합니다. Lambda 응답 스트리밍을 사용하여 응답을 스트리밍합니다. Lambda 함수 내에서 토큰 제한을 적용합니다. Lambda 및 API Gateway 타임아웃 구성을 사용하여 재시도 로직을 구현합니다."
     },
     "answer": "A",
-    "explanation": "Bedrock 기반 API의 스트리밍, 토큰 관리, 재시도 로직을 통합적으로 다룹니다. 정답 A는 HTTP API(REST API보다 저가이고 더 빠름), Lambda 응답 스트리밍(진정한 스트리밍 지원), 토큰 제한(Lambda에서 요청 전에 검증), 재시도 로직(Lambda와 API Gateway 타임아웃 조합)으로 모든 요구사항을 충족합니다. B는 클라이언트 측 폴링은 실제 스트리밍이 아니고 프론트엔드 토큰 제한은 보안 취약점, C는 ECS 관리 오버헤드가 크고 Bedrock 직접 사용보다 복잡, D는 REST API가 HTTP API보다 더 무겁습니다. AIP-C01에서는 'LEAST operational overhead'라는 표현이 나올 때 관리형 서비스 우선(Bedrock, Lambda) > 자체 관리(ECS, EC2)를 기억해야 합니다.",
+    "explanation": "Bedrock 기반 API의 스트리밍, 토큰 관리, 재시도 로직을 통합적으로 다룹니다.\n\n정답 A는 HTTP API(REST API보다 저가이고 더 빠름), Lambda 응답 스트리밍(진정한 스트리밍 지원), 토큰 제한(Lambda에서 요청 전에 검증), 재시도 로직(Lambda와 API Gateway 타임아웃 조합)으로 모든 요구사항을 충족합니다.\n\nB는 클라이언트 측 폴링은 실제 스트리밍이 아니고 프론트엔드 토큰 제한은 보안 취약점, C는 ECS 관리 오버헤드가 크고 Bedrock 직접 사용보다 복잡, D는 REST API가 HTTP API보다 더 무겁습니다.\n\nAIP-C01에서는 'LEAST operational overhead'라는 표현이 나올 때 관리형 서비스 우선(Bedrock, Lambda) > 자체 관리(ECS, EC2)를 기억해야 합니다.",
     "en_q": "A company is designing an API for a generative AI (GenAI) application that uses a foundation model (FM) that is hosted on a managed model service. The API must stream responses to reduce latency, enforce token limits to manage compute resource usage, and implement retry logic to handle model timeouts and partial responses. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Integrate an Amazon API Gateway HTTP API with an AWS Lambda function to invoke Amazon Bedrock. Use Lambda response streaming to stream responses. Enforce token limits within the Lambda function. Implement retry logic for model timeouts by using Lambda and API Gateway timeout configurations.",
@@ -1637,7 +1637,7 @@ window.AIP_QUESTIONS = [
       "D": "간단한 문의와 복잡한 문의에 대해 별도의 Amazon Bedrock 엔드포인트를 생성합니다. 키워드 감지를 기반으로 규칙 기반 라우팅 시스템을 구현합니다. 더 작은 모델에는 온디맨드 가격, 더 큰 모델에는 프로비저닝된 처리량을 사용합니다."
     },
     "answer": "B",
-    "explanation": "모델 라우팅과 비용 최적화를 결합한 문제입니다. 정답 B는 'Amazon Bedrock intelligent prompt routing'을 활용하여 자동으로 문의 복잡성을 분석하고 라우팅하는 관리형 기능을 사용합니다. 이는 추가 코드나 Lambda 함수 관리 없이 Bedrock 네이티브 기능으로 구현되므로 구현 노력이 가장 적습니다. 70% 간단 문의 → 소형 모델(저비용), 30% 복잡 문의 → 대형 모델(높은 품질)로 비용과 품질의 최적균형을 달성합니다. A는 Lambda 함수 작성이 필요한 추가 개발, C는 단일 모델로 비용 절감 불가, D는 수동 규칙 기반 라우팅으로 정확도 저하 및 유지보수 부담이 큽니다. 'intelligent prompt routing'은 AIP-C01에서 새로 강조되는 Bedrock 기능입니다.",
+    "explanation": "모델 라우팅과 비용 최적화를 결합한 문제입니다.\n\n정답 B는 'Amazon Bedrock intelligent prompt routing'을 활용하여 자동으로 문의 복잡성을 분석하고 라우팅하는 관리형 기능을 사용합니다.\n\n이는 추가 코드나 Lambda 함수 관리 없이 Bedrock 네이티브 기능으로 구현되므로 구현 노력이 가장 적습니다.\n\n70% 간단 문의 → 소형 모델(저비용), 30% 복잡 문의 → 대형 모델(높은 품질)로 비용과 품질의 최적균형을 달성합니다.\n\nA는 Lambda 함수 작성이 필요한 추가 개발, C는 단일 모델로 비용 절감 불가, D는 수동 규칙 기반 라우팅으로 정확도 저하 및 유지보수 부담이 큽니다.\n\n'intelligent prompt routing'은 AIP-C01에서 새로 강조되는 Bedrock 기능입니다.",
     "en_q": "A retail company is using Amazon Bedrock to develop a customer service AI assistant. Analysis shows that 70% of customer inquiries are simple product questions that a smaller model can effectively handle. However, 30% of inquiries are complex return policy questions that require advanced reasoning. The company wants to implement a cost-effective model selection framework to automatically route customer inquiries to appropriate models based on inquiry complexity. The framework must maintain high customer satisfaction and minimize response latency. Which solution will meet these requirements with the LEAST implementation effort?",
     "en_opts": {
       "A": "Create a multi-stage architecture that uses a small foundation model (FM) to classify the complexity of each inquiry. Route simple inquiries to a smaller, more cost-effective model. Route complex inquiries to a larger, more capable model. Use AWS Lambda functions to handle the routing logic.",
@@ -1657,7 +1657,7 @@ window.AIP_QUESTIONS = [
       "D": "Amazon Kendra를 사용하여 로스팅 로그 검색 정확도를 개선합니다. 정규화된 프롬프트 메타데이터를 Amazon DynamoDB 내에 저장합니다. AWS Step Functions를 사용하여 다단계 프롬프트를 조율합니다."
     },
     "answer": "A",
-    "explanation": "안정성, 성능, 안전성 세 가지 핵심 요구사항을 다룹니다. 정답 A는 (1) 프로비저닝된 처리량으로 일관된 성능 제공(99.5% 출력 일관성 확보), (2) 의미 거부 규칙으로 '과도하게 높은 온도'처럼 안전하지 않은 권장사항 차단, (3) Prompt Management로 승인된 프롬프트만 배포하여 3단계 체인의 일관성 유지합니다. 프로비저닝된 처리량은 추론 지연을 1초 이하로 안정화합니다. B는 로깅과 A/B 테스트는 모니터링일 뿐 근본 문제 해결 아님, C는 캐싱과 X-Ray는 성능만 개선하고 안전성 미해결, D는 Kendra 검색은 다양한 결과 반환으로 일관성 해침. 'semantic denial rules'은 구체적인 안전 위험(과도한 온도)을 정의하여 차단하는 Bedrock guardrails의 고급 기능입니다.",
+    "explanation": "안정성, 성능, 안전성 세 가지 핵심 요구사항을 다룹니다.\n\n정답 A는 (1) 프로비저닝된 처리량으로 일관된 성능 제공(99.5% 출력 일관성 확보), (2) 의미 거부 규칙으로 '과도하게 높은 온도'처럼 안전하지 않은 권장사항 차단, (3) Prompt Management로 승인된 프롬프트만 배포하여 3단계 체인의 일관성 유지합니다.\n\n프로비저닝된 처리량은 추론 지연을 1초 이하로 안정화합니다.\n\nB는 로깅과 A/B 테스트는 모니터링일 뿐 근본 문제 해결 아님, C는 캐싱과 X-Ray는 성능만 개선하고 안전성 미해결, D는 Kendra 검색은 다양한 결과 반환으로 일관성 해침. 'semantic denial rules'은 구체적인 안전 위험(과도한 온도)을 정의하여 차단하는 Bedrock guardrails의 고급 기능입니다.",
     "en_q": "A specialty coffee company has a mobile app that generates personalized coffee roast profiles by using Amazon Bedrock with a three-stage prompt chain. The prompt chain converts user inputs into structured metadata, retrieves relevant logs for coffee roasts, and generates a personalized roast recommendation for each customer. Users in multiple AWS Regions report inconsistent roast recommendations for identical inputs, slow inference during the retrieval step, and unsafe recommendations such as brewing at excessively high temperatures. The company must improve the stability of outputs for repeated inputs. The company must also improve app performance and the safety of the app's outputs. The updated solution must ensure 99.5% output consistency for identical inputs and achieve inference latency of less than 1 second. The solution must also block unsafe or hallucinated recommendations by using validated safety controls. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Deploy Amazon Bedrock with provisioned throughput to stabilize inference latency. Apply Amazon Bedrock guardrails that have semantic denial rules to block unsafe outputs. Use Amazon Bedrock Prompt Management to manage prompts by using approval workflows.",
@@ -1677,7 +1677,7 @@ window.AIP_QUESTIONS = [
       "D": "각 지역에 대해 개별 규정 준수 프레임워크가 있는 별도의 AWS 계정을 생성합니다. Amazon SageMaker AI를 사용자 정의 모니터링과 함께 사용하여 모델 성능을 추적하고 데이터 상주 요구사항을 준수합니다. 각 규제 관할권에 대한 수동 보고서를 작성합니다."
     },
     "answer": "C",
-    "explanation": "데이터 상주(data residency), 감시, 데이터 분류를 통합적으로 해결합니다. 정답 C는 세 가지 요구사항을 충족합니다: (1) S3 Object Lock으로 데이터 변경 불가능성 보장 및 지역별 버킷 정책으로 상주 규칙 강제, (2) 지역 내 전처리로 데이터가 처리 지역 외로 이동하지 않음, (3) Amazon Macie로 자동 데이터 분류, (4) CloudTrail 변경 불가능한 로그로 규제 감시. A는 교차 지역 추론이 상주 규칙 위반 가능, B는 사용자 정의 모델 배포는 복잡하고 분류 기능 미흡, D는 수동 보고서로 자동화 부재 및 오버헤드 큼. Object Lock과 S3 버킷 정책의 지역 기반 관리, Amazon Macie의 자동 분류, CloudTrail의 감시 추적 조합이 규제 준수의 핵심입니다.",
+    "explanation": "데이터 상주(data residency), 감시, 데이터 분류를 통합적으로 해결합니다.\n\n정답 C는 세 가지 요구사항을 충족합니다: (1) S3 Object Lock으로 데이터 변경 불가능성 보장 및 지역별 버킷 정책으로 상주 규칙 강제, (2) 지역 내 전처리로 데이터가 처리 지역 외로 이동하지 않음, (3) Amazon Macie로 자동 데이터 분류, (4) CloudTrail 변경 불가능한 로그로 규제 감시. A는 교차 지역 추론이 상주 규칙 위반 가능, B는 사용자 정의 모델 배포는 복잡하고 분류 기능 미흡, D는 수동 보고서로 자동화 부재 및 오버헤드 큼. Object Lock과 S3 버킷 정책의 지역 기반 관리, Amazon Macie의 자동 분류, CloudTrail의 감시 추적 조합이 규제 준수의 핵심입니다.",
     "en_q": "A company is developing a generative AI (GenAI) application by using Amazon Bedrock. The application will analyze patterns and relationships in the company's data. The application will process millions of new data points daily across AWS Regions in Europe, North America, and Asia before storing the data in Amazon S3. The application must comply with local data protection and storage regulations. Data residency and processing must occur within the same continent. The application must also maintain audit trails of the application's decision-making processes and provide data classification capabilities. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Deploy the application in each Region with local IAM policies. Use Amazon Bedrock cross-Region inference to distribute the workload. Use Amazon CloudWatch to log AI decision-making processes and data processing activities. Manually track compliance certifications across Regions.",
@@ -1697,7 +1697,7 @@ window.AIP_QUESTIONS = [
       "D": "Amazon SageMaker Model Monitor를 사용하여 모델 행동 드리프트를 감지합니다. AWS WAF를 사용하여 콘텐츠를 필터링합니다. 고객 상호작용을 암호화된 Amazon RDS 데이터베이스에 저장합니다. Amazon API Gateway를 사용하여 규정 준수 대시보드와 통합하기 위한 사용자 정의 HTTP API를 생성합니다."
     },
     "answer": "A",
-    "explanation": "60일 내 빠른 배포와 규정 준수, 모니터링, 성능을 동시에 충족해야 합니다. 정답 A는 Bedrock 네이티브 기능 기반으로 최소 개발 시간을 보장합니다: (1) Bedrock 보안정책으로 독성 감지 및 콘텐츠 필터 적용(관리형), (2) Model Evaluation으로 환각 감지(자동화), (3) DynamoDB TTL로 감시 추적 저장(간단함), (4) CloudWatch 사용자 정의 메트릭으로 기존 대시보드 통합(빠른 구축). 200ms 응답 시간은 DynamoDB(서버리스)와 Bedrock(관리형)으로 충족됩니다. B는 Lambda 함수 개발, PrivateLink 구성 오버헤드, C는 OpenSearch/QuickSight 설정과 유지보수 복잡도, D는 SageMaker Model Monitor 운영 오버헤드가 큽니다. 'LEAST operational overhead'와 '60일 배포'라는 시간 제약이 주어졌을 때 완전 관리형(A)이 정답입니다.",
+    "explanation": "60일 내 빠른 배포와 규정 준수, 모니터링, 성능을 동시에 충족해야 합니다.\n\n정답 A는 Bedrock 네이티브 기능 기반으로 최소 개발 시간을 보장합니다: (1) Bedrock 보안정책으로 독성 감지 및 콘텐츠 필터 적용(관리형), (2) Model Evaluation으로 환각 감지(자동화), (3) DynamoDB TTL로 감시 추적 저장(간단함), (4) CloudWatch 사용자 정의 메트릭으로 기존 대시보드 통합(빠른 구축). 200ms 응답 시간은 DynamoDB(서버리스)와 Bedrock(관리형)으로 충족됩니다.\n\nB는 Lambda 함수 개발, PrivateLink 구성 오버헤드, C는 OpenSearch/QuickSight 설정과 유지보수 복잡도, D는 SageMaker Model Monitor 운영 오버헤드가 큽니다.\n\n'LEAST operational overhead'와 '60일 배포'라는 시간 제약이 주어졌을 때 완전 관리형(A)이 정답입니다.",
     "en_q": "A financial services company is deploying a generative AI (GenAI) application that uses Amazon Bedrock to assist customer service representatives to provide personalized investment advice to customers. The company must implement a comprehensive governance solution that follows responsible AI practices and meets regulatory requirements. The solution must detect and prevent hallucinations in recommendations. The solution must have safety controls for customer interactions. The solution must also monitor model behavior drift in real time and maintain audit trails of all prompt-response pairs for regulatory review. The company must deploy the solution within 60 days. The solution must integrate with the company's existing compliance dashboard and respond to customers within 200 ms. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Configure Amazon Bedrock guardrails to apply custom content filters and toxicity detection. Use Amazon Bedrock Model Evaluation to detect hallucinations. Store prompt-response pairs in Amazon DynamoDB to capture audit trails and set a TTL. Integrate Amazon CloudWatch custom metrics with the existing compliance dashboard.",
@@ -1717,7 +1717,7 @@ window.AIP_QUESTIONS = [
       "D": "FM을 AWS STS에서 임시 자격 증명을 요청하도록 구성합니다. 비즈니스 단위 및 지역별 필터를 적용하는 API에서 생성한 presigned S3 URL을 사용하여 데이터에 액세스합니다. AWS CloudTrail을 사용하여 데이터 액세스의 포괄적인 감시 추적을 수집합니다."
     },
     "answer": "B",
-    "explanation": "AWS Lake Formation의 세분화된 접근 제어를 활용한 PII 보호 문제입니다. 정답 B는 Lake Formation의 핵심 기능인 LF-Tag 기반 권한(LF-Tag expression permissions)을 사용합니다: (1) IAM 역할 인증으로 FM의 보안 접근 보장, (2) LF-Tag로 비즈니스 단위와 지역을 정의하여 데이터셋을 논리적으로 분류, (3) LF-Tag 표현 기반 권한으로 FM이 승인된 데이터만 액세스(PII 열 제외 설정 가능), (4) CloudTrail로 모든 액세스 감시. A는 버킷 기반 분리로 확장성 떨어지고 PII 제거 메커니즘 부재, C는 사용자 정의 애플리케이션 계층이 유지보수 부담 및 PII 노출 위험, D는 presigned URL로 세분화된 제어 불가능. Lake Formation의 LF-Tag는 데이터 거버넌스의 핵심이며 AIP-C01에서 중요하게 다루어집니다.",
+    "explanation": "AWS Lake Formation의 세분화된 접근 제어를 활용한 PII 보호 문제입니다.\n\n정답 B는 Lake Formation의 핵심 기능인 LF-Tag 기반 권한(LF-Tag expression permissions)을 사용합니다: (1) IAM 역할 인증으로 FM의 보안 접근 보장, (2) LF-Tag로 비즈니스 단위와 지역을 정의하여 데이터셋을 논리적으로 분류, (3) LF-Tag 표현 기반 권한으로 FM이 승인된 데이터만 액세스(PII 열 제외 설정 가능), (4) CloudTrail로 모든 액세스 감시. A는 버킷 기반 분리로 확장성 떨어지고 PII 제거 메커니즘 부재, C는 사용자 정의 애플리케이션 계층이 유지보수 부담 및 PII 노출 위험, D는 presigned URL로 세분화된 제어 불가능. Lake Formation의 LF-Tag는 데이터 거버넌스의 핵심이며 AIP-C01에서 중요하게 다루어집니다.",
     "en_q": "A company uses AWS Lake Formation to set up a data lake that contains databases and tables for multiple business units across multiple AWS Regions. The company wants to use a foundation model (FM) through Amazon Bedrock to perform fraud detection. The FM must ingest sensitive financial data from the data lake. The data includes some customer personally identifiable information (PII). The company must design an access control solution that prevents PII from appearing in a production environment. The FM must access only authorized data subsets that have PII redacted from specific data columns. The company must capture audit trails for all data access. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Create a separate dataset in a separate Amazon S3 bucket for each business unit and Region combination. Configure S3 bucket policies to control access based on IAM roles that are assigned to FM training instances. Use S3 access logs to track data access.",
@@ -1737,7 +1737,7 @@ window.AIP_QUESTIONS = [
       "D": "Amazon Bedrock Knowledge Bases 내의 재순위 지정 구성을 통해 최신 Amazon 재순위 지정 모델을 사용합니다. 모델을 사용하여 문서 관련성 점수를 개선하고 문맥 평가를 기반으로 결과를 재정렬합니다."
     },
     "answer": "D",
-    "explanation": "Bedrock Knowledge Bases의 고급 기능인 reranking을 활용한 문제입니다. 정답 D는 Amazon Bedrock Knowledge Bases의 built-in reranking configuration을 사용하여 의미론적 유사성(semantic similarity)이 아닌 문맥 관련성(contextual relevance)을 기반으로 문서를 재순위화합니다. 이는 Bedrock 네이티브 기능으로 추가 API 호출이나 외부 모델 배포 없이 구현되므로 운영 오버헤드가 최소입니다. 50,000+ 문서 규모의 검색에서 정확성을 크게 개선합니다. A는 SageMaker 엔드포인트 관리 오버헤드, B는 Comprehend+Textract+Neptune의 복잡한 조합, C는 별도 API 호출로 레이턴시 증가. Bedrock Knowledge Bases의 reranking 기능은 AIP-C01에서 최신 기능으로 강조됩니다.",
+    "explanation": "Bedrock Knowledge Bases의 고급 기능인 reranking을 활용한 문제입니다.\n\n정답 D는 Amazon Bedrock Knowledge Bases의 built-in reranking configuration을 사용하여 의미론적 유사성(semantic similarity)이 아닌 문맥 관련성(contextual relevance)을 기반으로 문서를 재순위화합니다.\n\n이는 Bedrock 네이티브 기능으로 추가 API 호출이나 외부 모델 배포 없이 구현되므로 운영 오버헤드가 최소입니다.\n\n50,000+ 문서 규모의 검색에서 정확성을 크게 개선합니다.\n\nA는 SageMaker 엔드포인트 관리 오버헤드, B는 Comprehend+Textract+Neptune의 복잡한 조합, C는 별도 API 호출로 레이턴시 증가. Bedrock Knowledge Bases의 reranking 기능은 AIP-C01에서 최신 기능으로 강조됩니다.",
     "en_q": "A company runs a Retrieval Augmented Generation (RAG) application that uses Amazon Bedrock Knowledge Bases to perform regulatory compliance queries. The application uses the RetrieveAndGenerateStream API. The application retrieves relevant documents from a knowledge base that contains more than 50,000 regulatory documents, legal precedents, and policy updates. The RAG application is producing suboptimal responses because the initial retrieval often returns semantically similar but contextually irrelevant documents. The poor responses are causing model hallucinations and incorrect regulatory guidance. The company needs to improve the performance of the RAG application so it returns more relevant documents. Which solution will meet this requirement with the LEAST operational overhead?",
     "en_opts": {
       "A": "Deploy an Amazon SageMaker endpoint to run a fine-tuned ranking model. Use an Amazon API Gateway REST API to route requests. Configure the application to make requests through the REST API to rerank the results.",
@@ -1757,7 +1757,7 @@ window.AIP_QUESTIONS = [
       "D": "모든 카테고리에 대해 0.5로 임계값을 구성한 독성 감지를 사용합니다. 프롬프트 안전 분류 및 개인 식별 정보(PII) 감지(엔티티 수정 포함) 모두에 대해 병렬 처리를 사용합니다. Amazon CloudWatch 경보를 필터링 메트릭에 적용합니다."
     },
     "answer": "D",
-    "explanation": "계층화된 필터링의 성능 최적화를 다룹니다. 정답 D는 '모든 전처리 필터가 FM 도달 전 완료'라는 요구사항을 충족합니다: (1) 독성 감지(0.5 임계값)로 불쾌감 차단, (2) 프롬프트 안전 분류로 부적절한 조언 신청 감지, (3) PII 감지 및 엔티티 수정으로 개인정보 보호. 병렬 처리(프롬프트 안전 + PII를 동시 실행)로 지연시간을 최소화하면서 모든 필터를 FM 전에 완료합니다. CloudWatch 경보는 모니터링을 통해 성능 추적. A는 비동기 처리가 FM 도달 전 완료 불명확, B는 2차 필터 순차 실행으로 지연시간 증가, C는 이벤트브릿지 라우팅이 추가 레이턴시. 병렬 처리와 선택적 임계값 설정의 조합이 핵심입니다.",
+    "explanation": "계층화된 필터링의 성능 최적화를 다룹니다.\n\n정답 D는 '모든 전처리 필터가 FM 도달 전 완료'라는 요구사항을 충족합니다: (1) 독성 감지(0.5 임계값)로 불쾌감 차단, (2) 프롬프트 안전 분류로 부적절한 조언 신청 감지, (3) PII 감지 및 엔티티 수정으로 개인정보 보호. 병렬 처리(프롬프트 안전 + PII를 동시 실행)로 지연시간을 최소화하면서 모든 필터를 FM 전에 완료합니다.\n\nCloudWatch 경보는 모니터링을 통해 성능 추적. A는 비동기 처리가 FM 도달 전 완료 불명확, B는 2차 필터 순차 실행으로 지연시간 증가, C는 이벤트브릿지 라우팅이 추가 레이턴시. 병렬 처리와 선택적 임계값 설정의 조합이 핵심입니다.",
     "en_q": "A company is developing a customer communication platform that uses an AI assistant powered by an Amazon Bedrock foundation model (FM). The AI assistant summarizes customer messages and generates initial response drafts. The company wants to use Amazon Comprehend to implement layered content filtering. The layered content filtering must prevent sharing of offensive content, protect customer privacy, and detect potential inappropriate advice solicitation. Inappropriate advice solicitation includes requests for unethical practices, harmful activities, or manipulative behaviors. The solution must maintain acceptable overall response times, so all pre-processing filters must finish before the content reaches the FM. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Use parallel processing with asynchronous API calls. Use toxicity detection for offensive content. Use prompt safety classification for inappropriate advice solicitation. Use personally identifiable information (PII) detection without redaction.",
@@ -1777,7 +1777,7 @@ window.AIP_QUESTIONS = [
       "D": "RDS 데이터베이스에서 관련 예약 패턴, 선호도, 충성도 정보를 정확하게 검색하기 위해 text-to-SQL 변환을 구현합니다. SQL 검증을 수행합니다. 결과를 사용하여 개인화된 탑승 등급 업그레이드 권장사항을 생성합니다. Amazon Bedrock 보안정책을 적용하여 응답을 필터링합니다. 신뢰도 점수 및 의미론적 유사성 검색을 사용하여 환각을 줄입니다."
     },
     "answer": "B",
-    "explanation": "구조화된 고객 데이터(RDS)에서 정확한 여행 정보를 추출하여 권장사항을 생성하는 문제입니다. 정답 B는 text-to-SQL 변환으로 RDS 데이터베이스에 저장된 구조화된 여행 이력, 예약 패턴, 충성도 정보를 정확하게 쿼리합니다. SQL 검증으로 쿼리 정확성 보장, Bedrock 보안정책으로 안전성, Step Functions+Lambda로 검증 워크플로우를 조율하여 환각 제거. 구조화된 RDS 데이터에 대해서는 RAG(벡터 임베딩 기반)보다 text-to-SQL이 정확성 우수. A는 RAG가 구조화 데이터에 부적합하고 의미론적 검색 실패, C는 벡터 검색으로 정확한 구조화 쿼리 불가능, D는 신뢰도 점수와 의미론적 유사성이 구조화 데이터에 효과적이지 않습니다. AIP-C01에서 'structured data in RDS' + 'accurate retrieval' = text-to-SQL이 정답 패턴입니다.",
+    "explanation": "구조화된 고객 데이터(RDS)에서 정확한 여행 정보를 추출하여 권장사항을 생성하는 문제입니다.\n\n정답 B는 text-to-SQL 변환으로 RDS 데이터베이스에 저장된 구조화된 여행 이력, 예약 패턴, 충성도 정보를 정확하게 쿼리합니다.\n\nSQL 검증으로 쿼리 정확성 보장, Bedrock 보안정책으로 안전성, Step Functions+Lambda로 검증 워크플로우를 조율하여 환각 제거. 구조화된 RDS 데이터에 대해서는 RAG(벡터 임베딩 기반)보다 text-to-SQL이 정확성 우수. A는 RAG가 구조화 데이터에 부적합하고 의미론적 검색 실패, C는 벡터 검색으로 정확한 구조화 쿼리 불가능, D는 신뢰도 점수와 의미론적 유사성이 구조화 데이터에 효과적이지 않습니다.\n\nAIP-C01에서 'structured data in RDS' + 'accurate retrieval' = text-to-SQL이 정답 패턴입니다.",
     "en_q": "A software as a service (SaaS) company is building a recommendation model that uses Amazon SageMaker AI to support an application that recommends airline cabin upgrades to customers. The company will host SageMaker AI models on Amazon Bedrock by using Amazon Bedrock Custom Model Import. Airline companies will use the application to send customized offers to customers. The model must examine the travel history of customers to help make more relevant recommendations. The company stores customer travel history data in an Amazon RDS database. The company must ensure that the application delivers consistent, relevant, and accurate results across multiple airlines and customer populations. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Use Amazon Bedrock Knowledge Bases to implement a RAG architecture to analyze customer travel history data to give the application semantic search capabilities. Use the semantic search capabilities to retrieve relevant booking patterns, preferences, and loyalty information to generate personalized cabin upgrade recommendations. Apply Amazon Bedrock guardrails to filter content. Use AWS Step Functions and AWS Lambda functions to orchestrate validation workflows to reduce hallucinations.",
@@ -1797,7 +1797,7 @@ window.AIP_QUESTIONS = [
       "D": "콘텐츠 및 단어 필터 집합을 적용하도록 교차 지역 Amazon Bedrock 보안정책을 구성합니다. 개발 및 테스트 중에 보안정책을 감지 모드로 설정합니다. 프로덕션 배포를 위해 마스킹 모드로 전환합니다."
     },
     "answer": "B",
-    "explanation": "데이터 상주와 개인 정보 보호 검증을 결합하는 문제입니다. 정답 B는 세 가지 요구사항 충족: (1) 민감한 정보 필터로 PII 노출 방지, (2) 마스킹 모드(develop/test)로 개인정보 노출을 감지하면서 시스템 작동 허용(평가 가능), (3) 각 지역에 보안정책 사본 배포로 데이터 상주 준수(교차 지역 아님), (4) 프로덕션 차단 모드로 최종 보호. A는 교차 지역 보안정책이 상주 규칙 위반, C는 감지 모드만으로는 실제 보호 없고 로깅 비활성화는 감시 추적 상실, D는 마스킹 모드가 프로덕션 최종 단계인데 차단 모드 아님. 마스킹 모드는 개발/테스트 단계에서 PII를 수정하면서도 시스템 동작을 확인하고, 차단 모드는 프로덕션에서 최종 보호를 제공합니다.",
+    "explanation": "데이터 상주와 개인 정보 보호 검증을 결합하는 문제입니다.\n\n정답 B는 세 가지 요구사항 충족: (1) 민감한 정보 필터로 PII 노출 방지, (2) 마스킹 모드(develop/test)로 개인정보 노출을 감지하면서 시스템 작동 허용(평가 가능), (3) 각 지역에 보안정책 사본 배포로 데이터 상주 준수(교차 지역 아님), (4) 프로덕션 차단 모드로 최종 보호. A는 교차 지역 보안정책이 상주 규칙 위반, C는 감지 모드만으로는 실제 보호 없고 로깅 비활성화는 감시 추적 상실, D는 마스킹 모드가 프로덕션 최종 단계인데 차단 모드 아님. 마스킹 모드는 개발/테스트 단계에서 PII를 수정하면서도 시스템 동작을 확인하고, 차단 모드는 프로덕션에서 최종 보호를 제공합니다.",
     "en_q": "A company is using Amazon Bedrock to develop a customer support AI assistant. The AI assistant must respond to customer questions about their accounts. The AI assistant must not expose personal information in responses. The company must comply with data residency policies by ensuring that all processing occurs within the same AWS Region where each customer is located. The company wants to evaluate how effective the AI assistant is at preventing the exposure of personal information before the company makes the AI assistant available to customers. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Configure a cross-Region Amazon Bedrock guardrail to apply sensitive information filters. Set the guardrail to detect mode during development and testing. Switch to block mode for production deployment.",
@@ -1817,7 +1817,7 @@ window.AIP_QUESTIONS = [
       "D": "Amazon Bedrock의 Amazon Titan Embeddings를 사용하여 디지털화 파일의 벡터 표현을 생성합니다. Amazon Aurora PostgreSQL Serverless 데이터베이스에 pgvector 확장을 사용하여 임베딩을 저장합니다."
     },
     "answer": "D",
-    "explanation": "의미론적 검색과 벡터 저장소 선택에 관한 문제입니다. 정답 D는 세 가지 최적화: (1) Amazon Titan Embeddings(관리형, Bedrock 네이티브) - 학습/미세조정 없이 곧바로 사용, (2) Aurora PostgreSQL Serverless(서버리스 - 운영 오버헤드 최소), (3) pgvector 확장(SQL 기반 벡터 검색 지원). 100만 파일 미만 규모이므로 전용 벡터 DB(OpenSearch) 오버엔지니어링. A는 OpenSearch Neural Plugin 운영 오버헤드, B는 주제 추출만으로 의미론적 검색 불가능, C는 SageMaker 모델 배포 및 관리 부담. Titan Embeddings + Aurora pgvector의 조합은 'LEAST operational overhead'에서 최상입니다. pgvector는 최근 PostgreSQL 생태계의 핵심 확장으로 AIP-C01에서 강조됩니다.",
+    "explanation": "의미론적 검색과 벡터 저장소 선택에 관한 문제입니다.\n\n정답 D는 세 가지 최적화: (1) Amazon Titan Embeddings(관리형, Bedrock 네이티브) - 학습/미세조정 없이 곧바로 사용, (2) Aurora PostgreSQL Serverless(서버리스 - 운영 오버헤드 최소), (3) pgvector 확장(SQL 기반 벡터 검색 지원). 100만 파일 미만 규모이므로 전용 벡터 DB(OpenSearch) 오버엔지니어링. A는 OpenSearch Neural Plugin 운영 오버헤드, B는 주제 추출만으로 의미론적 검색 불가능, C는 SageMaker 모델 배포 및 관리 부담. Titan Embeddings + Aurora pgvector의 조합은 'LEAST operational overhead'에서 최상입니다.\n\npgvector는 최근 PostgreSQL 생태계의 핵심 확장으로 AIP-C01에서 강조됩니다.",
     "en_q": "A university recently digitized a collection of archival documents, academic journals, and manuscripts. The university stores the digital files in an AWS Lake Formation data lake. The university hires a GenAI developer to build a solution to allow users to search the digital files by using text queries. The solution must return journal abstracts that are semantically similar to a user's query. Users must be able to search the digitized collection based on text and metadata that is associated with the journal abstracts. The metadata of the digitized files does not contain keywords. The solution must match similar abstracts to one another based on the similarity of their text. The data lake contains fewer than 1 million files. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Use Amazon Titan Embeddings in Amazon Bedrock to create vector representations of the digitized files. Store embeddings in the OpenSearch Neural Plugin for Amazon OpenSearch Service.",
@@ -1838,7 +1838,7 @@ window.AIP_QUESTIONS = [
       "E": "소스 S3 버킷을 버킷에 객체가 생성될 때 Step Functions 워크플로우에 알림을 보내도록 구성합니다."
     },
     "answer": "BD",
-    "explanation": "다중 선택으로 워크플로우 자동화와 처리 조율을 다룹니다. 정답은 B와 D의 조합입니다. B는 Transcribe로 음성을 텍스트 변환, Bedrock FM을 직접 호출(Lambda 래핑 불필요)하여 JSON 구조화 출력(요약+감정분석). 직접 FM 호출은 간단하고 20MB 파일 처리에 충분. D는 S3 객체 생성 시 EventBridge로 Step Functions 워크플로우 자동 트리거(폴링 불필요). A는 Lambda로 FM을 호출하지만 불필요한 단계, C도 Lambda 프롬프트 생성이 추가 오버헤드, E는 S3 알림(SNS/SQS)로 Step Functions 직접 트리거 불가능. 'structured format'(JSON)은 Bedrock FM이 직접 지원하므로 B가 최적, EventBridge 자동 트리거(D)가 구현 편의성을 제공합니다.",
+    "explanation": "다중 선택으로 워크플로우 자동화와 처리 조율을 다룹니다.\n\n정답은 B와 D의 조합입니다.\n\nB는 Transcribe로 음성을 텍스트 변환, Bedrock FM을 직접 호출(Lambda 래핑 불필요)하여 JSON 구조화 출력(요약+감정분석). 직접 FM 호출은 간단하고 20MB 파일 처리에 충분. D는 S3 객체 생성 시 EventBridge로 Step Functions 워크플로우 자동 트리거(폴링 불필요). A는 Lambda로 FM을 호출하지만 불필요한 단계, C도 Lambda 프롬프트 생성이 추가 오버헤드, E는 S3 알림(SNS/SQS)로 Step Functions 직접 트리거 불가능. 'structured format'(JSON)은 Bedrock FM이 직접 지원하므로 B가 최적, EventBridge 자동 트리거(D)가 구현 편의성을 제공합니다.",
     "en_q": "A financial services company wants to use Amazon Bedrock foundation models (FMs) to analyze call center recordings. When calls end, the call center stores recordings as MP3 files in an Amazon S3 bucket. The company needs to generate summaries and sentiment analysis for the recordings in a structured format as soon as new files are created. The recordings average 20 MB in size. Which combination of solutions will meet these requirements? (Choose two.)",
     "en_opts": {
       "A": "Use AWS Step Functions to orchestrate a workflow to process the recordings. Configure steps to invoke Amazon Transcribe to convert audio to text, validate job completion, and to invoke an AWS Lambda function to process the text by using Amazon Bedrock FMs to generate structured analysis output.",
@@ -1859,7 +1859,7 @@ window.AIP_QUESTIONS = [
       "D": "두 번째 지식 기반을 생성합니다. 버킷에서 3년보다 오래된 보고서를 제거하도록 S3 Lifecycle 구성을 설정합니다. 새 보고서가 버킷에 업로드될 때 버킷을 원본 지식 기반과 동기화하는 AWS Lambda 함수를 호출합니다. Amazon Comprehend를 사용하여 PII를 감지하고 수정한 후 버킷을 두 번째 지식 기반과 동기화합니다. 사용자가 AI 어시스턴트와 상호작용할 때 사용자의 Cognito 사용자 그룹에 따라 모델을 적절한 지식 기반으로 리디렉션합니다."
     },
     "answer": "C",
-    "explanation": "역할 기반 PII 필터링과 데이터 라이프사이클 관리를 통합하는 문제입니다. 정답 C는 최적의 아키텍처: (1) S3 Lifecycle으로 3년 이상 보고서 자동 삭제(규정 준수), (2) 일일 Lambda 스케줄로 버킷-지식기반 동기화(유지보수 자동화), (3) Bedrock guardrails + Cognito 그룹으로 응답 시점 PII 제어(외과의 원본, 엔지니어 수정). 응답 생성 후 guardrail 적용으로 모든 사용자 유형 처리. A는 Macie 감지만으로 자동 수정 불가, B는 업로드 시점 수정으로 지식기반이 수정된 데이터만 포함(외과의가 원본 미열람), D는 이중 지식기반 관리 오버헤드 과다. 단일 지식기반 + guardrails로 역할 기반 필터링(C)이 AIP-C01의 권장 패턴입니다.",
+    "explanation": "역할 기반 PII 필터링과 데이터 라이프사이클 관리를 통합하는 문제입니다.\n\n정답 C는 최적의 아키텍처: (1) S3 Lifecycle으로 3년 이상 보고서 자동 삭제(규정 준수), (2) 일일 Lambda 스케줄로 버킷-지식기반 동기화(유지보수 자동화), (3) Bedrock guardrails + Cognito 그룹으로 응답 시점 PII 제어(외과의 원본, 엔지니어 수정). 응답 생성 후 guardrail 적용으로 모든 사용자 유형 처리. A는 Macie 감지만으로 자동 수정 불가, B는 업로드 시점 수정으로 지식기반이 수정된 데이터만 포함(외과의가 원본 미열람), D는 이중 지식기반 관리 오버헤드 과다.\n\n단일 지식기반 + guardrails로 역할 기반 필터링(C)이 AIP-C01의 권장 패턴입니다.",
     "en_q": "A medical device company wants to feed reports of medical procedures that used the company's devices into an AI assistant. To protect patient privacy, the AI assistant must expose patient personally identifiable information (PII) only to surgeons. The AI assistant must redact PII for engineers. The AI assistant must reference only medical reports that are less than 3 years old. The company stores reports in an Amazon S3 bucket as soon as each report is published. The company has already set up an Amazon Bedrock knowledge base. The AI assistant uses Amazon Cognito to authenticate users. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Enable Amazon Macie PII detection on the S3 bucket. Use an S3 trigger to invoke an AWS Lambda function that redacts PII from the reports. Configure the Lambda function to delete outdated documents from the bucket and to invoke knowledge base syncing.",
@@ -1879,7 +1879,7 @@ window.AIP_QUESTIONS = [
       "D": "기술 메트릭과 가져온 비즈니스 메트릭을 통합하는 CloudWatch 사용자 정의 대시보드를 구성합니다. 이상 탐지를 사용하여 CloudWatch 복합 경보를 설정합니다. 상관된 메트릭이 성능 문제를 나타낼 때 이해관계자에게 알리는 Amazon SNS를 사용하여 경보 작업을 생성합니다."
     },
     "answer": "D",
-    "explanation": "기술과 비즈니스 메트릭의 통합 모니터링을 다룹니다. 정답 D는 네 가지 요구사항 충족: (1) CloudWatch 사용자 정의 대시보드로 기술(토큰, 레이턴시) + 비즈니스(전환율, 수익) 메트릭 통합 시각화, (2) 복합 경보(composite alarms)로 상관된 메트릭 감지(기술 + 비즈니스 동시 악화), (3) 이상 탐지로 정상 범위 벗어난 패턴 자동 감지, (4) SNS로 자동 알림. 복합 경보는 여러 메트릭을 AND/OR 논리로 결합하여 실제 성능 저하만 알림. A는 구성은 유사하지만 이상 탐지 미포함, B는 자동 해결(Lambda)이 요구사항 없음, C는 S3 스트리밍이 실시간성 손실. 'correlate technical performance with business outcomes'와 'automatic alerts'는 복합 경보 + 이상 탐지의 조합(D)을 요구합니다.",
+    "explanation": "기술과 비즈니스 메트릭의 통합 모니터링을 다룹니다.\n\n정답 D는 네 가지 요구사항 충족: (1) CloudWatch 사용자 정의 대시보드로 기술(토큰, 레이턴시) + 비즈니스(전환율, 수익) 메트릭 통합 시각화, (2) 복합 경보(composite alarms)로 상관된 메트릭 감지(기술 + 비즈니스 동시 악화), (3) 이상 탐지로 정상 범위 벗어난 패턴 자동 감지, (4) SNS로 자동 알림. 복합 경보는 여러 메트릭을 AND/OR 논리로 결합하여 실제 성능 저하만 알림. A는 구성은 유사하지만 이상 탐지 미포함, B는 자동 해결(Lambda)이 요구사항 없음, C는 S3 스트리밍이 실시간성 손실. 'correlate technical performance with business outcomes'와 'automatic alerts'는 복합 경보 + 이상 탐지의 조합(D)을 요구합니다.",
     "en_q": "A large ecommerce company has deployed a foundation model (FM) to generate product descriptions. The company's engineering team monitors technical metrics such as token usage, latency, and error rates by using Amazon CloudWatch. The company's marketing team tracks business metrics such as conversion rates and revenue impact in its own systems. The company needs a unified observability solution that correlates technical performance with business outcomes. The solution must provide automatic alerts to stakeholders when operational metrics indicate degradation. The solution must provide comprehensive visibility across both technical and business metrics. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Create CloudWatch dashboards that include technical metrics and imported business metrics. Configure CloudWatch composite alarms that combine technical data and business data. Use Amazon SNS to set up notifications to stakeholders.",
@@ -1899,7 +1899,7 @@ window.AIP_QUESTIONS = [
       "D": "eu-north-1에서 Amazon SageMaker AI에 FM을 배포합니다. SageMaker AI VPC 엔드포인트를 구성합니다. 직원들이 SageMaker AI 엔드포인트를 사용할 수 있도록 기존 SCP를 확장합니다. SageMaker AI의 FM을 비즈니스 애플리케이션과 통합합니다."
     },
     "answer": "C",
-    "explanation": "지역 제약(eu-north-1, eu-west-1), 모델 호스팅 지역 불일치(eu-central-1, eu-west-3), SCP 준수, 데이터 프라이버시를 동시에 해결해야 합니다. 정답 C는 'inference profiles'(교차 지역 추론 최적화)를 사용하여: (1) eu.amazon.* 엔드포인트로 모든 호출이 유럽 내 유지(지역 경계 준수), (2) eu-central-1과 eu-west-3의 모델을 eu-north-1에서 액세스 가능(SCP 제약 우회 불가하지만 추론 프로필이 지역 교차 문제 해결), (3) VPC 엔드포인트로 프라이버시 보장, (4) SCP 확장으로 추론 프로필 접근 권한 부여. A는 Lambda 래핑으로 불필요 복잡도, B는 EC2 자체 관리 오버헤드 및 SCP 제약 미해결, D는 SageMaker 호스팅 시 eu-north-1만 가능하고 SCP 준수. 'inference profiles'은 AIP-C01에서 최신 Bedrock 기능으로 강조되며 지역 제약을 우아하게 해결합니다.",
+    "explanation": "지역 제약(eu-north-1, eu-west-1), 모델 호스팅 지역 불일치(eu-central-1, eu-west-3), SCP 준수, 데이터 프라이버시를 동시에 해결해야 합니다.\n\n정답 C는 'inference profiles'(교차 지역 추론 최적화)를 사용하여: (1) eu.amazon.* 엔드포인트로 모든 호출이 유럽 내 유지(지역 경계 준수), (2) eu-central-1과 eu-west-3의 모델을 eu-north-1에서 액세스 가능(SCP 제약 우회 불가하지만 추론 프로필이 지역 교차 문제 해결), (3) VPC 엔드포인트로 프라이버시 보장, (4) SCP 확장으로 추론 프로필 접근 권한 부여. A는 Lambda 래핑으로 불필요 복잡도, B는 EC2 자체 관리 오버헤드 및 SCP 제약 미해결, D는 SageMaker 호스팅 시 eu-north-1만 가능하고 SCP 준수. 'inference profiles'은 AIP-C01에서 최신 Bedrock 기능으로 강조되며 지역 제약을 우아하게 해결합니다.",
     "en_q": "A GenAI developer is evaluating Amazon Bedrock foundation models (FMs) to enhance a Europe-based company's internal business application. The company has a multi-account landing zone in AWS Control Tower. The company uses SCPs to allow its accounts to use only the eu-north-1 Region and the eu-west-1 Region. All customer data must remain in private networks within the approved AWS Regions. The GenAI developer selects an FM based on analysis and testing and hosts the model in the eu-central-1 Region and the eu-west-3 Region. The GenAI developer must enable access to the FM for the company's employees. The GenAI developer must ensure that requests to the FM are private and remain with the same Regions as the FM. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Deploy an AWS Lambda function that is exposed by a private Amazon API Gateway REST API to a VPC in eu-north-1. Create a VPC endpoint for the selected FM in eu-central-1 and eu-west-3. Extend existing SCPs to allow employees to use the FM. Integrate the REST API with the business application.",
@@ -1919,7 +1919,7 @@ window.AIP_QUESTIONS = [
       "D": "여러 AWS Lambda 함수를 조율하기 위해 Amazon Bedrock 에이전트를 생성하여 쿼리를 분해합니다. 참조 의료 문서를 저장할 Amazon Bedrock 지식 기반을 생성합니다. 에이전트의 내장 지식 기반 기능을 사용합니다. 에이전트에 깊은 연구 및 추론 기능을 추가하여 의료 용어의 모호성을 줄입니다."
     },
     "answer": "B",
-    "explanation": "의료 도메인의 복잡한 쿼리 처리와 성능, 의미론적 정확도를 통합합니다. 정답 B는 Amazon Bedrock의 네이티브 기능 조합: (1) Knowledge Bases로 의료 문서 저장(영역별 용어 참조), (2) 지식 기반의 'query decomposition' 기능으로 복잡한 쿼리를 단순 쿼리로 분해하여 의미 희석 감소, (3) Amazon Bedrock Flows로 FM과 지식 기반을 통합(낮은 레이턴시, 높은 처리량). 분당 1,000 쿼리(약 16.7/초)와 2초 미만은 관리형 서비스(B)로 충족. A는 Claude+Titan 조합이 오버엔지니어링이고 분해/확장 중복, C는 SageMaker 모델 관리 오버헤드, D는 Lambda 조율이 지연시간 증가. 'query decomposition'은 Bedrock Knowledge Bases의 최신 기능으로 복잡 쿼리를 최적으로 처리합니다.",
+    "explanation": "의료 도메인의 복잡한 쿼리 처리와 성능, 의미론적 정확도를 통합합니다.\n\n정답 B는 Amazon Bedrock의 네이티브 기능 조합: (1) Knowledge Bases로 의료 문서 저장(영역별 용어 참조), (2) 지식 기반의 'query decomposition' 기능으로 복잡한 쿼리를 단순 쿼리로 분해하여 의미 희석 감소, (3) Amazon Bedrock Flows로 FM과 지식 기반을 통합(낮은 레이턴시, 높은 처리량). 분당 1,000 쿼리(약 16.7/초)와 2초 미만은 관리형 서비스(B)로 충족. A는 Claude+Titan 조합이 오버엔지니어링이고 분해/확장 중복, C는 SageMaker 모델 관리 오버헤드, D는 Lambda 조율이 지연시간 증가. 'query decomposition'은 Bedrock Knowledge Bases의 최신 기능으로 복잡 쿼리를 최적으로 처리합니다.",
     "en_q": "A healthcare company is developing an application to process medical queries. The application must answer complex queries with high accuracy by reducing semantic dilution. The application must refer to domain-specific terminology in medical documents to reduce ambiguity in medical terminology. The application must be able to respond to 1,000 queries each minute with response times less than 2 seconds. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Use Amazon API Gateway to route incoming queries to an Amazon Bedrock agent. Configure the agent to use an Anthropic Claude model to decompose queries and an Amazon Titan model to expand queries. Create an Amazon Bedrock knowledge base to store the reference medical documents.",

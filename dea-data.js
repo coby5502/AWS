@@ -791,7 +791,7 @@ window.DEA_QUESTIONS = [
       "D": "AWS Lambda 함수를 만들어 JDBC(Java Database Connectivity)를 사용하여 EC2 인스턴스 기반 데이터베이스를 쿼리합니다. Lambda 함수를 구성하여 필요한 데이터를 검색하고 데이터를 Parquet 형식으로 변환한 다음 S3 버킷으로 전송합니다. Amazon EventBridge를 사용하여 매일 실행하도록 Lambda 함수를 예약합니다."
     },
     "answer": "A",
-    "explanation": "AWS Glue는 AWS에서 완전관리형 ETL 서비스로, SQL Server 데이터베이스에서 직접 데이터를 추출하여 Parquet 형식으로 변환하는 데 최적화되어 있습니다. 옵션 A는 가장 간단하고 효율적입니다. EC2 기반 데이터베이스에 뷰를 생성하면 AWS Glue가 뷰를 통해 직접 조인된 데이터에 접근할 수 있으므로 추가 변환 로직이 필요 없습니다. 옵션 B는 Lambda 함수를 사용하여 추가 변환 단계가 필요하므로 복잡하고, 옵션 C는 Glue 크롤러를 불필요하게 추가하므로 비효율적입니다. 옵션 D는 Lambda의 메모리 제약과 timeout 제한으로 대용량 데이터 처리에 부적합합니다. AWS Glue는 serverless 확장성과 built-in Parquet 지원으로 일일 배치 작업에 가장 적합한 선택입니다.",
+    "explanation": "AWS Glue는 AWS에서 완전관리형 ETL 서비스로, SQL Server 데이터베이스에서 직접 데이터를 추출하여 Parquet 형식으로 변환하는 데 최적화되어 있습니다.\n\n옵션 A는 가장 간단하고 효율적입니다. EC2 기반 데이터베이스에 뷰를 생성하면 AWS Glue가 뷰를 통해 직접 조인된 데이터에 접근할 수 있으므로 추가 변환 로직이 필요 없습니다.\n\n옵션 B는 Lambda 함수를 사용하여 추가 변환 단계가 필요하므로 복잡하고,\n\n옵션 C는 Glue 크롤러를 불필요하게 추가하므로 비효율적입니다.\n\n옵션 D는 Lambda의 메모리 제약과 timeout 제한으로 대용량 데이터 처리에 부적합합니다. AWS Glue는 serverless 확장성과 built-in Parquet 지원으로 일일 배치 작업에 가장 적합한 선택입니다.",
     "en_q": "A company is migrating its database servers from Amazon EC2 instances that run Microsoft SQL Server to Amazon RDS for Microsoft SQL Server DB instances. The company's analytics team must export large data elements every day until the migration is complete. The data elements are the result of SQL joins across multiple tables. The data must be in Apache Parquet format. The analytics team must store the data in Amazon S3. Which solution will meet these requirements in the MOST operationally efficient way?",
     "en_opts": {
       "A": "Create a view in the EC2 instance-based SQL Server databases that contains the required data elements. Create an AWS Glue job that selects the data directly from the view and transfers the data in Parquet format to an S3 bucket. Schedule the AWS Glue job to run every day.",
@@ -811,7 +811,7 @@ window.DEA_QUESTIONS = [
       "D": "STL_PLAN_INFO"
     },
     "answer": "B",
-    "explanation": "STL_ALERT_EVENT_LOG는 Amazon Redshift의 시스템 테이블로, 쿼리 옵티마이저가 잠재적 성능 문제를 감지할 때 경고 이벤트를 기록합니다. 이 테이블은 누락된 조인 조건, 병렬화 불가능한 작업, 긴 러닝 쿼리 등 성능 최적화 관련 이상 현상을 모두 포함합니다. STL_USAGE_CONTROL은 리소스 사용률을 제어하는 테이블이고, STL_QUERY_METRICS는 쿼리 실행 후 성능 메트릭을 기록하며, STL_PLAN_INFO는 쿼리 실행 계획을 저장합니다. DEA 시험에서 Redshift 성능 모니터링 관련 문제는 STL_ALERT_EVENT_LOG 테이블 인식이 핵심입니다. 이 테이블을 정기적으로 모니터링하면 성능 저하 원인을 사전에 파악할 수 있습니다.",
+    "explanation": "STL_ALERT_EVENT_LOG는 Amazon Redshift의 시스템 테이블로, 쿼리 옵티마이저가 잠재적 성능 문제를 감지할 때 경고 이벤트를 기록합니다.\n\n이 테이블은 누락된 조인 조건, 병렬화 불가능한 작업, 긴 러닝 쿼리 등 성능 최적화 관련 이상 현상을 모두 포함합니다.\n\nSTL_USAGE_CONTROL은 리소스 사용률을 제어하는 테이블이고, STL_QUERY_METRICS는 쿼리 실행 후 성능 메트릭을 기록하며, STL_PLAN_INFO는 쿼리 실행 계획을 저장합니다.\n\nDEA 시험에서 Redshift 성능 모니터링 관련 문제는 STL_ALERT_EVENT_LOG 테이블 인식이 핵심입니다.\n\n이 테이블을 정기적으로 모니터링하면 성능 저하 원인을 사전에 파악할 수 있습니다.",
     "en_q": "A data engineering team is using an Amazon Redshift data warehouse for operational reporting. The team wants to prevent performance issues that might result from long-running queries. A data engineer must choose a system table in Amazon Redshift to record anomalies when a query optimizer identifies conditions that might indicate performance issues. Which table views should the data engineer use to meet this requirement?",
     "en_opts": {
       "A": "STL_USAGE_CONTROL",
@@ -831,7 +831,7 @@ window.DEA_QUESTIONS = [
       "D": "AWS Glue ETL 작업을 만들어 .csv 정형 데이터 소스에서 데이터를 읽습니다. Apache Parquet 형식으로 데이터 레이크에 쓰도록 작업을 구성합니다."
     },
     "answer": "D",
-    "explanation": "Parquet은 컬럼 기반 저장 형식으로, 특정 컬럼만 필요할 때 필요한 컬럼만 읽을 수 있어 I/O 비용을 크게 절감합니다. 데이터 분석팀이 15개 컬럼 중 1~2개만 쿼리하는 경우 Parquet의 컬럼 프루닝(column pruning) 기능으로 Athena 스캔 비용을 85~90% 절감할 수 있습니다. CSV 형식(옵션 A)은 전체 행을 읽어야 하므로 비효율적이고, JSON(옵션 B)도 마찬가지입니다. Avro(옵션 C)는 행 기반 저장이므로 특정 컬럼 선택 시 전체 데이터를 읽어야 합니다. DEA 시험에서 비용 최적화 문제는 데이터 형식 선택이 중요하며, Parquet은 분석 쿼리 패턴이 일부 컬럼에만 집중할 때 최고의 선택입니다.",
+    "explanation": "Parquet은 컬럼 기반 저장 형식으로, 특정 컬럼만 필요할 때 필요한 컬럼만 읽을 수 있어 I/O 비용을 크게 절감합니다.\n\n데이터 분석팀이 15개 컬럼 중 1~2개만 쿼리하는 경우 Parquet의 컬럼 프루닝(column pruning) 기능으로 Athena 스캔 비용을 85~90% 절감할 수 있습니다.\n\nCSV 형식(옵션 A)은 전체 행을 읽어야 하므로 비효율적이고, JSON(옵션 B)도 마찬가지입니다.\n\nAvro(옵션 C)는 행 기반 저장이므로 특정 컬럼 선택 시 전체 데이터를 읽어야 합니다.\n\nDEA 시험에서 비용 최적화 문제는 데이터 형식 선택이 중요하며, Parquet은 분석 쿼리 패턴이 일부 컬럼에만 집중할 때 최고의 선택입니다.",
     "en_q": "A data engineer must ingest a source of structured data that is in .csv format into an Amazon S3 data lake. The .csv files contain 15 columns. Data analysts need to run Amazon Athena queries on one or two columns of the dataset. The data analysts rarely query the entire file. Which solution will meet these requirements MOST cost-effectively?",
     "en_opts": {
       "A": "Use an AWS Glue PySpark job to ingest the source data into the data lake in .csv format.",
@@ -852,7 +852,7 @@ window.DEA_QUESTIONS = [
       "E": "각 리전마다 별도의 S3 버킷을 만듭니다. S3 액세스를 허용하도록 IAM 정책을 구성합니다. 리전을 기준으로 액세스를 제한합니다."
     },
     "answer": "BD",
-    "explanation": "AWS Lake Formation은 S3 기반 데이터 레이크의 중앙 집중식 액세스 제어를 제공합니다. S3 경로를 Lake Formation 위치로 등록(옵션 B)한 후, Lake Formation의 세분화된 액세스 제어(옵션 D)를 활성화하여 리전별 데이터 필터를 설정하면 IAM 역할 개별 수정 없이 중앙 집중식으로 관리할 수 있습니다. 이는 각 IAM 역할을 개별 수정하는 것(옵션 C)보다 훨씬 효율적입니다. 옵션 A는 등록 없이 필터만 적용하므로 불완전하고, 옵션 E는 리전별로 별도 버킷을 운영하므로 관리 오버헤드가 높습니다. DEA 시험에서 Lake Formation 관련 문제는 위치 등록과 세분화된 액세스 제어의 조합이 핵심이며, 이를 통해 중앙 집중식 권한 관리가 가능합니다.",
+    "explanation": "AWS Lake Formation은 S3 기반 데이터 레이크의 중앙 집중식 액세스 제어를 제공합니다. S3 경로를 Lake Formation 위치로 등록(옵션 B)한 후, Lake Formation의 세분화된 액세스 제어(옵션 D)를 활성화하여 리전별 데이터 필터를 설정하면 IAM 역할 개별 수정 없이 중앙 집중식으로 관리할 수 있습니다. 이는 각 IAM 역할을 개별 수정하는 것(옵션 C)보다 훨씬 효율적입니다.\n\n옵션 A는 등록 없이 필터만 적용하므로 불완전하고,\n\n옵션 E는 리전별로 별도 버킷을 운영하므로 관리 오버헤드가 높습니다. DEA 시험에서 Lake Formation 관련 문제는 위치 등록과 세분화된 액세스 제어의 조합이 핵심이며, 이를 통해 중앙 집중식 권한 관리가 가능합니다.",
     "en_q": "A company has five offices in different AWS Regions. Each office has its own human resources (HR) department that uses a unique IAM role. The company stores employee records in a data lake that is based on Amazon S3 storage. A data engineering team needs to limit access to the records. Each HR department should be able to access records for only employees who are within the HR department's Region. Which combination of steps should the data engineering team take to meet this requirement with the LEAST operational overhead? (Choose two.)",
     "en_opts": {
       "A": "Use data filters for each Region to register the S3 paths as data locations.",
@@ -874,7 +874,7 @@ window.DEA_QUESTIONS = [
       "E": "회사에서 EMR 작업을 위해 구성한 재시도 시나리오를 확인합니다. 각 EMR 작업 간 간격의 초 수를 늘립니다. 각 폴백 상태에 각 결정 상태에 대한 적절한 catch가 있는지 검증합니다. 오류 메시지를 저장하도록 Amazon Simple Notification Service(Amazon SNS) 주제를 구성합니다."
     },
     "answer": "BD",
-    "explanation": "Step Functions가 EMR 작업을 실행하지 못하는 경우 두 가지 주요 원인을 확인해야 합니다. 첫째, Step Functions의 IAM 역할이 EMR 작업을 생성하고 S3 버킷에 접근할 권한이 있어야 합니다(옵션 B). 둘째, VPC 네트워크 구성 및 보안 그룹이 EMR 클러스터가 데이터 소스에 연결하도록 허용해야 합니다(옵션 D). 옵션 A는 문제 해결보다는 배포 자동화에 초점이 있고, 옵션 C는 EMR on EKS로의 아키텍처 변경을 제시하므로 현재 문제 원인 파악에 부적합합니다. 옵션 E는 재시도 정책을 조정하는 것으로 근본 원인을 해결하지 못합니다. DEA 시험에서 Step Functions 연동 문제는 IAM 권한과 네트워크 연결성이 핵심 진단 포인트입니다.",
+    "explanation": "Step Functions가 EMR 작업을 실행하지 못하는 경우 두 가지 주요 원인을 확인해야 합니다. 첫째, Step Functions의 IAM 역할이 EMR 작업을 생성하고 S3 버킷에 접근할 권한이 있어야 합니다(옵션 B). 둘째, VPC 네트워크 구성 및 보안 그룹이 EMR 클러스터가 데이터 소스에 연결하도록 허용해야 합니다(옵션 D).\n\n옵션 A는 문제 해결보다는 배포 자동화에 초점이 있고,\n\n옵션 C는 EMR on EKS로의 아키텍처 변경을 제시하므로 현재 문제 원인 파악에 부적합합니다.\n\n옵션 E는 재시도 정책을 조정하는 것으로 근본 원인을 해결하지 못합니다. DEA 시험에서 Step Functions 연동 문제는 IAM 권한과 네트워크 연결성이 핵심 진단 포인트입니다.",
     "en_q": "A company uses AWS Step Functions to orchestrate a data pipeline. The pipeline consists of Amazon EMR jobs that ingest data from data sources and store the data in an Amazon S3 bucket. The pipeline also includes EMR jobs that load the data to Amazon Redshift. The company's cloud infrastructure team manually built a Step Functions state machine. The cloud infrastructure team launched an EMR cluster into a VPC to support the EMR jobs. However, the deployed Step Functions state machine is not able to run the EMR jobs. Which combination of steps should the company take to identify the reason the Step Functions state machine is not able to run the EMR jobs? (Choose two.)",
     "en_opts": {
       "A": "Use AWS CloudFormation to automate the Step Functions state machine deployment. Create a step to pause the state machine during the EMR jobs that fail. Configure the step to wait for a human user to send approval through an email message. Include details of the EMR task in the email message for further analysis.",
@@ -895,7 +895,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon Elastic Block Store(Amazon EBS) 볼륨으로 지원되는 AMI를 사용하여 새 EC2 인스턴스를 시작합니다. 애플리케이션 데이터를 포함하도록 추가 EC2 인스턴스 저장소 볼륨을 연결합니다. EC2 인스턴스에 기본 설정을 적용합니다."
     },
     "answer": "C",
-    "explanation": "EC2 인스턴스 저장소 볼륨은 인스턴스가 종료되면 데이터가 손실되는 임시 저장소입니다. 데이터를 지속적으로 보존하려면 Amazon EBS 볼륨이 필요합니다. 옵션 C는 EC2 인스턴스 저장소로 지원되는 AMI를 사용하여 인스턴스를 시작한 후, 애플리케이션 데이터를 저장하기 위해 EBS 볼륨을 별도로 연결합니다. EBS 볼륨은 인스턴스 종료 후에도 데이터를 보존합니다(Delete on Termination 설정을 off로 하는 경우). 옵션 A는 인스턴스 저장소만 사용하므로 데이터 손실 위험이 있고, 옵션 B는 루트 EBS 볼륨에 데이터를 저장하여 별도 관리가 어렵습니다. 옵션 D는 EBS 볼륨에 인스턴스 저장소를 추가하는 것이므로 역순입니다. DEA 시험에서 EC2 저장소 관련 문제는 임시성과 지속성의 차이를 이해하는 것이 중요합니다.",
+    "explanation": "EC2 인스턴스 저장소 볼륨은 인스턴스가 종료되면 데이터가 손실되는 임시 저장소입니다. 데이터를 지속적으로 보존하려면 Amazon EBS 볼륨이 필요합니다.\n\n옵션 C는 EC2 인스턴스 저장소로 지원되는 AMI를 사용하여 인스턴스를 시작한 후, 애플리케이션 데이터를 저장하기 위해 EBS 볼륨을 별도로 연결합니다. EBS 볼륨은 인스턴스 종료 후에도 데이터를 보존합니다(Delete on Termination 설정을 off로 하는 경우).\n\n옵션 A는 인스턴스 저장소만 사용하므로 데이터 손실 위험이 있고,\n\n옵션 B는 루트 EBS 볼륨에 데이터를 저장하여 별도 관리가 어렵습니다.\n\n옵션 D는 EBS 볼륨에 인스턴스 저장소를 추가하는 것이므로 역순입니다. DEA 시험에서 EC2 저장소 관련 문제는 임시성과 지속성의 차이를 이해하는 것이 중요합니다.",
     "en_q": "A company is developing an application that runs on Amazon EC2 instances. Currently, the data that the application generates is temporary. However, the company needs to persist the data, even if the EC2 instances are terminated. A data engineer must launch new EC2 instances from an Amazon Machine Image (AMI) and configure the instances to preserve the data. Which solution will meet this requirement?",
     "en_opts": {
       "A": "Launch new EC2 instances by using an AMI that is backed by an EC2 instance store volume that contains the application data. Apply the default settings to the EC2 instances.",
@@ -915,7 +915,7 @@ window.DEA_QUESTIONS = [
       "D": "Athena 쿼리 편집기"
     },
     "answer": "B",
-    "explanation": "Athena 워크그룹(Workgroup)은 쿼리 실행 환경을 구성하는 논리적 단위입니다. Athena 워크그룹을 통해 SQL 기반 쿼리 엔진과 Apache Spark 기반 엔진을 모두 지원할 수 있습니다. 워크그룹 설정에서 엔진 타입을 Spark로 지정하면 Spark를 사용하여 Athena 데이터에 액세스할 수 있습니다. 쿼리 설정(옵션 A)은 일반적인 쿼리 환경 설정이고, 데이터 소스(옵션 C)는 외부 데이터 소스 연결용이며, 쿼리 편집기(옵션 D)는 쿼리 작성 인터페이스일 뿐입니다. DEA 시험에서 Athena 기능을 묻는 문제는 워크그룹의 역할을 이해하는 것이 중요하며, 워크그룹을 통해 Spark 엔진을 활성화할 수 있습니다.",
+    "explanation": "Athena 워크그룹(Workgroup)은 쿼리 실행 환경을 구성하는 논리적 단위입니다.\n\nAthena 워크그룹을 통해 SQL 기반 쿼리 엔진과 Apache Spark 기반 엔진을 모두 지원할 수 있습니다.\n\n워크그룹 설정에서 엔진 타입을 Spark로 지정하면 Spark를 사용하여 Athena 데이터에 액세스할 수 있습니다.\n\n쿼리 설정(옵션 A)은 일반적인 쿼리 환경 설정이고, 데이터 소스(옵션 C)는 외부 데이터 소스 연결용이며, 쿼리 편집기(옵션 D)는 쿼리 작성 인터페이스일 뿐입니다.\n\nDEA 시험에서 Athena 기능을 묻는 문제는 워크그룹의 역할을 이해하는 것이 중요하며, 워크그룹을 통해 Spark 엔진을 활성화할 수 있습니다.",
     "en_q": "A company uses Amazon Athena to run SQL queries for extract, transform, and load (ETL) tasks by using Create Table As Select (CTAS). The company must use Apache Spark instead of SQL to generate analytics. Which solution will give the company the ability to use Spark to access Athena?",
     "en_opts": {
       "A": "Athena query settings",
@@ -935,7 +935,7 @@ window.DEA_QUESTIONS = [
       "D": "AWS Glue 콘솔에서 MSCK REPAIR TABLE 명령을 실행합니다."
     },
     "answer": "C",
-    "explanation": "AWS Glue Data Catalog와 S3 저장소의 동기화에서 가장 낮은 지연 시간을 달성하려면 데이터 쓰기 시점에 즉시 파티션을 등록해야 합니다. 옵션 C는 데이터를 S3에 쓰는 코드에서 직접 create_partition API를 호출하여 파티션을 실시간으로 등록합니다. 이는 파티션 생성과 Catalog 업데이트 사이의 지연 시간을 최소화합니다. 옵션 A의 Glue 크롤러는 스케줄 주기만큼 지연이 발생하고, 옵션 B는 수동 실행이므로 더욱 늦으며, 옵션 D의 MSCK REPAIR TABLE은 기존 파티션을 발견하는 용도이지 실시간 등록에 부적합합니다. DEA 시험에서 최저 지연 시간 요구사항은 주로 애플리케이션 코드 레벨에서의 직접 API 호출을 지시합니다.",
+    "explanation": "AWS Glue Data Catalog와 S3 저장소의 동기화에서 가장 낮은 지연 시간을 달성하려면 데이터 쓰기 시점에 즉시 파티션을 등록해야 합니다.\n\n옵션 C는 데이터를 S3에 쓰는 코드에서 직접 create_partition API를 호출하여 파티션을 실시간으로 등록합니다. 이는 파티션 생성과 Catalog 업데이트 사이의 지연 시간을 최소화합니다. 옵션 A의 Glue 크롤러는 스케줄 주기만큼 지연이 발생하고,\n\n옵션 B는 수동 실행이므로 더욱 늦으며, 옵션 D의 MSCK REPAIR TABLE은 기존 파티션을 발견하는 용도이지 실시간 등록에 부적합합니다. DEA 시험에서 최저 지연 시간 요구사항은 주로 애플리케이션 코드 레벨에서의 직접 API 호출을 지시합니다.",
     "en_q": "A company needs to partition the Amazon S3 storage that the company uses for a data lake. The partitioning will use a path of the S3 object keys in the following format: s3://bucket/prefix/year=2023/month=01/day=01. A data engineer must ensure that the AWS Glue Data Catalog synchronizes with the S3 storage when the company adds new partitions to the bucket. Which solution will meet these requirements with the LEAST latency?",
     "en_opts": {
       "A": "Schedule an AWS Glue crawler to run every morning.",
@@ -955,7 +955,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon Kinesis"
     },
     "answer": "B",
-    "explanation": "Amazon AppFlow는 SaaS 애플리케이션 간 데이터 통합을 위한 완전관리형 통합 서비스입니다. Salesforce, Slack, Google Analytics 등 다양한 SaaS 도구에서 데이터를 자동으로 수집하여 S3로 직접 로드할 수 있습니다. AppFlow는 사전 구축된 커넥터를 제공하므로 커스텀 코드 작성이 필요 없어 운영 오버헤드가 가장 낮습니다. Amazon MSK(옵션 A)는 메시지 스트리밍 플랫폼이고, AWS Glue Data Catalog(옵션 C)는 메타데이터 관리 서비스이며, Amazon Kinesis(옵션 D)는 실시간 스트리밍 서비스로 모두 SaaS 데이터 수집 통합에 직접적으로 최적화되지 않았습니다. DEA 시험에서 SaaS 데이터 수집 문제는 AppFlow의 사전 구축된 커넥터와 최소 관리 특성이 핵심입니다.",
+    "explanation": "Amazon AppFlow는 SaaS 애플리케이션 간 데이터 통합을 위한 완전관리형 통합 서비스입니다.\n\nSalesforce, Slack, Google Analytics 등 다양한 SaaS 도구에서 데이터를 자동으로 수집하여 S3로 직접 로드할 수 있습니다.\n\nAppFlow는 사전 구축된 커넥터를 제공하므로 커스텀 코드 작성이 필요 없어 운영 오버헤드가 가장 낮습니다.\n\nAmazon MSK(옵션 A)는 메시지 스트리밍 플랫폼이고, AWS Glue Data Catalog(옵션 C)는 메타데이터 관리 서비스이며, Amazon Kinesis(옵션 D)는 실시간 스트리밍 서비스로 모두 SaaS 데이터 수집 통합에 직접적으로 최적화되지 않았습니다.\n\nDEA 시험에서 SaaS 데이터 수집 문제는 AppFlow의 사전 구축된 커넥터와 최소 관리 특성이 핵심입니다.",
     "en_q": "A media company uses software as a service (SaaS) applications to gather data by using third-party tools. The company needs to store the data in an Amazon S3 bucket. The company will use Amazon Redshift to perform analytics based on the data. Which AWS service or feature will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Amazon Managed Streaming for Apache Kafka (Amazon MSK)",
@@ -975,7 +975,7 @@ window.DEA_QUESTIONS = [
       "D": "GROUP BY 절을 제거합니다."
     },
     "answer": "B",
-    "explanation": "문제는 WHERE year = 2023 조건이 잘못된 문법이라는 점입니다. year는 sales_data 테이블의 컬럼으로 해석되지 않거나, 타입 비교가 올바르지 않을 수 있습니다. 옵션 B의 extract(year FROM 날짜_컬럼) = 2023은 날짜 타입의 컬럼에서 연도를 올바르게 추출하는 표준 SQL 문법입니다. 이를 통해 모든 제품의 데이터가 올바르게 필터링됩니다. 옵션 A는 집계 함수를 변경하므로 잘못된 결과를 반환하고, 옵션 C는 HAVING 절이 행을 제외하므로 완전한 결과를 제공하지 못하며, 옵션 D는 GROUP BY를 제거하여 쿼리 의도를 변경합니다. DEA 시험에서 Athena SQL 쿼리 문제는 올바른 함수 사용과 타입 변환을 이해하는 것이 중요합니다.",
+    "explanation": "문제는 WHERE year = 2023 조건이 잘못된 문법이라는 점입니다. year는 sales_data 테이블의 컬럼으로 해석되지 않거나, 타입 비교가 올바르지 않을 수 있습니다. 옵션 B의 extract(year FROM 날짜_컬럼) = 2023은 날짜 타입의 컬럼에서 연도를 올바르게 추출하는 표준 SQL 문법입니다. 이를 통해 모든 제품의 데이터가 올바르게 필터링됩니다.\n\n옵션 A는 집계 함수를 변경하므로 잘못된 결과를 반환하고,\n\n옵션 C는 HAVING 절이 행을 제외하므로 완전한 결과를 제공하지 못하며,\n\n옵션 D는 GROUP BY를 제거하여 쿼리 의도를 변경합니다. DEA 시험에서 Athena SQL 쿼리 문제는 올바른 함수 사용과 타입 변환을 이해하는 것이 중요합니다.",
     "en_q": "A data engineer is using Amazon Athena to analyze sales data that is in Amazon S3. The data engineer writes a query to retrieve sales amounts for 2023 for several products from a table named sales_data. However, the query does not return results for all of the products that are in the sales_data table. The data engineer needs to troubleshoot the query to resolve the issue. The data engineer's original query is as follows: SELECT product_name, sum(sales_amount) FROM sales_data - WHERE year = 2023 - GROUP BY product_name - How should the data engineer modify the Athena query to meet these requirements?",
     "en_opts": {
       "A": "Replace sum(sales_amount) with count(*) for the aggregation.",
@@ -995,7 +995,7 @@ window.DEA_QUESTIONS = [
       "D": "S3 객체에 AWS Glue 크롤러를 실행합니다. Amazon Athena의 SQL SELECT 문을 사용하여 필요한 컬럼을 쿼리합니다."
     },
     "answer": "B",
-    "explanation": "S3 Select는 S3에서 객체의 일부만을 선택적으로 검색하는 서비스로, 데이터 전체를 다운로드하지 않고도 SQL 쿼리로 필요한 컬럼만 추출할 수 있습니다. 일회성 작업이므로 인프라 설정이 거의 필요 없고, 비용 효율적입니다. 옵션 A는 Lambda로 전체 데이터를 로드해야 하므로 비효율적이고, 옵션 C는 DataBrew 프로젝트 설정이 필요하므로 오버헤드가 높으며, 옵션 D는 Glue 크롤러와 Athena를 통해 불필요한 메타데이터 관리가 필요합니다. DEA 시험에서 일회성 데이터 추출 문제는 S3 Select의 간편함과 효율성이 답이 되는 패턴입니다.",
+    "explanation": "S3 Select는 S3에서 객체의 일부만을 선택적으로 검색하는 서비스로, 데이터 전체를 다운로드하지 않고도 SQL 쿼리로 필요한 컬럼만 추출할 수 있습니다. 일회성 작업이므로 인프라 설정이 거의 필요 없고, 비용 효율적입니다.\n\n옵션 A는 Lambda로 전체 데이터를 로드해야 하므로 비효율적이고,\n\n옵션 C는 DataBrew 프로젝트 설정이 필요하므로 오버헤드가 높으며,\n\n옵션 D는 Glue 크롤러와 Athena를 통해 불필요한 메타데이터 관리가 필요합니다. DEA 시험에서 일회성 데이터 추출 문제는 S3 Select의 간편함과 효율성이 답이 되는 패턴입니다.",
     "en_q": "A data engineer has a one-time task to read data from objects that are in Apache Parquet format in an Amazon S3 bucket. The data engineer needs to query only one column of the data. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Configure an AWS Lambda function to load data from the S3 bucket into a pandas dataframe. Write a SQL SELECT statement on the dataframe to query the required column.",
@@ -1015,7 +1015,7 @@ window.DEA_QUESTIONS = [
       "D": "AWS Glue 워크플로우를 사용하여 구체화된 뷰를 새로 고칩니다."
     },
     "answer": "C",
-    "explanation": "Amazon Redshift 쿼리 편집기 v2는 Redshift 관리 콘솔의 일부로, 자동 새로 고침(Auto-refresh) 기능을 지원합니다. 쿼리 편집기 v2에서 구체화된 뷰의 새로 고침 일정을 설정하면 별도의 추가 서비스 구성 없이 자동으로 새로 고침됩니다. Apache Airflow(옵션 A)는 별도의 인프라 설정이 필요하고, Lambda UDF(옵션 B)는 복잡한 구현이 필요하며, AWS Glue 워크플로우(옵션 D)도 추가 구성이 필요합니다. DEA 시험에서 가장 적은 노력 또는 가장 간단한 요구사항은 AWS의 native 기능을 사용하는 것이 정답 패턴입니다.",
+    "explanation": "Amazon Redshift 쿼리 편집기 v2는 Redshift 관리 콘솔의 일부로, 자동 새로 고침(Auto-refresh) 기능을 지원합니다.\n\n쿼리 편집기 v2에서 구체화된 뷰의 새로 고침 일정을 설정하면 별도의 추가 서비스 구성 없이 자동으로 새로 고침됩니다.\n\nApache Airflow(옵션 A)는 별도의 인프라 설정이 필요하고, Lambda UDF(옵션 B)는 복잡한 구현이 필요하며, AWS Glue 워크플로우(옵션 D)도 추가 구성이 필요합니다.\n\nDEA 시험에서 가장 적은 노력 또는 가장 간단한 요구사항은 AWS의 native 기능을 사용하는 것이 정답 패턴입니다.",
     "en_q": "A company uses Amazon Redshift for its data warehouse. The company must automate refresh schedules for Amazon Redshift materialized views. Which solution will meet this requirement with the LEAST effort?",
     "en_opts": {
       "A": "Use Apache Airflow to refresh the materialized views.",
@@ -1035,7 +1035,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon Elastic Kubernetes Service(Amazon EKS)에 배포된 Apache Airflow 워크플로우를 사용합니다. Lambda 함수를 호출하는 첫 번째 작업과 AWS Glue 작업을 호출하는 두 번째 작업이 있는 DAG(방향성 비순환 그래프)를 정의합니다."
     },
     "answer": "A",
-    "explanation": "AWS Step Functions는 AWS 서비스 간 워크플로우 오케스트레이션을 위한 serverless 서비스로, Lambda와 Glue를 포함한 다양한 AWS 서비스와 기본 통합을 지원합니다. 상태 머신을 통해 Lambda 함수와 Glue 작업의 실행 순서와 조건을 정의할 수 있으며, 별도의 인프라 관리가 필요 없습니다. 옵션 B와 D의 Apache Airflow는 EC2 또는 EKS 인스턴스를 직접 관리해야 하므로 운영 오버헤드가 높고, 옵션 C의 Glue 워크플로우는 Lambda 통합이 제한적입니다. DEA 시험에서 최소 관리 오버헤드는 serverless 솔루션과 native AWS 통합을 의미하며, Step Functions가 이를 충족하는 최적의 선택입니다.",
+    "explanation": "AWS Step Functions는 AWS 서비스 간 워크플로우 오케스트레이션을 위한 serverless 서비스로, Lambda와 Glue를 포함한 다양한 AWS 서비스와 기본 통합을 지원합니다.\n\n상태 머신을 통해 Lambda 함수와 Glue 작업의 실행 순서와 조건을 정의할 수 있으며, 별도의 인프라 관리가 필요 없습니다.\n\n옵션 B와 D의 Apache Airflow는 EC2 또는 EKS 인스턴스를 직접 관리해야 하므로 운영 오버헤드가 높고, 옵션 C의 Glue 워크플로우는 Lambda 통합이 제한적입니다.\n\nDEA 시험에서 최소 관리 오버헤드는 serverless 솔루션과 native AWS 통합을 의미하며, Step Functions가 이를 충족하는 최적의 선택입니다.",
     "en_q": "A data engineer must orchestrate a data pipeline that consists of one AWS Lambda function and one AWS Glue job. The solution must integrate with AWS services. Which solution will meet these requirements with the LEAST management overhead?",
     "en_opts": {
       "A": "Use an AWS Step Functions workflow that includes a state machine. Configure the state machine to run the Lambda function and then the AWS Glue job.",
@@ -1055,7 +1055,7 @@ window.DEA_QUESTIONS = [
       "D": "AWS Glue Data Catalog를 중앙 메타데이터 저장소로 사용합니다. Amazon RDS 및 Amazon Redshift 소스에 대한 스키마를 추출하고 Data Catalog를 빌드합니다. Amazon S3의 데이터에 AWS Glue 크롤러를 사용하여 스키마를 추론하고 Data Catalog를 자동으로 업데이트합니다."
     },
     "answer": "B",
-    "explanation": "AWS Glue Data Catalog는 AWS에서 제공하는 관리형 메타데이터 저장소로, RDS, Redshift, S3의 다양한 데이터 소스를 통합 관리할 수 있습니다. AWS Glue 크롤러는 이러한 소스에 자동으로 연결하여 스키마를 추론하고 메타데이터 변경을 감지하며, 주기적으로 실행하여 카탈로그를 자동으로 업데이트합니다. 이는 Lambda 함수를 직접 작성해야 하는 옵션 A, C보다 운영 오버헤드가 훨씬 낮고, 옵션 D는 RDS/Redshift에 대한 스키마 추출이 수동이므로 완전 자동화가 아닙니다. DEA 시험에서 메타데이터 관리와 변경 감지 문제는 Glue Data Catalog와 크롤러의 자동 기능이 핵심입니다.",
+    "explanation": "AWS Glue Data Catalog는 AWS에서 제공하는 관리형 메타데이터 저장소로, RDS, Redshift, S3의 다양한 데이터 소스를 통합 관리할 수 있습니다.\n\nAWS Glue 크롤러는 이러한 소스에 자동으로 연결하여 스키마를 추론하고 메타데이터 변경을 감지하며, 주기적으로 실행하여 카탈로그를 자동으로 업데이트합니다.\n\n이는 Lambda 함수를 직접 작성해야 하는 옵션 A, C보다 운영 오버헤드가 훨씬 낮고,\n\n옵션 D는 RDS/Redshift에 대한 스키마 추출이 수동이므로 완전 자동화가 아닙니다.\n\nDEA 시험에서 메타데이터 관리와 변경 감지 문제는 Glue Data Catalog와 크롤러의 자동 기능이 핵심입니다.",
     "en_q": "A company needs to set up a data catalog and metadata management for data sources that run in the AWS Cloud. The company will use the data catalog to maintain the metadata of all the objects that are in a set of data stores. The data stores include structured sources such as Amazon RDS and Amazon Redshift. The data stores also include semistructured sources such as JSON files and .xml files that are stored in Amazon S3. The company needs a solution that will update the data catalog on a regular basis. The solution also must detect changes to the source metadata. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Use Amazon Aurora as the data catalog. Create AWS Lambda functions that will connect to the data catalog. Configure the Lambda functions to gather the metadata information from multiple sources and to update the Aurora data catalog. Schedule the Lambda functions to run periodically.",
@@ -1075,7 +1075,7 @@ window.DEA_QUESTIONS = [
       "D": "용량 모드를 프로비저닝됨에서 온디맨드로 변경합니다. 테이블의 로드를 기반으로 테이블을 확장 및 축소하도록 구성합니다."
     },
     "answer": "C",
-    "explanation": "AWS Application Auto Scaling은 예측 가능한 일정에 따라 DynamoDB 프로비저닝된 용량을 자동으로 조정할 수 있습니다. 스케줄 기반 스케일링을 통해 월요일 아침의 피크 시간에는 높은 용량을 할당하고, 주말의 비피크 시간에는 낮은 용량을 할당하여 비용을 최소화하면서 성능을 보장합니다. 옵션 A는 항상 최대 용량을 유지하므로 비용 낭비이고, 옵션 B는 테이블 분할로 복잡성을 증가시키며, 옵션 D는 온디맨드 모드가 프로비저닝 모드보다 비용이 높을 수 있습니다. DEA 시험에서 비용 최적화와 예측 가능한 워크로드는 Application Auto Scaling의 스케줄 기반 접근이 정답입니다.",
+    "explanation": "AWS Application Auto Scaling은 예측 가능한 일정에 따라 DynamoDB 프로비저닝된 용량을 자동으로 조정할 수 있습니다. 스케줄 기반 스케일링을 통해 월요일 아침의 피크 시간에는 높은 용량을 할당하고, 주말의 비피크 시간에는 낮은 용량을 할당하여 비용을 최소화하면서 성능을 보장합니다.\n\n옵션 A는 항상 최대 용량을 유지하므로 비용 낭비이고,\n\n옵션 B는 테이블 분할로 복잡성을 증가시키며,\n\n옵션 D는 온디맨드 모드가 프로비저닝 모드보다 비용이 높을 수 있습니다. DEA 시험에서 비용 최적화와 예측 가능한 워크로드는 Application Auto Scaling의 스케줄 기반 접근이 정답입니다.",
     "en_q": "A company stores data from an application in an Amazon DynamoDB table that operates in provisioned capacity mode. The workloads of the application have predictable throughput load on a regular schedule. Every Monday, there is an immediate increase in activity early in the morning. The application has very low usage during weekends. The company must ensure that the application performs consistently during peak usage times. Which solution will meet these requirements in the MOST cost-effective way?",
     "en_opts": {
       "A": "Increase the provisioned capacity to the maximum capacity that is currently present during peak load times.",
@@ -1095,7 +1095,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon EMR에서 새 Hive 메타스토어를 구성합니다. 기존 온프레미스 Hive 메타스토어를 Amazon EMR로 마이그레이션합니다. 새 메타스토어를 회사의 데이터 카탈로그로 사용합니다."
     },
     "answer": "B",
-    "explanation": "회사는 serverless 솔루션을 필요로 하므로 옵션 B가 최적입니다. Amazon EMR에 Hive 메타스토어를 구성하고 온프레미스 Hive 메타스토어를 마이그레이션한 후, AWS Glue Data Catalog를 외부 카탈로그로 사용합니다. 이렇게 하면 EMR의 작업은 Hive 메타스토어와 호환성을 유지하면서, 메타데이터는 Glue Data Catalog에 의해 중앙 집중식으로 관리되어 다른 AWS 서비스와의 통합이 용이합니다. 옵션 A는 S3의 원본 메타스토어 데이터에서 카탈로그를 생성하는 것이므로 불완전하고, 옵션 C는 Aurora MySQL이 serverless가 아니며, 옵션 D는 EMR 메타스토어만 사용하므로 중앙 집중식 관리가 부족합니다. DEA 시험에서 메타스토어 마이그레이션과 serverless 요구사항은 Glue Data Catalog 외부 사용이 핵심입니다.",
+    "explanation": "회사는 serverless 솔루션을 필요로 하므로\n\n옵션 B가 최적입니다. Amazon EMR에 Hive 메타스토어를 구성하고 온프레미스 Hive 메타스토어를 마이그레이션한 후, AWS Glue Data Catalog를 외부 카탈로그로 사용합니다. 이렇게 하면 EMR의 작업은 Hive 메타스토어와 호환성을 유지하면서, 메타데이터는 Glue Data Catalog에 의해 중앙 집중식으로 관리되어 다른 AWS 서비스와의 통합이 용이합니다.\n\n옵션 A는 S3의 원본 메타스토어 데이터에서 카탈로그를 생성하는 것이므로 불완전하고,\n\n옵션 C는 Aurora MySQL이 serverless가 아니며,\n\n옵션 D는 EMR 메타스토어만 사용하므로 중앙 집중식 관리가 부족합니다. DEA 시험에서 메타스토어 마이그레이션과 serverless 요구사항은 Glue Data Catalog 외부 사용이 핵심입니다.",
     "en_q": "A company is planning to migrate on-premises Apache Hadoop clusters to Amazon EMR. The company also needs to migrate a data catalog into a persistent storage solution. The company currently stores the data catalog in an on-premises Apache Hive metastore on the Hadoop clusters. The company requires a serverless solution to migrate the data catalog. Which solution will meet these requirements MOST cost-effectively?",
     "en_opts": {
       "A": "Use AWS Database Migration Service (AWS DMS) to migrate the Hive metastore into Amazon S3. Configure AWS Glue Data Catalog to scan Amazon S3 to produce the data catalog.",
@@ -1115,7 +1115,7 @@ window.DEA_QUESTIONS = [
       "D": "기본 키를 SQL SELECT 문의 WHERE 절에서 가장 자주 사용되는 데이터 컬럼으로 변경합니다."
     },
     "answer": "B",
-    "explanation": "Amazon Redshift에서 노드 간 부하 불균형은 주로 분산 키(Distribution Key) 선택 문제입니다. 현재 분산 키가 데이터를 한 노드에 편중되게 분배하고 있는 것으로 보입니다. 옵션 B의 분산 키를 더 큰 차원을 가진 컬럼으로 변경하면 데이터가 노드 전체에 더 균등하게 분산됩니다. 정렬 키(옵션 A)는 쿼리 성능에 영향을 주지만 부하 분산과는 관계가 없고, 노드 업그레이드(옵션 C)는 리소스 증가만 하므로 부하 불균형을 해결하지 못하며, 기본 키(옵션 D)는 Redshift의 분산 개념과 다릅니다. DEA 시험에서 Redshift 성능 최적화는 분산 키와 정렬 키의 역할 이해가 핵심입니다.",
+    "explanation": "Amazon Redshift에서 노드 간 부하 불균형은 주로 분산 키(Distribution Key) 선택 문제입니다.\n\n현재 분산 키가 데이터를 한 노드에 편중되게 분배하고 있는 것으로 보입니다.\n\n옵션 B의 분산 키를 더 큰 차원을 가진 컬럼으로 변경하면 데이터가 노드 전체에 더 균등하게 분산됩니다.\n\n정렬 키(옵션 A)는 쿼리 성능에 영향을 주지만 부하 분산과는 관계가 없고, 노드 업그레이드(옵션 C)는 리소스 증가만 하므로 부하 불균형을 해결하지 못하며, 기본 키(옵션 D)는 Redshift의 분산 개념과 다릅니다.\n\nDEA 시험에서 Redshift 성능 최적화는 분산 키와 정렬 키의 역할 이해가 핵심입니다.",
     "en_q": "A company uses an Amazon Redshift provisioned cluster as its database. The Redshift cluster has five reserved ra3.4xlarge nodes and uses key distribution. A data engineer notices that one of the nodes frequently has a CPU load over 90%. SQL Queries that run on the node are queued. The other four nodes usually have a CPU load under 15% during daily operations. The data engineer wants to maintain the current number of compute nodes. The data engineer also wants to balance the load more evenly across all five compute nodes. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Change the sort key to be the data column that is most often used in a WHERE clause of the SQL SELECT statement.",
@@ -1135,7 +1135,7 @@ window.DEA_QUESTIONS = [
       "D": "AWS Glue Data Catalog를 만듭니다. AWS Glue Schema Registry를 구성합니다. Amazon Redshift Data API를 사용하여 AWS Lambda 사용자 정의 함수(UDF)를 만듭니다. 분석 부서가 사용할 데이터를 Amazon Redshift Serverless로 수집하도록 AWS Step Functions 작업을 만듭니다."
     },
     "answer": "A",
-    "explanation": "AWS Glue Data Catalog와 AWS Glue Schema Registry의 조합이 비용 효율적이고 유연합니다. Glue Data Catalog는 메타데이터를 관리하고, Schema Registry는 변화하는 데이터 구조를 버전 관리합니다. Glue 워크로드로 데이터를 Amazon Redshift Serverless로 수집하면 서버리스 아키텍처로 비용을 최소화할 수 있습니다. 분석 부서는 카탈로그를 통해 데이터를 발견하고 인덱싱할 수 있습니다. 옵션 B는 프로비저닝된 Redshift 클러스터로 비용이 높고, 옵션 C는 Spectrum 없이 탐색만 가능하며, 옵션 D는 Lambda UDF와 Step Functions 추가로 복잡성과 비용이 증가합니다. DEA 시험에서 Schema Registry는 변화하는 데이터 구조 관리에 특화된 기능으로 자주 출제됩니다.",
+    "explanation": "AWS Glue Data Catalog와 AWS Glue Schema Registry의 조합이 비용 효율적이고 유연합니다. Glue Data Catalog는 메타데이터를 관리하고, Schema Registry는 변화하는 데이터 구조를 버전 관리합니다. Glue 워크로드로 데이터를 Amazon Redshift Serverless로 수집하면 서버리스 아키텍처로 비용을 최소화할 수 있습니다. 분석 부서는 카탈로그를 통해 데이터를 발견하고 인덱싱할 수 있습니다.\n\n옵션 B는 프로비저닝된 Redshift 클러스터로 비용이 높고,\n\n옵션 C는 Spectrum 없이 탐색만 가능하며,\n\n옵션 D는 Lambda UDF와 Step Functions 추가로 복잡성과 비용이 증가합니다. DEA 시험에서 Schema Registry는 변화하는 데이터 구조 관리에 특화된 기능으로 자주 출제됩니다.",
     "en_q": "A security company stores IoT data that is in JSON format in an Amazon S3 bucket. The data structure can change when the company upgrades the IoT devices. The company wants to create a data catalog that includes the IoT data. The company's analytics department will use the data catalog to index the data. Which solution will meet these requirements MOST cost-effectively?",
     "en_opts": {
       "A": "Create an AWS Glue Data Catalog. Configure an AWS Glue Schema Registry. Create a new AWS Glue workload to orchestrate the ingestion of the data that the analytics department will use into Amazon Redshift Serverless.",
@@ -1155,7 +1155,7 @@ window.DEA_QUESTIONS = [
       "D": "AWS CloudTrail에서 데이터 이벤트의 추적을 만듭니다. 거래 S3 버킷에서 데이터를 수신하도록 추적을 구성합니다. 빈 접두사와 쓰기 전용 이벤트를 지정합니다. 로그 S3 버킷을 대상 버킷으로 지정합니다."
     },
     "answer": "D",
-    "explanation": "S3 버킷에 대한 쓰기 활동을 로깅하기 위한 가장 적은 운영 노력 솔루션은 AWS CloudTrail 데이터 이벤트입니다. 데이터 이벤트(옵션 D)는 S3 객체 수준의 모든 활동(PutObject, DeleteObject 등)을 기록합니다. CloudTrail을 설정하고 쓰기 전용 이벤트를 지정한 후 로그 버킷을 대상으로 하면 Lambda 함수나 Kinesis Firehose 같은 추가 리소스 없이 자동으로 로깅됩니다. 옵션 A, C는 Lambda 함수와 이벤트 규칙 구성이 필요하고, 옵션 B의 관리 이벤트는 S3 버킷 레벨 활동만 기록하므로 객체 수준 쓰기는 캡처하지 못합니다. DEA 시험에서 최소 운영 노력은 AWS native 로깅 서비스의 활용을 의미합니다.",
+    "explanation": "S3 버킷에 대한 쓰기 활동을 로깅하기 위한 가장 적은 운영 노력 솔루션은 AWS CloudTrail 데이터 이벤트입니다.\n\n데이터 이벤트(옵션 D)는 S3 객체 수준의 모든 활동(PutObject, DeleteObject 등)을 기록합니다.\n\nCloudTrail을 설정하고 쓰기 전용 이벤트를 지정한 후 로그 버킷을 대상으로 하면 Lambda 함수나 Kinesis Firehose 같은 추가 리소스 없이 자동으로 로깅됩니다.\n\n옵션 A, C는 Lambda 함수와 이벤트 규칙 구성이 필요하고, 옵션 B의 관리 이벤트는 S3 버킷 레벨 활동만 기록하므로 객체 수준 쓰기는 캡처하지 못합니다.\n\nDEA 시험에서 최소 운영 노력은 AWS native 로깅 서비스의 활용을 의미합니다.",
     "en_q": "A company stores details about transactions in an Amazon S3 bucket. The company wants to log all writes to the S3 bucket into another S3 bucket that is in the same AWS Region. Which solution will meet this requirement with the LEAST operational effort?",
     "en_opts": {
       "A": "Configure an S3 Event Notifications rule for all activities on the transactions S3 bucket to invoke an AWS Lambda function. Program the Lambda function to write the event to Amazon Kinesis Data Firehose. Configure Kinesis Data Firehose to write the event to the logs S3 bucket.",
@@ -1565,7 +1565,7 @@ window.DEA_QUESTIONS = [
       "D": "데이터 엔지니어의 IAM 사용자에게 AWS Glue 및 SageMaker 서비스 프린시팔에 대한 신뢰 정책에서 sts:AddAssociation 작업을 허용하는 정책을 추가합니다."
     },
     "answer": "B",
-    "explanation": "SageMaker Studio에서 AWS Glue 대화형 세션을 사용하려면 SageMaker 역할이 Glue 역할을 수임(Assume)할 수 있어야 합니다. 이를 위해 IAM 사용자의 신뢰 정책(Trust Policy)에서 sts:AssumeRole 작업을 명시적으로 구성해야 합니다. 정답 B는 AWS Glue와 SageMaker 서비스 프린시팔에 대한 수임 권한을 정책에 추가하도록 지정합니다. AWSGlueServiceRole을 직접 추가하는 것(선택지 A)은 불충분하며, AmazonSageMakerFullAccess(선택지 C)는 과도한 권한입니다. sts:AddAssociation(선택지 D)은 존재하지 않는 작업이므로 오답입니다. 이 시나리오에서는 최소 권한 원칙에 따라 크로스 서비스 역할 수임 권한이 필요합니다.",
+    "explanation": "SageMaker Studio에서 AWS Glue 대화형 세션을 사용하려면 SageMaker 역할이 Glue 역할을 수임(Assume)할 수 있어야 합니다.\n\n이를 위해 IAM 사용자의 신뢰 정책(Trust Policy)에서 sts:AssumeRole 작업을 명시적으로 구성해야 합니다.\n\n정답 B는 AWS Glue와 SageMaker 서비스 프린시팔에 대한 수임 권한을 정책에 추가하도록 지정합니다.\n\nAWSGlueServiceRole을 직접 추가하는 것(선택지 A)은 불충분하며, AmazonSageMakerFullAccess(선택지 C)는 과도한 권한입니다.\n\nsts:AddAssociation(선택지 D)은 존재하지 않는 작업이므로 오답입니다.\n\n이 시나리오에서는 최소 권한 원칙에 따라 크로스 서비스 역할 수임 권한이 필요합니다.",
     "en_q": "A data engineer is configuring Amazon SageMaker Studio to use AWS Glue interactive sessions to prepare data for machine learning (ML) models. The data engineer receives an access denied error when the data engineer tries to prepare the data by using SageMaker Studio. Which change should the engineer make to gain access to SageMaker Studio?",
     "en_opts": {
       "A": "Add the AWSGlueServiceRole managed policy to the data engineer's IAM user.",
@@ -1585,7 +1585,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon Redshift에서 저장 프로시저를 작성하여 스키마를 감지하고 데이터를 Redshift Spectrum 테이블로 추출, 변환 및 로드합니다. Amazon S3에서 테이블에 접근합니다."
     },
     "answer": "B",
-    "explanation": "이 요구사항은 다양한 소스에서 스키마를 동적으로 감지하고, 15분 SLA를 충족하며, 운영 오버헤드를 최소화해야 합니다. AWS Glue는 분류자(Classifier)를 통해 자동으로 스키마를 감지하고, Spark 기반의 ETL 작업으로 변환을 처리하며, 완전 관리형 서비스이므로 인프라 관리가 없습니다. Amazon EMR(선택지 A)은 클러스터 관리 오버헤드가 있고, Lambda(선택지 C)는 15분 내에 1TB를 처리하기에 부족하며, Redshift(선택지 D)는 데이터 웨어하우스이므로 ETL 용도에 부적합합니다. Glue는 1000개 이상의 데이터 소스를 지원하고 스키마 감지 기능이 내장되어 있어 최적의 선택입니다.",
+    "explanation": "이 요구사항은 다양한 소스에서 스키마를 동적으로 감지하고, 15분 SLA를 충족하며, 운영 오버헤드를 최소화해야 합니다.\n\nAWS Glue는 분류자(Classifier)를 통해 자동으로 스키마를 감지하고, Spark 기반의 ETL 작업으로 변환을 처리하며, 완전 관리형 서비스이므로 인프라 관리가 없습니다.\n\nAmazon EMR(선택지 A)은 클러스터 관리 오버헤드가 있고, Lambda(선택지 C)는 15분 내에 1TB를 처리하기에 부족하며, Redshift(선택지 D)는 데이터 웨어하우스이므로 ETL 용도에 부적합합니다.\n\nGlue는 1000개 이상의 데이터 소스를 지원하고 스키마 감지 기능이 내장되어 있어 최적의 선택입니다.",
     "en_q": "A company extracts approximately 1 TB of data every day from data sources such as SAP HANA, Microsoft SQL Server, MongoDB, Apache Kafka, and Amazon DynamoDB. Some of the data sources have undefined data schemas or data schemas that change. A data engineer must implement a solution that can detect the schema for these data sources. The solution must extract, transform, and load the data to an Amazon S3 bucket. The company has a service level agreement (SLA) to load the data into the S3 bucket within 15 minutes of data creation. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Use Amazon EMR to detect the schema and to extract, transform, and load the data into the S3 bucket. Create a pipeline in Apache Spark.",
@@ -1605,7 +1605,7 @@ window.DEA_QUESTIONS = [
       "D": "사용자 지정 권한 부여자가 있는 API Gateway 엔드포인트를 생성합니다. API Gateway 엔드포인트를 사용하여 S3 버킷에서 데이터를 읽습니다. REST API 호출을 시작하여 각 애플리케이션의 필요에 따라 PII를 동적으로 마스킹합니다."
     },
     "answer": "B",
-    "explanation": "S3 Object Lambda는 S3에서 객체를 검색할 때 데이터를 동적으로 변환하는 AWS 서비스입니다. 이를 통해 단일 데이터셋을 유지하면서 애플리케이션별로 다른 PII 마스킹 수준을 제공할 수 있습니다. 복사본 생성(선택지 A, C)은 저장 공간 낭비 및 데이터 동기화 문제를 야기합니다. API Gateway(선택지 D)는 추가 구성과 비용이 발생합니다. S3 Object Lambda는 Lambda 함수를 통해 객체별 동적 변환을 제공하므로, 규정 준수를 유지하면서 운영 오버헤드를 최소화합니다. 이 솔루션은 데이터 접근 시점에 실시간으로 마스킹을 적용합니다.",
+    "explanation": "S3 Object Lambda는 S3에서 객체를 검색할 때 데이터를 동적으로 변환하는 AWS 서비스입니다.\n\n이를 통해 단일 데이터셋을 유지하면서 애플리케이션별로 다른 PII 마스킹 수준을 제공할 수 있습니다.\n\n복사본 생성(선택지 A, C)은 저장 공간 낭비 및 데이터 동기화 문제를 야기합니다.\n\nAPI Gateway(선택지 D)는 추가 구성과 비용이 발생합니다.\n\nS3 Object Lambda는 Lambda 함수를 통해 객체별 동적 변환을 제공하므로, 규정 준수를 유지하면서 운영 오버헤드를 최소화합니다.\n\n이 솔루션은 데이터 접근 시점에 실시간으로 마스킹을 적용합니다.",
     "en_q": "A company has multiple applications that use datasets that are stored in an Amazon S3 bucket. The company has an ecommerce application that generates a dataset that contains personally identifiable information (PII). The company has an internal analytics application that does not require access to the PII. To comply with regulations, the company must not share PII unnecessarily. A data engineer needs to implement a solution that with redact PII dynamically, based on the needs of each application that accesses the dataset. Which solution will meet the requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Create an S3 bucket policy to limit the access each application has. Create multiple copies of the dataset. Give each dataset copy the appropriate level of redaction for the needs of the application that accesses the copy.",
@@ -1625,7 +1625,7 @@ window.DEA_QUESTIONS = [
       "D": "AWS Glue Python Shell 작업을 작성합니다. pandas를 사용하여 데이터를 변환합니다."
     },
     "answer": "D",
-    "explanation": "각 파일이 100MB 미만이므로, 복잡한 분산 처리(Spark)가 필요하지 않습니다. AWS Glue Python Shell 작업은 경량 처리에 최적화되어 있으며, pandas를 사용한 행 기반 처리가 효율적입니다. 가격 관점에서, Glue Python Shell은 소규모 데이터셋 처리에 가장 저렴합니다. EKS(선택지 A)는 과도한 인프라 관리 비용이 있고, EMR(선택지 B)도 클러스터 관리 비용이 많이 들며, Glue PySpark(선택지 C)는 100MB 파일에 대해 과도한 리소스를 사용합니다. Glue의 요금 체계상 Python Shell은 DPU(Data Processing Unit) 시간 기반으로 청구되며, 소규모 작업에서 비용 효율성이 가장 높습니다.",
+    "explanation": "각 파일이 100MB 미만이므로, 복잡한 분산 처리(Spark)가 필요하지 않습니다.\n\nAWS Glue Python Shell 작업은 경량 처리에 최적화되어 있으며, pandas를 사용한 행 기반 처리가 효율적입니다.\n\n가격 관점에서, Glue Python Shell은 소규모 데이터셋 처리에 가장 저렴합니다.\n\nEKS(선택지 A)는 과도한 인프라 관리 비용이 있고, EMR(선택지 B)도 클러스터 관리 비용이 많이 들며, Glue PySpark(선택지 C)는 100MB 파일에 대해 과도한 리소스를 사용합니다.\n\nGlue의 요금 체계상 Python Shell은 DPU(Data Processing Unit) 시간 기반으로 청구되며, 소규모 작업에서 비용 효율성이 가장 높습니다.",
     "en_q": "A data engineer needs to build an extract, transform, and load (ETL) job. The ETL job will process daily incoming .csv files that users upload to an Amazon S3 bucket. The size of each S3 object is less than 100 MB. Which solution will meet these requirements MOST cost-effectively?",
     "en_opts": {
       "A": "Write a custom Python application. Host the application on an Amazon Elastic Kubernetes Service (Amazon EKS) cluster.",
@@ -1645,7 +1645,7 @@ window.DEA_QUESTIONS = [
       "D": "ALTER TABLE Orders MODIFY PARTITION(order_date='2023-01-01') LOCATION 's3://transactions/orders/2023-01-01'; ALTER TABLE Orders MODIFY PARTITION(order_date='2023-01-02') LOCATION 's3://transactions/orders/2023-01-02';"
     },
     "answer": "A",
-    "explanation": "이 문제는 파티션을 명시적으로 추가하는 방법을 다룹니다. ALTER TABLE ... ADD PARTITION은 메타스토어에 파티션 정보를 직접 추가하며, 모든 파일을 스캔할 필요가 없습니다. MSCK REPAIR TABLE(선택지 B)은 실제로 파일 시스템을 검사하여 누락된 파티션을 찾는 명령이므로, 이 경우 모든 폴더를 스캔하게 되어 요구사항에 맞지 않습니다. REPAIR TABLE(선택지 C)은 Hive 문법이 아니므로 오답입니다. MODIFY PARTITION(선택지 D)은 기존 파티션의 위치를 수정하는 것이지, 새 파티션을 추가하는 것이 아니므로 오답입니다. ADD PARTITION 문은 정확한 경로를 지정하여 빠르게 메타데이터를 업데이트합니다.",
+    "explanation": "이 문제는 파티션을 명시적으로 추가하는 방법을 다룹니다.\n\nALTER TABLE ... ADD PARTITION은 메타스토어에 파티션 정보를 직접 추가하며, 모든 파일을 스캔할 필요가 없습니다.\n\nMSCK REPAIR TABLE(선택지 B)은 실제로 파일 시스템을 검사하여 누락된 파티션을 찾는 명령이므로, 이 경우 모든 폴더를 스캔하게 되어 요구사항에 맞지 않습니다.\n\nREPAIR TABLE(선택지 C)은 Hive 문법이 아니므로 오답입니다.\n\nMODIFY PARTITION(선택지 D)은 기존 파티션의 위치를 수정하는 것이지, 새 파티션을 추가하는 것이 아니므로 오답입니다.\n\nADD PARTITION 문은 정확한 경로를 지정하여 빠르게 메타데이터를 업데이트합니다.",
     "en_q": "A data engineer creates an AWS Glue Data Catalog table by using an AWS Glue crawler that is named Orders. The data engineer wants to add the following new partitions: s3://transactions/orders/order_date=2023-01-01 s3://transactions/orders/order_date=2023-01-02 The data engineer must edit the metadata to include the new partitions in the table without scanning all the folders and files in the location of the table. Which data definition language (DDL) statement should the data engineer use in Amazon Athena?",
     "en_opts": {
       "A": "ALTER TABLE Orders ADD PARTITION(order_date='2023-01-01') LOCATION 's3://transactions/orders/order_date=2023-01-01'; ALTER TABLE Orders ADD PARTITION(order_date='2023-01-02') LOCATION 's3://transactions/orders/order_date=2023-01-02';",
@@ -1665,7 +1665,7 @@ window.DEA_QUESTIONS = [
       "D": "LZO로 압축된 Apache Avro 형식"
     },
     "answer": "C",
-    "explanation": "Apache Parquet 형식은 Athena 쿼리에 최적화된 칼럼 기반 저장 형식입니다. Parquet는 쿼리 시 필요한 칼럼만 읽으므로 I/O를 최소화하고, 구조화된 데이터에 매우 효율적입니다. Snappy 압축은 압축률과 성능 사이의 균형을 제공합니다. .csv 형식(선택지 A)은 행 기반이므로 비효율적이며, zip은 Athena에서 지원하지 않습니다. JSON(선택지 B)은 Parquet보다 쿼리 효율이 낮습니다. Avro(선택지 D)는 Parquet보다 덜 최적화되어 있습니다. 10~15TB의 대용량 데이터셋에서 Parquet + Snappy 조합은 스캔 시간을 50% 이상 단축하고 저장 공간을 크게 절감합니다.",
+    "explanation": "Apache Parquet 형식은 Athena 쿼리에 최적화된 칼럼 기반 저장 형식입니다.\n\nParquet는 쿼리 시 필요한 칼럼만 읽으므로 I/O를 최소화하고, 구조화된 데이터에 매우 효율적입니다.\n\nSnappy 압축은 압축률과 성능 사이의 균형을 제공합니다.\n\n.csv 형식(선택지 A)은 행 기반이므로 비효율적이며, zip은 Athena에서 지원하지 않습니다.\n\nJSON(선택지 B)은 Parquet보다 쿼리 효율이 낮습니다.\n\nAvro(선택지 D)는 Parquet보다 덜 최적화되어 있습니다.\n\n10~15TB의 대용량 데이터셋에서 Parquet + Snappy 조합은 스캔 시간을 50% 이상 단축하고 저장 공간을 크게 절감합니다.",
     "en_q": "A company stores 10 to 15 TB of uncompressed .csv files in Amazon S3. The company is evaluating Amazon Athena as a one-time query engine. The company wants to transform the data to optimize query runtime and storage costs. Which file format and compression solution will meet these requirements for Athena queries?",
     "en_opts": {
       "A": ".csv format compressed with zip",
@@ -1685,7 +1685,7 @@ window.DEA_QUESTIONS = [
       "D": "파이프라인을 AWS Step Functions 워크플로우로 변환합니다. SQL 기반 데이터 품질 검사를 Python 기반 AWS Lambda 함수로 다시 생성합니다."
     },
     "answer": "C",
-    "explanation": "Amazon MWAA는 Apache Airflow의 완전 관리형 AWS 서비스입니다. 기존 Airflow DAG와 SQL 작업을 그대로 마이그레이션할 수 있으므로 리팩토링이 최소화됩니다. MWAA는 Airflow 생태계를 완벽하게 지원하므로 코드 변경이 거의 없습니다. AWS Outposts(선택지 A)는 물리적 인프라 설정이 필요하고 클라우드의 장점을 활용하지 못합니다. EC2 기반 솔루션(선택지 B)은 인프라 관리 오버헤드가 높습니다. Step Functions(선택지 D)는 Airflow와 전혀 다른 아키텍처이므로 모든 파이프라인을 다시 작성해야 하며 리팩토링이 과도합니다. MWAA는 1개 명령으로 DAG를 마이그레이션할 수 있습니다.",
+    "explanation": "Amazon MWAA는 Apache Airflow의 완전 관리형 AWS 서비스입니다.\n\n기존 Airflow DAG와 SQL 작업을 그대로 마이그레이션할 수 있으므로 리팩토링이 최소화됩니다.\n\nMWAA는 Airflow 생태계를 완벽하게 지원하므로 코드 변경이 거의 없습니다.\n\nAWS Outposts(선택지 A)는 물리적 인프라 설정이 필요하고 클라우드의 장점을 활용하지 못합니다.\n\nEC2 기반 솔루션(선택지 B)은 인프라 관리 오버헤드가 높습니다.\n\nStep Functions(선택지 D)는 Airflow와 전혀 다른 아키텍처이므로 모든 파이프라인을 다시 작성해야 하며 리팩토링이 과도합니다.\n\nMWAA는 1개 명령으로 DAG를 마이그레이션할 수 있습니다.",
     "en_q": "A company uses Apache Airflow to orchestrate the company's current on-premises data pipelines. The company runs SQL data quality check tasks as part of the pipelines. The company wants to migrate the pipelines to AWS and to use AWS managed services. Which solution will meet these requirements with the LEAST amount of refactoring?",
     "en_opts": {
       "A": "Setup AWS Outposts in the AWS Region that is nearest to the location where the company uses Airflow. Migrate the servers into Outposts hosted Amazon EC2 instances. Update the pipelines to interact with the Outposts hosted EC2 instances instead of the on-premises pipelines.",
@@ -1705,7 +1705,7 @@ window.DEA_QUESTIONS = [
       "D": "AWS Glue Workflows"
     },
     "answer": "C",
-    "explanation": "AWS Step Functions은 워크플로우를 오케스트레이션하는 서버리스 서비스로, 복잡한 작업 흐름을 효율적으로 관리할 수 있습니다. EMR 작업의 시작, 모니터링, 오류 처리를 네이티브로 지원합니다. 비용 관점에서 Step Functions는 상태 전이당 과금되므로 경제적입니다. EventBridge(선택지 A)는 이벤트 라우팅 서비스로 복잡한 워크플로우 오케스트레이션에 부적합합니다. MWAA(선택지 B)는 Airflow 기반이지만 EMR 오케스트레이션에는 Step Functions이 더 효율적입니다. Glue Workflows(선택지 D)는 Glue 작업 전용으로, EMR 작업을 오케스트레이션하기에는 제한적입니다. Step Functions은 병렬 처리, 조건부 분기, 재시도 로직을 지원하여 EMR 파이프라인의 성능을 최대화합니다.",
+    "explanation": "AWS Step Functions은 워크플로우를 오케스트레이션하는 서버리스 서비스로, 복잡한 작업 흐름을 효율적으로 관리할 수 있습니다.\n\nEMR 작업의 시작, 모니터링, 오류 처리를 네이티브로 지원합니다.\n\n비용 관점에서 Step Functions는 상태 전이당 과금되므로 경제적입니다.\n\nEventBridge(선택지 A)는 이벤트 라우팅 서비스로 복잡한 워크플로우 오케스트레이션에 부적합합니다.\n\nMWAA(선택지 B)는 Airflow 기반이지만 EMR 오케스트레이션에는 Step Functions이 더 효율적입니다.\n\nGlue Workflows(선택지 D)는 Glue 작업 전용으로, EMR 작업을 오케스트레이션하기에는 제한적입니다.\n\nStep Functions은 병렬 처리, 조건부 분기, 재시도 로직을 지원하여 EMR 파이프라인의 성능을 최대화합니다.",
     "en_q": "A company uses Amazon EMR as an extract, transform, and load (ETL) pipeline to transform data that comes from multiple sources. A data engineer must orchestrate the pipeline to maximize performance. Which AWS service will meet this requirement MOST cost effectively?",
     "en_opts": {
       "A": "Amazon EventBridge",
@@ -1725,7 +1725,7 @@ window.DEA_QUESTIONS = [
       "D": "Apache Hive를 사용하여 분할된 테이블을 생성합니다. AWS Lambda 함수를 사용하여 모든 ALB 접근 로그를 변환합니다."
     },
     "answer": "B",
-    "explanation": "이 문제는 기존 테이블의 성능을 개선하기 위한 최선의 방법을 다룹니다. AWS Glue 크롤러는 자동으로 스키마를 감지하고 분류자를 사용하여 ALB 로그 형식을 인식하며, 자동으로 파티션 메타데이터를 생성합니다. 크롤러는 정기적으로 실행되도록 예약할 수 있으므로 운영 노력이 최소화됩니다. Glue 작업(선택지 A)은 수동으로 스키마를 정의해야 하므로 노력이 더 필요합니다. Lambda 기반 솔루션(선택지 C)은 변환 로직을 작성하고 유지보수해야 하며 복잡합니다. Apache Hive(선택지 D)는 온프레미스 도구이므로 AWS 환경에 부적합합니다. Glue 크롤러는 완전 자동화되어 추가 구성 없이 작동합니다.",
+    "explanation": "이 문제는 기존 테이블의 성능을 개선하기 위한 최선의 방법을 다룹니다.\n\nAWS Glue 크롤러는 자동으로 스키마를 감지하고 분류자를 사용하여 ALB 로그 형식을 인식하며, 자동으로 파티션 메타데이터를 생성합니다.\n\n크롤러는 정기적으로 실행되도록 예약할 수 있으므로 운영 노력이 최소화됩니다.\n\nGlue 작업(선택지 A)은 수동으로 스키마를 정의해야 하므로 노력이 더 필요합니다.\n\nLambda 기반 솔루션(선택지 C)은 변환 로직을 작성하고 유지보수해야 하며 복잡합니다.\n\nApache Hive(선택지 D)는 온프레미스 도구이므로 AWS 환경에 부적합합니다.\n\nGlue 크롤러는 완전 자동화되어 추가 구성 없이 작동합니다.",
     "en_q": "An online retail company stores Application Load Balancer (ALB) access logs in an Amazon S3 bucket. The company wants to use Amazon Athena to query the logs to analyze traffic patterns. A data engineer creates an unpartitioned table in Athena. As the amount of the data gradually increases, the response time for queries also increases. The data engineer wants to improve the query performance in Athena. Which solution will meet these requirements with the LEAST operational effort?",
     "en_opts": {
       "A": "Create an AWS Glue job that determines the schema of all ALB access logs and writes the partition metadata to AWS Glue Data Catalog.",
@@ -1745,7 +1745,7 @@ window.DEA_QUESTIONS = [
       "D": "AWS Glue Workflow를 호출하는 AWS Lambda 함수를 설정합니다. S3 객체 생성을 Lambda 함수의 트리거로 설정합니다."
     },
     "answer": "B",
-    "explanation": "이 문제는 파일 전송 완료 후 자동으로 Glue 워크플로우를 실행해야 합니다. Amazon EventBridge는 S3 File Gateway에서 발생하는 S3 객체 생성 이벤트를 감지하고, 이를 Glue 워크플로우로 직접 라우팅할 수 있습니다. 이는 완전 자동화되고 운영 오버헤드가 없습니다. 예약된 이벤트(선택지 A)는 고정된 시간에만 실행되므로 유연성이 없습니다. 온디맨드 워크플로우(선택지 C)는 수동 개입이 필요하므로 자동화가 아닙니다. Lambda(선택지 D)는 추가 코드 작성과 유지보수가 필요합니다. EventBridge는 S3 이벤트 알림을 기본으로 지원하며, Glue 워크플로우와의 통합이 직관적입니다.",
+    "explanation": "이 문제는 파일 전송 완료 후 자동으로 Glue 워크플로우를 실행해야 합니다.\n\nAmazon EventBridge는 S3 File Gateway에서 발생하는 S3 객체 생성 이벤트를 감지하고, 이를 Glue 워크플로우로 직접 라우팅할 수 있습니다.\n\n이는 완전 자동화되고 운영 오버헤드가 없습니다.\n\n예약된 이벤트(선택지 A)는 고정된 시간에만 실행되므로 유연성이 없습니다.\n\n온디맨드 워크플로우(선택지 C)는 수동 개입이 필요하므로 자동화가 아닙니다.\n\nLambda(선택지 D)는 추가 코드 작성과 유지보수가 필요합니다.\n\nEventBridge는 S3 이벤트 알림을 기본으로 지원하며, Glue 워크플로우와의 통합이 직관적입니다.",
     "en_q": "A company has a business intelligence platform on AWS. The company uses an AWS Storage Gateway Amazon S3 File Gateway to transfer files from the company's on-premises environment to an Amazon S3 bucket. A data engineer needs to setup a process that will automatically launch an AWS Glue workflow to run a series of AWS Glue jobs when each file transfer finishes successfully. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Determine when the file transfers usually finish based on previous successful file transfers. Set up an Amazon EventBridge scheduled event to initiate the AWS Glue jobs at that time of day.",
@@ -1767,7 +1767,7 @@ window.DEA_QUESTIONS = [
     },
     "answer": "A",
     "source": "https://www.examtopics.com/discussions/amazon/view/142537-exam-aws-certified-data-engineer-associate-dea-c01-topic-1/",
-    "explanation": "이 문제는 3가지 소스의 데이터를 결합하면서 Redshift 비용을 최적화해야 합니다. 정답은 A와 C 조합입니다. Federated Query(선택지 A)는 Redshift에서 PostgreSQL의 실시간 데이터를 직접 쿼리할 수 있게 하며, Spectrum(선택지 C)을 통해 S3의 보관 데이터에 접근합니다. 이렇게 하면 Redshift에는 15개월 데이터만 유지하면서 필요할 때 과거 데이터를 조회할 수 있습니다. Spectrum(선택지 B)은 PostgreSQL을 쿼리하지 못하므로 A와 함께 사용할 수 없습니다. S3 Glacier(선택지 D)는 쿼리 성능이 좋지 않으므로 분석용으로 부적합합니다. 구체화된 뷰(선택지 E)는 비용 절감이 되지 않습니다. A+C 조합은 다양한 소스의 데이터를 효율적으로 통합하고 비용을 최적화합니다.",
+    "explanation": "이 문제는 3가지 소스의 데이터를 결합하면서 Redshift 비용을 최적화해야 합니다.\n\n정답은 A와 C 조합입니다.\n\nFederated Query(선택지 A)는 Redshift에서 PostgreSQL의 실시간 데이터를 직접 쿼리할 수 있게 하며, Spectrum(선택지 C)을 통해 S3의 보관 데이터에 접근합니다.\n\n이렇게 하면 Redshift에는 15개월 데이터만 유지하면서 필요할 때 과거 데이터를 조회할 수 있습니다.\n\nSpectrum(선택지 B)은 PostgreSQL을 쿼리하지 못하므로 A와 함께 사용할 수 없습니다.\n\nS3 Glacier(선택지 D)는 쿼리 성능이 좋지 않으므로 분석용으로 부적합합니다.\n\n구체화된 뷰(선택지 E)는 비용 절감이 되지 않습니다.\n\nA+C 조합은 다양한 소스의 데이터를 효율적으로 통합하고 비용을 최적화합니다.",
     "en_q": "A retail company uses Amazon Aurora PostgreSQL to process and store live transactional data. The company uses an Amazon Redshift cluster for a data warehouse. An extract, transform, and load (ETL) job runs every morning to update the Redshift cluster with new data from the PostgreSQL database. The company has grown rapidly and needs to cost optimize the Redshift cluster. A data engineer needs to create a solution to archive historical data. The data engineer must be able to run analytics queries that effectively combine data from live transactional data in PostgreSQL, current data in Redshift, and archived historical data. The solution must keep only the most recent 15 months of data in Amazon Redshift to reduce costs. Which combination of steps will meet these requirements? (Choose two.)",
     "en_opts": {
       "A": "Configure the Amazon Redshift Federated Query feature to query live transactional data that is in the PostgreSQL database.",
@@ -1787,7 +1787,7 @@ window.DEA_QUESTIONS = [
       "D": "파티션 키를 시설 ID에서 캡처 날짜로 변경합니다."
     },
     "answer": "A",
-    "explanation": "이 문제는 Kinesis의 호트스팟(Hot Shard) 문제를 다룹니다. 시설 ID를 파티션 키로 사용하면 특정 시설의 데이터가 한 샤드에 집중되어 그 샤드의 처리량 한계에 도달합니다. WriteThroughputExceeded 예외는 파티션 키 분포가 불균형하기 때문입니다. 무작위 키로 변경하면 데이터가 모든 샤드에 균등하게 분산되어 처리량을 최대화합니다. 샤드 수 증가(선택지 B)는 비용만 증가시킬 뿐 근본적인 해결책이 아닙니다. 데이터 보관(선택지 C)은 문제와 무관합니다. 캡처 날짜로 변경(선택지 D)도 분포 문제를 해결하지 못합니다. 무작위 키는 Kinesis 모범 사례에서 권장하는 샤드 분산 최적화 방법입니다.",
+    "explanation": "이 문제는 Kinesis의 호트스팟(Hot Shard) 문제를 다룹니다.\n\n시설 ID를 파티션 키로 사용하면 특정 시설의 데이터가 한 샤드에 집중되어 그 샤드의 처리량 한계에 도달합니다.\n\nWriteThroughputExceeded 예외는 파티션 키 분포가 불균형하기 때문입니다.\n\n무작위 키로 변경하면 데이터가 모든 샤드에 균등하게 분산되어 처리량을 최대화합니다.\n\n샤드 수 증가(선택지 B)는 비용만 증가시킬 뿐 근본적인 해결책이 아닙니다.\n\n데이터 보관(선택지 C)은 문제와 무관합니다.\n\n캡처 날짜로 변경(선택지 D)도 분포 문제를 해결하지 못합니다.\n\n무작위 키는 Kinesis 모범 사례에서 권장하는 샤드 분산 최적화 방법입니다.",
     "en_q": "A manufacturing company has many IoT devices in facilities around the world. The company uses Amazon Kinesis Data Streams to collect data from the devices. The data includes device ID, capture date, measurement type, measurement value, and facility ID. The company uses facility ID as the partition key. The company's operations team recently observed many WriteThroughputExceeded exceptions. The operations team found that some shards were heavily used but other shards were generally idle. How should the company resolve the issues that the operations team observed?",
     "en_opts": {
       "A": "Change the partition key from facility ID to a randomly generated key.",
@@ -1807,7 +1807,7 @@ window.DEA_QUESTIONS = [
       "D": "EXPLAIN FROM sales;"
     },
     "answer": "C",
-    "explanation": "EXPLAIN ANALYZE SELECT는 SQL 쿼리의 실행 계획과 실제 실행 통계를 모두 제공합니다. EXPLAIN은 예상 실행 계획을 보여주고, ANALYZE는 실제 실행 후 비용 정보를 추가합니다. 이를 통해 각 작업의 계산 비용, 행 개수, 실행 시간 등을 확인할 수 있습니다. EXPLAIN만 사용(선택지 A)하면 실제 비용 데이터가 없으므로 부족합니다. EXPLAIN ANALYZE FROM(선택지 B)은 FROM 없이는 사용할 수 없는 잘못된 문법입니다. EXPLAIN FROM(선택지 D)도 FROM 없는 부정확한 문법입니다. C가 Athena에서 쿼리 성능 분석을 위한 올바른 문법이며, 이를 통해 쿼리 최적화를 위한 상세한 정보를 얻을 수 있습니다.",
+    "explanation": "EXPLAIN ANALYZE SELECT는 SQL 쿼리의 실행 계획과 실제 실행 통계를 모두 제공합니다.\n\nEXPLAIN은 예상 실행 계획을 보여주고, ANALYZE는 실제 실행 후 비용 정보를 추가합니다.\n\n이를 통해 각 작업의 계산 비용, 행 개수, 실행 시간 등을 확인할 수 있습니다.\n\nEXPLAIN만 사용(선택지 A)하면 실제 비용 데이터가 없으므로 부족합니다.\n\nEXPLAIN ANALYZE FROM(선택지 B)은 FROM 없이는 사용할 수 없는 잘못된 문법입니다.\n\nEXPLAIN FROM(선택지 D)도 FROM 없는 부정확한 문법입니다.\n\nC가 Athena에서 쿼리 성능 분석을 위한 올바른 문법이며, 이를 통해 쿼리 최적화를 위한 상세한 정보를 얻을 수 있습니다.",
     "en_q": "A data engineer wants to improve the performance of SQL queries in Amazon Athena that run against a sales data table. The data engineer wants to understand the execution plan of a specific SQL statement. The data engineer also wants to see the computational cost of each operation in a SQL query. Which statement does the data engineer need to run to meet these requirements?",
     "en_opts": {
       "A": "EXPLAIN SELECT * FROM sales;",
@@ -1827,7 +1827,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon Kinesis Data Streams 데이터 스트림을 구성하여 Splunk를 대상으로 사용합니다. CloudWatch Logs에서 데이터 스트림으로 플로우 로그를 전송하는 AWS Lambda 함수를 생성합니다."
     },
     "answer": "B",
-    "explanation": "이 문제는 CloudWatch Logs에서 Splunk로 데이터를 전달하는 가장 효율적인 방법을 다룹니다. Amazon Kinesis Data Firehose는 CloudWatch Logs 구독 필터와 기본으로 통합되어 있으며, 자동으로 Splunk로 데이터를 전달합니다. Lambda 함수가 필요 없으므로 운영 오버헤드가 최소화됩니다. Kinesis Data Streams(선택지 A)는 수동으로 Lambda 함수를 작성해야 하므로 추가 오버헤드가 있습니다. Firehose + Lambda(선택지 C)는 필요 이상의 복잡성을 추가합니다. Streams + Lambda(선택지 D)도 마찬가지로 불필요한 구성입니다. Firehose는 완전 관리형이며, 버퍼링, 변환, 배달 실패 처리 등이 자동으로 처리됩니다.",
+    "explanation": "이 문제는 CloudWatch Logs에서 Splunk로 데이터를 전달하는 가장 효율적인 방법을 다룹니다.\n\nAmazon Kinesis Data Firehose는 CloudWatch Logs 구독 필터와 기본으로 통합되어 있으며, 자동으로 Splunk로 데이터를 전달합니다.\n\nLambda 함수가 필요 없으므로 운영 오버헤드가 최소화됩니다.\n\nKinesis Data Streams(선택지 A)는 수동으로 Lambda 함수를 작성해야 하므로 추가 오버헤드가 있습니다.\n\nFirehose + Lambda(선택지 C)는 필요 이상의 복잡성을 추가합니다.\n\nStreams + Lambda(선택지 D)도 마찬가지로 불필요한 구성입니다.\n\nFirehose는 완전 관리형이며, 버퍼링, 변환, 배달 실패 처리 등이 자동으로 처리됩니다.",
     "en_q": "A company plans to provision a log delivery stream within a VPC. The company configured the VPC flow logs to publish to Amazon CloudWatch Logs. The company needs to send the flow logs to Splunk in near real time for further analysis. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Configure an Amazon Kinesis Data Streams data stream to use Splunk as the destination. Create a CloudWatch Logs subscription filter to send log events to the data stream.",
@@ -1847,7 +1847,7 @@ window.DEA_QUESTIONS = [
       "D": "AWS Resource Access Manager(AWS RAM)의 리소스 공유를 생성하여 IAM 사용자에게 접근 권한을 부여합니다."
     },
     "answer": "A",
-    "explanation": "AWS Lake Formation은 데이터 레이크의 접근 제어를 위해 특화된 서비스입니다. Lake Formation은 칼럼 수준의 세밀한(Fine-grained) 접근 제어를 지원하고, IAM 역할을 기반으로 정책 기반 규칙을 정의할 수 있습니다. Lake Formation은 S3, Glue Data Catalog와 통합되어 있으며, Athena 쿼리에서 자동으로 접근 제어를 적용합니다. IAM 리소스 기반 정책(선택지 B)은 테이블 수준 제어만 가능하므로 칼럼 수준 제어가 불가능합니다. IAM 신원 기반 정책(선택지 C)도 마찬가지로 세밀한 제어가 어렵습니다. AWS RAM(선택지 D)은 조직 간 리소스 공유 용도이지, 칼럼 수준 접근 제어가 아닙니다. Lake Formation은 데이터 거버넌스 및 접근 제어 전문 서비스입니다.",
+    "explanation": "AWS Lake Formation은 데이터 레이크의 접근 제어를 위해 특화된 서비스입니다.\n\nLake Formation은 칼럼 수준의 세밀한(Fine-grained) 접근 제어를 지원하고, IAM 역할을 기반으로 정책 기반 규칙을 정의할 수 있습니다.\n\nLake Formation은 S3, Glue Data Catalog와 통합되어 있으며, Athena 쿼리에서 자동으로 접근 제어를 적용합니다.\n\nIAM 리소스 기반 정책(선택지 B)은 테이블 수준 제어만 가능하므로 칼럼 수준 제어가 불가능합니다.\n\nIAM 신원 기반 정책(선택지 C)도 마찬가지로 세밀한 제어가 어렵습니다.\n\nAWS RAM(선택지 D)은 조직 간 리소스 공유 용도이지, 칼럼 수준 접근 제어가 아닙니다.\n\nLake Formation은 데이터 거버넌스 및 접근 제어 전문 서비스입니다.",
     "en_q": "A company has a data lake on AWS. The data lake ingests sources of data from business units. The company uses Amazon Athena for queries. The storage layer is Amazon S3 with an AWS Glue Data Catalog as a metadata repository. The company wants to make the data available to data scientists and business analysts. However, the company first needs to manage fine-grained, column-level data access for Athena based on the user roles and responsibilities. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Set up AWS Lake Formation. Define security policy-based rules for the users and applications by IAM role in Lake Formation.",
@@ -1867,7 +1867,7 @@ window.DEA_QUESTIONS = [
       "D": "각 실행 후 처리된 객체를 Amazon S3에서 삭제하도록 ETL 작업을 구성합니다."
     },
     "answer": "B",
-    "explanation": "AWS Glue Job Bookmarks는 이전에 처리된 데이터를 자동으로 추적하고, 각 실행 후 상태를 업데이트하는 기능입니다. 활성화하면 ETL 작업이 자동으로 증분 데이터만 처리합니다. 코딩이 필요 없고, 설정 파라미터만 변경하면 됩니다. DynamoDB 로깅(선택지 A)은 수동으로 상태를 관리해야 하므로 추가 코딩이 필요합니다. Job Metrics(선택지 C)는 메트릭 수집일 뿐, 증분 처리를 제어하지 않습니다. 파일 삭제(선택지 D)는 위험하며 증분 처리 자동화가 아닙니다. Job Bookmarks는 Glue의 내장 기능으로 DynamicFrame과 완벽하게 호환되며, 코딩 없이 활성화만으로 작동합니다.",
+    "explanation": "AWS Glue Job Bookmarks는 이전에 처리된 데이터를 자동으로 추적하고, 각 실행 후 상태를 업데이트하는 기능입니다.\n\n활성화하면 ETL 작업이 자동으로 증분 데이터만 처리합니다.\n\n코딩이 필요 없고, 설정 파라미터만 변경하면 됩니다.\n\nDynamoDB 로깅(선택지 A)은 수동으로 상태를 관리해야 하므로 추가 코딩이 필요합니다.\n\nJob Metrics(선택지 C)는 메트릭 수집일 뿐, 증분 처리를 제어하지 않습니다.\n\n파일 삭제(선택지 D)는 위험하며 증분 처리 자동화가 아닙니다.\n\nJob Bookmarks는 Glue의 내장 기능으로 DynamicFrame과 완벽하게 호환되며, 코딩 없이 활성화만으로 작동합니다.",
     "en_q": "A company has developed several AWS Glue extract, transform, and load (ETL) jobs to validate and transform data from Amazon S3. The ETL jobs load the data into Amazon RDS for MySQL in batches once every day. The ETL jobs use a DynamicFrame to read the S3 data. The ETL jobs currently process all the data that is in the S3 bucket. However, the company wants the jobs to process only the daily incremental data. Which solution will meet this requirement with the LEAST coding effort?",
     "en_opts": {
       "A": "Create an ETL job that reads the S3 file status and logs the status in Amazon DynamoDB.",
@@ -1887,7 +1887,7 @@ window.DEA_QUESTIONS = [
       "D": "플로우 로그를 Apache Parquet 형식으로 Amazon S3에 발행합니다. Amazon Athena를 사용하여 분석합니다."
     },
     "answer": "D",
-    "explanation": "VPC Flow Logs를 분석할 때는 저장소와 쿼리 엔진의 조합을 고려해야 합니다. S3 + Athena(선택지 C, D)는 CloudWatch Logs + Athena(선택지 A)보다 비용 효율적입니다. CloudWatch Logs는 보관 비용이 높습니다. S3 텍스트 형식(선택지 C)은 Parquet(선택지 D)보다 스캔 비용이 높으며, Parquet은 칼럼 기반 형식으로 Athena 쿼리 시 필요한 데이터만 읽으므로 비용 절감 효과가 큽니다. OpenSearch(선택지 B)는 별도 클러스터 유지 비용이 발생하므로 가장 비싸습니다. 비용 측면에서 S3 + Parquet + Athena 조합이 최적이며, VPC Flow Logs의 구조화된 데이터에 완벽하게 적합합니다.",
+    "explanation": "VPC Flow Logs를 분석할 때는 저장소와 쿼리 엔진의 조합을 고려해야 합니다.\n\nS3 + Athena(선택지 C, D)는 CloudWatch Logs + Athena(선택지 A)보다 비용 효율적입니다.\n\nCloudWatch Logs는 보관 비용이 높습니다.\n\nS3 텍스트 형식(선택지 C)은 Parquet(선택지 D)보다 스캔 비용이 높으며, Parquet은 칼럼 기반 형식으로 Athena 쿼리 시 필요한 데이터만 읽으므로 비용 절감 효과가 큽니다.\n\nOpenSearch(선택지 B)는 별도 클러스터 유지 비용이 발생하므로 가장 비싸습니다.\n\n비용 측면에서 S3 + Parquet + Athena 조합이 최적이며, VPC Flow Logs의 구조화된 데이터에 완벽하게 적합합니다.",
     "en_q": "An online retail company has an application that runs on Amazon EC2 instances that are in a VPC. The company wants to collect flow logs for the VPC and analyze network traffic. Which solution will meet these requirements MOST cost-effectively?",
     "en_opts": {
       "A": "Publish flow logs to Amazon CloudWatch Logs. Use Amazon Athena for analytics.",
@@ -1907,7 +1907,7 @@ window.DEA_QUESTIONS = [
       "D": "Redshift 예약 노드를 같은 인스턴스 패밀리의 더 큰 인스턴스 크기로 업그레이드합니다."
     },
     "answer": "A",
-    "explanation": "이 문제는 작고 정적인 테이블(매장 위치)의 브로드캐스트 성능을 최적화하는 방법을 다룹니다. ALL 분배는 각 노드에 테이블의 전체 복사본을 저장하므로, 조인 시 브로드캐스트가 필요하지 않습니다. 매장 위치 테이블은 거의 변경되지 않으므로 ALL 분배에 이상적입니다. KEY 분배(선택지 B)는 여전히 일부 브로드캐스트를 필요로 합니다. 정렬 키 추가(선택지 C)는 쿼리 성능에 큰 영향을 주지 않습니다. 인스턴스 업그레이드(선택지 D)는 비용이 증가하고 근본적인 해결책이 아닙니다. ALL 분배는 작은 차원 테이블(Dimension Table)의 표준 최적화 기법이며, 저장 공간이 충분하면 최고의 성능을 제공합니다.",
+    "explanation": "이 문제는 작고 정적인 테이블(매장 위치)의 브로드캐스트 성능을 최적화하는 방법을 다룹니다.\n\nALL 분배는 각 노드에 테이블의 전체 복사본을 저장하므로, 조인 시 브로드캐스트가 필요하지 않습니다.\n\n매장 위치 테이블은 거의 변경되지 않으므로 ALL 분배에 이상적입니다.\n\nKEY 분배(선택지 B)는 여전히 일부 브로드캐스트를 필요로 합니다.\n\n정렬 키 추가(선택지 C)는 쿼리 성능에 큰 영향을 주지 않습니다.\n\n인스턴스 업그레이드(선택지 D)는 비용이 증가하고 근본적인 해결책이 아닙니다.\n\nALL 분배는 작은 차원 테이블(Dimension Table)의 표준 최적화 기법이며, 저장 공간이 충분하면 최고의 성능을 제공합니다.",
     "en_q": "A retail company stores transactions, store locations, and customer information tables in four reserved ra3.4xlarge Amazon Redshift cluster nodes. All three tables use even table distribution. The company updates the store location table only once or twice every few years. A data engineer notices that Redshift queues are slowing down because the whole store location table is constantly being broadcast to all four compute nodes for most queries. The data engineer wants to speed up the query performance by minimizing the broadcasting of the store location table. Which solution will meet these requirements in the MOST cost-effective way?",
     "en_opts": {
       "A": "Change the distribution style of the store location table from EVEN distribution to ALL distribution.",
@@ -1927,7 +1927,7 @@ window.DEA_QUESTIONS = [
       "D": "Select * from Sales where city_name ~ '^(San&El)*';"
     },
     "answer": "B",
-    "explanation": "Amazon Redshift는 POSIX 정규 표현식을 지원합니다. 이 쿼리는 'San' 또는 'El'로 시작하는 city_name을 찾아야 합니다. 정규 표현식에서 ^ 기호는 문자열의 시작을 나타냅니다. (San|El) 부분은 'San' 또는 'El'을 의미합니다. 따라서 '^(San|El)'는 'San' 또는 'El'로 시작하는 문자열을 일치시킵니다. 선택지 A의 $ 기호는 문자열의 끝을 나타내므로, '$(San|El)*'는 문자열 끝에서 San 또는 El을 찾습니다. 선택지 C, D의 & 기호는 AND 연산자가 아니라 역할이 없으므로 오답입니다. 또한 * 기호는 0개 이상을 의미하지만, (San|El)* 구문은 문자 자체에 * 가 붙지 않았으므로 단순히 선택 항목을 의미합니다. 정답은 B입니다.",
+    "explanation": "Amazon Redshift는 POSIX 정규 표현식을 지원합니다.\n\n이 쿼리는 'San' 또는 'El'로 시작하는 city_name을 찾아야 합니다.\n\n정규 표현식에서 ^ 기호는 문자열의 시작을 나타냅니다.\n\n(San|El) 부분은 'San' 또는 'El'을 의미합니다.\n\n따라서 '^(San|El)'는 'San' 또는 'El'로 시작하는 문자열을 일치시킵니다.\n\n선택지 A의 $ 기호는 문자열의 끝을 나타내므로, '$(San|El)*'는 문자열 끝에서 San 또는 El을 찾습니다.\n\n선택지 C, D의 & 기호는 AND 연산자가 아니라 역할이 없으므로 오답입니다.\n\n또한 * 기호는 0개 이상을 의미하지만, (San|El)* 구문은 문자 자체에 * 가 붙지 않았으므로 단순히 선택 항목을 의미합니다.\n\n정답은 B입니다.",
     "en_q": "A company has a data warehouse that contains a table that is named Sales. The company stores the table in Amazon Redshift. The table includes a column that is named city_name. The company wants to query the table to find all rows that have a city_name that starts with \"San\" or \"El\". Which SQL query will meet this requirement?",
     "en_opts": {
       "A": "Select * from Sales where city_name ~ '$(San|El)*';",
@@ -1947,7 +1947,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon CloudWatch를 사용하여 DMS 작업을 모니터링합니다. CDCLatencySource 메트릭을 검토하여 소스 데이터베이스에서 CDC의 지연을 확인합니다."
     },
     "answer": "D",
-    "explanation": "AWS DMS의 CDC(Change Data Capture) 지연 진단에서 핵심은 지연의 원인을 정확히 파악하는 것입니다. CDCLatencySource 메트릭은 소스 데이터베이스에서 DMS로 데이터가 도달하는 데 걸리는 시간을 측정하며, 이를 통해 PostgreSQL 소스가 실제로 지연의 원인인지 확인할 수 있습니다. 반면 CDCIncomingChanges 메트릭은 DMS가 소스에서 받은 변경사항의 개수를 나타낼 뿐 실제 지연 시간을 반영하지 않습니다. 지연을 정량적으로 측정하려면 CDCLatencySource 메트릭이 필수적입니다. 이 메트릭이 높으면 소스 데이터베이스가 병목이고, 낮으면 Redshift 쪽이 병목일 가능성이 있습니다. DMS 작업의 상세 메트릭 분석을 통해 문제의 정확한 원인을 특정할 수 있습니다.",
+    "explanation": "AWS DMS의 CDC(Change Data Capture) 지연 진단에서 핵심은 지연의 원인을 정확히 파악하는 것입니다.\n\nCDCLatencySource 메트릭은 소스 데이터베이스에서 DMS로 데이터가 도달하는 데 걸리는 시간을 측정하며, 이를 통해 PostgreSQL 소스가 실제로 지연의 원인인지 확인할 수 있습니다.\n\n반면 CDCIncomingChanges 메트릭은 DMS가 소스에서 받은 변경사항의 개수를 나타낼 뿐 실제 지연 시간을 반영하지 않습니다.\n\n지연을 정량적으로 측정하려면 CDCLatencySource 메트릭이 필수적입니다.\n\n이 메트릭이 높으면 소스 데이터베이스가 병목이고, 낮으면 Redshift 쪽이 병목일 가능성이 있습니다.\n\nDMS 작업의 상세 메트릭 분석을 통해 문제의 정확한 원인을 특정할 수 있습니다.",
     "en_q": "A company needs to send customer call data from its on-premises PostgreSQL database to AWS to generate near real-time insights. The solution must capture and load updates from operational data stores that run in the PostgreSQL database. The data changes continuously. A data engineer configures an AWS Database Migration Service (AWS DMS) ongoing replication task. The task reads changes in near real time from the PostgreSQL source database transaction logs for each table. The task then sends the data to an Amazon Redshift cluster for processing. The data engineer discovers latency issues during the change data capture (CDC) of the task. The data engineer thinks that the PostgreSQL source database is causing the high latency. Which solution will confirm that the PostgreSQL database is the source of the high latency?",
     "en_opts": {
       "A": "Use Amazon CloudWatch to monitor the DMS task. Examine the CDCIncomingChanges metric to identify delays in the CDC from the source database.",
@@ -1967,7 +1967,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon Managed Service for Apache Flink(이전의 Amazon Kinesis Data Analytics) 및 Amazon Kinesis Data Firehose를 사용하여 데이터를 S3 버킷으로 전달합니다. Kinesis Data Firehose에 5초 버퍼 간격을 사용합니다."
     },
     "answer": "C",
-    "explanation": "IoT 센서에서 매 10초마다 100KB 데이터를 전송하고, 다운스트림이 30초마다 읽는 상황에서 가장 낮은 지연을 달성하려면 Kinesis Data Streams의 기본 설정(1초 배치, 1MB 버퍼)을 조정해야 합니다. Kinesis Client Library로 애플리케이션 수준에서 5초 버퍼를 설정하면, 최대 5초 지연으로 효율적인 배치 처리가 가능합니다. Firehose의 기본 버퍼 간격(60초)은 너무 길고, 스트림만으로는 S3에 직접 쓸 수 없으며 버퍼링 제어가 제한적입니다. Flink를 추가하면 복잡성이 증가합니다. 결국 Kinesis Data Streams + Kinesis Client Library + 5초 버퍼 조정이 지연과 비용의 최적 균형을 제공합니다.",
+    "explanation": "IoT 센서에서 매 10초마다 100KB 데이터를 전송하고, 다운스트림이 30초마다 읽는 상황에서 가장 낮은 지연을 달성하려면 Kinesis Data Streams의 기본 설정(1초 배치, 1MB 버퍼)을 조정해야 합니다.\n\nKinesis Client Library로 애플리케이션 수준에서 5초 버퍼를 설정하면, 최대 5초 지연으로 효율적인 배치 처리가 가능합니다.\n\nFirehose의 기본 버퍼 간격(60초)은 너무 길고, 스트림만으로는 S3에 직접 쓸 수 없으며 버퍼링 제어가 제한적입니다.\n\nFlink를 추가하면 복잡성이 증가합니다.\n\n결국 Kinesis Data Streams + Kinesis Client Library + 5초 버퍼 조정이 지연과 비용의 최적 균형을 제공합니다.",
     "en_q": "A lab uses IoT sensors to monitor humidity, temperature, and pressure for a project. The sensors send 100 KB of data every 10 seconds. A downstream process will read the data from an Amazon S3 bucket every 30 seconds. Which solution will deliver the data to the S3 bucket with the LEAST latency?",
     "en_opts": {
       "A": "Use Amazon Kinesis Data Streams and Amazon Kinesis Data Firehose to deliver the data to the S3 bucket. Use the default buffer interval for Kinesis Data Firehose.",
@@ -1988,7 +1988,7 @@ window.DEA_QUESTIONS = [
       "E": "아카이브된 데이터의 경우 Amazon SageMaker를 사용하여 데이터 변환을 수행합니다."
     },
     "answer": "AD",
-    "explanation": "【핵심 용어】▸ AWS Glue Crawler — 자동으로 스키마 감지 및 카탈로그 생성 ▸ Amazon EMR — 대규모 배치 처리 및 복잡한 변환 엔진 【정답 포인트】▸ 일일 300GB 정형 데이터: Glue Crawler로 스키마 감지 후 Glue ETL 처리(자동 스케일링, 관리형) ▸ 테라바이트 아카이브 데이터: EMR로 분산 처리(Spark/Hadoop 활용, 복잡 변환 능력) ▸ 조합 이유: 일일+아카이브 모두 비용 효율적 처리 가능 【오답 체크】(B) Athena는 스키마 감지가 아닌 쿼리 엔진 (C) Redshift는 데이터웨어하우스, ETL 용도로 오버스펙 (E) SageMaker는 머신러닝 모델용, 데이터 변환 아님 【시험 포인트】▸ 정형/반정형 데이터 + 스케줄: Glue Crawler + Glue Job ▸ 대규모 배치 변환: EMR 선택",
+    "explanation": "【핵심 용어】\n▸ AWS Glue Crawler — 자동으로 스키마 감지 및 카탈로그 생성\n▸ Amazon EMR — 대규모 배치 처리 및 복잡한 변환 엔진\n\n【정답 포인트】\n▸ 일일 300GB 정형 데이터: Glue Crawler로 스키마 감지 후 Glue ETL 처리(자동 스케일링, 관리형)\n▸ 테라바이트 아카이브 데이터: EMR로 분산 처리(Spark/Hadoop 활용, 복잡 변환 능력)\n▸ 조합 이유: 일일+아카이브 모두 비용 효율적 처리 가능\n\n【오답 체크】\n(B) Athena는 스키마 감지가 아닌 쿼리 엔진\n(C) Redshift는 데이터웨어하우스, ETL 용도로 오버스펙\n(E) SageMaker는 머신러닝 모델용, 데이터 변환 아님\n\n【시험 포인트】\n▸ 정형/반정형 데이터 + 스케줄: Glue Crawler + Glue Job\n▸ 대규모 배치 변환: EMR 선택",
     "en_q": "A company wants to use machine learning (ML) to perform analytics on data that is in an Amazon S3 data lake. The company has two data transformation requirements that will give consumers within the company the ability to create reports. The company must perform daily transformations on 300 GB of data that is in a variety format that must arrive in Amazon S3 at a scheduled time. The company must perform one-time transformations of terabytes of archived data that is in the S3 data lake. The company uses Amazon Managed Workflows for Apache Airflow (Amazon MWAA) Directed Acyclic Graphs (DAGs) to orchestrate processing. Which combination of tasks should the company schedule in the Amazon MWAA DAGs to meet these requirements MOST cost-effectively? (Choose two.)",
     "en_opts": {
       "A": "For daily incoming data, use AWS Glue crawlers to scan and identify the schema.",
@@ -2009,7 +2009,7 @@ window.DEA_QUESTIONS = [
       "D": "중앙화된 데이터 스키마 및 메타데이터 저장소를 유지하기 위해 AWS Glue Data Catalog를 사용합니다."
     },
     "answer": "B",
-    "explanation": "AWS Glue Data Quality는 구체적인 데이터 품질 규칙을 정의하고 검증하는 데 특화된 기능입니다. 회사가 \"특정 유효성 검사 규칙\"을 구현해야 하는 요구사항에 정확히 부합합니다. 사용자 지정 규칙 세트를 통해 비즈니스 로직에 맞는 검증 조건(예: 범위 확인, 패턴 매칭, NULL 값 검증, 중복 확인)을 정의할 수 있습니다. Job Bookmarks는 데이터 추적용으로 검증이 아니며, 기본 제공 변환은 표준 검증에만 제한적이고, Data Catalog는 메타데이터 관리 도구입니다. Glue Data Quality 규칙 세트가 맞춤형 검증 로직 구현에 가장 적합한 솔루션입니다.",
+    "explanation": "AWS Glue Data Quality는 구체적인 데이터 품질 규칙을 정의하고 검증하는 데 특화된 기능입니다.\n\n회사가 \"특정 유효성 검사 규칙\"을 구현해야 하는 요구사항에 정확히 부합합니다.\n\n사용자 지정 규칙 세트를 통해 비즈니스 로직에 맞는 검증 조건(예: 범위 확인, 패턴 매칭, NULL 값 검증, 중복 확인)을 정의할 수 있습니다.\n\nJob Bookmarks는 데이터 추적용으로 검증이 아니며, 기본 제공 변환은 표준 검증에만 제한적이고, Data Catalog는 메타데이터 관리 도구입니다.\n\nGlue Data Quality 규칙 세트가 맞춤형 검증 로직 구현에 가장 적합한 솔루션입니다.",
     "en_q": "A retail company uses AWS Glue for extract, transform, and load (ETL) operations on a dataset that contains information about customer orders. The company wants to implement specific validation rules to ensure data accuracy and consistency. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Use AWS Glue job bookmarks to track the data for accuracy and consistency.",
@@ -2029,7 +2029,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon Glacier Instant Retrieval에 데이터를 저장합니다. Amazon Athena를 사용하여 데이터를 쿼리합니다."
     },
     "answer": "A",
-    "explanation": "\"가끔씩 감시 목적\"의 낮은 접근 빈도와 gzip 압축 데이터 세트의 특성을 고려하면, Glacier Flexible Retrieval이 스토리지 비용 최적화에 가장 효율적입니다. Glacier Select는 Glacier에서 직접 압축된 파일을 쿼리할 수 있으므로, 전체 객체를 검색하지 않고도 필요한 데이터만 추출 가능합니다. S3 Select는 더 빈번한 접근용이므로 스토리지 비용이 높습니다. Athena는 S3에 저장된 데이터만 처리하며, Glacier Instant Retrieval은 쿼리 성능이 좋지만 스토리지 비용이 더 큽니다. 감시용 가끔씩 접근하는 데이터는 Glacier Flexible Retrieval + Glacier Select 조합이 가장 경제적입니다.",
+    "explanation": "\"가끔씩 감시 목적\"의 낮은 접근 빈도와 gzip 압축 데이터 세트의 특성을 고려하면, Glacier Flexible Retrieval이 스토리지 비용 최적화에 가장 효율적입니다.\n\nGlacier Select는 Glacier에서 직접 압축된 파일을 쿼리할 수 있으므로, 전체 객체를 검색하지 않고도 필요한 데이터만 추출 가능합니다.\n\nS3 Select는 더 빈번한 접근용이므로 스토리지 비용이 높습니다.\n\nAthena는 S3에 저장된 데이터만 처리하며, Glacier Instant Retrieval은 쿼리 성능이 좋지만 스토리지 비용이 더 큽니다.\n\n감시용 가끔씩 접근하는 데이터는 Glacier Flexible Retrieval + Glacier Select 조합이 가장 경제적입니다.",
     "en_q": "An insurance company stores transaction data that the company compressed with gzip. The company needs to query the transaction data for occasional audits. Which solution will meet this requirement in the MOST cost-effective way?",
     "en_opts": {
       "A": "Store the data in Amazon Glacier Flexible Retrieval. Use Amazon S3 Glacier Select to query the data.",
@@ -2049,7 +2049,7 @@ window.DEA_QUESTIONS = [
       "D": "저장 프로시저를 실행하기 위해 AWS Glue Python shell 작업을 예약합니다."
     },
     "answer": "C",
-    "explanation": "Redshift Query Editor v2는 저장 프로시저의 예약 실행을 네이티브로 지원합니다. UI에서 간단히 일정을 설정할 수 있으며, Lambda나 EC2 인스턴스 같은 별도 컴퓨팅 리소스를 관리할 필요가 없습니다. Lambda는 추가 복잡성이 있고, EC2 Spot은 비용은 저렴하지만 관리 오버헤드가 증가하며, Glue Python shell은 ETL 작업용이지 단순 프로시저 실행에는 오버스펙입니다. Query Editor v2의 스케줄 기능이 가장 직관적이고 관리 부담 없이 비용 효율적입니다.",
+    "explanation": "Redshift Query Editor v2는 저장 프로시저의 예약 실행을 네이티브로 지원합니다.\n\nUI에서 간단히 일정을 설정할 수 있으며, Lambda나 EC2 인스턴스 같은 별도 컴퓨팅 리소스를 관리할 필요가 없습니다.\n\nLambda는 추가 복잡성이 있고, EC2 Spot은 비용은 저렴하지만 관리 오버헤드가 증가하며, Glue Python shell은 ETL 작업용이지 단순 프로시저 실행에는 오버스펙입니다.\n\nQuery Editor v2의 스케줄 기능이 가장 직관적이고 관리 부담 없이 비용 효율적입니다.",
     "en_q": "A data engineer finished testing an Amazon Redshift stored procedure that processes and inserts data into a table that is not mission critical. The engineer wants to automatically run the stored procedure on a daily basis. Which solution will meet this requirement in the MOST cost-effective way?",
     "en_opts": {
       "A": "Create an AWS Lambda function to schedule a cron job to run the stored procedure.",
@@ -2070,7 +2070,7 @@ window.DEA_QUESTIONS = [
       "E": "QuickSight SPICE(Super-fast, Parallel, In-memory Calculation Engine)를 통해 쿼리 데이터에 접근합니다. 데이터 세트에 대한 일일 새로 고침을 구성합니다."
     },
     "answer": "BE",
-    "explanation": "【핵심 용어】▸ Amazon Athena — 서버리스 SQL 쿼리 엔진, S3 직접 분석, 비용 효율적 ▸ QuickSight SPICE — 캐싱된 인메모리 엔진, 빠른 대시보드 응답 【정답 포인트】▸ Athena: S3에 저장된 Firehose 데이터를 서버리스로 쿼리(관리 오버헤드 최소) ▸ SPICE 일일 새로 고침: 수백 명 사용자 동시 접근 시 대시보드 성능 최적화(직접 쿼리보다 빠름) ▸ 조합 이유: Athena의 저비용 + SPICE의 고속 응답 = 비용과 성능의 균형 【오답 체크】(A) Redshift는 비용이 높고 관리 필요 (C) S3 Analytics는 스토리지 메트릭용, 쿼리 도구 아님 (D) 직접 SQL은 수백 명 사용자 동시 접근 시 성능 저하 【시험 포인트】▸ 대규모 사용자 대시보드: SPICE 일일 새로 고침 필수",
+    "explanation": "【핵심 용어】\n▸ Amazon Athena — 서버리스 SQL 쿼리 엔진, S3 직접 분석, 비용 효율적\n▸ QuickSight SPICE — 캐싱된 인메모리 엔진, 빠른 대시보드 응답\n\n【정답 포인트】\n▸ Athena: S3에 저장된 Firehose 데이터를 서버리스로 쿼리(관리 오버헤드 최소)\n▸ SPICE 일일 새로 고침: 수백 명 사용자 동시 접근 시 대시보드 성능 최적화(직접 쿼리보다 빠름)\n▸ 조합 이유: Athena의 저비용 + SPICE의 고속 응답 = 비용과 성능의 균형\n\n【오답 체크】\n(A) Redshift는 비용이 높고 관리 필요\n(C) S3 Analytics는 스토리지 메트릭용, 쿼리 도구 아님\n(D) 직접 SQL은 수백 명 사용자 동시 접근 시 성능 저하\n\n【시험 포인트】\n▸ 대규모 사용자 대시보드: SPICE 일일 새로 고침 필수",
     "en_q": "A marketing company collects clickstream data. The company sends the clickstream data to Amazon Kinesis Data Firehose and stores the clickstream data in Amazon S3. The company wants to build a series of dashboards that hundreds of users from multiple departments will use. The company will use Amazon QuickSight to develop the dashboards. The company wants a solution that can scale and provide daily updates about clickstream activity. Which combination of steps will meet these requirements MOST cost-effectively? (Choose two.)",
     "en_opts": {
       "A": "Use Amazon Redshift to store and query the clickstream data.",
@@ -2091,7 +2091,7 @@ window.DEA_QUESTIONS = [
       "D": "AWS Glue"
     },
     "answer": "C",
-    "explanation": "Amazon MWAA는 오픈 소스 Apache Airflow 기반이므로, AWS 클라우드와 온프레미스 환경 모두에서 호환되는 워크플로우 정의를 작성할 수 있습니다. Apache Airflow의 DAG는 어디든 실행 가능하며, MWAA는 AWS의 관리형 서비스로 클라우드 부분을 처리하고, 같은 Airflow를 온프레미스에 설치하여 일관된 오케스트레이션을 구현할 수 있습니다. AWS Data Exchange는 데이터 마켓플레이스, SWF는 AWS 전용 레거시 서비스, Glue는 AWS 전용 ETL 도구입니다. Airflow의 포터빌리티와 오픈 소스 특성이 하이브리드 요구사항에 가장 적합합니다.",
+    "explanation": "Amazon MWAA는 오픈 소스 Apache Airflow 기반이므로, AWS 클라우드와 온프레미스 환경 모두에서 호환되는 워크플로우 정의를 작성할 수 있습니다.\n\nApache Airflow의 DAG는 어디든 실행 가능하며, MWAA는 AWS의 관리형 서비스로 클라우드 부분을 처리하고, 같은 Airflow를 온프레미스에 설치하여 일관된 오케스트레이션을 구현할 수 있습니다.\n\nAWS Data Exchange는 데이터 마켓플레이스, SWF는 AWS 전용 레거시 서비스, Glue는 AWS 전용 ETL 도구입니다.\n\nAirflow의 포터빌리티와 오픈 소스 특성이 하이브리드 요구사항에 가장 적합합니다.",
     "en_q": "A data engineer is building a data orchestration workflow. The data engineer plans to use a hybrid model that includes some on-premises resources and some resources that are in the cloud. The data engineer wants to prioritize portability and open source resources. Which service should the data engineer use in both the on-premises environment and the cloud-based environment?",
     "en_opts": {
       "A": "AWS Data Exchange",
@@ -2111,7 +2111,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon Timestream"
     },
     "answer": "C",
-    "explanation": "Amazon DynamoDB는 높은 OLTP 워크로드, 한 자리 밀리초 지연, 글로벌 고가용성을 모두 제공하는 완전 관리형 NoSQL 데이터베이스입니다. DynamoDB는 자동 확장, 글로벌 테이블 기능(멀티 리전 복제), DAX 캐시 등으로 운영 오버헤드를 최소화합니다. Keyspaces도 Cassandra 호환이지만 복잡한 설정이 필요하고, DocumentDB는 MongoDB 호환성에 중점이며, Timestream은 시계열 데이터 전용입니다. NoSQL 기반 고객 정보 저장소를 AWS로 마이그레이션하면서 최소 운영 부담으로 OLTP 성능을 원하면 DynamoDB가 최적입니다.",
+    "explanation": "Amazon DynamoDB는 높은 OLTP 워크로드, 한 자리 밀리초 지연, 글로벌 고가용성을 모두 제공하는 완전 관리형 NoSQL 데이터베이스입니다.\n\nDynamoDB는 자동 확장, 글로벌 테이블 기능(멀티 리전 복제), DAX 캐시 등으로 운영 오버헤드를 최소화합니다.\n\nKeyspaces도 Cassandra 호환이지만 복잡한 설정이 필요하고, DocumentDB는 MongoDB 호환성에 중점이며, Timestream은 시계열 데이터 전용입니다.\n\nNoSQL 기반 고객 정보 저장소를 AWS로 마이그레이션하면서 최소 운영 부담으로 OLTP 성능을 원하면 DynamoDB가 최적입니다.",
     "en_q": "A gaming company uses a NoSQL database to store customer information. The company is planning to migrate to AWS. The company needs a fully managed AWS solution that will handle high online transaction processing (OLTP) workload, provide single-digit millisecond performance, and provide high availability around the world. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Amazon Keyspaces (for Apache Cassandra)",
@@ -2131,7 +2131,7 @@ window.DEA_QUESTIONS = [
       "D": "EventBridge 스키마가 유효하고 이벤트 매핑 구성이 올바른지 확인합니다."
     },
     "answer": "B",
-    "explanation": "EventBridge에서 Lambda를 호출할 때 AccessDeniedException이 발생하는 것은 권한 문제입니다. 두 가지 권한 점검이 필요합니다: 1) EventBridge의 실행 역할(또는 리소스 기반 정책)이 Lambda를 호출할 권한을 가져야 하고, 2) Lambda 함수의 리소스 기반 정책이 EventBridge를 신뢰해야 합니다. 신뢰 정책만으로는 부족하며(A), 서브넷은 동기식 호출에 영향이 없고(C), 스키마 유효성도 권한 문제와 무관합니다(D). EventBridge 측 권한 + Lambda 측 리소스 기반 정책 모두 확인이 필수입니다.",
+    "explanation": "EventBridge에서 Lambda를 호출할 때 AccessDeniedException이 발생하는 것은 권한 문제입니다.\n\n두 가지 권한 점검이 필요합니다: 1) EventBridge의 실행 역할(또는 리소스 기반 정책)이 Lambda를 호출할 권한을 가져야 하고, 2) Lambda 함수의 리소스 기반 정책이 EventBridge를 신뢰해야 합니다.\n\n신뢰 정책만으로는 부족하며(A), 서브넷은 동기식 호출에 영향이 없고(C), 스키마 유효성도 권한 문제와 무관합니다(D). EventBridge 측 권한 + Lambda 측 리소스 기반 정책 모두 확인이 필수입니다.",
     "en_q": "A data engineer creates an AWS Lambda function that an Amazon EventBridge event will invoke. When the data engineer tries to invoke the Lambda function by using an EventBridge event, an AccessDeniedException message appears. How should the data engineer resolve the exception?",
     "en_opts": {
       "A": "Ensure that the trust policy of the Lambda function execution role allows EventBridge to assume the execution role.",
@@ -2151,7 +2151,7 @@ window.DEA_QUESTIONS = [
       "D": "AWS KMS 키(SSE-KMS)를 사용한 서버 측 암호화를 사용합니다."
     },
     "answer": "B",
-    "explanation": "\"두 개의 암호화 계층\"을 S3에 적용해야 하는 요구사항은 DSSE-KMS(Dual-layer Server-Side Encryption with AWS KMS keys)가 정확히 해결합니다. DSSE-KMS는 AWS KMS를 이용한 이중 암호화를 제공하여 규제 준수(예: HIPAA, PCI-DSS)를 만족시킵니다. Lambda 함수에서는 S3 PutObject API 호출 시 ServerSideEncryption 파라미터를 'aws:kms'로, SSEKMSEncryptionContext를 설정하면 됩니다. SSE-KMS만으로는 단일 계층이고, S3 Encryption Client는 클라이언트 측 암호화이며, SSE-C는 고객 관리 키로 별도 관리 부담이 있습니다. DSSE-KMS가 두 계층 요구사항을 가장 직접적으로 충족합니다.",
+    "explanation": "\"두 개의 암호화 계층\"을 S3에 적용해야 하는 요구사항은 DSSE-KMS(Dual-layer Server-Side Encryption with AWS KMS keys)가 정확히 해결합니다.\n\nDSSE-KMS는 AWS KMS를 이용한 이중 암호화를 제공하여 규제 준수(예: HIPAA, PCI-DSS)를 만족시킵니다.\n\nLambda 함수에서는 S3 PutObject API 호출 시 ServerSideEncryption 파라미터를 'aws:kms'로, SSEKMSEncryptionContext를 설정하면 됩니다.\n\nSSE-KMS만으로는 단일 계층이고, S3 Encryption Client는 클라이언트 측 암호화이며, SSE-C는 고객 관리 키로 별도 관리 부담이 있습니다.\n\nDSSE-KMS가 두 계층 요구사항을 가장 직접적으로 충족합니다.",
     "en_q": "A company uses a data lake that is based on an Amazon S3 bucket. To comply with regulations, the company must apply two layers of server-side encryption to files that are uploaded to the S3 bucket. The company wants to use an AWS Lambda function to apply the necessary encryption. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Use both server-side encryption with AWS KMS keys (SSE-KMS) and the Amazon S3 Encryption Client.",
@@ -2171,7 +2171,7 @@ window.DEA_QUESTIONS = [
       "D": "기존 워크그룹에 Athena 쿼리를 실행하는 사용자를 허용합니다."
     },
     "answer": "B",
-    "explanation": "Athena에서 쿼리가 큐에 대기하는 것은 동시 실행 용량 제한으로 인한 것입니다. 프로비저닝된 용량(Provisioned Capacity)을 설정하면, 워크그룹이 예약된 DPU(Data Processing Unit) 리소스를 확보하게 되어 쿼리 대기 시간을 제거할 수 있습니다. 기본적으로 Athena는 온디맨드 용량을 사용하여 동시 쿼리 수가 제한되지만, 프로비저닝된 용량을 구매하면 일정한 리소스를 보장받습니다. 쿼리 결과 제한 증가(A)는 성능과 무관하고, 페더레이션 쿼리(C)는 다른 데이터 소스 접근용이며, 사용자 권한(D)은 액세스 제어와 관련이 있습니다. 프로비저닝된 용량 구성이 쿼리 대기열 제거의 직접적인 솔루션입니다.",
+    "explanation": "Athena에서 쿼리가 큐에 대기하는 것은 동시 실행 용량 제한으로 인한 것입니다.\n\n프로비저닝된 용량(Provisioned Capacity)을 설정하면, 워크그룹이 예약된 DPU(Data Processing Unit) 리소스를 확보하게 되어 쿼리 대기 시간을 제거할 수 있습니다.\n\n기본적으로 Athena는 온디맨드 용량을 사용하여 동시 쿼리 수가 제한되지만, 프로비저닝된 용량을 구매하면 일정한 리소스를 보장받습니다.\n\n쿼리 결과 제한 증가(A)는 성능과 무관하고, 페더레이션 쿼리(C)는 다른 데이터 소스 접근용이며, 사용자 권한(D)은 액세스 제어와 관련이 있습니다.\n\n프로비저닝된 용량 구성이 쿼리 대기열 제거의 직접적인 솔루션입니다.",
     "en_q": "A data engineer notices that Amazon Athena queries are held in a queue before the queries run. How can the data engineer prevent the queries from queueing?",
     "en_opts": {
       "A": "Increase the query result limit.",
@@ -2191,7 +2191,7 @@ window.DEA_QUESTIONS = [
       "D": "AWS Glue 작업에 필요한 커밋 문이 없습니다."
     },
     "answer": "D",
-    "explanation": "Glue Job Bookmarks는 처리된 데이터를 추적하기 위해 작업이 완료될 때 상태를 커밋해야 합니다. 커밋 문이 없으면 북마크가 상태를 저장하지 않아 동일 파일이 반복적으로 처리됩니다. Spark 또는 Glue 스크립트에서 마지막에 `job.commit()`을 호출하지 않으면 북마크 메커니즘이 작동하지 않습니다. s3:GetObjectAcl 권한(A)은 북마크 동작에 직접적이지 않고, 최대 동시성 1(B)은 처리 속도만 영향이며, Glue 버전(C)은 일반적인 문제가 아닙니다. 커밋 문의 부재가 북마크가 상태를 저장하지 못하는 근본 원인입니다.",
+    "explanation": "Glue Job Bookmarks는 처리된 데이터를 추적하기 위해 작업이 완료될 때 상태를 커밋해야 합니다.\n\n커밋 문이 없으면 북마크가 상태를 저장하지 않아 동일 파일이 반복적으로 처리됩니다.\n\nSpark 또는 Glue 스크립트에서 마지막에 `job.commit()`을 호출하지 않으면 북마크 메커니즘이 작동하지 않습니다.\n\ns3:GetObjectAcl 권한(A)은 북마크 동작에 직접적이지 않고, 최대 동시성 1(B)은 처리 속도만 영향이며, Glue 버전(C)은 일반적인 문제가 아닙니다.\n\n커밋 문의 부재가 북마크가 상태를 저장하지 못하는 근본 원인입니다.",
     "en_q": "A data engineer needs to debug an AWS Glue job that reads from Amazon S3 and writes to Amazon Redshift. The data engineer enabled the bookmark feature for the AWS Glue job. The data engineer has set the maximum concurrency for the AWS Glue job to 1. The AWS Glue job is successfully writing the output to Amazon Redshift. However, the Amazon S3 files that were loaded during previous runs of the AWS Glue job are being reprocessed by subsequent runs. What is the likely reason the AWS Glue job is reprocessing the files?",
     "en_opts": {
       "A": "The AWS Glue job does not have the s3:GetObjectAcl permission that is required for bookmarks to work correctly.",
@@ -2211,7 +2211,7 @@ window.DEA_QUESTIONS = [
       "D": "AWS Glue"
     },
     "answer": "B",
-    "explanation": "Amazon MWAA는 Apache Airflow의 관리형 서비스로, Python과 Bash 스크립트를 DAG로 오케스트레이션할 수 있으며 기존 Airflow 코드를 거의 그대로 마이그레이션할 수 있습니다. 서버 관리가 필요 없는 완전 관리형 서비스입니다. Lambda는 함수 기반이므로 기존 스크립트 마이그레이션에 부적합하고 장시간 작업에 제약이 있습니다. Step Functions는 상태 머신 정의가 필요하여 코드 리팩터링이 필요하고, Glue는 주로 ETL 작업용입니다. 기존 스크립트 기반 오케스트레이션을 AWS로 옮기면서 최소한의 코드 변경을 원하면 MWAA가 최적입니다.",
+    "explanation": "Amazon MWAA는 Apache Airflow의 관리형 서비스로, Python과 Bash 스크립트를 DAG로 오케스트레이션할 수 있으며 기존 Airflow 코드를 거의 그대로 마이그레이션할 수 있습니다.\n\n서버 관리가 필요 없는 완전 관리형 서비스입니다.\n\nLambda는 함수 기반이므로 기존 스크립트 마이그레이션에 부적합하고 장시간 작업에 제약이 있습니다.\n\nStep Functions는 상태 머신 정의가 필요하여 코드 리팩터링이 필요하고, Glue는 주로 ETL 작업용입니다.\n\n기존 스크립트 기반 오케스트레이션을 AWS로 옮기면서 최소한의 코드 변경을 원하면 MWAA가 최적입니다.",
     "en_q": "An ecommerce company wants to use AWS to migrate data pipelines from an on-premises environment into the AWS Cloud. The company currently uses a third-party tool in the on-premises environment to orchestrate data ingestion processes. The company wants a migration solution that does not require the company to manage servers. The solution must be able to orchestrate Python and Bash scripts. The solution must not require the company to refactor any code. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "AWS Lambda",
@@ -2231,7 +2231,7 @@ window.DEA_QUESTIONS = [
       "D": "MySQL 데이터베이스에서 동기화할 AWS DataSync 작업을 예약하여 실행합니다. 작업의 대상을 Amazon Redshift로 설정합니다."
     },
     "answer": "B",
-    "explanation": "거의 실시간(near real time) 변경 데이터를 MySQL에서 Redshift로 지속적으로 복제하려면 AWS DMS의 CDC(Change Data Capture) 기능이 가장 적합합니다. \"전체 로드 + CDC\" 작업 방식은 초기 데이터를 한번에 로드하고, 이후 변경사항을 지속적으로 추적하여 복제합니다. Glue 예약 작업(A)은 배치 처리로 거의 실시간이 아니며, AppFlow(C)는 SaaS 통합용이고, DataSync(D)는 스토리지 동기화용으로 실시간 변경 추적이 불가능합니다. Direct Connect 연결이 이미 있어 DMS 복제 인스턴스 설정만 필요하므로 개발 노력이 최소입니다.",
+    "explanation": "거의 실시간(near real time) 변경 데이터를 MySQL에서 Redshift로 지속적으로 복제하려면 AWS DMS의 CDC(Change Data Capture) 기능이 가장 적합합니다.\n\n\"전체 로드 + CDC\" 작업 방식은 초기 데이터를 한번에 로드하고, 이후 변경사항을 지속적으로 추적하여 복제합니다.\n\nGlue 예약 작업(A)은 배치 처리로 거의 실시간이 아니며, AppFlow(C)는 SaaS 통합용이고, DataSync(D)는 스토리지 동기화용으로 실시간 변경 추적이 불가능합니다.\n\nDirect Connect 연결이 이미 있어 DMS 복제 인스턴스 설정만 필요하므로 개발 노력이 최소입니다.",
     "en_q": "A retail company stores data from a product lifecycle management (PLM) application in an on-premises MySQL database. The PLM application frequently updates the database when transactions occur. The company wants to gather insights from the PLM application in near real time. The company wants to integrate the insights with other business datasets and to analyze the combined dataset by using an Amazon Redshift data warehouse. The company has already established an AWS Direct Connect connection between the on-premises infrastructure and AWS. Which solution will meet these requirements with the LEAST development effort?",
     "en_opts": {
       "A": "Run a scheduled AWS Glue extract, transform, and load (ETL) job to get the MySQL database updates by using a Java Database Connectivity (JDBC) connection. Set Amazon Redshift as the destination for the ETL job.",
@@ -2251,7 +2251,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon EMR"
     },
     "answer": "C",
-    "explanation": "서버리스 환경에서 S3의 다중 버킷 데이터를 SQL JOIN으로 쿼리하면서 ACID 속성을 유지해야 하는 경우, Amazon Athena는 Apache Iceberg 테이블 포맷(또는 Hudi, Delta Lake)을 지원하여 ACID 트랜잭션을 보장합니다. Athena는 서버 관리 불필요(Spectrum은 Redshift 클러스터 필요), 분할 데이터 쿼리 최적화, 비용 효율적입니다. S3 Select(A)는 단일 객체 쿼리만 지원하고, Spectrum(B)은 Redshift 인스턴스 관리 비용이 들고, EMR(D)은 서버리스가 아닙니다. Athena의 ACID 지원 + 서버리스 + 낮은 비용이 최적 조합입니다.",
+    "explanation": "서버리스 환경에서 S3의 다중 버킷 데이터를 SQL JOIN으로 쿼리하면서 ACID 속성을 유지해야 하는 경우, Amazon Athena는 Apache Iceberg 테이블 포맷(또는 Hudi, Delta Lake)을 지원하여 ACID 트랜잭션을 보장합니다.\n\nAthena는 서버 관리 불필요(Spectrum은 Redshift 클러스터 필요), 분할 데이터 쿼리 최적화, 비용 효율적입니다.\n\nS3 Select(A)는 단일 객체 쿼리만 지원하고, Spectrum(B)은 Redshift 인스턴스 관리 비용이 들고, EMR(D)은 서버리스가 아닙니다.\n\nAthena의 ACID 지원 + 서버리스 + 낮은 비용이 최적 조합입니다.",
     "en_q": "A marketing company uses Amazon S3 to store clickstream data. The company queries the data at the end of each day by using a SQL JOIN clause on S3 objects that are stored in separate buckets. The company creates key performance indicators (KPIs) based on the objects. The company needs a serverless solution that will give users the ability to query data by partitioning the data. The solution must maintain the atomicity, consistency, isolation, and durability (ACID) properties of the data. Which solution will meet these requirements MOST cost-effectively?",
     "en_opts": {
       "A": "Amazon S3 Select",
@@ -2271,7 +2271,7 @@ window.DEA_QUESTIONS = [
       "D": "Account_A의 eu-east-1에서 AWS DMS 복제 인스턴스를 설정합니다."
     },
     "answer": "A",
-    "explanation": "AWS DMS 복제 인스턴스는 소스와 대상 데이터베이스 간의 네트워크 통신을 매개하므로, 효율성과 성능을 위해 대상 쪽에 배치하는 것이 권장됩니다. 이 경우 대상은 Account_B의 eu-west-1 Redshift이므로, 복제 인스턴스를 Account_B의 eu-west-1에 설정합니다. 이렇게 하면: 1) 대상 데이터베이스에 대한 네트워크 지연 최소화, 2) 크로스 계정 복제 시 Account_B의 IAM 역할 권한으로 Redshift에 직접 쓰기 가능, 3) 대역폭 최적화. 다른 옵션들은 추가 네트워크 홉이나 IAM 권한 복잡성을 야기합니다.",
+    "explanation": "AWS DMS 복제 인스턴스는 소스와 대상 데이터베이스 간의 네트워크 통신을 매개하므로, 효율성과 성능을 위해 대상 쪽에 배치하는 것이 권장됩니다.\n\n이 경우 대상은 Account_B의 eu-west-1 Redshift이므로, 복제 인스턴스를 Account_B의 eu-west-1에 설정합니다.\n\n이렇게 하면: 1) 대상 데이터베이스에 대한 네트워크 지연 최소화, 2) 크로스 계정 복제 시 Account_B의 IAM 역할 권한으로 Redshift에 직접 쓰기 가능, 3) 대역폭 최적화. 다른 옵션들은 추가 네트워크 홉이나 IAM 권한 복잡성을 야기합니다.",
     "en_q": "A company wants to migrate data from an Amazon RDS for PostgreSQL DB instance in the eu-east-1 Region of an AWS account named Account_A. The company will migrate the data to an Amazon Redshift cluster in the eu-west-1 Region of an AWS account named Account_B. Which solution will give AWS Database Migration Service (AWS DMS) the ability to replicate data between two data stores?",
     "en_opts": {
       "A": "Set up an AWS DMS replication instance in Account_B in eu-west-1.",
@@ -2291,7 +2291,7 @@ window.DEA_QUESTIONS = [
       "D": "데이터 파일 위치를 포함하는 매니페스트 파일을 생성합니다. COPY 명령을 사용하여 데이터를 Amazon Redshift에 로드합니다."
     },
     "answer": "D",
-    "explanation": "Redshift의 COPY 명령은 매니페스트 파일(manifest file)을 지원하여, 여러 S3 객체 위치를 한 번의 COPY 명령으로 처리할 수 있습니다. 이를 통해: 1) 다중 파일을 병렬로 수집 가능, 2) 네트워크 왕복 횟수 최소화, 3) 비용 증가 없음(Redshift 클러스터만 사용). EMR(A)은 추가 비용, Aurora(B)는 중간 데이터베이스로 불필요한 복잡성, Glue(C)는 ETL 추가 작업 비용이 발생합니다. 매니페스트 파일 접근법이 기존 인프라로 최소 비용 증가로 성능을 향상시킵니다.",
+    "explanation": "Redshift의 COPY 명령은 매니페스트 파일(manifest file)을 지원하여, 여러 S3 객체 위치를 한 번의 COPY 명령으로 처리할 수 있습니다.\n\n이를 통해: 1) 다중 파일을 병렬로 수집 가능, 2) 네트워크 왕복 횟수 최소화, 3) 비용 증가 없음(Redshift 클러스터만 사용). EMR(A)은 추가 비용, Aurora(B)는 중간 데이터베이스로 불필요한 복잡성, Glue(C)는 ETL 추가 작업 비용이 발생합니다.\n\n매니페스트 파일 접근법이 기존 인프라로 최소 비용 증가로 성능을 향상시킵니다.",
     "en_q": "A company uses Amazon S3 as a data lake. The company sets up a data warehouse by using a multi-node Amazon Redshift cluster. The company organizes the data files in the data lake based on the data source of each data file. The company loads all the data files into one table in the Redshift cluster by using a separate COPY command for each data file location. This approach takes a long time to load all the data files into the table. The company must increase the speed of the data ingestion. The company does not want to increase the cost of the process. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Use a provisioned Amazon EMR cluster to copy all the data files into one folder. Use a COPY command to load the data into Amazon Redshift.",
@@ -2311,7 +2311,7 @@ window.DEA_QUESTIONS = [
       "D": "Kinesis Data Firehose를 사용하여 AWS Lambda 함수를 호출하여 .csv 파일을 JSON으로 변환합니다. Kinesis Data Firehose를 사용하여 파일을 Parquet 형식으로 저장합니다."
     },
     "answer": "D",
-    "explanation": "【핵심 용어】▸ Kinesis Data Firehose — 데이터 포맷 변환 및 S3 저장 자동화 ▸ Lambda 통합 — 변환 로직 외부화 가능 【정답 포인트】▸ CSV→JSON 변환: Lambda로 변환 로직 분리 (Firehose 데이터 포맷 변환 기능과 다름) ▸ JSON→Parquet 저장: Firehose의 데이터 포맷(output format) 설정으로 처리 ▸ 개발 노력 최소: Lambda는 CSV 파싱 로직만, Firehose 설정이 Parquet 자동 처리 【오답 체크】(A) Lambda로 Parquet 변환까지 하면 개발 복잡도 증가 (B) Firehose 자체는 CSV→JSON 변환 기능 미지원(별도 변환 필요) (C) Lambda에서 모든 변환+저장 처리면 과도한 개발 【시험 포인트】▸ Firehose 데이터 포맷 설정 vs Lambda 변환 역할 구분",
+    "explanation": "【핵심 용어】\n▸ Kinesis Data Firehose — 데이터 포맷 변환 및 S3 저장 자동화\n▸ Lambda 통합 — 변환 로직 외부화 가능\n\n【정답 포인트】\n▸ CSV→JSON 변환: Lambda로 변환 로직 분리 (Firehose 데이터 포맷 변환 기능과 다름)\n▸ JSON→Parquet 저장: Firehose의 데이터 포맷(output format) 설정으로 처리\n▸ 개발 노력 최소: Lambda는 CSV 파싱 로직만, Firehose 설정이 Parquet 자동 처리\n\n【오답 체크】\n(A) Lambda로 Parquet 변환까지 하면 개발 복잡도 증가\n(B) Firehose 자체는 CSV→JSON 변환 기능 미지원(별도 변환 필요)\n(C) Lambda에서 모든 변환+저장 처리면 과도한 개발\n\n【시험 포인트】\n▸ Firehose 데이터 포맷 설정 vs Lambda 변환 역할 구분",
     "en_q": "A company plans to use Amazon Kinesis Data Firehose to store data in Amazon S3. The source data consists of 2 MB .csv files. The company must convert the .csv files to JSON format. The company must store the files in Apache Parquet format. Which solution will meet these requirements with the LEAST development effort?",
     "en_opts": {
       "A": "Use Kinesis Data Firehose to convert the .csv files to JSON. Use an AWS Lambda function to store the files in Parquet format.",
@@ -3105,7 +3105,7 @@ window.DEA_QUESTIONS = [
       "D": "S3 버킷의 개별 객체에 대한 보관 기간을 7년으로 설정합니다."
     },
     "answer": "B",
-    "explanation": "S3 Object Lock의 compliance 모드는 루트 사용자를 포함한 누구도 보관 기간 동안 객체를 삭제하거나 수정할 수 없도록 합니다. Governance 모드는 특정 권한이 있는 사용자가 보관 설정을 변경할 수 있게 하므로 요구 사항을 충족하지 않습니다. Legal hold는 개별 객체 단위로만 적용되어 기본 7년 보관을 위해서는 bucket-level 기본 보관 설정이 필요합니다. 개별 객체에만 보관 기간을 설정하면 누락된 객체는 보호되지 않습니다. Compliance 모드에서 기본 보관 기간(7년)을 설정하면 모든 객체에 대해 루트 사용자도 변경할 수 없는 강력한 보호가 제공됩니다.",
+    "explanation": "S3 Object Lock의 compliance 모드는 루트 사용자를 포함한 누구도 보관 기간 동안 객체를 삭제하거나 수정할 수 없도록 합니다.\n\nGovernance 모드는 특정 권한이 있는 사용자가 보관 설정을 변경할 수 있게 하므로 요구 사항을 충족하지 않습니다.\n\nLegal hold는 개별 객체 단위로만 적용되어 기본 7년 보관을 위해서는 bucket-level 기본 보관 설정이 필요합니다.\n\n개별 객체에만 보관 기간을 설정하면 누락된 객체는 보호되지 않습니다.\n\nCompliance 모드에서 기본 보관 기간(7년)을 설정하면 모든 객체에 대해 루트 사용자도 변경할 수 없는 강력한 보호가 제공됩니다.",
     "en_q": "A company stores customer records in Amazon S3. The company must not delete or modify the customer record data for 7 years after each record is created. The root user also must not have the ability to delete or modify the data. A data engineer wants to use S3 Object Lock to secure the data. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Enable governance mode on the S3 bucket. Use a default retention period of 7 years.",
@@ -3125,7 +3125,7 @@ window.DEA_QUESTIONS = [
       "D": "CREATE TABLE new_table AS (SELECT * FROM old_table) WITH NO DATA;"
     },
     "answer": "D",
-    "explanation": "CREATE TABLE AS SELECT (CTAS)는 쿼리 결과 기반으로 테이블을 생성합니다. WITH NO DATA 절을 사용하면 스키마만 복사하고 데이터는 포함하지 않습니다. 옵션 A는 'old_tables'로 오타가 있어 실패합니다. 옵션 B는 기존 테이블이 필요하므로 새로 만드는 경우 작동하지 않습니다. 옵션 C의 LIKE 구문은 Athena에서 지원되지 않습니다. 옵션 D는 정확한 스키마 복사와 데이터 없는 빈 테이블 생성을 모두 제공하므로 이 요구 사항을 완벽하게 충족합니다.",
+    "explanation": "CREATE TABLE AS SELECT (CTAS)는 쿼리 결과 기반으로 테이블을 생성합니다. WITH NO DATA 절을 사용하면 스키마만 복사하고 데이터는 포함하지 않습니다.\n\n옵션 A는 'old_tables'로 오타가 있어 실패합니다.\n\n옵션 B는 기존 테이블이 필요하므로 새로 만드는 경우 작동하지 않습니다. 옵션 C의 LIKE 구문은 Athena에서 지원되지 않습니다.\n\n옵션 D는 정확한 스키마 복사와 데이터 없는 빈 테이블 생성을 모두 제공하므로 이 요구 사항을 완벽하게 충족합니다.",
     "en_q": "A data engineer needs to create a new empty table in Amazon Athena that has the same schema as an existing table named old_table. Which SQL statement should the data engineer use to meet this requirement?",
     "en_opts": {
       "A": "CREATE TABLE new_table AS SELECT * FROM old_tables;",
@@ -3145,7 +3145,7 @@ window.DEA_QUESTIONS = [
       "D": "UPDATE cities_usa SET (city, state) = (SELECT city, state FROM cities_world WHERE country='usa');"
     },
     "answer": "A",
-    "explanation": "INSERT INTO ... SELECT 문은 한 테이블에서 다른 테이블로 데이터를 삽입하는 표준 방법입니다. 옵션 A가 정답인 이유는 대상 테이블(cities_usa)과 원본 테이블(cities_world)의 열을 명시적으로 지정하여 명확성을 제공하기 때문입니다. 옵션 B의 MOVE는 SQL 표준이 아닙니다. 옵션 C도 유사하지만 열을 명시적으로 명시하지 않아 테이블 구조가 일치해야 합니다. 옵션 D는 UPDATE 문으로 서브쿼리 기반 업데이트를 의도했지만 INSERT 작업에는 적합하지 않습니다. 명시적인 열 지정이 있는 옵션 A가 가장 안전하고 명확합니다.",
+    "explanation": "INSERT INTO ... SELECT 문은 한 테이블에서 다른 테이블로 데이터를 삽입하는 표준 방법입니다.\n\n옵션 A가 정답인 이유는 대상 테이블(cities_usa)과 원본 테이블(cities_world)의 열을 명시적으로 지정하여 명확성을 제공하기 때문입니다. 옵션 B의 MOVE는 SQL 표준이 아닙니다. 옵션 C도 유사하지만 열을 명시적으로 명시하지 않아 테이블 구조가 일치해야 합니다.\n\n옵션 D는 UPDATE 문으로 서브쿼리 기반 업데이트를 의도했지만 INSERT 작업에는 적합하지 않습니다. 명시적인 열 지정이 있는\n\n옵션 A가 가장 안전하고 명확합니다.",
     "en_q": "A data engineer needs to create an Amazon Athena table based on a subset of data from an existing Athena table named cities_world. The cities_world table contains cities that are located around the world. The data engineer must create a new table named cities_us to contain only the cities from cities_world that are located in the US. Which SQL statement should the data engineer use to meet this requirement?",
     "en_opts": {
       "A": "INSERT INTO cities_usa (city,state) SELECT city, state FROM cities_world WHERE country='usa';",
@@ -3166,7 +3166,7 @@ window.DEA_QUESTIONS = [
       "E": "Amazon Redshift 데이터 공유를 마케팅 팀 계정의 Amazon Redshift Serverless 워크그룹으로 공유합니다."
     },
     "answer": "BD",
-    "explanation": "Redshift data sharing은 Redshift Serverless 간에 데이터 공유를 위한 기본 메커니즘입니다. 옵션 B는 공유할 테이블을 포함하는 데이터 공유를 생성하는 필수 단계입니다. 옵션 D는 데이터 공유를 Lake Formation 카탈로그에 등록하여 거버넌스와 세밀한 액세스 제어를 가능하게 합니다. 옵션 A의 뷰는 관계형 접근이지만 Redshift Serverless 간 공유에는 데이터 공유가 더 적합합니다. 옵션 C의 VPC 엔드포인트는 필요하지 않습니다. 옵션 E는 워크그룹으로의 직접 공유이지만 Lake Formation을 통한 중앙 제어가 없습니다. 따라서 B와 D의 조합이 최적입니다.",
+    "explanation": "Redshift data sharing은 Redshift Serverless 간에 데이터 공유를 위한 기본 메커니즘입니다.\n\n옵션 B는 공유할 테이블을 포함하는 데이터 공유를 생성하는 필수 단계입니다.\n\n옵션 D는 데이터 공유를 Lake Formation 카탈로그에 등록하여 거버넌스와 세밀한 액세스 제어를 가능하게 합니다. 옵션 A의 뷰는 관계형 접근이지만 Redshift Serverless 간 공유에는 데이터 공유가 더 적합합니다. 옵션 C의 VPC 엔드포인트는 필요하지 않습니다.\n\n옵션 E는 워크그룹으로의 직접 공유이지만 Lake Formation을 통한 중앙 제어가 없습니다. 따라서 B와 D의 조합이 최적입니다.",
     "en_q": "A company implements a data mesh that has a central governance account. The company needs to catalog all data in the governance account. The governance account uses AWS Lake Formation to centrally share data and grant access permissions. The company has created a new data product that includes a group of Amazon Redshift Serverless tables. A data engineer needs to share the data product with a marketing team. The marketing team must have access to only a subset of columns. The data engineer needs to share the same data product with a compliance team. The compliance team must have access to a different subset of columns than the marketing team needs access to. Which combination of steps should the data engineer take to meet these requirements? (Choose two.)",
     "en_opts": {
       "A": "Create views of the tables that need to be shared. Include only the required columns.",
@@ -3187,7 +3187,7 @@ window.DEA_QUESTIONS = [
       "D": "각 Glue ETL 작업에 새로운 사용자 정의 변환을 추가합니다. Great Expectations 라이브러리를 사용하여 평가해야 하는 데이터 품질 규칙을 포함하는 규칙 집합을 구현합니다."
     },
     "answer": "B",
-    "explanation": "AWS Glue의 Evaluate Data Quality transform은 AWS에서 관리하는 내장 기능으로, DQDL을 사용하여 데이터 품질 규칙을 정의합니다. 이는 최소 구현 노력으로 기존 ETL 파이프라인에 통합할 수 있습니다. 옵션 A는 SQL을 사용하지만 DQDL만큼 최적화되지 않습니다. 옵션 C의 PyDeequ와 옵션 D의 Great Expectations는 오픈소스 라이브러리로 추가 설정과 유지보수가 필요합니다. Evaluate Data Quality는 Glue Studio에서 기본 변환으로 제공되어 DQDL로 정의된 규칙을 쉽게 적용할 수 있으므로 최적의 선택입니다.",
+    "explanation": "AWS Glue의 Evaluate Data Quality transform은 AWS에서 관리하는 내장 기능으로, DQDL을 사용하여 데이터 품질 규칙을 정의합니다.\n\n이는 최소 구현 노력으로 기존 ETL 파이프라인에 통합할 수 있습니다.\n\n옵션 A는 SQL을 사용하지만 DQDL만큼 최적화되지 않습니다.\n\n옵션 C의 PyDeequ와 옵션 D의 Great Expectations는 오픈소스 라이브러리로 추가 설정과 유지보수가 필요합니다.\n\nEvaluate Data Quality는 Glue Studio에서 기본 변환으로 제공되어 DQDL로 정의된 규칙을 쉽게 적용할 수 있으므로 최적의 선택입니다.",
     "en_q": "A company has a data lake in Amazon S3. The company uses AWS Glue to catalog data and AWS Glue Studio to implement data extract, transform, and load (ETL) pipelines. The company needs to ensure that data quality issues are checked every time the pipelines run. A data engineer must enhance the existing pipelines to evaluate data quality rules based on predefined thresholds. Which solution will meet these requirements with the LEAST implementation effort?",
     "en_opts": {
       "A": "Add a new transform that is defined by a SQL query to each Glue ETL job. Use the SQL query to implement a ruleset that includes the data quality rules that need to be evaluated.",
@@ -3208,7 +3208,7 @@ window.DEA_QUESTIONS = [
       "E": "AWS Glue를 사용하여 로그와 추적을 상관관계시킵니다."
     },
     "answer": "AD",
-    "explanation": "옵션 A는 로그 수집을 위한 FluentBit과 분산 추적을 위한 OpenTelemetry라는 업계 표준 도구를 조합합니다. FluentBit은 경량이고 EKS에서 잘 작동하며, OpenTelemetry는 AWS 환경에서 추적을 수집하는 표준입니다. 옵션 D의 Amazon OpenSearch는 수집된 로그와 추적을 상관관계시키고 분석하기 위한 강력한 검색 및 분석 엔진입니다. CloudWatch만으로는 복잡한 로그-추적 상관관계 분석이 제한적이므로 옵션 B와 C는 부족합니다. Kinesis와 MSK는 로그 전달에는 적합하지만 추적 수집이 아닙니다. OpenSearch는 로그와 추적을 통합하여 분석하는 데 가장 적합한 솔루션입니다.",
+    "explanation": "옵션 A는 로그 수집을 위한 FluentBit과 분산 추적을 위한 OpenTelemetry라는 업계 표준 도구를 조합합니다.\n\nFluentBit은 경량이고 EKS에서 잘 작동하며, OpenTelemetry는 AWS 환경에서 추적을 수집하는 표준입니다.\n\n옵션 D의 Amazon OpenSearch는 수집된 로그와 추적을 상관관계시키고 분석하기 위한 강력한 검색 및 분석 엔진입니다.\n\nCloudWatch만으로는 복잡한 로그-추적 상관관계 분석이 제한적이므로 옵션 B와 C는 부족합니다.\n\nKinesis와 MSK는 로그 전달에는 적합하지만 추적 수집이 아닙니다.\n\nOpenSearch는 로그와 추적을 통합하여 분석하는 데 가장 적합한 솔루션입니다.",
     "en_q": "A company has an application that uses a microservice architecture. The company hosts the application on an Amazon Elastic Kubernetes Services (Amazon EKS) cluster. The company wants to set up a robust monitoring system for the application. The company needs to analyze the logs from the EKS cluster and the application. The company needs to correlate the cluster's logs with the application's traces to identify points of failure in the whole application request flow. Which combination of steps will meet these requirements with the LEAST development effort? (Choose two.)",
     "en_opts": {
       "A": "Use FluentBit to collect logs. Use OpenTelemetry to collect traces.",
@@ -3229,7 +3229,7 @@ window.DEA_QUESTIONS = [
       "D": "사용자 정의 OpenSearch 플러그인을 사용하여 Amazon DynamoDB 테이블의 데이터를 동기화합니다."
     },
     "answer": "C",
-    "explanation": "Amazon DynamoDB Streams는 DynamoDB 테이블의 모든 데이터 수정을 실시간으로 캡처합니다. 이는 거의 실시간 데이터 전송에 가장 적합한 메커니즘입니다. AWS Lambda는 이러한 스트림 이벤트를 처리하고 OpenSearch Service를 업데이트할 수 있습니다. 옵션 A는 주기적인 배치 방식으로 거의 실시간이 아니며 지연이 있습니다. 옵션 B의 Glue는 배치 기반이고 실시간 스트리밍에 최적화되지 않았습니다. 옵션 D의 사용자 정의 플러그인은 유지보수가 복잡하고 비용이 많이 듭니다. DynamoDB Streams와 Lambda의 조합은 거의 실시간 업데이트를 제공하는 가장 효율적이고 확장 가능한 솔루션입니다.",
+    "explanation": "Amazon DynamoDB Streams는 DynamoDB 테이블의 모든 데이터 수정을 실시간으로 캡처합니다.\n\n이는 거의 실시간 데이터 전송에 가장 적합한 메커니즘입니다.\n\nAWS Lambda는 이러한 스트림 이벤트를 처리하고 OpenSearch Service를 업데이트할 수 있습니다.\n\n옵션 A는 주기적인 배치 방식으로 거의 실시간이 아니며 지연이 있습니다.\n\n옵션 B의 Glue는 배치 기반이고 실시간 스트리밍에 최적화되지 않았습니다.\n\n옵션 D의 사용자 정의 플러그인은 유지보수가 복잡하고 비용이 많이 듭니다.\n\nDynamoDB Streams와 Lambda의 조합은 거의 실시간 업데이트를 제공하는 가장 효율적이고 확장 가능한 솔루션입니다.",
     "en_q": "A company has a gaming application that stores data in Amazon DynamoDB tables. A data engineer needs to ingest the game data into an Amazon OpenSearch Service cluster. Data updates must occur in near real time. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Use AWS Step Functions to periodically export data from the Amazon DynamoDB tables to an Amazon S3 bucket. Use an AWS Lambda function to load the data into Amazon OpenSearch Service.",
@@ -3249,7 +3249,7 @@ window.DEA_QUESTIONS = [
       "D": "KEY 분배"
     },
     "answer": "C",
-    "explanation": "Redshift의 AUTO 분배 스타일은 Redshift가 데이터 패턴을 학습하여 최적의 분배 방식을 자동으로 결정합니다. ALL 분배는 각 노드에 데이터 복사본을 저장하므로 큰 테이블에는 비효율적입니다. EVEN 분배는 데이터를 균등하게 분배하지만 조인 성능이 최적화되지 않을 수 있습니다. KEY 분배는 적절한 열이 없으므로 사용할 수 없습니다. AUTO 분배는 테이블 크기와 쿼리 패턴을 바탕으로 최적의 분배 스타일을 자동으로 선택하므로 최소 유지보수 오버헤드를 제공합니다. 이는 증가하는 테이블에 가장 적합합니다.",
+    "explanation": "Redshift의 AUTO 분배 스타일은 Redshift가 데이터 패턴을 학습하여 최적의 분배 방식을 자동으로 결정합니다.\n\nALL 분배는 각 노드에 데이터 복사본을 저장하므로 큰 테이블에는 비효율적입니다.\n\nEVEN 분배는 데이터를 균등하게 분배하지만 조인 성능이 최적화되지 않을 수 있습니다.\n\nKEY 분배는 적절한 열이 없으므로 사용할 수 없습니다.\n\nAUTO 분배는 테이블 크기와 쿼리 패턴을 바탕으로 최적의 분배 스타일을 자동으로 선택하므로 최소 유지보수 오버헤드를 제공합니다.\n\n이는 증가하는 테이블에 가장 적합합니다.",
     "en_q": "A company uses Amazon Redshift as its data warehouse service. A data engineer needs to design a physical data model. The data engineer encounters a de-normalized table that is growing in size. The table does not have a suitable column to use as the distribution key. Which distribution style should the data engineer use to meet these requirements with the LEAST maintenance overhead?",
     "en_opts": {
       "A": "ALL distribution",
@@ -3269,7 +3269,7 @@ window.DEA_QUESTIONS = [
       "D": "대시보드에서 계산된 필드를 정의하고 생성합니다."
     },
     "answer": "A",
-    "explanation": "QuickSight에서 데이터 세트 수준의 계산된 필드는 SPICE에 미리 계산되어 저장됩니다. 이는 모든 분석과 시각화에서 사용할 수 있습니다. 분석 또는 시각 수준의 계산된 필드는 쿼리 시마다 계산되므로 미리 계산되지 않습니다. 대시보드에서는 계산된 필드를 정의할 수 없습니다. 데이터 세트 수준에서 정의하면 4자리 정밀도의 환율 계산이 한 번만 수행되고 SPICE에 저장되어, 모든 대시보드와 분석에서 일관되고 빠른 성능을 제공합니다.",
+    "explanation": "QuickSight에서 데이터 세트 수준의 계산된 필드는 SPICE에 미리 계산되어 저장됩니다.\n\n이는 모든 분석과 시각화에서 사용할 수 있습니다.\n\n분석 또는 시각 수준의 계산된 필드는 쿼리 시마다 계산되므로 미리 계산되지 않습니다.\n\n대시보드에서는 계산된 필드를 정의할 수 없습니다.\n\n데이터 세트 수준에서 정의하면 4자리 정밀도의 환율 계산이 한 번만 수행되고 SPICE에 저장되어, 모든 대시보드와 분석에서 일관되고 빠른 성능을 제공합니다.",
     "en_q": "A retail company is expanding its operations globally. The company needs to use Amazon QuickSight to accurately calculate currency exchange rates for financial reports. The company has an existing dashboard that includes a visual that is based on an analysis of a dataset that contains global currency values and exchange rates. A data engineer needs to ensure that exchange rates are calculated with a precision of four decimal places. The calculations must be precomputed. The data engineer must materialize results in QuickSight super-fast, parallel, in-memory calculation engine (SPICE). Which solution will meet these requirements?",
     "en_opts": {
       "A": "Define and create the calculated field in the dataset.",
@@ -3289,7 +3289,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon Appflow에서 기본 Amazon Redshift, Teradata 및 BigQuery 커넥터를 사용하여 Amazon S3 및 AWS Glue Data Catalog에 데이터를 씁니다. Amazon Athena를 사용하여 데이터를 조인합니다. 데이터 레이크 Iceberg 테이블에 Merge 작업을 실행합니다."
     },
     "answer": "B",
-    "explanation": "Athena의 페더레이션 쿼리 커넥터는 여러 데이터 소스(Redshift, Teradata, BigQuery)에 대한 통합 SQL 인터페이스를 제공합니다. 이는 각 소스의 고유한 커넥터와 변환을 처리하는 가장 간단한 방식입니다. 단일 SQL 쿼리로 조인, 필터링 및 데이터 집계가 가능합니다. Iceberg 테이블에 Merge 작업으로 데이터를 효율적으로 업데이트합니다. 옵션 A는 Glue에서 각 커넥터를 별도로 관리해야 합니다. 옵션 C는 EMR 클러스터를 설정하고 PySpark 코드를 유지보수해야 합니다. 옵션 D는 Appflow로 여러 단계가 필요합니다. Athena 페더레이션은 최소 설정과 운영 오버헤드로 최적의 솔루션입니다.",
+    "explanation": "Athena의 페더레이션 쿼리 커넥터는 여러 데이터 소스(Redshift, Teradata, BigQuery)에 대한 통합 SQL 인터페이스를 제공합니다. 이는 각 소스의 고유한 커넥터와 변환을 처리하는 가장 간단한 방식입니다. 단일 SQL 쿼리로 조인, 필터링 및 데이터 집계가 가능합니다. Iceberg 테이블에 Merge 작업으로 데이터를 효율적으로 업데이트합니다.\n\n옵션 A는 Glue에서 각 커넥터를 별도로 관리해야 합니다.\n\n옵션 C는 EMR 클러스터를 설정하고 PySpark 코드를 유지보수해야 합니다.\n\n옵션 D는 Appflow로 여러 단계가 필요합니다. Athena 페더레이션은 최소 설정과 운영 오버헤드로 최적의 솔루션입니다.",
     "en_q": "A company has three subsidiaries. Each subsidiary uses a different data warehousing solution. The first subsidiary hosts its data warehouse in Amazon Redshift. The second subsidiary uses Teradata Vantage on AWS. The third subsidiary uses Google BigQuery. The company wants to aggregate all the data into a central Amazon S3 data lake. The company wants to use Apache Iceberg as the table format. A data engineer needs to build a new pipeline to connect to all the data sources, run transformations by using each source engine, join the data, and write the data to Iceberg. Which solution will meet these requirements with the LEAST operational effort?",
     "en_opts": {
       "A": "Use native Amazon Redshift, Teradata, and BigQuery connectors to build the pipeline in AWS Glue. Use native AWS Glue transforms to join the data. Run a Merge operation on the data lake Iceberg table.",
@@ -3309,7 +3309,7 @@ window.DEA_QUESTIONS = [
       "D": "DynamoDB 테이블에 액세스할 수 있는 액세스 키가 있는 IAM 사용자를 만듭니다. EKS 클러스터 노드의 볼륨에 마운트된 Kubernetes 시크릿을 사용하여 사용자 액세스 키 데이터를 저장합니다."
     },
     "answer": "B",
-    "explanation": "IAM Roles for Service Accounts (IRSA)는 EKS에서 권장되는 보안 방식으로, 각 Pod에 세분화된 IAM 권한을 부여합니다. IAM 역할을 워커 노드에 연결하고 IRSA를 설정하면 자격증명을 컨테이너에 포함할 필요가 없습니다. 옵션 A는 S3에 자격증명을 저장하므로 보안이 떨어집니다. 옵션 C와 D는 자격증명을 환경 변수나 시크릿으로 저장하는데, 이는 컨테이너 이미지나 로그에 노출될 수 있습니다. IRSA는 AWS의 표준 권장 사항이며 자격증명 관리 없이 안전한 액세스를 제공합니다.",
+    "explanation": "IAM Roles for Service Accounts (IRSA)는 EKS에서 권장되는 보안 방식으로, 각 Pod에 세분화된 IAM 권한을 부여합니다.\n\nIAM 역할을 워커 노드에 연결하고 IRSA를 설정하면 자격증명을 컨테이너에 포함할 필요가 없습니다.\n\n옵션 A는 S3에 자격증명을 저장하므로 보안이 떨어집니다.\n\n옵션 C와 D는 자격증명을 환경 변수나 시크릿으로 저장하는데, 이는 컨테이너 이미지나 로그에 노출될 수 있습니다.\n\nIRSA는 AWS의 표준 권장 사항이며 자격증명 관리 없이 안전한 액세스를 제공합니다.",
     "en_q": "A company is building a data stream processing application. The application runs in an Amazon Elastic Kubernetes Service (Amazon EKS) cluster. The application stores processed data in an Amazon DynamoDB table. The company needs the application containers in the EKS cluster to have secure access to the DynamoDB table. The company does not want to embed AWS credentials in the containers. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Store the AWS credentials in an Amazon S3 bucket. Grant the EKS containers access to the S3 bucket to retrieve the credentials.",
@@ -3329,7 +3329,7 @@ window.DEA_QUESTIONS = [
       "D": "온프레미스 데이터 센터에 AWS Direct Connect 연결을 만듭니다. 애플리케이션 키를 AWS Secrets Manager에 저장합니다. 1일 만료 날짜가 있는 사전 서명된 URL이 포함된 Amazon S3 버킷을 만듭니다."
     },
     "answer": "B",
-    "explanation": "AWS Direct Connect는 공개 인터넷을 사용하지 않고 온프레미스 데이터 센터와 AWS 간의 전용 네트워크 연결을 제공합니다. 이는 보안 전송의 핵심 요구 사항입니다. AWS Secrets Manager는 서비스 계정 자격증명을 안전하게 저장하고 관리합니다. 옵션 A는 ECS에서 AMI를 사용하는 것이 적절하지 않으며 공개 서브넷 사용이 보안 위험입니다. 옵션 C는 공개 서브넷을 사용하여 보안이 떨어집니다. 옵션 D는 S3 사전 서명 URL을 추가로 포함하지만 필수는 아닙니다. 옵션 B는 안전한 전용 연결과 자격증명 관리라는 핵심 요구 사항을 충족합니다.",
+    "explanation": "AWS Direct Connect는 공개 인터넷을 사용하지 않고 온프레미스 데이터 센터와 AWS 간의 전용 네트워크 연결을 제공합니다. 이는 보안 전송의 핵심 요구 사항입니다. AWS Secrets Manager는 서비스 계정 자격증명을 안전하게 저장하고 관리합니다.\n\n옵션 A는 ECS에서 AMI를 사용하는 것이 적절하지 않으며 공개 서브넷 사용이 보안 위험입니다.\n\n옵션 C는 공개 서브넷을 사용하여 보안이 떨어집니다.\n\n옵션 D는 S3 사전 서명 URL을 추가로 포함하지만 필수는 아닙니다.\n\n옵션 B는 안전한 전용 연결과 자격증명 관리라는 핵심 요구 사항을 충족합니다.",
     "en_q": "A data engineer needs to onboard a new data producer into AWS. The data producer needs to migrate data products to AWS. The data producer maintains many data pipelines that support a business application. Each pipeline must have service accounts and their corresponding credentials. The data engineer must establish a secure connection from the data producer's on-premises data center to AWS. The data engineer must not use the public internet to transfer data from an on-premises data center to AWS. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Instruct the new data producer to create Amazon Machine Images (AMIs) on Amazon Elastic Container Service (Amazon ECS) to store the code base of the application. Create security groups in a public subnet that allow connections only to the on-premises data center.",
@@ -3350,7 +3350,7 @@ window.DEA_QUESTIONS = [
       "E": "SQS 큐가 수신하는 S3 이벤트를 기반으로 Data Catalog 업데이트 프로세스를 오케스트레이션하도록 AWS Step Functions를 사용합니다."
     },
     "answer": "AB",
-    "explanation": "옵션 A의 S3 이벤트 기반 AWS Glue 크롤러는 SQS 큐의 이벤트를 자동으로 소비하고 실시간으로 Data Catalog를 업데이트합니다. 이는 AWS에서 관리하는 기능으로 최소 오버헤드를 제공합니다. 옵션 B의 시간 기반 일정은 증분 업데이트를 위한 대체 방법으로, 일정한 간격(예: 시간별)으로 크롤러를 실행하여 새로운 파일을 감지합니다. 두 방식을 조합하면 이벤트 기반 실시간 업데이트와 정기적인 일정 기반 업데이트를 함께 제공할 수 있습니다. 옵션 C의 Lambda는 관리할 사용자 정의 코드가 필요합니다. 옵션 D는 수동 작업입니다. 옵션 E의 Step Functions는 불필요한 오버헤드를 추가합니다. 따라서 A와 B의 조합이 최적입니다.",
+    "explanation": "옵션 A의 S3 이벤트 기반 AWS Glue 크롤러는 SQS 큐의 이벤트를 자동으로 소비하고 실시간으로 Data Catalog를 업데이트합니다.\n\n이는 AWS에서 관리하는 기능으로 최소 오버헤드를 제공합니다.\n\n옵션 B의 시간 기반 일정은 증분 업데이트를 위한 대체 방법으로, 일정한 간격(예: 시간별)으로 크롤러를 실행하여 새로운 파일을 감지합니다.\n\n두 방식을 조합하면 이벤트 기반 실시간 업데이트와 정기적인 일정 기반 업데이트를 함께 제공할 수 있습니다.\n\n옵션 C의 Lambda는 관리할 사용자 정의 코드가 필요합니다.\n\n옵션 D는 수동 작업입니다.\n\n옵션 E의 Step Functions는 불필요한 오버헤드를 추가합니다.\n\n따라서 A와 B의 조합이 최적입니다.",
     "en_q": "A data engineer configured an AWS Glue Data Catalog for data that is stored in Amazon S3 buckets. The data engineer needs to configure the Data Catalog to receive incremental updates. The data engineer sets up event notifications for the S3 bucket and creates an Amazon Simple Queue Service (Amazon SQS) queue to receive the S3 events. Which combination of steps should the data engineer take to meet these requirements with LEAST operational overhead? (Choose two.)",
     "en_opts": {
       "A": "Create an S3 event-based AWS Glue crawler to consume events from the SQS queue.",
@@ -3371,7 +3371,7 @@ window.DEA_QUESTIONS = [
       "D": "열 데이터 유형과 null 값의 존재 여부를 확인하는 데이터 품질 쿼리를 실행하도록 AWS Lambda 함수를 만듭니다. AWS Step Functions 워크플로우를 사용하여 Lambda 함수를 실행하는 ETL 파이프라인을 오케스트레이션합니다. 불완전한 데이터 세트에 대해 데이터 엔지니어에게 알리는 이메일 알림을 SNS 토픽으로 보내도록 Step Functions 워크플로우를 구성합니다."
     },
     "answer": "C",
-    "explanation": "AWS Glue 워크플로우와 데이터 품질 작업은 AWS에서 관리하는 기능으로, 데이터 완전성과 일관성을 자동으로 확인합니다. EventBridge는 데이터 품질 문제가 감지되면 자동으로 SNS 토픽으로 알림을 보냅니다. 이는 최소 구성과 관리 오버헤드를 제공합니다. 옵션 A는 Airflow 클러스터를 별도로 설정하고 관리해야 합니다. 옵션 B는 EMR 클러스터를 설정하고 Spark 작업을 관리해야 합니다. 옵션 D는 Lambda 함수를 작성하고 Step Functions를 구성해야 합니다. 옵션 C는 AWS 관리 서비스를 통한 통합으로 가장 적은 운영 오버헤드를 제공합니다.",
+    "explanation": "AWS Glue 워크플로우와 데이터 품질 작업은 AWS에서 관리하는 기능으로, 데이터 완전성과 일관성을 자동으로 확인합니다. EventBridge는 데이터 품질 문제가 감지되면 자동으로 SNS 토픽으로 알림을 보냅니다. 이는 최소 구성과 관리 오버헤드를 제공합니다.\n\n옵션 A는 Airflow 클러스터를 별도로 설정하고 관리해야 합니다.\n\n옵션 B는 EMR 클러스터를 설정하고 Spark 작업을 관리해야 합니다.\n\n옵션 D는 Lambda 함수를 작성하고 Step Functions를 구성해야 합니다.\n\n옵션 C는 AWS 관리 서비스를 통한 통합으로 가장 적은 운영 오버헤드를 제공합니다.",
     "en_q": "A company uses AWS Glue Data Catalog to index data that is uploaded to an Amazon S3 bucket every day. The company uses a daily batch processes in an extract, transform, and load (ETL) pipeline to upload data from external sources into the S3 bucket. The company runs a daily report on the S3 data. Some days, the company runs the report before all the daily data has been uploaded to the S3 bucket. A data engineer must be able to send a message that identifies any incomplete data to an existing Amazon Simple Notification Service (Amazon SNS) topic. Which solution will meet this requirement with the LEAST operational overhead?",
     "en_opts": {
       "A": "Create data quality checks for the source datasets that the daily reports use. Create a new AWS managed Apache Airflow cluster. Run the data quality checks by using Airflow tasks that run data quality queries on the columns data type and the presence of null values. Configure Airflow Directed Acyclic Graphs (DAGs) to send an email notification that informs the data engineer about the incomplete datasets to the SNS topic.",
@@ -3391,7 +3391,7 @@ window.DEA_QUESTIONS = [
       "D": "고객 데이터를 Amazon S3 버킷으로 이동합니다. AWS Lake Formation을 사용하여 데이터 레이크를 만듭니다. 세분화된 보안 기능을 사용하여 각 팀에 데이터에 대한 적절한 권한을 부여합니다."
     },
     "answer": "C",
-    "explanation": "Redshift의 데이터베이스 역할과 마스킹 정책은 각 팀에 맞게 PII를 선택적으로 난독처리할 수 있습니다. 마케팅 팀은 마스킹 정책 없이 전체 연락처 정보를 보고 청구 정보는 난독처리됩니다. 분석 팀은 모든 PII가 난독처리된 뷰를 봅니다. 이는 단일 테이블과 역할 기반 마스킹으로 최소 관리 오버헤드를 제공합니다. 옵션 A는 여러 클러스터를 관리해야 하므로 오버헤드가 많습니다. 옵션 B는 여러 뷰를 관리하지만 마스킹 논리가 부족합니다. 옵션 D는 데이터를 이동하고 Lake Formation을 설정하는 추가 작업이 필요합니다. 옵션 C는 Redshift 역할과 마스킹 정책으로 가장 효율적입니다.",
+    "explanation": "Redshift의 데이터베이스 역할과 마스킹 정책은 각 팀에 맞게 PII를 선택적으로 난독처리할 수 있습니다. 마케팅 팀은 마스킹 정책 없이 전체 연락처 정보를 보고 청구 정보는 난독처리됩니다. 분석 팀은 모든 PII가 난독처리된 뷰를 봅니다. 이는 단일 테이블과 역할 기반 마스킹으로 최소 관리 오버헤드를 제공합니다.\n\n옵션 A는 여러 클러스터를 관리해야 하므로 오버헤드가 많습니다.\n\n옵션 B는 여러 뷰를 관리하지만 마스킹 논리가 부족합니다.\n\n옵션 D는 데이터를 이동하고 Lake Formation을 설정하는 추가 작업이 필요합니다.\n\n옵션 C는 Redshift 역할과 마스킹 정책으로 가장 효율적입니다.",
     "en_q": "A company stores customer data that contains personally identifiable information (PII) in an Amazon Redshift cluster. The company's marketing, claims, and analytics teams need to be able to access the customer data. The marketing team should have access to obfuscated claim information but should have full access to customer contact information. The claims team should have access to customer information for each claim that the team processes. The analytics team should have access only to obfuscated PII data. Which solution will enforce these data access requirements with the LEAST administrative overhead?",
     "en_opts": {
       "A": "Create a separate Redshift cluster for each team. Load only the required data for each team. Restrict access to clusters based on the teams.",
@@ -3411,7 +3411,7 @@ window.DEA_QUESTIONS = [
       "D": "기존 토픽에 대해 Target Volume-in-GiB 매개변수를 지정합니다."
     },
     "answer": "A",
-    "explanation": "RootDiskUsed 메트릭은 MSK 브로커의 루트 디스크 사용량을 나타냅니다. 새로운 토픽 추가로 인해 디스크 사용량이 증가하여 경보가 발생했습니다. MSK 브로커의 스토리지를 확장하고 자동 확장을 구성하면 디스크 부족 문제를 해결할 수 있습니다. 옵션 B의 ZooKeeper는 메타데이터 관리용이고 데이터 저장소가 아닙니다. 옵션 C의 인스턴스 업그레이드와 재시작은 불필요하고 가동 중지 시간을 유발합니다. 옵션 D의 Target Volume 매개변수는 토픽 수준 설정이 아닙니다. 옵션 A가 적절한 해결책입니다.",
+    "explanation": "RootDiskUsed 메트릭은 MSK 브로커의 루트 디스크 사용량을 나타냅니다.\n\n새로운 토픽 추가로 인해 디스크 사용량이 증가하여 경보가 발생했습니다.\n\nMSK 브로커의 스토리지를 확장하고 자동 확장을 구성하면 디스크 부족 문제를 해결할 수 있습니다.\n\n옵션 B의 ZooKeeper는 메타데이터 관리용이고 데이터 저장소가 아닙니다.\n\n옵션 C의 인스턴스 업그레이드와 재시작은 불필요하고 가동 중지 시간을 유발합니다.\n\n옵션 D의 Target Volume 매개변수는 토픽 수준 설정이 아닙니다.\n\n옵션 A가 적절한 해결책입니다.",
     "en_q": "A financial company recently added more features to its mobile app. The new features required the company to create a new topic in an existing Amazon Managed Streaming for Apache Kafka (Amazon MSK) cluster. A few days after the company added the new topic, Amazon CloudWatch raised an alarm on the RootDiskUsed metric for the MSK cluster. How should the company address the CloudWatch alarm?",
     "en_opts": {
       "A": "Expand the storage of the MSK broker. Configure the MSK cluster storage to expand automatically.",
@@ -3431,7 +3431,7 @@ window.DEA_QUESTIONS = [
       "D": "데이터 요소를 스캔하고 데이터 형식을 기반으로 데이터 분류를 할당하도록 스크립트를 사용합니다."
     },
     "answer": "B",
-    "explanation": "AWS Glue 크롤러는 S3 및 RDS 데이터를 자동으로 스캔합니다. 특히 Glue 크롤러 분류자는 데이터 형식(CSV, Parquet, JSON 등)을 자동으로 인식하고 메타데이터를 Data Catalog에 저장합니다. 이는 최소 노력으로 스토리지 형식 메타데이터를 포함하는 카탈로그를 구축할 수 있습니다. 옵션 A는 수동 검사와 업데이트가 필요하여 노력이 많습니다. 옵션 C의 Macie는 데이터 형식 감지보다는 민감한 데이터 식별에 초점을 맞춥니다. 옵션 D는 사용자 정의 스크립트가 필요하므로 구현 노력이 많습니다. 옵션 B가 가장 자동화되고 최소 노력의 솔루션입니다.",
+    "explanation": "AWS Glue 크롤러는 S3 및 RDS 데이터를 자동으로 스캔합니다. 특히 Glue 크롤러 분류자는 데이터 형식(CSV, Parquet, JSON 등)을 자동으로 인식하고 메타데이터를 Data Catalog에 저장합니다. 이는 최소 노력으로 스토리지 형식 메타데이터를 포함하는 카탈로그를 구축할 수 있습니다.\n\n옵션 A는 수동 검사와 업데이트가 필요하여 노력이 많습니다. 옵션 C의 Macie는 데이터 형식 감지보다는 민감한 데이터 식별에 초점을 맞춥니다.\n\n옵션 D는 사용자 정의 스크립트가 필요하므로 구현 노력이 많습니다.\n\n옵션 B가 가장 자동화되고 최소 노력의 솔루션입니다.",
     "en_q": "A data engineer needs to build an enterprise data catalog based on the company's Amazon S3 buckets and Amazon RDS databases. The data catalog must include storage format metadata for the data in the catalog. Which solution will meet these requirements with the LEAST effort?",
     "en_opts": {
       "A": "Use an AWS Glue crawler to scan the S3 buckets and RDS databases and build a data catalog. Use data stewards to inspect the data and update the data catalog with the data format.",
@@ -3451,7 +3451,7 @@ window.DEA_QUESTIONS = [
       "D": "데이터 레이크로의 추출 변환 및 로드(ETL) 작업 중에 필드에서 PII 정보를 추출하도록 정규식 패턴을 구현합니다."
     },
     "answer": "B",
-    "explanation": "AWS Glue DataBrew는 사용자 정의 데이터 품질 규칙을 정의할 수 있는 기능을 제공합니다. 사용자 정의 PII 범주에 대한 규칙을 만들고 이를 여러 데이터 세트에 적용할 수 있습니다. DataBrew는 AWS에서 관리하는 서비스이므로 별도의 서버 관리가 필요 없습니다. 옵션 A는 완전한 수동 작업입니다. 옵션 C는 사용자 정의 Python 스크립트를 작성하고 유지보수해야 합니다. 옵션 D는 정규식이 모든 사용자 정의 PII 범주를 완전히 포착하기 어렵습니다. 옵션 B는 DataBrew의 사용자 정의 규칙 기능으로 최소 오버헤드를 제공합니다.",
+    "explanation": "AWS Glue DataBrew는 사용자 정의 데이터 품질 규칙을 정의할 수 있는 기능을 제공합니다. 사용자 정의 PII 범주에 대한 규칙을 만들고 이를 여러 데이터 세트에 적용할 수 있습니다. DataBrew는 AWS에서 관리하는 서비스이므로 별도의 서버 관리가 필요 없습니다.\n\n옵션 A는 완전한 수동 작업입니다.\n\n옵션 C는 사용자 정의 Python 스크립트를 작성하고 유지보수해야 합니다.\n\n옵션 D는 정규식이 모든 사용자 정의 PII 범주를 완전히 포착하기 어렵습니다.\n\n옵션 B는 DataBrew의 사용자 정의 규칙 기능으로 최소 오버헤드를 제공합니다.",
     "en_q": "A company analyzes data in a data lake every quarter to perform inventory assessments. A data engineer uses AWS Glue DataBrew to detect any personally identifiable formation (PII) about customers within the data. The company's privacy policy considers some custom categories of information to be PII. However, the categories are not included in standard DataBrew data quality rules. The data engineer needs to modify the current process to scan for the custom PII categories across multiple datasets within the data lake. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Manually review the data for custom PII categories.",
@@ -3471,7 +3471,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon Athena에서 SQL 쿼리를 실행하여 CSV 파일을 읽고 누락된 행을 삭제합니다. 수정된 CSV 파일을 두 번째 S3 버킷으로 복사합니다."
     },
     "answer": "B",
-    "explanation": "AWS Glue Data Quality는 DQDL을 사용하여 데이터 유효성 검사 규칙을 정의합니다. 필수 필드의 누락된 값과 빈 파일을 감지하는 규칙을 만들 수 있습니다. ETL 파이프라인 내에서 이러한 규칙을 통합하면 데이터가 유효하지 않을 때 파일을 덮어쓰지 않도록 제어할 수 있습니다. 옵션 A는 AWS Lambda로 누락된 값을 채우므로 데이터 품질 검증이 부족합니다. 옵션 C는 가장 일반적인 값으로 채우는 방식이 항상 정확하지 않을 수 있습니다. 옵션 D는 Athena를 사용하지만 ETL 파이프라인과 통합되지 않습니다. 옵션 B는 Glue Data Quality 규칙으로 파이프라인 내에서 유효성 검사를 수행합니다.",
+    "explanation": "AWS Glue Data Quality는 DQDL을 사용하여 데이터 유효성 검사 규칙을 정의합니다. 필수 필드의 누락된 값과 빈 파일을 감지하는 규칙을 만들 수 있습니다. ETL 파이프라인 내에서 이러한 규칙을 통합하면 데이터가 유효하지 않을 때 파일을 덮어쓰지 않도록 제어할 수 있습니다.\n\n옵션 A는 AWS Lambda로 누락된 값을 채우므로 데이터 품질 검증이 부족합니다.\n\n옵션 C는 가장 일반적인 값으로 채우는 방식이 항상 정확하지 않을 수 있습니다.\n\n옵션 D는 Athena를 사용하지만 ETL 파이프라인과 통합되지 않습니다.\n\n옵션 B는 Glue Data Quality 규칙으로 파이프라인 내에서 유효성 검사를 수행합니다.",
     "en_q": "A company receives a data file from a partner each day in an Amazon S3 bucket. The company uses a daily AWS Glue extract, transform, and load (ETL) pipeline to clean and transform each data file. The output of the ETL pipeline is written to a CSV file named Daily.csv in a second S3 bucket. Occasionally, the daily data file is empty or is missing values for required fields. When the file is missing data, the company can use the previous day's CSV file. A data engineer needs to ensure that the previous day's data file is overwritten only if the new daily file is complete and valid. Which solution will meet these requirements with the LEAST effort?",
     "en_opts": {
       "A": "Invoke an AWS Lambda function to check the file for missing data and to fill in missing values in required fields.",
@@ -4261,7 +4261,7 @@ window.DEA_QUESTIONS = [
       "D": "데이터를 Amazon QuickSight의 SPICE(Super-fast, Parallel, In-memory Calculation Engine)로 로드합니다. 데이터 분석팀이 QuickSight에서 분석 및 대시보드를 생성할 수 있도록 합니다."
     },
     "answer": "C",
-    "explanation": "이 문제는 CSV/JSON 데이터를 SQL 쿼리 분석에 적합한 형태로 제공하는 가장 비용 효율적인 방법을 선택하는 것입니다. 옵션 C(S3 + Glue Crawler + Athena)가 정답인 이유: (1) S3는 스토리지 비용이 매우 저렴하고, CSV/JSON 같은 비정형 데이터 저장에 적합합니다. (2) Glue Crawler는 자동으로 메타데이터를 발견하고 카탈로그화하므로 추가 ETL 작업이 불필요합니다. (3) Athena는 SQL 쿼리를 지원하며 사용량 기반 과금 모델로 비용 효율적입니다. 옵션 A는 RDS 관리 비용이 높고, 옵션 B는 DataBrew가 데이터 분석이 아닌 데이터 준비 도구이며, 옵션 D는 SPICE 메모리가 제한적이고 대규모 데이터에 부적합합니다. DEA 시험에서 자주 출제되는 최소 비용 솔루션 패턴입니다.",
+    "explanation": "이 문제는 CSV/JSON 데이터를 SQL 쿼리 분석에 적합한 형태로 제공하는 가장 비용 효율적인 방법을 선택하는 것입니다. 옵션 C(S3 + Glue Crawler + Athena)가 정답인 이유: (1) S3는 스토리지 비용이 매우 저렴하고, CSV/JSON 같은 비정형 데이터 저장에 적합합니다. (2) Glue Crawler는 자동으로 메타데이터를 발견하고 카탈로그화하므로 추가 ETL 작업이 불필요합니다. (3) Athena는 SQL 쿼리를 지원하며 사용량 기반 과금 모델로 비용 효율적입니다.\n\n옵션 A는 RDS 관리 비용이 높고,\n\n옵션 B는 DataBrew가 데이터 분석이 아닌 데이터 준비 도구이며,\n\n옵션 D는 SPICE 메모리가 제한적이고 대규모 데이터에 부적합합니다. DEA 시험에서 자주 출제되는 최소 비용 솔루션 패턴입니다.",
     "en_q": "A company has several new datasets in CSV and JSON formats. A data engineer needs to make the data available to a team of data analysts who will analyze the data by using SQL queries. Which solution will meet these requirements in the MOST cost-effective way?",
     "en_opts": {
       "A": "Create an Amazon RDS MySQL cluster. Use AWS Glue to transform and load the CSV and JSON files into database tables. Provide the data analysts access to the MySQL cluster.",
@@ -4281,7 +4281,7 @@ window.DEA_QUESTIONS = [
       "D": "연합 쿼리를 사용하여 Aurora에서 직접 Orders 테이블을 쿼리합니다. Amazon Redshift에서 구체화된 뷰를 생성하여 Campaigns 테이블과 조인합니다."
     },
     "answer": "B",
-    "explanation": "이 문제는 고처리량 Aurora 데이터베이스의 데이터를 Redshift로 복제하면서 원본 DB에 영향을 최소화하는 방법을 찾는 것입니다. Aurora zero-ETL 통합(옵션 B)이 정답인 이유: (1) Zero-ETL은 Aurora에서 Redshift로 거의 실시간 데이터 동기화를 제공하며, 원본 데이터베이스 성능에 영향이 없습니다. (2) 관리형 서비스로 DMS 리소스 관리가 불필요하며, 최소 운영 오버헤드입니다. (3) 초당 100,000 트랜잭션 같은 높은 처리량 환경에서 가장 적합합니다. 옵션 A는 DMS 클러스터 관리 필요, 옵션 C는 Glue가 배치 기반이라 실시간성 부족, 옵션 D는 연합 쿼리가 Aurora에 부하를 줍니다. 최신 AWS 데이터 아키텍처의 핵심 기능입니다.",
+    "explanation": "이 문제는 고처리량 Aurora 데이터베이스의 데이터를 Redshift로 복제하면서 원본 DB에 영향을 최소화하는 방법을 찾는 것입니다. Aurora zero-ETL 통합(옵션 B)이 정답인 이유: (1) Zero-ETL은 Aurora에서 Redshift로 거의 실시간 데이터 동기화를 제공하며, 원본 데이터베이스 성능에 영향이 없습니다. (2) 관리형 서비스로 DMS 리소스 관리가 불필요하며, 최소 운영 오버헤드입니다. (3) 초당 100,000 트랜잭션 같은 높은 처리량 환경에서 가장 적합합니다.\n\n옵션 A는 DMS 클러스터 관리 필요,\n\n옵션 C는 Glue가 배치 기반이라 실시간성 부족,\n\n옵션 D는 연합 쿼리가 Aurora에 부하를 줍니다. 최신 AWS 데이터 아키텍처의 핵심 기능입니다.",
     "en_q": "A retail company stores order information in an Amazon Aurora table named Orders. The company needs to create operational reports from the Orders table with minimal latency. The Orders table contains billions of rows, and over 100,000 transactions can occur each second. A marketing team needs to join the Orders data with an Amazon Redshift table named Campaigns in the marketing team's data warehouse. The operational Aurora database must not be affected. Which solution will meet these requirements with the LEAST operational effort?",
     "en_opts": {
       "A": "Use AWS Database Migration Service (AWS DMS) Serverless to replicate the Orders table to Amazon Redshift. Create a materialized view in Amazon Redshift to join with the Campaigns table.",
@@ -4301,7 +4301,7 @@ window.DEA_QUESTIONS = [
       "D": "S3 새 객체 생성 이벤트와 일치하는 Amazon EventBridge 규칙을 구성합니다. 규칙의 대상으로 Amazon Simple Queue Service(Amazon SQS) 큐를 설정합니다. Lambda 함수가 큐를 처리하도록 구성합니다."
     },
     "answer": "B",
-    "explanation": "이 문제는 S3의 새 파일 도착 시 Lambda 함수를 자동으로 트리거하는 메커니즘을 구성하는 것입니다. SQS 기반 솔루션(옵션 B)이 정답인 이유: (1) S3 이벤트 알림이 SQS 큐로 직접 전송되므로 메시지 손실 방지 및 안정성이 높습니다. (2) SQS는 메시지 큐로 작동하여 버스트 트래픽 처리 시 Lambda 호출 스로틀링을 방지합니다. (3) Lambda가 SQS 큐를 폴링하는 구조이므로 구성이 간단합니다. 옵션 A는 EventBridge가 Lambda에 직접 호출하는 방식으로 동기 처리이며, 실패 시 재시도 메커니즘이 약합니다. 옵션 C는 DMS가 S3->Kinesis 스트리밍에 부적합하고, 옵션 D는 EventBridge->SQS 구조로 불필요한 복잡성을 추가합니다. 메시지 큐 기반 이벤트 드리븐 아키텍처의 베스트 프랙티스입니다.",
+    "explanation": "이 문제는 S3의 새 파일 도착 시 Lambda 함수를 자동으로 트리거하는 메커니즘을 구성하는 것입니다. SQS 기반 솔루션(옵션 B)이 정답인 이유: (1) S3 이벤트 알림이 SQS 큐로 직접 전송되므로 메시지 손실 방지 및 안정성이 높습니다. (2) SQS는 메시지 큐로 작동하여 버스트 트래픽 처리 시 Lambda 호출 스로틀링을 방지합니다. (3) Lambda가 SQS 큐를 폴링하는 구조이므로 구성이 간단합니다.\n\n옵션 A는 EventBridge가 Lambda에 직접 호출하는 방식으로 동기 처리이며, 실패 시 재시도 메커니즘이 약합니다.\n\n옵션 C는 DMS가 S3->Kinesis 스트리밍에 부적합하고,\n\n옵션 D는 EventBridge->SQS 구조로 불필요한 복잡성을 추가합니다. 메시지 큐 기반 이벤트 드리븐 아키텍처의 베스트 프랙티스입니다.",
     "en_q": "A company is building a new application that ingests CSV files into Amazon Redshift. The company has developed the frontend for the application. The files are stored in an Amazon S3 bucket. Files are no larger than 5 MB. A data engineer is developing the extract, transform, and load (ETL) pipeline for the CSV files. The data engineer configured a Redshift cluster and an AWS Lambda function that copies the data out of the files into the Redshift cluster. Which additional steps should the data engineer perform to meet these requirements?",
     "en_opts": {
       "A": "Configure the bucket to send S3 event notifications to Amazon EventBridge. Configure an EventBridge rule that matches S3 new object created events. Set the Lambda function as the target.",
@@ -4321,7 +4321,7 @@ window.DEA_QUESTIONS = [
       "D": "AWS Glue 작업을 생성하여 민감한 데이터를 수정하고 데이터를 새 Redshift 테이블에 로드합니다."
     },
     "answer": "A",
-    "explanation": "이 문제는 데이터 중복 없이 역할에 따라 다른 수준의 데이터 마스킹을 구현하는 방법입니다. 동적 데이터 마스킹(옵션 A)이 정답인 이유: (1) Redshift의 동적 데이터 마스킹은 쿼리 시간에 데이터를 마스킹하므로 원본 테이블을 수정하지 않습니다(중복 없음). (2) 사용자 역할 기반으로 마스킹 규칙을 정의할 수 있어 고객지원팀은 마지막 4자만 보고, 감사팀은 전체를 봅니다. (3) IAM 역할과 연동되어 접근 제어를 통합 관리합니다. 옵션 B는 메타데이터 보안이 데이터 마스킹이 아니라 카탈로그 접근 제어이며, 옵션 C는 행 수준 보안이 행 단위 필터링으로 열 값 마스킹 불가, 옵션 D는 데이터를 새 테이블에 복사하므로 중복 발생. Redshift의 세분화된 접근 제어 기능입니다.",
+    "explanation": "이 문제는 데이터 중복 없이 역할에 따라 다른 수준의 데이터 마스킹을 구현하는 방법입니다. 동적 데이터 마스킹(옵션 A)이 정답인 이유: (1) Redshift의 동적 데이터 마스킹은 쿼리 시간에 데이터를 마스킹하므로 원본 테이블을 수정하지 않습니다(중복 없음). (2) 사용자 역할 기반으로 마스킹 규칙을 정의할 수 있어 고객지원팀은 마지막 4자만 보고, 감사팀은 전체를 봅니다. (3) IAM 역할과 연동되어 접근 제어를 통합 관리합니다.\n\n옵션 B는 메타데이터 보안이 데이터 마스킹이 아니라 카탈로그 접근 제어이며,\n\n옵션 C는 행 수준 보안이 행 단위 필터링으로 열 값 마스킹 불가,\n\n옵션 D는 데이터를 새 테이블에 복사하므로 중복 발생. Redshift의 세분화된 접근 제어 기능입니다.",
     "en_q": "A company stores sensitive data in an Amazon Redshift table. The company needs to give specific users the ability to access the sensitive data. The company must not create duplication in the data. Customer support users must be able to see the last four characters of the sensitive data. Audit users must be able to see the full value of the sensitive data. No other users can have the ability to access the sensitive information. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Create a dynamic data masking policy to allow access based on each user role. Create IAM roles that have specific access permissions. Attach the masking policy to the column that contains sensitive data.",
@@ -4341,7 +4341,7 @@ window.DEA_QUESTIONS = [
       "D": "교차 계정 액세스를 허용하도록 S3 버킷 정책을 구성합니다."
     },
     "answer": "B",
-    "explanation": "이 문제는 Lake Formation과 Glue Crawler의 통합에서 발생하는 권한 오류를 해결하는 방법입니다. Lake Formation에 S3 위치 등록(옵션 B)이 정답인 이유: (1) Lake Formation은 중앙 집중식 권한 관리 서비스로, 관리되는 S3 경로는 반드시 Lake Formation에 등록되어야 합니다. (2) 오류 메시지 \"S3 location is not registered\"는 Lake Formation 관리 대상이 아닌 경로에 Glue Crawler가 접근하려고 할 때 발생합니다. (3) 등록 후 Glue Crawler는 Lake Formation의 권한 체계에 따라 데이터에 액세스할 수 있습니다. 옵션 A는 IAM 정책만으로는 Lake Formation 관리 경로 접근 불가, 옵션 C는 데이터베이스 권한이 문제가 아니며, 옵션 D는 같은 계정이므로 불필요. Lake Formation 기반 데이터 거버넌스의 핵심 개념입니다.",
+    "explanation": "이 문제는 Lake Formation과 Glue Crawler의 통합에서 발생하는 권한 오류를 해결하는 방법입니다. Lake Formation에 S3 위치 등록(옵션 B)이 정답인 이유: (1) Lake Formation은 중앙 집중식 권한 관리 서비스로, 관리되는 S3 경로는 반드시 Lake Formation에 등록되어야 합니다. (2) 오류 메시지 \"S3 location is not registered\"는 Lake Formation 관리 대상이 아닌 경로에 Glue Crawler가 접근하려고 할 때 발생합니다. (3) 등록 후 Glue Crawler는 Lake Formation의 권한 체계에 따라 데이터에 액세스할 수 있습니다.\n\n옵션 A는 IAM 정책만으로는 Lake Formation 관리 경로 접근 불가,\n\n옵션 C는 데이터베이스 권한이 문제가 아니며,\n\n옵션 D는 같은 계정이므로 불필요. Lake Formation 기반 데이터 거버넌스의 핵심 개념입니다.",
     "en_q": "A data engineer uses AWS Lake Formation to manage access to data that is stored in an Amazon S3 bucket. The data engineer configures an AWS Glue crawler to discover data at a specific file location in the bucket, s3://examplepath. The crawler execution fails with the following error: \"The S3 location: s3://examplepath is not registered.\" The data engineer needs to resolve the error. Which solution will meet this requirement?",
     "en_opts": {
       "A": "Attach an appropriate IAM policy to the IAM role of the AWS Glue crawler to grant the crawler permission to read the S3 location.",
@@ -4361,7 +4361,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon OpenSearch Service를 사용합니다. 비즈니스 용어사전을 위한 인덱스를 생성합니다. 비즈니스 메타데이터를 위한 두 번째 인덱스를 생성합니다. OpenSearch Service 대시보드를 사용하여 메타데이터에 액세스합니다."
     },
     "answer": "C",
-    "explanation": "이 문제는 비즈니스 메타데이터와 용어사전을 관리할 수 있는 데이터 카탈로그를 선택하는 것입니다. Amazon DataZone(옵션 C)이 정답인 이유: (1) DataZone은 AWS의 관리형 데이터 카탈로깅 및 메타데이터 관리 서비스로, 비즈니스 용어사전과 메타데이터를 기본 기능으로 지원합니다. (2) DataZone 포털은 사용자 친화적인 UI를 제공하여 웹 애플리케이션 개발 필요 없습니다. (3) 운영 오버헤드가 최소화되고 거버넌스 기능이 통합되어 있습니다. 옵션 A는 Glue Catalog가 기술 메타데이터 중심이고 비즈니스 메타데이터 지원이 약하며 API/앱 개발 필요, 옵션 B는 Hive 메타스토어가 기술적이고 비즈니스 용어사전 기능 없음, 옵션 D는 OpenSearch가 메타데이터 검색 용도이지 거버넌스 플랫폼이 아님. 현대적 데이터 거버넌스의 통합 솔루션입니다.",
+    "explanation": "이 문제는 비즈니스 메타데이터와 용어사전을 관리할 수 있는 데이터 카탈로그를 선택하는 것입니다. Amazon DataZone(옵션 C)이 정답인 이유: (1) DataZone은 AWS의 관리형 데이터 카탈로깅 및 메타데이터 관리 서비스로, 비즈니스 용어사전과 메타데이터를 기본 기능으로 지원합니다. (2) DataZone 포털은 사용자 친화적인 UI를 제공하여 웹 애플리케이션 개발 필요 없습니다. (3) 운영 오버헤드가 최소화되고 거버넌스 기능이 통합되어 있습니다.\n\n옵션 A는 Glue Catalog가 기술 메타데이터 중심이고 비즈니스 메타데이터 지원이 약하며 API/앱 개발 필요,\n\n옵션 B는 Hive 메타스토어가 기술적이고 비즈니스 용어사전 기능 없음,\n\n옵션 D는 OpenSearch가 메타데이터 검색 용도이지 거버넌스 플랫폼이 아님. 현대적 데이터 거버넌스의 통합 솔루션입니다.",
     "en_q": "A company built a data lake and a data warehouse on AWS. The company wants to implement a data catalog to enhance the current data storage solutions. The company wants to have the capability to add business metadata and glossary information to the data catalog for every asset. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Use AWS Glue Catalog. Create a user table for the business glossary. Use the AWS Glue API to change table properties to add business metadata. Create a web application to access the metadata.",
@@ -4381,7 +4381,7 @@ window.DEA_QUESTIONS = [
       "D": "AWS Glue에서 명령 구문이 유효하지 않으므로 레코드가 삭제되지 않습니다."
     },
     "answer": "A",
-    "explanation": "이 문제는 MERGE 문의 WHEN MATCHED THEN DELETE 절의 동작을 이해하는 것입니다. MERGE INTO 명령은 두 테이블을 조인하여 일치하는 행에 대해 특정 작업을 수행합니다. WHEN MATCHED THEN DELETE 절은 조인 조건(t.customer = s.customer)과 일치하는 행들을 대상 테이블(accounts)에서 삭제하라는 의미입니다. 따라서 monthly_accounts_update에 존재하는 고객이 accounts 테이블에도 있으면 그 레코드들이 삭제됩니다(정답 A). 이는 불일치 행의 유지(옵션 B)나 소스 테이블 삭제(옵션 C)와는 다릅니다. 또한 AWS Glue는 Apache Spark 기반이므로 Spark SQL의 MERGE 문법을 지원합니다(옵션 D는 오류). Spark의 데이터 변경 작업(DML: DELETE, UPDATE, INSERT)의 핵심 개념입니다.",
+    "explanation": "이 문제는 MERGE 문의 WHEN MATCHED THEN DELETE 절의 동작을 이해하는 것입니다.\n\nMERGE INTO 명령은 두 테이블을 조인하여 일치하는 행에 대해 특정 작업을 수행합니다.\n\nWHEN MATCHED THEN DELETE 절은 조인 조건(t.customer = s.customer)과 일치하는 행들을 대상 테이블(accounts)에서 삭제하라는 의미입니다.\n\n따라서 monthly_accounts_update에 존재하는 고객이 accounts 테이블에도 있으면 그 레코드들이 삭제됩니다(정답 A). 이는 불일치 행의 유지(옵션 B)나 소스 테이블 삭제(옵션 C)와는 다릅니다.\n\n또한 AWS Glue는 Apache Spark 기반이므로 Spark SQL의 MERGE 문법을 지원합니다(\n\n옵션 D는 오류). Spark의 데이터 변경 작업(DML: DELETE, UPDATE, INSERT)의 핵심 개념입니다.",
     "en_q": "A data engineer is using an AWS Glue ETL job to remove outdated customer records from a table that contains customer account information. The data engineer is using the following SQL command to remove customers that exist in a table named monthly_accounts_update table from the customer accounts table: MERGE INTO accounts t USING monthly_accounts_update s ON t.customer = s.customer - WHEN MATCHED - THEN DELETE - What will happen when the data engineer runs the SQL command?",
     "en_opts": {
       "A": "All customer records that exist in both the customer accounts table and the monthly_accounts_update table will be deleted from the accounts table.",
@@ -4401,7 +4401,7 @@ window.DEA_QUESTIONS = [
       "D": "AWS Database Migration Service(AWS DMS) 작업을 생성합니다. 마이그레이션할 적절한 데이터 스키마를 지정합니다. 사용할 마이그레이션의 적절한 유형을 지정합니다."
     },
     "answer": "A",
-    "explanation": "이 문제는 작은 크기의 CSV 파일을 정기적으로 Redshift에 로드하는 가장 간단한 방법을 찾는 것입니다. Lambda + EventBridge + COPY 명령(옵션 A)이 정답인 이유: (1) S3에 업로드되는 각 파일(100-300KB)이 작으므로 Lambda의 15분 타임아웃이 충분합니다. (2) EventBridge는 S3 이벤트를 감지하여 Lambda를 즉시 트리거하므로 지연 없이 처리합니다. (3) Redshift의 COPY 명령은 S3에서 데이터를 직접 로드하는 가장 빠르고 효율적인 방법입니다. (4) 관리할 인프라나 서버가 없어 운영 오버헤드가 최소입니다. 옵션 B는 Firehose가 COPY보다 느리고, 옵션 C는 Spectrum이 쿼리용이지 로드용이 아니며, 옵션 D는 DMS가 배치 마이그레이션 도구이지 파이프라인 용도가 아님. 소규모 정기 로드의 표준 패턴입니다.",
+    "explanation": "이 문제는 작은 크기의 CSV 파일을 정기적으로 Redshift에 로드하는 가장 간단한 방법을 찾는 것입니다. Lambda + EventBridge + COPY 명령(옵션 A)이 정답인 이유: (1) S3에 업로드되는 각 파일(100-300KB)이 작으므로 Lambda의 15분 타임아웃이 충분합니다. (2) EventBridge는 S3 이벤트를 감지하여 Lambda를 즉시 트리거하므로 지연 없이 처리합니다. (3) Redshift의 COPY 명령은 S3에서 데이터를 직접 로드하는 가장 빠르고 효율적인 방법입니다. (4) 관리할 인프라나 서버가 없어 운영 오버헤드가 최소입니다.\n\n옵션 B는 Firehose가 COPY보다 느리고,\n\n옵션 C는 Spectrum이 쿼리용이지 로드용이 아니며,\n\n옵션 D는 DMS가 배치 마이그레이션 도구이지 파이프라인 용도가 아님. 소규모 정기 로드의 표준 패턴입니다.",
     "en_q": "A company receives marketing campaign data from a vendor. The company ingests the data into an Amazon S3 bucket every 40 to 60 minutes. The data is in CSV format. File sizes are between 100 KB and 300 KB. A data engineer needs to set-up an extract, transform, and load (ETL) pipeline to upload the content of each file to Amazon Redshift. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Create an AWS Lambda function that connects to Amazon Redshift and runs a COPY command. Use Amazon EventBridge to invoke the Lambda function based on an Amazon S3 upload trigger.",
@@ -4421,7 +4421,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon EMR 작업을 개발하여 새 변경사항을 Apache Spark DataFrame으로 읽습니다. Apache Hudi 프레임워크를 사용하여 Amazon S3에 기본 테이블을 생성합니다. Spark 업데이트 메서드를 사용하여 기본 테이블을 업데이트합니다."
     },
     "answer": "D",
-    "explanation": "이 문제는 1TB의 대규모 히스토리 데이터에서 매일 10,000개(0.1%) 레코드만 업데이트하는 가장 빠른 방법입니다. Apache Hudi 프레임워크(옵션 D)가 정답인 이유: (1) Hudi는 대규모 데이터셋에서 부분 업데이트(upsert)에 최적화된 프레임워크로, 변경된 레코드만 처리합니다. (2) Upsert 작업이 전체 1TB를 다시 쓰지 않고 변경된 부분만 업데이트하므로 런타임이 매우 짧습니다. (3) Hudi의 Copy-on-Write(CoW) 테이블 타입은 읽기 성능을 최적화하여 쿼리도 빠릅니다. 옵션 A는 일반 Spark로 전체 1TB를 읽고 업데이트해야 하므로 느리며, 옵션 B는 Pandas가 단일 머신 처리라 대규모 데이터 부적합, 옵션 C도 Spark 업데이트가 전체 데이터셋 재처리. 데이터 레이크의 효율적 부분 업데이트 기술입니다.",
+    "explanation": "이 문제는 1TB의 대규모 히스토리 데이터에서 매일 10,000개(0.1%) 레코드만 업데이트하는 가장 빠른 방법입니다. Apache Hudi 프레임워크(옵션 D)가 정답인 이유: (1) Hudi는 대규모 데이터셋에서 부분 업데이트(upsert)에 최적화된 프레임워크로, 변경된 레코드만 처리합니다. (2) Upsert 작업이 전체 1TB를 다시 쓰지 않고 변경된 부분만 업데이트하므로 런타임이 매우 짧습니다. (3) Hudi의 Copy-on-Write(CoW) 테이블 타입은 읽기 성능을 최적화하여 쿼리도 빠릅니다.\n\n옵션 A는 일반 Spark로 전체 1TB를 읽고 업데이트해야 하므로 느리며,\n\n옵션 B는 Pandas가 단일 머신 처리라 대규모 데이터 부적합, 옵션 C도 Spark 업데이트가 전체 데이터셋 재처리. 데이터 레이크의 효율적 부분 업데이트 기술입니다.",
     "en_q": "A company wants to build a dimension table in an Amazon S3 bucket. The bucket contains historical data that includes 10 million records. The historical data is 1 TB in size. A data engineer needs a solution to update changes for up to 10,000 records in the base table every day. Which solution will meet this requirement with the LOWEST runtime?",
     "en_opts": {
       "A": "Develop an Apache Spark job in Amazon EMR to read the historical data and the new changes into two Spark DataFrames. Use the Spark update method to update the base table.",
@@ -4442,7 +4442,7 @@ window.DEA_QUESTIONS = [
       "E": "Amazon CloudWatch의 오류 로그를 사용하여 데이터 스큐를 모니터링합니다."
     },
     "answer": "BD",
-    "explanation": "이 문제는 Spark ETL 작업의 \"No space left on device\" 오류를 진단하고 해결하는 2개 단계를 선택하는 것입니다. 정답 B와 D: (1) B(Spark UI 및 Glue 메트릭)는 문제의 근본 원인인 데이터 스큐를 파악하는 진단 단계입니다. Spark 실행기 메트릭에서 일부 파티션이 다른 파티션보다 훨씬 큰 데이터를 처리하는 것을 확인할 수 있습니다. (2) D(--write-shuffle-files-to-s3 + salting)는 데이터 스큐를 해결하는 방법으로, 셔플 파일을 S3에 쓰도록 설정하여 로컬 디스크 공간 압박을 완화하고, 솔팅(key에 무작위 접두사 추가)으로 데이터를 균등 분산합니다. 옵션 A는 수직 확장(더 큰 인스턴스)이 비용 비효율적이고, C는 수평 확장만으로는 스큐 문제 해결 불가, E는 모니터링 도구만으로 해결책 아님. Spark 성능 최적화의 핵심 기법입니다.",
+    "explanation": "이 문제는 Spark ETL 작업의 \"No space left on device\" 오류를 진단하고 해결하는 2개 단계를 선택하는 것입니다.\n\n정답 B와 D: (1) B(Spark UI 및 Glue 메트릭)는 문제의 근본 원인인 데이터 스큐를 파악하는 진단 단계입니다.\n\nSpark 실행기 메트릭에서 일부 파티션이 다른 파티션보다 훨씬 큰 데이터를 처리하는 것을 확인할 수 있습니다.\n\n(2) D(--write-shuffle-files-to-s3 + salting)는 데이터 스큐를 해결하는 방법으로, 셔플 파일을 S3에 쓰도록 설정하여 로컬 디스크 공간 압박을 완화하고, 솔팅(key에 무작위 접두사 추가)으로 데이터를 균등 분산합니다.\n\n옵션 A는 수직 확장(더 큰 인스턴스)이 비용 비효율적이고, C는 수평 확장만으로는 스큐 문제 해결 불가, E는 모니터링 도구만으로 해결책 아님. Spark 성능 최적화의 핵심 기법입니다.",
     "en_q": "A data engineer develops an AWS Glue Apache Spark ETL job to perform transformations on a dataset. When the data engineer runs the job, the job returns an error that reads, \"No space left on device.\" The data engineer needs to identify the source of the error and provide a solution. Which combinations of steps will meet this requirement MOST cost-effectively? (Choose two.)",
     "en_opts": {
       "A": "Scale out the workers vertically to address data skewness.",
@@ -4463,7 +4463,7 @@ window.DEA_QUESTIONS = [
       "D": "기존 SSH 규칙의 소스를 RDS 인스턴스의 프라이빗 IP 주소로 바꿉니다. 인바운드 SSH 규칙과 동일한 소스, 대상 및 프로토콜로 아웃바운드 규칙을 생성합니다."
     },
     "answer": "A",
-    "explanation": "이 문제는 같은 보안 그룹에 있는 Glue 작업과 RDS의 연결을 복구하는 것입니다. 보안 그룹을 소스로 설정하여 모든 TCP 포트 허용(옵션 A)이 정답인 이유: (1) 문제 상황에서 RDS와 Glue 작업은 동일한 보안 그룹에 있습니다. (2) 보안 그룹을 자신의 소스로 지정하면 해당 보안 그룹에 속한 모든 리소스 간의 통신을 허용합니다(자신을 참조). (3) Glue가 RDS에 쿼리하는 데 필요한 포트(기본적으로 3306 또는 설정된 DB 포트)를 자동으로 허용합니다. 옵션 B는 프라이빗 IP가 인스턴스 재시작 시 변경될 수 있어 비권장이고, C는 DNS는 IP로 해석되지 보안 그룹 규칙에 직접 사용 불가, D는 불필요하게 SSH 규칙만 수정합니다. VPC 내 동일 보안 그룹의 통신 원칙입니다.",
+    "explanation": "이 문제는 같은 보안 그룹에 있는 Glue 작업과 RDS의 연결을 복구하는 것입니다.\n\n보안 그룹을 소스로 설정하여 모든 TCP 포트 허용(옵션 A)이 정답인 이유: (1) 문제 상황에서 RDS와 Glue 작업은 동일한 보안 그룹에 있습니다.\n\n(2) 보안 그룹을 자신의 소스로 지정하면 해당 보안 그룹에 속한 모든 리소스 간의 통신을 허용합니다(자신을 참조). (3) Glue가 RDS에 쿼리하는 데 필요한 포트(기본적으로 3306 또는 설정된 DB 포트)를 자동으로 허용합니다.\n\n옵션 B는 프라이빗 IP가 인스턴스 재시작 시 변경될 수 있어 비권장이고,\nC는 DNS는 IP로 해석되지 보안 그룹 규칙에 직접 사용 불가, D는 불필요하게 SSH 규칙만 수정합니다.\n\nVPC 내 동일 보안 그룹의 통신 원칙입니다.",
     "en_q": "A company has a data pipeline that uses an Amazon RDS instance, AWS Glue jobs, and an Amazon S3 bucket. The RDS instance and AWS Glue jobs run in a private subnet of a VPC and in the same security group. A user made a change to the security group that prevents the AWS Glue jobs from connecting to the RDS instance. After the change, the security group contains a single rule that allows inbound SSH traffic from a specific IP address. The company must resolve the connectivity issue. Which solution will meet this requirement?",
     "en_opts": {
       "A": "Add an inbound rule that allows all TCP traffic on all TCP ports. Set the security group as the source.",
@@ -4483,7 +4483,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon SageMaker Data Wrangler와 사용자 정의 Python 변환을 사용하여 null 값 및 참조 무결성을 확인하는 사용자 정의 규칙을 생성합니다."
     },
     "answer": "B",
-    "explanation": "이 문제는 데이터 품질 검사를 파이프라인에 통합하는 가장 운영 효율적인 방법입니다. AWS Glue 데이터 품질(옵션 B)이 정답인 이유: (1) Glue의 Data Quality Transform은 IsComplete(null 값 검사), ReferentialIntegrity(외래키 무결성) 같은 내장 규칙을 제공합니다. (2) 코드를 작성하지 않고 선언적 규칙으로 품질 검사를 정의할 수 있어 운영이 간단합니다. (3) 품질 검사 결과를 기반으로 파이프라인 진행을 제어할 수 있습니다. (4) 스케일에서 자동으로 병렬 처리됩니다. 옵션 A는 Data Wrangler가 대화형 데이터 준비 도구이지 자동 파이프라인 통합 부적합, C는 SQL 변환으로 처리하면 반복적 코드 작성 필요, D는 커스텀 Python 작성으로 운영 오버헤드 증가. Glue의 데이터 거버넌스 기능입니다.",
+    "explanation": "이 문제는 데이터 품질 검사를 파이프라인에 통합하는 가장 운영 효율적인 방법입니다.\n\nAWS Glue 데이터 품질(옵션 B)이 정답인 이유: (1) Glue의 Data Quality Transform은 IsComplete(null 값 검사), ReferentialIntegrity(외래키 무결성) 같은 내장 규칙을 제공합니다.\n\n(2) 코드를 작성하지 않고 선언적 규칙으로 품질 검사를 정의할 수 있어 운영이 간단합니다.\n\n(3) 품질 검사 결과를 기반으로 파이프라인 진행을 제어할 수 있습니다.\n\n(4) 스케일에서 자동으로 병렬 처리됩니다.\n\n옵션 A는 Data Wrangler가 대화형 데이터 준비 도구이지 자동 파이프라인 통합 부적합, C는 SQL 변환으로 처리하면 반복적 코드 작성 필요, D는 커스텀 Python 작성으로 운영 오버헤드 증가. Glue의 데이터 거버넌스 기능입니다.",
     "en_q": "A company builds a new data pipeline to process data for business intelligence reports. Users have noticed that data is missing from the reports. A data engineer needs to add a data quality check for columns that contain null values and for referential integrity at a stage before the data is added to storage. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Use Amazon SageMaker Data Wrangler to create a Data Quality and Insights report.",
@@ -4503,7 +4503,7 @@ window.DEA_QUESTIONS = [
       "D": "AWS Glue Studio를 사용하여 S3 버킷에서 데이터를 추출합니다. AWS Glue DataBrew를 사용하여 변환 및 품질 검사를 수행합니다. 처리된 데이터 및 품질 검사 결과를 Amazon RDS for MySQL 인스턴스에 로드합니다."
     },
     "answer": "A",
-    "explanation": "이 문제는 데이터 추출, 변환, 품질 검사, RDS 로드를 가장 비용 효율적으로 수행하는 방법입니다. Glue ETL + Data Quality(옵션 A)가 정답인 이유: (1) AWS Glue ETL은 추출과 변환을 모두 처리하는 기본 도구로, 비용 효율적입니다. (2) Glue Data Quality는 내장 규칙으로 품질 검사를 수행하고, 자동화할 수 있습니다. (3) 데이터와 품질 검사 결과를 모두 RDS에 저장하여 통합 관리됩니다. (4) Glue의 관리형 Spark는 스케일에서 자동 병렬화됩니다. 옵션 B는 DataBrew가 GUI 기반 대화형 도구로 배치 파이프라인에 비용 비효율, C는 데이터를 S3에만 로드하여 RDS 쿼리 불가(요구사항 위배), D는 DataBrew 과다 사용(비용 증가). 대규모 데이터 파이프라인의 비용 최적화입니다.",
+    "explanation": "이 문제는 데이터 추출, 변환, 품질 검사, RDS 로드를 가장 비용 효율적으로 수행하는 방법입니다.\n\nGlue ETL + Data Quality(옵션 A)가 정답인 이유: (1) AWS Glue ETL은 추출과 변환을 모두 처리하는 기본 도구로, 비용 효율적입니다.\n\n(2) Glue Data Quality는 내장 규칙으로 품질 검사를 수행하고, 자동화할 수 있습니다.\n\n(3) 데이터와 품질 검사 결과를 모두 RDS에 저장하여 통합 관리됩니다.\n\n(4) Glue의 관리형 Spark는 스케일에서 자동 병렬화됩니다.\n\n옵션 B는 DataBrew가 GUI 기반 대화형 도구로 배치 파이프라인에 비용 비효율, C는 데이터를 S3에만 로드하여 RDS 쿼리 불가(요구사항 위배), D는 DataBrew 과다 사용(비용 증가). 대규모 데이터 파이프라인의 비용 최적화입니다.",
     "en_q": "A company is setting up a data pipeline in AWS. The pipeline extracts client data from Amazon S3 buckets, performs quality checks, and transforms the data. The pipeline stores the processed data in a relational database. The company will use the processed data for future queries. Which solution will meet these requirements MOST cost-effectively?",
     "en_opts": {
       "A": "Use AWS Glue ETL to extract the data from the S3 buckets and perform the transformations. Use AWS Glue Data Quality to enforce suggested quality rules. Load the data and the quality check results into an Amazon RDS for MySQL instance.",
@@ -4523,7 +4523,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon Redshift Spectrum을 구성하여 업체의 S3 버킷을 대상으로 사용합니다. 양방향 데이터 쿼리를 활성화합니다."
     },
     "answer": "B",
-    "explanation": "이 문제는 Redshift의 데이터를 S3 버킷으로 정기적으로 내보내는 방법입니다. Glue 작업 + UNLOAD 명령(옵션 B)이 정답인 이유: (1) UNLOAD는 Redshift 테이블의 데이터를 S3에 병렬로 내보내는 가장 효율적인 명령입니다. (2) AWS Glue는 일정 기반 작업 실행을 지원하여 주 1회 스케줄링이 가능합니다. (3) Glue 작업은 관리형 서비스로 인프라 관리가 불필요합니다. (4) UNLOAD는 대용량 데이터 내보내기에 최적화되어 있습니다. 옵션 A는 COPY가 S3에서 Redshift로 로드하는 명령이지 반대 방향 내보내기 불가, C는 데이터 공유가 계정 간 공유용이지 S3 내보내기용이 아니며 외부 버킷을 대상으로 설정 불가, D는 Spectrum이 S3 데이터를 Redshift에서 쿼리하는 기능이지 내보내기가 아님. Redshift 데이터 내보내기의 표준 패턴입니다.",
+    "explanation": "이 문제는 Redshift의 데이터를 S3 버킷으로 정기적으로 내보내는 방법입니다.\n\nGlue 작업 + UNLOAD 명령(옵션 B)이 정답인 이유: (1) UNLOAD는 Redshift 테이블의 데이터를 S3에 병렬로 내보내는 가장 효율적인 명령입니다.\n\n(2) AWS Glue는 일정 기반 작업 실행을 지원하여 주 1회 스케줄링이 가능합니다.\n\n(3) Glue 작업은 관리형 서비스로 인프라 관리가 불필요합니다.\n\n(4) UNLOAD는 대용량 데이터 내보내기에 최적화되어 있습니다.\n\n옵션 A는 COPY가 S3에서 Redshift로 로드하는 명령이지 반대 방향 내보내기 불가, C는 데이터 공유가 계정 간 공유용이지 S3 내보내기용이 아니며 외부 버킷을 대상으로 설정 불가, D는 Spectrum이 S3 데이터를 Redshift에서 쿼리하는 기능이지 내보내기가 아님. Redshift 데이터 내보내기의 표준 패턴입니다.",
     "en_q": "A company uses Amazon Redshift as a data warehouse solution. One of the datasets that the company stores in Amazon Redshift contains data for a vendor. Recently, the vendor asked the company to transfer the vendor's data into the vendor's Amazon S3 bucket once each week. Which solution will meet this requirement?",
     "en_opts": {
       "A": "Create an AWS Lambda function to connect to the Redshift data warehouse. Configure the Lambda function to use the Redshift COPY command to copy the required data to the vendor's S3 bucket on a schedule.",
@@ -4543,7 +4543,7 @@ window.DEA_QUESTIONS = [
       "D": "각 부서에 대해 IAM 사용자 그룹을 생성합니다. 신원 기반 IAM 정책을 사용하여 IAM 사용자 그룹을 기반으로 테이블 및 뷰 권한을 부여합니다."
     },
     "answer": "A",
-    "explanation": "이 문제는 두 부서의 데이터를 같은 Redshift 클러스터에서 분리 관리하면서, 교차 부서 조인을 지원하는 방법입니다. 스키마 기반 접근(옵션 A)이 정답인 이유: (1) Redshift에서 스키마는 테이블 그룹의 논리적 단위로, 각 부서별 스키마를 생성하면 데이터 분리가 명확합니다. (2) 스키마 수준의 권한 관리로 부서 A 사용자는 schemaA의 모든 테이블, 부서 B 사용자는 schemaB의 모든 테이블에만 접근하도록 제어할 수 있습니다. (3) 교차 부서 쿼리는 두 스키마의 테이블을 참조하는 문법(schemaA.table1 JOIN schemaB.table2)을 사용하면 가능합니다. (4) 운영이 간단하고 확장 가능합니다. 옵션 B는 데이터베이스가 더 큰 경계(클러스터 내 물리적 분리)라 교차 데이터베이스 조인의 성능이 떨어지고, C는 명명 규칙 기반 권한이 비효율적(수동 관리 필요), D는 IAM이 Redshift 네이티브가 아니라 별도 관리 필요. Redshift의 멀티테넌트 설계 패턴입니다.",
+    "explanation": "이 문제는 두 부서의 데이터를 같은 Redshift 클러스터에서 분리 관리하면서, 교차 부서 조인을 지원하는 방법입니다.\n\n스키마 기반 접근(옵션 A)이 정답인 이유: (1) Redshift에서 스키마는 테이블 그룹의 논리적 단위로, 각 부서별 스키마를 생성하면 데이터 분리가 명확합니다.\n\n(2) 스키마 수준의 권한 관리로 부서 A 사용자는 schemaA의 모든 테이블, 부서 B 사용자는 schemaB의 모든 테이블에만 접근하도록 제어할 수 있습니다.\n\n(3) 교차 부서 쿼리는 두 스키마의 테이블을 참조하는 문법(schemaA.table1 JOIN schemaB.table2)을 사용하면 가능합니다.\n\n(4) 운영이 간단하고 확장 가능합니다.\n\n옵션 B는 데이터베이스가 더 큰 경계(클러스터 내 물리적 분리)라 교차 데이터베이스 조인의 성능이 떨어지고, C는 명명 규칙 기반 권한이 비효율적(수동 관리 필요), D는 IAM이 Redshift 네이티브가 아니라 별도 관리 필요.\n\nRedshift의 멀티테넌트 설계 패턴입니다.",
     "en_q": "A company uses an Amazon Redshift cluster as a data warehouse that is shared across two departments. To comply with a security policy, each department must have unique access permissions. Department A must have access to tables and views for Department A. Department B must have access to tables and views for Department B. The company often runs SQL queries that use objects from both departments in one query. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Group tables and views for each department into dedicated schemas. Manage permissions at the schema level.",
@@ -4563,7 +4563,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon S3 버킷을 생성합니다. Amazon MSK에서 데이터를 수집합니다. S3 버킷에서 데이터를 새 Amazon Redshift 테이블로 로드하는 이벤트 기반 AWS Lambda 함수를 생성합니다."
     },
     "answer": "A",
-    "explanation": "이 문제는 Kafka 스트림을 Redshift로 수집하면서 낮은 지연 시간과 저비용을 동시에 달성하는 방법입니다. 외부 스키마 + 구체화된 뷰(옵션 A)가 정답인 이유: (1) Redshift의 외부 스키마(External Schema)는 MSK 같은 외부 스트리밍 소스에 직접 연결하여 데이터를 실시간으로 쿼리합니다. (2) 구체화된 뷰(Materialized View)는 스트리밍 데이터를 자동으로 증분 갱신하여, Redshift 내부에 최신 상태의 데이터를 유지합니다. (3) 실시간 성능(낮은 지연)과 비용 효율성(S3 중간 저장소 없음)을 모두 제공합니다. (4) 운영이 간단하고 자동화됩니다. 옵션 B는 Glue로 S3 중간 저장, Spectrum으로 쿼리하는 구조로 지연 시간 증가 및 추가 비용 발생, C는 외부 테이블만으로 증분 갱신 지원 부족, D는 Lambda 기반 배치 처리로 실시간성 부족. Redshift의 고급 스트리밍 통합 기능입니다.",
+    "explanation": "이 문제는 Kafka 스트림을 Redshift로 수집하면서 낮은 지연 시간과 저비용을 동시에 달성하는 방법입니다.\n\n외부 스키마 + 구체화된 뷰(옵션 A)가 정답인 이유: (1) Redshift의 외부 스키마(External Schema)는 MSK 같은 외부 스트리밍 소스에 직접 연결하여 데이터를 실시간으로 쿼리합니다.\n\n(2) 구체화된 뷰(Materialized View)는 스트리밍 데이터를 자동으로 증분 갱신하여, Redshift 내부에 최신 상태의 데이터를 유지합니다.\n\n(3) 실시간 성능(낮은 지연)과 비용 효율성(S3 중간 저장소 없음)을 모두 제공합니다.\n\n(4) 운영이 간단하고 자동화됩니다.\n\n옵션 B는 Glue로 S3 중간 저장, Spectrum으로 쿼리하는 구조로 지연 시간 증가 및 추가 비용 발생, C는 외부 테이블만으로 증분 갱신 지원 부족, D는 Lambda 기반 배치 처리로 실시간성 부족. Redshift의 고급 스트리밍 통합 기능입니다.",
     "en_q": "A company wants to ingest streaming data into an Amazon Redshift data warehouse from an Amazon Managed Streaming for Apache Kafka (Amazon MSK) cluster. A data engineer needs to develop a solution that provides low data access time and that optimizes storage costs. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Create an external schema that maps to the MSK cluster. Create a materialized view that references the external schema to consume the streaming data from the MSK topic.",
@@ -4583,7 +4583,7 @@ window.DEA_QUESTIONS = [
       "D": "AWS Glue 자동 스케일링을 활성화합니다."
     },
     "answer": "C",
-    "explanation": "이 문제는 44,000개의 작은 파일(200-300KB)을 처리할 때 Glue ETL 성능을 개선하는 가장 비용 효율적인 방법입니다. DynamicFrame grouping(옵션 C)이 정답인 이유: (1) 44,000개의 작은 파일은 각각 별도 작업으로 처리되면 메타데이터 오버헤드가 막대하고, 태스크 스케줄링 비용이 높습니다. (2) DynamicFrame의 grouping 옵션은 여러 작은 파일을 자동으로 병합하여 처리하므로, 태스크 수를 크게 감소시킵니다. (3) Glue 비용은 DPU-시간 기반이므로 처리 시간이 단축되면 비용도 감소합니다. (4) 인프라 확장 없이 소프트웨어 최적화로 해결됩니다. 옵션 A는 워커 크기 증가로 비용 증가, B는 워커 수 증가로 병렬도 향상이지만 작은 파일 문제 근본 해결 아님, D는 자동 스케일링으로 반응적이지만 작은 파일 문제 미해결. Glue의 작은 파일 최적화 기능입니다.",
+    "explanation": "이 문제는 44,000개의 작은 파일(200-300KB)을 처리할 때 Glue ETL 성능을 개선하는 가장 비용 효율적인 방법입니다.\n\nDynamicFrame grouping(옵션 C)이 정답인 이유: (1) 44,000개의 작은 파일은 각각 별도 작업으로 처리되면 메타데이터 오버헤드가 막대하고, 태스크 스케줄링 비용이 높습니다.\n\n(2) DynamicFrame의 grouping 옵션은 여러 작은 파일을 자동으로 병합하여 처리하므로, 태스크 수를 크게 감소시킵니다.\n\n(3) Glue 비용은 DPU-시간 기반이므로 처리 시간이 단축되면 비용도 감소합니다.\n\n(4) 인프라 확장 없이 소프트웨어 최적화로 해결됩니다.\n\n옵션 A는 워커 크기 증가로 비용 증가, B는 워커 수 증가로 병렬도 향상이지만 작은 파일 문제 근본 해결 아님, D는 자동 스케일링으로 반응적이지만 작은 파일 문제 미해결. Glue의 작은 파일 최적화 기능입니다.",
     "en_q": "A sales company uses AWS Glue ETL to collect, process, and ingest data into an Amazon S3 bucket. The AWS Glue pipeline creates a new file in the S3 bucket every hour. File sizes vary from 200 KB to 300 KB. The company wants to build a sales prediction model by using data from the previous 5 years. The historic data includes 44,000 files. The company builds a second AWS Glue ETL pipeline by using the smallest worker type. The second pipeline retrieves the historic files from the S3 bucket and processes the files for downstream analysis. The company notices significant performance issues with the second ETL pipeline. The company needs to improve the performance of the second pipeline. Which solution will meet this requirement MOST cost-effectively?",
     "en_opts": {
       "A": "Use a larger worker type.",
@@ -4603,7 +4603,7 @@ window.DEA_QUESTIONS = [
       "D": "SaaS 애플리케이션에서 Microsoft Excel 파일로 데이터를 내보냅니다. Excel 파일을 업로드하여 QuickSight에서 데이터 소스 및 데이터셋을 생성합니다."
     },
     "answer": "C",
-    "explanation": "이 문제는 여러 SaaS 애플리케이션의 데이터를 QuickSight에서 분석하도록 통합하는 가장 운영 효율적인 방법입니다. Amazon AppFlow(옵션 C)가 정답인 이유: (1) AppFlow는 SaaS 애플리케이션(Salesforce, Slack, ServiceNow 등)과의 통합이 기본 지원되어 API 호출 코드 작성 불필요합니다. (2) 각 SaaS별로 별도 flow를 생성하여 S3로 자동 추출하고, 일정 기반 실행으로 정기적 업데이트가 자동화됩니다. (3) Glue Crawler가 S3 데이터를 자동 카탈로그화하므로 메타데이터 관리가 간단합니다. (4) QuickSight가 카탈로그된 테이블을 바로 쿼리할 수 있어 운영 오버헤드 최소입니다. 옵션 A는 각 SaaS API 호출 코드를 별도 작성해야 하고, B는 Athena 커넥터 개발 필요, D는 수동 Excel 내보내기로 자동화 불가. SaaS 통합 데이터 파이프라인의 표준 패턴입니다.",
+    "explanation": "이 문제는 여러 SaaS 애플리케이션의 데이터를 QuickSight에서 분석하도록 통합하는 가장 운영 효율적인 방법입니다.\n\nAmazon AppFlow(옵션 C)가 정답인 이유: (1) AppFlow는 SaaS 애플리케이션(Salesforce, Slack, ServiceNow 등)과의 통합이 기본 지원되어 API 호출 코드 작성 불필요합니다.\n\n(2) 각 SaaS별로 별도 flow를 생성하여 S3로 자동 추출하고, 일정 기반 실행으로 정기적 업데이트가 자동화됩니다.\n\n(3) Glue Crawler가 S3 데이터를 자동 카탈로그화하므로 메타데이터 관리가 간단합니다.\n\n(4) QuickSight가 카탈로그된 테이블을 바로 쿼리할 수 있어 운영 오버헤드 최소입니다.\n\n옵션 A는 각 SaaS API 호출 코드를 별도 작성해야 하고, B는 Athena 커넥터 개발 필요, D는 수동 Excel 내보내기로 자동화 불가. SaaS 통합 데이터 파이프라인의 표준 패턴입니다.",
     "en_q": "A company wants to combine data from multiple software as a service (SaaS) applications for analysis. A data engineering team needs to use Amazon QuickSight to perform the analysis and build dashboards. A data engineer needs to extract the data from the SaaS applications and make the data available for QuickSight queries. Which solution will meet these requirements in the MOST operationally efficient way?",
     "en_opts": {
       "A": "Create AWS Lambda functions that call the required APIs to extract the data from the applications. Store the data in an Amazon S3 bucket. Use AWS Glue to catalog the data in the S3 bucket. Create a data source and a dataset in QuickSight.",
@@ -4623,7 +4623,7 @@ window.DEA_QUESTIONS = [
       "D": "애플리케이션 코드를 업데이트하여 Super-fast, Parallel, In-memory Calculation Engine(SPICE)을 사용하여 Amazon QuickSight로 로그 데이터를 전송합니다. QuickSight에서 필요한 분석 및 대시보드를 생성합니다."
     },
     "answer": "B",
-    "explanation": "이 문제는 애플리케이션 로그를 거의 실시간(near real-time)으로 쿼리하고 시각화하는 방법입니다. Amazon OpenSearch + CloudWatch 구독 필터(옵션 B)가 정답인 이유: (1) CloudWatch Logs의 구독 필터는 로그 이벤트를 실시간으로 OpenSearch로 스트리밍하므로 지연 시간이 매우 짧습니다. (2) OpenSearch는 로그 검색과 분석에 최적화된 엔진으로, 풍부한 쿼리 언어(Query DSL)를 지원합니다. (3) OpenSearch Dashboards는 로그 데이터의 시각화와 모니터링을 위한 강력한 UI를 제공합니다. (4) 거의 실시간의 성능을 제공합니다. 옵션 A는 Lambda 일정 기반 내보내기로 실시간성 부족(수 분~수십 분 지연), C는 CloudWatch 이상 탐지가 쿼리/시각화 도구가 아니라 머신러닝 기반 알림 기능일 뿐, D는 SPICE가 메모리 기반 데이터이므로 대용량 로그 부적합. 실시간 로그 분석의 표준 아키텍처입니다.",
+    "explanation": "이 문제는 애플리케이션 로그를 거의 실시간(near real-time)으로 쿼리하고 시각화하는 방법입니다.\n\nAmazon OpenSearch + CloudWatch 구독 필터(옵션 B)가 정답인 이유: (1) CloudWatch Logs의 구독 필터는 로그 이벤트를 실시간으로 OpenSearch로 스트리밍하므로 지연 시간이 매우 짧습니다.\n\n(2) OpenSearch는 로그 검색과 분석에 최적화된 엔진으로, 풍부한 쿼리 언어(Query DSL)를 지원합니다.\n\n(3) OpenSearch Dashboards는 로그 데이터의 시각화와 모니터링을 위한 강력한 UI를 제공합니다.\n\n(4) 거의 실시간의 성능을 제공합니다.\n\n옵션 A는 Lambda 일정 기반 내보내기로 실시간성 부족(수 분~수십 분 지연), C는 CloudWatch 이상 탐지가 쿼리/시각화 도구가 아니라 머신러닝 기반 알림 기능일 뿐, D는 SPICE가 메모리 기반 데이터이므로 대용량 로그 부적합. 실시간 로그 분석의 표준 아키텍처입니다.",
     "en_q": "A company runs multiple applications on AWS. The company configured each application to output logs. The company wants to query and visualize the application logs in near real time. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Configure the applications to output logs to Amazon CloudWatch Logs log groups. Create an Amazon S3 bucket. Create an AWS Lambda function that runs on a schedule to export the required log groups to the S3 bucket. Use Amazon Athena to query the log data in the S3 bucket.",
@@ -6171,7 +6171,7 @@ window.DEA_QUESTIONS = [
       "D": "테이블 통계를 사용하여 조인 순서를 자동으로 결정합니다."
     },
     "answer": "A",
-    "explanation": "Amazon Athena에서의 조인 성능 최적화는 조인 순서 선택에 따라 크게 달라집니다. Athena는 SQL 쿼리를 Presto 엔진으로 처리하며, 효율적인 해시 조인(hash join) 전략을 사용합니다. 작은 테이블을 조인의 왼쪽(build side)에 배치하면, 해시 테이블을 메모리에 작게 유지하면서 큰 테이블(probe side)을 오른쪽에서 효율적으로 처리할 수 있습니다. 이 방식은 메모리 사용량을 최소화하고 쿼리 실행 시간을 단축합니다. B는 반대 순서로 메모리 압박을 증가시키고, C는 AWS Glue 작업의 오버헤드를 추가하며, D는 Athena의 자동 최적화 옵션이 아닙니다. 따라서 정답은 A입니다.",
+    "explanation": "Amazon Athena에서의 조인 성능 최적화는 조인 순서 선택에 따라 크게 달라집니다.\n\nAthena는 SQL 쿼리를 Presto 엔진으로 처리하며, 효율적인 해시 조인(hash join) 전략을 사용합니다.\n\n작은 테이블을 조인의 왼쪽(build side)에 배치하면, 해시 테이블을 메모리에 작게 유지하면서 큰 테이블(probe side)을 오른쪽에서 효율적으로 처리할 수 있습니다.\n\n이 방식은 메모리 사용량을 최소화하고 쿼리 실행 시간을 단축합니다.\n\nB는 반대 순서로 메모리 압박을 증가시키고, C는 AWS Glue 작업의 오버헤드를 추가하며, D는 Athena의 자동 최적화 옵션이 아닙니다.\n\n따라서 정답은 A입니다.",
     "en_q": "A data engineer is writing a query to join two tables in Amazon Athena. The data engineer needs to choose the correct join order for the tables to optimize query performance. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Specify the smaller table on the left side of the join and the larger table on the right side of the join.",
@@ -6192,7 +6192,7 @@ window.DEA_QUESTIONS = [
       "E": "AWS Glue 작업을 생성하여 각 필요한 테이블을 전송합니다. AWS Glue 워크플로우를 실행하여 5분마다 작업을 시작합니다."
     },
     "answer": "BC",
-    "explanation": "이 문제는 100개 테이블 중 30개만 필요하므로 선택적 복제 방식과 최소 운영 오버헤드를 찾아야 합니다. C(제로-ETL 통합)는 Amazon Aurora에서 Amazon Redshift로 지속적인 복제를 제공하며, 필요한 테이블만 선택할 수 있어 불필요한 데이터 이동을 방지합니다. B(Redshift 데이터베이스 통합)는 제로-ETL 통합과 함께 사용되어 Aurora의 데이터를 Redshift에서 직접 접근 가능하게 합니다. A의 DMS는 일회성 마이그레이션에 적합하며 지속적인 동기화 오버헤드가 크고, D는 단순 쿼리 접근만 제공하며, E는 Glue 작업 관리의 운영 오버헤드가 높습니다. BC 조합이 운영 효율성과 자동화를 최대한 제공합니다.",
+    "explanation": "이 문제는 100개 테이블 중 30개만 필요하므로 선택적 복제 방식과 최소 운영 오버헤드를 찾아야 합니다.\n\nC(제로-ETL 통합)는 Amazon Aurora에서 Amazon Redshift로 지속적인 복제를 제공하며, 필요한 테이블만 선택할 수 있어 불필요한 데이터 이동을 방지합니다.\n\nB(Redshift 데이터베이스 통합)는 제로-ETL 통합과 함께 사용되어 Aurora의 데이터를 Redshift에서 직접 접근 가능하게 합니다.\n\nA의 DMS는 일회성 마이그레이션에 적합하며 지속적인 동기화 오버헤드가 크고, D는 단순 쿼리 접근만 제공하며, E는 Glue 작업 관리의 운영 오버헤드가 높습니다.\n\nBC 조합이 운영 효율성과 자동화를 최대한 제공합니다.",
     "en_q": "A company generates reports from 30 tables in an Amazon Redshift data warehouse. The data source is an operational Amazon Aurora MySQL database that contains 100 tables. Currently, the company refreshes all data from Aurora to Amazon Redshift every hour, which causes delays in report generation. Which combination of steps will meet these requirements with the LEAST operational overhead? (Choose two.)",
     "en_opts": {
       "A": "Use AWS Database Migration Service (AWS DMS) to create a replication task. Select only the required tables.",
@@ -6213,7 +6213,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon Managed Workflows for Apache Airflow(Amazon MWAA)를 사용하여 매시간 데이터를 확인하는 DAG(방향성 비순환 그래프)를 실행하는 워크플로우를 생성합니다. 식별된 데이터를 처리하도록 DAG를 구성합니다. Python 연산자에서 오류 처리를 구현합니다."
     },
     "answer": "A",
-    "explanation": "이 문제의 핵심은 다양한 데이터소스(RDS, DynamoDB, OpenSearch) 지원, 시간 단위 스케줄링, 강력한 오류 처리, 최소 비용 오버헤드입니다. Step Functions과 Lambda의 조합(A)은 EventBridge 트리거로 정확한 시간 단위 실행을 제공하며, Step Functions의 상태 머신은 각 단계별 오류 처리(재시도, catch)를 선언적으로 정의할 수 있습니다. Lambda는 RDS, DynamoDB, OpenSearch와 네이티브로 통합되며 10MB 데이터 처리도 충분히 가능합니다. B는 오류 처리가 덜 견고하고, C는 EMR 클러스터 비용 오버헤드가 크며, D는 MWAA의 기본 비용이 높습니다. A가 비용과 기능성 측면에서 최적입니다.",
+    "explanation": "이 문제의 핵심은 다양한 데이터소스(RDS, DynamoDB, OpenSearch) 지원, 시간 단위 스케줄링, 강력한 오류 처리, 최소 비용 오버헤드입니다.\n\nStep Functions과 Lambda의 조합(A)은 EventBridge 트리거로 정확한 시간 단위 실행을 제공하며, Step Functions의 상태 머신은 각 단계별 오류 처리(재시도, catch)를 선언적으로 정의할 수 있습니다.\n\nLambda는 RDS, DynamoDB, OpenSearch와 네이티브로 통합되며 10MB 데이터 처리도 충분히 가능합니다.\n\nB는 오류 처리가 덜 견고하고, C는 EMR 클러스터 비용 오버헤드가 크며, D는 MWAA의 기본 비용이 높습니다.\n\nA가 비용과 기능성 측면에서 최적입니다.",
     "en_q": "A data engineer needs a fully automated solution to check for new data in multiple databases and process data that the solution finds. The solution must run every hour. The solution must be compatible with Amazon RDS, Amazon DynamoDB, and Amazon OpenSearch Service. The solution must be able to process up to 10 MB of data at one time. The solution must be optimized for costs and operational overhead. The solution must have robust error handling capabilities. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Use Amazon EventBridge to invoke AWS Step Functions every hour to deploy an AWS Lambda function to check for data. Configure Step Functions steps to process data that the Lambda function finds. Implement error handling in each state.",
@@ -6233,7 +6233,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon Redshift의 로그인 자격증명을 AWS Secrets Manager에 저장합니다. Glue 작업 구성에 비밀 참조를 추가합니다."
     },
     "answer": "A",
-    "explanation": "AWS Glue 작업이 Amazon Redshift에서 데이터를 읽어 Amazon S3에 쓰기 위해서는 적절한 권한이 필요합니다. 가장 중요한 단계는 S3 버킷에 대한 쓰기 권한(s3:PutObject, s3:GetObject 등)을 가진 IAM 역할을 생성하고, 이 역할을 Redshift 클러스터와 연결하는 것입니다. 이를 통해 Glue 작업과 Redshift가 안전하게 S3에 접근할 수 있습니다. B는 Spectrum은 S3의 데이터를 읽기만 하는 것이고 쓰기와 무관하며, C는 데이터 공유는 Redshift 클러스터 간의 기능이고, D는 자격증명 저장은 필요하지만 본질적인 권한 문제를 해결하지 못합니다. A가 핵심 요구사항입니다.",
+    "explanation": "AWS Glue 작업이 Amazon Redshift에서 데이터를 읽어 Amazon S3에 쓰기 위해서는 적절한 권한이 필요합니다.\n\n가장 중요한 단계는 S3 버킷에 대한 쓰기 권한(s3:PutObject, s3:GetObject 등)을 가진 IAM 역할을 생성하고, 이 역할을 Redshift 클러스터와 연결하는 것입니다.\n\n이를 통해 Glue 작업과 Redshift가 안전하게 S3에 접근할 수 있습니다.\n\nB는 Spectrum은 S3의 데이터를 읽기만 하는 것이고 쓰기와 무관하며, C는 데이터 공유는 Redshift 클러스터 간의 기능이고, D는 자격증명 저장은 필요하지만 본질적인 권한 문제를 해결하지 못합니다.\n\nA가 핵심 요구사항입니다.",
     "en_q": "A company uses an Amazon Redshift cluster to manage data, including vendor sales data. The company wants to store a copy of the vendor data in an Amazon S3 bucket. A data engineer sets up an AWS Glue job to upload the data to the S3 bucket data on a schedule. The data engineer set up a network connection to allow private traffic between Amazon Redshift and Amazon S3. What is the next step required to meet this requirement?",
     "en_opts": {
       "A": "Create an IAM role that has permission to write to the S3 bucket. Associate the IAM role with the Amazon Redshift cluster.",
@@ -6253,7 +6253,7 @@ window.DEA_QUESTIONS = [
       "D": "데이터를 Amazon QuickSight 데이터세트로 로드합니다. 질문으로 데이터를 프로파일링하기 위해 주제를 작성합니다."
     },
     "answer": "A",
-    "explanation": "데이터 프로파일링은 데이터 품질, 분포, 이상치 등을 파악하기 위해 데이터를 분석하는 과정입니다. AWS Glue DataBrew의 프로파일 기능은 이 목적으로 특화되어 있으며, 100MB 데이터세트에 대해 최소의 구성으로 자동으로 통계, 중복값, 누락값, 패턴 등을 생성합니다. B는 Flink는 스트리밍 처리용이고 프로파일링에는 과다하며, C는 Spectrum은 외부 테이블 쿼리용이고 프로파일링 자동화가 부족하며, D는 QuickSight는 시각화/대시보드 도구이고 데이터 프로파일링에는 적합하지 않습니다. DataBrew는 데이터 품질 검사와 프로파일링에 최적화된 전문 도구입니다.",
+    "explanation": "데이터 프로파일링은 데이터 품질, 분포, 이상치 등을 파악하기 위해 데이터를 분석하는 과정입니다.\n\nAWS Glue DataBrew의 프로파일 기능은 이 목적으로 특화되어 있으며, 100MB 데이터세트에 대해 최소의 구성으로 자동으로 통계, 중복값, 누락값, 패턴 등을 생성합니다.\n\nB는 Flink는 스트리밍 처리용이고 프로파일링에는 과다하며, C는 Spectrum은 외부 테이블 쿼리용이고 프로파일링 자동화가 부족하며,\nD는 QuickSight는 시각화/대시보드 도구이고 데이터 프로파일링에는 적합하지 않습니다.\n\nDataBrew는 데이터 품질 검사와 프로파일링에 최적화된 전문 도구입니다.",
     "en_q": "A company stores a 100 MB dataset in an Amazon S3 bucket as an Apache Parquet file. A data engineer needs to profile the data before performing data preparation steps on the data. Which solution will meet this requirement in the MOST operationally efficient way?",
     "en_opts": {
       "A": "Create a profile job on the dataset in AWS Glue DataBrew. Review the profile job results.",
@@ -6273,7 +6273,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon DynamoDB Streams를 사용하여 데이터를 캡처합니다. AWS Glue를 사용하여 데이터를 처리합니다. 제로-ETL 통합을 사용하여 데이터를 Amazon Redshift로 로드합니다."
     },
     "answer": "C",
-    "explanation": "실시간 분석의 핵심은 낮은 지연시간으로 대용량 데이터를 Redshift에 수집하는 것입니다. Kinesis Data Streams(C)은 고처리량 스트리밍에 최적화되어 있고, Amazon Redshift의 스트리밍 수집(streaming ingestion) 기능은 Kinesis에서 데이터를 직접 구체화된 뷰로 로드할 수 있어 S3 중간 저장소를 거치지 않으므로 지연시간을 최소화합니다. A는 Firehose와 S3 거쳐서 배치 COPY까지 총 지연시간이 길고, B는 EMR 처리 오버헤드와 페더레이션 쿼리의 성능 제약이 있으며, D는 DynamoDB Streams와 Glue 조합은 고처리량 스트리밍에 최적화되지 않았습니다. C가 실시간 지연시간 요구사항을 최고 수준으로 충족합니다.",
+    "explanation": "실시간 분석의 핵심은 낮은 지연시간으로 대용량 데이터를 Redshift에 수집하는 것입니다.\n\nKinesis Data Streams(C)은 고처리량 스트리밍에 최적화되어 있고, Amazon Redshift의 스트리밍 수집(streaming ingestion) 기능은 Kinesis에서 데이터를 직접 구체화된 뷰로 로드할 수 있어 S3 중간 저장소를 거치지 않으므로 지연시간을 최소화합니다.\n\nA는 Firehose와 S3 거쳐서 배치 COPY까지 총 지연시간이 길고, B는 EMR 처리 오버헤드와 페더레이션 쿼리의 성능 제약이 있으며, D는 DynamoDB Streams와 Glue 조합은 고처리량 스트리밍에 최적화되지 않았습니다.\n\nC가 실시간 지연시간 요구사항을 최고 수준으로 충족합니다.",
     "en_q": "A company needs to implement real-time analytics for a retail shopping platform. The company wants to capture clickstream data, process the data, and load the data into Amazon Redshift for analysis. The solution must handle hundreds of megabytes of data every second. Which solution will meet these requirements with the LEAST query latency for analytics?",
     "en_opts": {
       "A": "Use Amazon Data Firehose to capture the data. Store the data in an Amazon S3 bucket. Use the COPY command to load data into Amazon Redshift.",
@@ -6293,7 +6293,7 @@ window.DEA_QUESTIONS = [
       "D": "각 오류 유형에 대해 서로 다른 메트릭으로 Amazon CloudWatch 경보를 설정합니다. 메트릭 임계값을 초과할 때마다 서로 다른 Amazon Simple Notification Service(Amazon SNS) 알림을 호출합니다."
     },
     "answer": "B",
-    "explanation": "다양한 오류 유형에 따라 즉시 다른 팀에 알림을 보내는 것은 이벤트 기반 라우팅의 전형적인 사용 사례입니다. EventBridge(B)는 이벤트 패턴 기반 라우팅을 지원하므로 오류 유형 필드 값에 따라 자동으로 다양한 SNS 주제로 라우팅할 수 있습니다. 이는 선언적이고 간단하며 운영 오버헤드가 최소입니다. A는 Lambda 함수에서 라우팅 로직을 구현해야 하므로 추가 개발과 유지보수 오버헤드가 있고, C는 폴링 방식으로 지연시간이 발생하며, D는 CloudWatch 경보는 메트릭 기반이고 이벤트 패턴 기반 라우팅에는 부적절합니다. B가 이벤트 기반 아키텍처에 최적화되어 있습니다.",
+    "explanation": "다양한 오류 유형에 따라 즉시 다른 팀에 알림을 보내는 것은 이벤트 기반 라우팅의 전형적인 사용 사례입니다.\n\nEventBridge(B)는 이벤트 패턴 기반 라우팅을 지원하므로 오류 유형 필드 값에 따라 자동으로 다양한 SNS 주제로 라우팅할 수 있습니다.\n\n이는 선언적이고 간단하며 운영 오버헤드가 최소입니다.\n\nA는 Lambda 함수에서 라우팅 로직을 구현해야 하므로 추가 개발과 유지보수 오버헤드가 있고, C는 폴링 방식으로 지연시간이 발생하며, D는 CloudWatch 경보는 메트릭 기반이고 이벤트 패턴 기반 라우팅에는 부적절합니다.\n\nB가 이벤트 기반 아키텍처에 최적화되어 있습니다.",
     "en_q": "A company has a data pipeline that processes transaction data in real time. The company needs a notification system that alerts different teams based on the type of processing error without any delay. For security-related errors, the system must immediately notify the security team. For data validation errors, the system must notify the data quality team. For system errors, the system must notify the operations team. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Create an Amazon Simple Notification Service (Amazon SNS) topic with an AWS Lambda function subscriber that evaluates the error type and forwards the error to the appropriate email addresses.",
@@ -6313,7 +6313,7 @@ window.DEA_QUESTIONS = [
       "D": "워크플로우의 각 단계를 실행하는 AWS Lambda 함수를 생성합니다. 매일 함수를 호출하도록 Amazon EventBridge 예약 규칙을 생성합니다."
     },
     "answer": "C",
-    "explanation": "복잡한 ETL 워크플로우의 오케스트레이션에는 종속성 관리, 재시도, 모니터링 같은 고급 기능이 필요합니다. Amazon MWAA(C)는 Apache Airflow 기반이므로 DAG를 통해 작업 간 종속성을 명확하게 정의할 수 있고, 자동화된 재시도와 에러 핸들링이 내장되어 있으며, Airflow UI를 통한 완전한 파이프라인 모니터링과 시각화를 제공합니다. A의 Step Functions는 Glue와 EMR 통합도 가능하지만 복잡한 DAG 표현과 모니터링이 Airflow보다 수동적입니다. B와 D는 Lambda와 EventBridge 기반으로 종속성 관리와 고급 오케스트레이션 기능이 부족하며 복잡한 워크플로우에는 부적절합니다. MWAA가 엔터프라이즈급 ETL 오케스트레이션에 최적화되어 있습니다.",
+    "explanation": "복잡한 ETL 워크플로우의 오케스트레이션에는 종속성 관리, 재시도, 모니터링 같은 고급 기능이 필요합니다.\n\nAmazon MWAA(C)는 Apache Airflow 기반이므로 DAG를 통해 작업 간 종속성을 명확하게 정의할 수 있고, 자동화된 재시도와 에러 핸들링이 내장되어 있으며, Airflow UI를 통한 완전한 파이프라인 모니터링과 시각화를 제공합니다.\n\nA의 Step Functions는 Glue와 EMR 통합도 가능하지만 복잡한 DAG 표현과 모니터링이 Airflow보다 수동적입니다.\n\nB와 D는 Lambda와 EventBridge 기반으로 종속성 관리와 고급 오케스트레이션 기능이 부족하며 복잡한 워크플로우에는 부적절합니다.\n\nMWAA가 엔터프라이즈급 ETL 오케스트레이션에 최적화되어 있습니다.",
     "en_q": "A global ecommerce company processes customer transactions, inventory updates, and user activity logs across multiple AWS services. The company needs a scalable, fully managed, and event-driven orchestration solution to coordinate complex extract, transform, and load (ETL) workflows. The solution must use AWS Glue and Amazon EMR to process data. The data will be stored in Amazon Redshift and Amazon S3. The solution must support dependency management, automated retries, and data pipeline monitoring. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Use AWS Step Functions to define an express workflow that invokes the data transformation and loading tasks across Amazon EMR and AWS Glue.",
@@ -6333,7 +6333,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon Redshift에 페더레이션 쿼리 액세스가 있는 Quick Suite 대시보드를 사용합니다."
     },
     "answer": "B",
-    "explanation": "SQL 지식이 부족한 비즈니스 분석가들이 자연어로 대시보드와 보고서를 생성하려면 자연어 처리 기능이 필요합니다. Amazon Q in Quick Suite(B)는 자연어 질문으로 데이터를 쿼리하고 대시보드를 생성할 수 있게 해주는 생성형 AI 기반 기능입니다. 사용자가 SQL을 작성할 필요가 없으므로 모든 기술 수준의 분석가가 사용할 수 있으며, 자동으로 대시보드와 보고서를 생성합니다. A는 제로-ETL 액세스는 데이터 연결일 뿐 자연어 쿼리 기능이 아니고, C는 Tableau는 별도 도구이고 Quick Suite 에코시스템 밖이며, D는 페더레이션 쿼리도 SQL 기반입니다. Amazon Q가 자연어 기반 셀프 서비스 분석의 차별화된 기능입니다.",
+    "explanation": "SQL 지식이 부족한 비즈니스 분석가들이 자연어로 대시보드와 보고서를 생성하려면 자연어 처리 기능이 필요합니다.\n\nAmazon Q in Quick Suite(B)는 자연어 질문으로 데이터를 쿼리하고 대시보드를 생성할 수 있게 해주는 생성형 AI 기반 기능입니다.\n\n사용자가 SQL을 작성할 필요가 없으므로 모든 기술 수준의 분석가가 사용할 수 있으며, 자동으로 대시보드와 보고서를 생성합니다.\n\nA는 제로-ETL 액세스는 데이터 연결일 뿐 자연어 쿼리 기능이 아니고,\nC는 Tableau는 별도 도구이고 Quick Suite 에코시스템 밖이며, D는 페더레이션 쿼리도 SQL 기반입니다.\n\nAmazon Q가 자연어 기반 셀프 서비스 분석의 차별화된 기능입니다.",
     "en_q": "A global company currently uses Amazon Redshift to store data and Amazon Quick Suite (previously known as Amazon QuickSight) to generate reports. A team of business analysts have varying levels of technical expertise. Some analysts lack SQL knowledge. All the analysts need to create new reports frequently. The company wants to use natural program language queries to create dashboards and reports more efficiently. Which solution will meet these requirements with the LEAST operational effort?",
     "en_opts": {
       "A": "Use Quick Suite dashboards that have zero-ETL access to Amazon Redshift.",
@@ -6353,7 +6353,7 @@ window.DEA_QUESTIONS = [
       "D": "각 비즈니스 부서를 자산, 프로젝트 및 메타데이터의 권한을 관리하는 별도의 도메인 단위로 구성합니다. 중앙화된 인증을 위해 AWS IAM Identity Center를 구성합니다. 사용자 프로필을 각각의 도메인 단위에 매핑합니다. 도메인 단위 간 공유를 액세스 요청을 통해 활성화합니다. 도메인 단위 소유자가 요청을 승인 또는 거부하도록 지시합니다."
     },
     "answer": "D",
-    "explanation": "이 요구사항은 격리(isolation), 제어(control), 공유(sharing)의 세 가지를 모두 충족해야 합니다. D는 이 모든 요소를 포함합니다: 도메인 단위 구조로 각 비즈니스 부서의 격리된 제어, IAM Identity Center로 중앙화된 인증과 ID 매핑, 그리고 액세스 요청과 승인 메커니즘을 통한 선택적 데이터 공유입니다. A는 API 키 기반 인증이 중앙화된 ID 관리가 아니고, B는 데이터 공유를 완전히 차단하므로 요구사항 미충족이며, C는 공유 메커니즘이 없습니다. D가 세 가지 요구사항을 모두 균형있게 충족합니다.",
+    "explanation": "이 요구사항은 격리(isolation), 제어(control), 공유(sharing)의 세 가지를 모두 충족해야 합니다.\n\nD는 이 모든 요소를 포함합니다: 도메인 단위 구조로 각 비즈니스 부서의 격리된 제어, IAM Identity Center로 중앙화된 인증과 ID 매핑, 그리고 액세스 요청과 승인 메커니즘을 통한 선택적 데이터 공유입니다.\n\nA는 API 키 기반 인증이 중앙화된 ID 관리가 아니고, B는 데이터 공유를 완전히 차단하므로 요구사항 미충족이며, C는 공유 메커니즘이 없습니다.\n\nD가 세 가지 요구사항을 모두 균형있게 충족합니다.",
     "en_q": "A company is setting up a new Amazon SageMaker Unified Studio domain. Each of the company's business units needs isolated control over its own assets, projects, and metadata. Specific datasets must be shareable with other business units upon approval. The company also requires centralized user authentication and identity mapping. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Configure each business unit as a domain unit with delegated ownership and fine-grained permissions policies. Give users the ability to share assets across domain units with explicit access control. Assign API keys to users for authentication to access the domain portal.",
@@ -6373,7 +6373,7 @@ window.DEA_QUESTIONS = [
       "D": "Amazon Redshift 프로듀서 클러스터와 컨슈머 클러스터 간에 데이터를 자동으로 동기화하는 AWS DataSync 작업을 설정합니다."
     },
     "answer": "C",
-    "explanation": "다운스트림 팀들이 자신의 Redshift 클러스터(RA3 노드)에서 중앙 데이터세트에 즉시 액세스해야 하면서 성능을 유지해야 합니다. Amazon Redshift 데이터 공유(C)는 Redshift 간의 기본 기능으로, 프로듀서 클러스터의 데이터를 컨슈머 클러스터에 공유할 수 있으며 데이터 복제 없이 직접 접근 가능합니다. 이는 즉시 액세스를 제공하고 성능 저하가 최소입니다. A는 S3 복사와 Spectrum 쿼리 오버헤드가 발생하며, B는 수동 ETL과 데이터 복제로 지연시간과 스토리지 낭비가 크며, D는 DataSync는 동기화 도구이지 Redshift 기본 기능이 아닙니다. 데이터 공유가 이 시나리오의 정답입니다.",
+    "explanation": "다운스트림 팀들이 자신의 Redshift 클러스터(RA3 노드)에서 중앙 데이터세트에 즉시 액세스해야 하면서 성능을 유지해야 합니다.\n\nAmazon Redshift 데이터 공유(C)는 Redshift 간의 기본 기능으로, 프로듀서 클러스터의 데이터를 컨슈머 클러스터에 공유할 수 있으며 데이터 복제 없이 직접 접근 가능합니다.\n\n이는 즉시 액세스를 제공하고 성능 저하가 최소입니다.\n\nA는 S3 복사와 Spectrum 쿼리 오버헤드가 발생하며, B는 수동 ETL과 데이터 복제로 지연시간과 스토리지 낭비가 크며,\nD는 DataSync는 동기화 도구이지 Redshift 기본 기능이 아닙니다.\n\n데이터 공유가 이 시나리오의 정답입니다.",
     "en_q": "A data engineer at a large company needs to create centralized datasets that are optimized for Amazon Redshift performance. The company has multiple downstream teams that use their own AWS accounts and dedicated Amazon Redshift clusters with RA3 nodes. All downstream teams need access to the centralized datasets. Which solution will provide immediate access to the datasets and maintain the current Amazon Redshift performance?",
     "en_opts": {
       "A": "Copy the datasets to an Amazon S3 bucket by using the UNLOAD command. Register the table definitions in a dedicated AWS Glue Data Catalog schema. Share the schema with the other AWS accounts by using AWS Lake Formation. Use Amazon Redshift Spectrum to access the data.",
@@ -6393,7 +6393,7 @@ window.DEA_QUESTIONS = [
       "D": "각 AWS 리전에서 거래 데이터를 수신하도록 Amazon Kinesis Data Streams를 사용합니다. Amazon Data Firehose를 사용하여 각 리전의 Amazon Managed Streaming for Apache Kafka(Amazon MSK) 클러스터 간에 데이터를 복제합니다. AWS Key Management Service(AWS KMS) 암호화 및 IAM 역할을 구성하여 액세스를 관리합니다."
     },
     "answer": "B",
-    "explanation": "거의 실시간 교차 리전 데이터 동기화에는 낮은 지연시간, 암호화, 데이터 순서 보장, 완전히 관리되는 솔루션이 필요합니다. Amazon MSK Replicator(B)는 AWS 관리형 서비스로 MSK 클러스터 간의 복제를 완벽하게 자동화하며, 여러 리전 간에 완전히 상호 연결된 복제 관계를 설정할 수 있습니다. TLS 암호화, IAM 인증, 데이터 순서 보장, 교차 리전 백업을 모두 지원하므로 금융 회사의 모든 요구사항을 충족합니다. A와 C는 수동으로 커넥터나 Mirror Maker를 관리해야 하고 운영 오버헤드가 크며, D는 Kinesis와 Firehose 조합은 Kafka 기반 솔루션이 아니고 복제 관리가 복잡합니다. MSK Replicator가 관리형 교차 리전 복제에 최적화되어 있습니다.",
+    "explanation": "거의 실시간 교차 리전 데이터 동기화에는 낮은 지연시간, 암호화, 데이터 순서 보장, 완전히 관리되는 솔루션이 필요합니다.\n\nAmazon MSK Replicator(B)는 AWS 관리형 서비스로 MSK 클러스터 간의 복제를 완벽하게 자동화하며, 여러 리전 간에 완전히 상호 연결된 복제 관계를 설정할 수 있습니다.\n\nTLS 암호화, IAM 인증, 데이터 순서 보장, 교차 리전 백업을 모두 지원하므로 금융 회사의 모든 요구사항을 충족합니다.\n\nA와 C는 수동으로 커넥터나 Mirror Maker를 관리해야 하고 운영 오버헤드가 크며, D는 Kinesis와 Firehose 조합은 Kafka 기반 솔루션이 아니고 복제 관리가 복잡합니다.\n\nMSK Replicator가 관리형 교차 리전 복제에 최적화되어 있습니다.",
     "en_q": "A global finance company needs to implement near real-time cross-Region synchronization of trading data between trading centers in the us-east-1 Region, the eu-west-2 Region, and the ap-northeast-1 Region. The company must ensure that data is encrypted in transit. The solution must ensure data ordering and consistency and must support cross-Region disaster recovery. The solution must provide data latency of less than 500 milliseconds. Which solution will meet these requirements with the LEAST operational effort?",
     "en_opts": {
       "A": "Deploy Apache Kafka Connect in each AWS Region. Use custom-developed connectors to set up cross-Region data replication. Configure the SSL security protocol.",
@@ -6413,7 +6413,7 @@ window.DEA_QUESTIONS = [
       "D": "Aurora I/O 최적화 인스턴스에서 실행되는 Amazon Aurora 클러스터를 사용합니다. 각 데이터 팀에 스토리지 및 쿼리를 구성할 수 있는 별도의 Aurora 클러스터를 할당합니다."
     },
     "answer": "C",
-    "explanation": "거의 실시간 검색과 분석에서 초당 1,000개의 높은 요청 처리량과 낮은 지연시간이 필요하며, 각 팀이 독립적으로 구성할 수 있어야 합니다. Amazon OpenSearch Service(C)는 검색 및 분석에 특화되어 있으며, 역 인덱싱으로 매우 빠른 쿼리 응답 시간을 제공합니다. 각 팀에 별도 클러스터를 할당하면 각 팀이 자신의 비용과 성능을 독립적으로 최적화할 수 있습니다. A는 Athena는 배치/분석형이고 고처리량 실시간 쿼리에는 부적합하며, B는 Flink는 스트림 처리이고 검색 엔진이 아니며, D는 Aurora도 OLTP용이고 검색 성능은 OpenSearch보다 낮습니다. OpenSearch가 거의 실시간 검색 분석의 표준 선택입니다.",
+    "explanation": "거의 실시간 검색과 분석에서 초당 1,000개의 높은 요청 처리량과 낮은 지연시간이 필요하며, 각 팀이 독립적으로 구성할 수 있어야 합니다.\n\nAmazon OpenSearch Service(C)는 검색 및 분석에 특화되어 있으며, 역 인덱싱으로 매우 빠른 쿼리 응답 시간을 제공합니다.\n\n각 팀에 별도 클러스터를 할당하면 각 팀이 자신의 비용과 성능을 독립적으로 최적화할 수 있습니다.\n\nA는 Athena는 배치/분석형이고 고처리량 실시간 쿼리에는 부적합하며,\nB는 Flink는 스트림 처리이고 검색 엔진이 아니며, D는 Aurora도 OLTP용이고 검색 성능은 OpenSearch보다 낮습니다.\n\nOpenSearch가 거의 실시간 검색 분석의 표준 선택입니다.",
     "en_q": "A company's application needs to search and analyze data in near real time. The application must handle up to 1,000 requests each second with low query latency. The company wants a solution that individual data teams can own and configure to meet each team's cost and performance optimization requirements. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Use Amazon S3 buckets to store the data. Use Amazon Athena to query and analyze the data. Assign each data team a separate S3 bucket prefix to optimize queries.",
@@ -6433,7 +6433,7 @@ window.DEA_QUESTIONS = [
       "D": ""
     },
     "answer": "A",
-    "explanation": "이 문제는 선택지 옵션이 비어있어 정확한 SQL 문법을 평가할 수 없습니다. 그러나 Amazon Redshift에서 특정 열을 제외하고 모든 열을 선택하는 일반적인 방법은 두 가지입니다: (1) EXCEPT 연산자를 사용하여 제외할 열들을 명시하는 방법, 또는 (2) 명시적으로 필요한 100개 중 98개 열을 모두 나열하는 방법입니다. 최신 Redshift 버전에서는 SELECT * EXCEPT (column1, column2) 구문이 지원됩니다. 문제 원본에서 각 옵션의 SQL 문을 확인하면 EXCEPT 절을 올바르게 사용한 것이 정답입니다.",
+    "explanation": "이 문제는 선택지 옵션이 비어있어 정확한 SQL 문법을 평가할 수 없습니다.\n\n그러나 Amazon Redshift에서 특정 열을 제외하고 모든 열을 선택하는 일반적인 방법은 두 가지입니다: (1) EXCEPT 연산자를 사용하여 제외할 열들을 명시하는 방법, 또는 (2) 명시적으로 필요한 100개 중 98개 열을 모두 나열하는 방법입니다.\n\n최신 Redshift 버전에서는 SELECT * EXCEPT (column1, column2) 구문이 지원됩니다.\n\n문제 원본에서 각 옵션의 SQL 문을 확인하면 EXCEPT 절을 올바르게 사용한 것이 정답입니다.",
     "en_q": "A company uses Amazon Redshift for its data warehouse. A data engineer must query a table named orders.complete_orders_history, which contains 100 columns. The query must return all columns except columns named companyId and unique_system_id. Which Amazon Redshift SQL statement will meet this requirement?",
     "en_opts": {
       "A": "",
@@ -6453,7 +6453,7 @@ window.DEA_QUESTIONS = [
       "D": "AWS Config 자동화 조치를 설정하여 사용자가 S3 객체를 삭제하지 못하도록 방지합니다."
     },
     "answer": "A",
-    "explanation": "실수로 인한 S3 객체 삭제를 방지하는 가장 효과적인 방법은 버전 관리(Versioning)와 MFA 삭제(MFA Delete)를 함께 사용하는 것입니다. 버전 관리를 활성화하면 객체 삭제 시 삭제 마커(delete marker)만 생성되고 실제 버전은 유지되므로 복구 가능하며, MFA 삭제를 추가로 구성하면 MFA 인증이 없이는 삭제 마커도 생성할 수 없습니다. 이는 실수를 방지하는 강력한 통제입니다. B는 삭제 마커 생성만 거부하는 것이고 버전은 여전히 사용 가능하게 유지되므로 MFA 보호 없음, C는 Lifecycle는 자동 정책일 뿐 실수 방지 제어가 아니며, D는 AWS Config는 감시 도구이지 삭제 방지 제어가 아닙니다. 버전 관리와 MFA 삭제가 삭제 방지의 표준 모범 사례입니다.",
+    "explanation": "실수로 인한 S3 객체 삭제를 방지하는 가장 효과적인 방법은 버전 관리(Versioning)와 MFA 삭제(MFA Delete)를 함께 사용하는 것입니다.\n\n버전 관리를 활성화하면 객체 삭제 시 삭제 마커(delete marker)만 생성되고 실제 버전은 유지되므로 복구 가능하며, MFA 삭제를 추가로 구성하면 MFA 인증이 없이는 삭제 마커도 생성할 수 없습니다.\n\n이는 실수를 방지하는 강력한 통제입니다.\n\nB는 삭제 마커 생성만 거부하는 것이고 버전은 여전히 사용 가능하게 유지되므로 MFA 보호 없음,\nC는 Lifecycle는 자동 정책일 뿐 실수 방지 제어가 아니며, D는 AWS Config는 감시 도구이지 삭제 방지 제어가 아닙니다.\n\n버전 관리와 MFA 삭제가 삭제 방지의 표준 모범 사례입니다.",
     "en_q": "A company stores sensitive transaction data in an Amazon S3 bucket. A data engineer must implement controls to prevent accidental deletions. Which solution will meet this requirement?",
     "en_opts": {
       "A": "Enable versioning on the S3 bucket and configure MFA delete.",
@@ -6473,7 +6473,7 @@ window.DEA_QUESTIONS = [
       "D": "UniqueValueRatio \"Email\" matches \"[%@%.%]\" with a threshold set to > 0.1"
     },
     "answer": "C",
-    "explanation": "AWS Glue 데이터 품질 규칙에서 열의 값 패턴 일치 여부를 확인하려면 ColumnValues 규칙을 사용합니다. ColumnValues는 지정된 열의 값이 정규표현식 패턴과 얼마나 많은 비율로 일치하는지 평가합니다. \"[%@%.%]\"는 이메일 패턴(@ 기호 포함)을 나타내고, threshold > 0.9는 90% 이상의 값이 이 패턴과 일치해야 함을 의미합니다. 즉, 90% 미만이면 규칙이 실패합니다. A의 Uniqueness는 고유성을 검사하는 것이고, B와 D는 threshold 값이 0.1이므로 10%만 충족하면 되어 90% 요구사항과 맞지 않습니다. C가 정확한 규칙 구성입니다.",
+    "explanation": "AWS Glue 데이터 품질 규칙에서 열의 값 패턴 일치 여부를 확인하려면 ColumnValues 규칙을 사용합니다.\n\nColumnValues는 지정된 열의 값이 정규표현식 패턴과 얼마나 많은 비율로 일치하는지 평가합니다.\n\n\"[%@%.%]\"는 이메일 패턴(@ 기호 포함)을 나타내고, threshold > 0.9는 90% 이상의 값이 이 패턴과 일치해야 함을 의미합니다.\n\n즉, 90% 미만이면 규칙이 실패합니다.\n\nA의 Uniqueness는 고유성을 검사하는 것이고, B와 D는 threshold 값이 0.1이므로 10%만 충족하면 되어 90% 요구사항과 맞지 않습니다.\n\nC가 정확한 규칙 구성입니다.",
     "en_q": "A company stores historical customer data in an Amazon Redshift table. A column named Email contains null entries and values that are not email addresses. The quality of the Email column is critical for multiple downstream processes. A data engineer must create an AWS Glue Data Quality rule that fails when the percentage of valid email addresses in the Email column is less than 90%. Which component of an AWS Glue Data Quality rule will meet these requirements?",
     "en_opts": {
       "A": "Uniqueness \"Email\" matches \"[%@%.%]\" with a threshold set to > 0.9",
@@ -6493,7 +6493,7 @@ window.DEA_QUESTIONS = [
       "D": "버킷 액세스를 제한하는 s3:ResourceAccount 조건 키와 업무 시간 외에 적용되는 Deny 문"
     },
     "answer": "B",
-    "explanation": "IAM 정책에서 S3 접두사별 액세스 제어와 시간 기반 제한을 동시에 구현하려면 두 가지 요소가 필요합니다. Resource 요소에서는 각 분류 수준의 접두사에 해당하는 S3 ARN 패턴을 와일드카드로 지정해야 하고(예: arn:aws:s3:::bucket/prefix1/*, arn:aws:s3:::bucket/prefix2/*), Condition 요소에서는 aws:CurrentTime 조건 키와 DateGreaterThan/DateLessThan 연산자를 사용하여 시간 범위를 제한합니다. A는 $util.time은 IAM에서 지원되지 않고, C는 s3:prefix 조건 키는 존재하지 않으며 s3:prefix는 getObject 컨텍스트에 전달되지 않고, D는 Deny 문은 부정 로직이고 시간 조건 없음입니다. B가 정확한 IAM 정책 구조입니다.",
+    "explanation": "IAM 정책에서 S3 접두사별 액세스 제어와 시간 기반 제한을 동시에 구현하려면 두 가지 요소가 필요합니다.\n\nResource 요소에서는 각 분류 수준의 접두사에 해당하는 S3 ARN 패턴을 와일드카드로 지정해야 하고(예: arn:aws:s3:::bucket/prefix1/*, arn:aws:s3:::bucket/prefix2/*), Condition 요소에서는 aws:CurrentTime 조건 키와 DateGreaterThan/DateLessThan 연산자를 사용하여 시간 범위를 제한합니다.\n\nA는 $util.time은 IAM에서 지원되지 않고, C는 s3:prefix 조건 키는 존재하지 않으며 s3:prefix는 getObject 컨텍스트에 전달되지 않고, D는 Deny 문은 부정 로직이고 시간 조건 없음입니다.\n\nB가 정확한 IAM 정책 구조입니다.",
     "en_q": "A company is building data processing pipelines by using AWS Glue. The pipelines access data stored in Amazon S3. The company has organized the data into folders with prefixes that represent different classification levels. The company needs to restrict AWS Glue jobs to access only specific prefixes based on the data classification. The company must also restrict access to business hours (9 AM to 5 PM). Which elements must the company include in a custom IAM policy to meet these requirements?",
     "en_opts": {
       "A": "A Resource element with S3 object Amazon Resource Name (ARN) patterns that use wildcards for each prefix and a Condition element that uses the $util.time variable with TimeGreaterThan and TimeLessThan operators",
@@ -6513,7 +6513,7 @@ window.DEA_QUESTIONS = [
       "D": "기본 Amazon RDS 데이터베이스 감시(audit) 로깅을 활성화하고 구성합니다. Amazon CloudWatch Logs를 활성화합니다. 메트릭 필터와 경보를 구성합니다. AWS CloudTrail 감시 로깅을 구성합니다."
     },
     "answer": "D",
-    "explanation": "사용자의 데이터 수정 작업과 데이터베이스 인스턴스 변경을 포괄적으로 추적하려면 여러 로깅 메커니즘을 조합해야 합니다. D는 세 가지 계층의 감시를 모두 포함합니다: (1) Amazon RDS 기본 감시 로깅은 데이터베이스 내 DML/DDL 쿼리와 사용자 작업을 기록하고, (2) Amazon CloudWatch Logs는 로그를 수집하고 보관하며, (3) AWS CloudTrail은 RDS 인스턴스 수준의 API 호출(변경, 삭제, 암호화 설정 등)을 기록합니다. A는 경보만 설정하고 실제 감시 로깅을 활성화하지 않으며, B는 EventBridge는 데이터베이스 내 사용자 작업 추적에 부적합하고, C는 CloudTrail만으로는 데이터베이스 내 DML 작업을 기록하지 못합니다. D가 포괄적 감시를 제공합니다.",
+    "explanation": "사용자의 데이터 수정 작업과 데이터베이스 인스턴스 변경을 포괄적으로 추적하려면 여러 로깅 메커니즘을 조합해야 합니다.\n\nD는 세 가지 계층의 감시를 모두 포함합니다: (1) Amazon RDS 기본 감시 로깅은 데이터베이스 내 DML/DDL 쿼리와 사용자 작업을 기록하고, (2) Amazon CloudWatch Logs는 로그를 수집하고 보관하며, (3) AWS CloudTrail은 RDS 인스턴스 수준의 API 호출(변경, 삭제, 암호화 설정 등)을 기록합니다.\n\nA는 경보만 설정하고 실제 감시 로깅을 활성화하지 않으며,\nB는 EventBridge는 데이터베이스 내 사용자 작업 추적에 부적합하고,\nC는 CloudTrail만으로는 데이터베이스 내 DML 작업을 기록하지 못합니다.\n\nD가 포괄적 감시를 제공합니다.",
     "en_q": "A company needs to collect logs for an Amazon RDS for MySQL database and make the logs available for audits. The logs must track each user that modifies data in the database or makes changes to the database instance. Which solution will meet these requirements?",
     "en_opts": {
       "A": "Enable Amazon CloudWatch Logs. Create metric filters to monitor database changes and instance-level changes. Configure automated notification systems to send near real-time alerts for suspicious database operations.",
@@ -6533,7 +6533,7 @@ window.DEA_QUESTIONS = [
       "D": "S3 Batch Operations와 함께 AWS Lambda를 사용하여 파일을 처리하고 검증 실패를 추적하여 15% 미만이 되도록 합니다."
     },
     "answer": "B",
-    "explanation": "수백만 개 레코드의 병렬 처리와 실패율 기반 조건부 중단이 필요합니다. AWS Step Functions의 Distributed Map 상태(B)는 대량 데이터의 병렬 처리에 최적화되어 있으며, ToleratedFailurePercentage 파라미터를 사용하여 실패 비율 임계값을 설정할 수 있습니다. 이는 선언적이고 간단하며 운영 오버헤드가 최소이며 자동으로 병렬화를 관리합니다. A는 AWS Batch는 오버헤드가 크고 커스텀 오류 추적 복잡하고, C는 EMR 클러스터 비용과 구성 오버헤드가 높으며, D는 S3 Batch Operations는 파일 단위 작업이고 레코드 단위 검증에 부적합합니다. Step Functions Distributed Map이 병렬 데이터 처리 및 조건부 중단에 가장 최적화되어 있습니다.",
+    "explanation": "수백만 개 레코드의 병렬 처리와 실패율 기반 조건부 중단이 필요합니다.\n\nAWS Step Functions의 Distributed Map 상태(B)는 대량 데이터의 병렬 처리에 최적화되어 있으며, ToleratedFailurePercentage 파라미터를 사용하여 실패 비율 임계값을 설정할 수 있습니다.\n\n이는 선언적이고 간단하며 운영 오버헤드가 최소이며 자동으로 병렬화를 관리합니다.\n\nA는 AWS Batch는 오버헤드가 크고 커스텀 오류 추적 복잡하고, C는 EMR 클러스터 비용과 구성 오버헤드가 높으며, D는 S3 Batch Operations는 파일 단위 작업이고 레코드 단위 검증에 부적합합니다.\n\nStep Functions Distributed Map이 병렬 데이터 처리 및 조건부 중단에 가장 최적화되어 있습니다.",
     "en_q": "A company processes a CSV file that contains millions of transaction records every day. The file is stored in Amazon S3. Each transaction must be validated before updating a database. The company needs a solution that will process the data in parallel. The solution must use error handling that stops the entire process if more than 15% of the records fail validation. Which solution will meet these requirements with the LEAST operational overhead?",
     "en_opts": {
       "A": "Create an AWS Batch job that processes chunks of the file in parallel with a custom error tracking mechanism.",

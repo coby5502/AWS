@@ -92,17 +92,15 @@ input  { font-family: var(--font); }
 /* ═══════════════════════════════════════
    SCREEN SYSTEM
 ═══════════════════════════════════════ */
-.screen {
-  display: none;
-  animation: fadeUp .3s ease;
-  padding-left: 24px;
-  padding-right: 24px;
-  padding-top: 20px;
-  padding-bottom: 40px;
-}
+.screen { display: none; animation: fadeUp .3s ease; }
 .screen.active { display: block; }
+#matching {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 28px 48px;
+}
 @media (max-width: 640px) {
-  .screen { padding-left: 16px; padding-right: 16px; padding-top: 14px; }
+  #matching { padding: 16px 18px 40px; }
 }
 @keyframes fadeUp {
   from { opacity:0; transform: translateY(12px); }

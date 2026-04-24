@@ -180,6 +180,11 @@ input  { font-family: var(--font); }
 .level-section[data-level="foundational"] .level-title { color: #0ea5e9; }
 .level-section[data-level="associate"] .level-title { color: #8b5cf6; }
 .level-section[data-level="professional"] .level-title { color: #f59e0b; }
+.level-section[data-level="specialty"] .level-title { color: #ef4444; }
+.exam-card[data-level="specialty"] .exam-card-badge {
+  background: linear-gradient(135deg, rgba(239,68,68,.2), rgba(244,63,94,.2));
+  color: #ef4444;
+}
 
 .level-cards {
   display: grid;
@@ -1442,6 +1447,43 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
           <span>🤖 Bedrock</span><span>📚 Knowledge Base</span><span>🧩 Agents</span><span>🛡️ Guardrails</span>
         </div>
       </button>
+
+      <button class="exam-card" data-level="professional" onclick="selectExam('dop')">
+        <div class="exam-card-badge">DOP-C02</div>
+        <div class="exam-card-title">DevOps Engineer</div>
+        <div class="exam-card-desc">CI/CD · IaC · 자동화 · 한국어 <strong>429</strong>문제</div>
+        <div class="exam-card-tags">
+          <span>🚀 CodeDeploy</span><span>📜 CloudFormation</span><span>⚙️ Systems Manager</span><span>📊 CloudWatch</span>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Specialty -->
+  <div class="level-section" data-level="specialty">
+    <div class="level-header">
+      <span class="level-icon">🔒</span>
+      <span class="level-title">Specialty</span>
+      <span class="level-subtitle">전문 분야</span>
+    </div>
+    <div class="level-cards cards-multi">
+      <button class="exam-card" data-level="specialty" onclick="selectExam('ans')">
+        <div class="exam-card-badge">ANS-C01</div>
+        <div class="exam-card-title">Advanced Networking</div>
+        <div class="exam-card-desc">하이브리드 네트워킹 · Route 53 · 한국어 <strong>289</strong>문제</div>
+        <div class="exam-card-tags">
+          <span>🌐 Transit Gateway</span><span>🔗 Direct Connect</span><span>📡 Route 53</span><span>🚀 Global Accelerator</span>
+        </div>
+      </button>
+
+      <button class="exam-card" data-level="specialty" onclick="selectExam('scs')">
+        <div class="exam-card-badge">SCS-C03</div>
+        <div class="exam-card-title">Security Specialty</div>
+        <div class="exam-card-desc">보안 · 암호화 · 컴플라이언스 · 한국어 <strong>73</strong>문제</div>
+        <div class="exam-card-tags">
+          <span>🛡️ GuardDuty</span><span>🔑 KMS</span><span>🔐 IAM</span><span>🔍 Security Hub</span>
+        </div>
+      </button>
     </div>
   </div>
 
@@ -1709,6 +1751,12 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
 <script src="soa-extras.js"></script>
 <script src="aip-data.js"></script>
 <script src="aip-extras.js"></script>
+<script src="dop-data.js"></script>
+<script src="dop-extras.js"></script>
+<script src="ans-data.js"></script>
+<script src="ans-extras.js"></script>
+<script src="scs-data.js"></script>
+<script src="scs-extras.js"></script>
 
 <!-- ═══ SCRIPT ═══ -->
 <script>
@@ -1787,6 +1835,33 @@ const EXAM_META = {
     chip: '🤖 AWS GEN AI CERTIFIED',
     storagePrefix: 'aws_aip_',
     getQuestions: () => window.AIP_QUESTIONS || []
+  },
+  dop: {
+    id: 'dop',
+    code: 'DOP-C02',
+    title: 'DOP-C02 퀴즈',
+    sub: 'DevOps Engineer Professional · 한국어 기출',
+    chip: '🚀 AWS DEVOPS CERTIFIED',
+    storagePrefix: 'aws_dop_',
+    getQuestions: () => window.DOP_QUESTIONS || []
+  },
+  ans: {
+    id: 'ans',
+    code: 'ANS-C01',
+    title: 'ANS-C01 퀴즈',
+    sub: 'Advanced Networking Specialty · 한국어 기출',
+    chip: '🌐 AWS NETWORKING CERTIFIED',
+    storagePrefix: 'aws_ans_',
+    getQuestions: () => window.ANS_QUESTIONS || []
+  },
+  scs: {
+    id: 'scs',
+    code: 'SCS-C03',
+    title: 'SCS-C03 퀴즈',
+    sub: 'Security Specialty · 한국어 기출',
+    chip: '🔒 AWS SECURITY CERTIFIED',
+    storagePrefix: 'aws_scs_',
+    getQuestions: () => window.SCS_QUESTIONS || []
   }
 };
 
@@ -3290,7 +3365,13 @@ function _isDVA(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'dva'; }
 function _isDEA(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'dea'; }
 function _isSOA(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'soa'; }
 function _isAIP(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'aip'; }
+function _isDOP(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'dop'; }
+function _isANS(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'ans'; }
+function _isSCS(){ return CURRENT_EXAM && CURRENT_EXAM.id === 'scs'; }
 function _getCompares(){
+  if(_isSCS()) return window.SCS_COMPARES || [];
+  if(_isANS()) return window.ANS_COMPARES || [];
+  if(_isDOP()) return window.DOP_COMPARES || [];
   if(_isAIP()) return window.AIP_COMPARES || [];
   if(_isSOA()) return window.SOA_COMPARES || [];
   if(_isDEA()) return window.DEA_COMPARES || [];
@@ -3301,6 +3382,9 @@ function _getCompares(){
   return (typeof COMPARES !== 'undefined' ? COMPARES : (window.SAA_COMPARES || []));
 }
 function _getKeywords(){
+  if(_isSCS()) return window.SCS_KEYWORDS || [];
+  if(_isANS()) return window.ANS_KEYWORDS || [];
+  if(_isDOP()) return window.DOP_KEYWORDS || [];
   if(_isAIP()) return window.AIP_KEYWORDS || [];
   if(_isSOA()) return window.SOA_KEYWORDS || [];
   if(_isDEA()) return window.DEA_KEYWORDS || [];
@@ -3311,6 +3395,9 @@ function _getKeywords(){
   return (typeof KEYWORDS !== 'undefined' ? KEYWORDS : (window.SAA_KEYWORDS || []));
 }
 function _getTraps(){
+  if(_isSCS()) return window.SCS_TRAPS || [];
+  if(_isANS()) return window.ANS_TRAPS || [];
+  if(_isDOP()) return window.DOP_TRAPS || [];
   if(_isAIP()) return window.AIP_TRAPS || [];
   if(_isSOA()) return window.SOA_TRAPS || [];
   if(_isDEA()) return window.DEA_TRAPS || [];
@@ -3321,6 +3408,9 @@ function _getTraps(){
   return (typeof TRAPS !== 'undefined' ? TRAPS : (window.SAA_TRAPS || []));
 }
 function _getDecisions(){
+  if(_isSCS()) return window.SCS_DECISIONS || [];
+  if(_isANS()) return window.ANS_DECISIONS || [];
+  if(_isDOP()) return window.DOP_DECISIONS || [];
   if(_isAIP()) return window.AIP_DECISIONS || [];
   if(_isSOA()) return window.SOA_DECISIONS || [];
   if(_isDEA()) return window.DEA_DECISIONS || [];
@@ -3331,6 +3421,9 @@ function _getDecisions(){
   return (typeof DECISIONS !== 'undefined' ? DECISIONS : (window.SAA_DECISIONS || []));
 }
 function _getGlossary(){
+  if(_isSCS()) return window.SCS_GLOSSARY || [];
+  if(_isANS()) return window.ANS_GLOSSARY || [];
+  if(_isDOP()) return window.DOP_GLOSSARY || [];
   if(_isAIP()) return window.AIP_GLOSSARY || [];
   if(_isSOA()) return window.SOA_GLOSSARY || [];
   if(_isDEA()) return window.DEA_GLOSSARY || [];

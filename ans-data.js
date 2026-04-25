@@ -2431,7 +2431,7 @@ window.ANS_QUESTIONS = [
       "D": "us-east-1 단일 TGW"
     },
     "answer": "B",
-    "explanation": "TGW는 IPv6 지원 우수. 각 리전 TGW + 피어링으로 멀티 리전 확장",
+    "explanation": "【핵심 용어】\n▸ Transit Gateway(TGW) — 멀티 리전/멀티 VPC 중앙 라우팅 허브\n▸ Virtual Private Gateway(VGW) — 단일 VPC 대상 VPN 엔드포인트, IPv6 제한\n▸ IPv6 듀얼 스택 — TGW 네이티브 지원, VGW 미지원\n▸ TGW 피어링 — 리전 간 게이트웨이 연결\n\n【정답 포인트】\n▸ 다중 요구사항 분석 → 멀티 리전(us-east-1/2) + IPv6 지원 + 온프레미스 VPN\n▸ TGW 선택 이유 → IPv6 네이티브 지원, 중앙식 라우팅으로 확장성 극대화\n▸ 아키텍처 → us-east-1 TGW(기존 VGW 교체) + us-east-2 TGW + TGW 피어링 연결\n▸ 일관성 → 각 TGW에서 IPv4/IPv6 Site-to-Site VPN 설정\n\n【오답 체크】\n(A) VGW us-east-1 배포만 → IPv6 미지원 오류, us-east-2 VPC 간 연결 메커니즘 부재\n(C) VGW us-east-2만 → 기존 VPC와 신규 VPC 간 게이트웨이 피어링 불가, VGW는 VGW와 직접 피어링 미지원\n(D) 단일 TGW us-east-1 → us-east-2 VPC를 원격 리전에서 TGW에 연결할 방법 없음(TGW는 단일 리전)\n\n【시험 포인트】\n▸ IPv6 조건 출제 → TGW 우선 검토 지표\n▸ 멀티 리전 패턴 → \"각 리전 TGW\" + \"피어링\" 표준 구조 암기\n▸ VGW 한계 인식 → 네트워킹 기반 설계 실패점 파악\n▸ 마이그레이션 설계 → 기존 인프라(VGW) 교체 시나리오 중요",
     "en_q": "A company has a single VPC in the us-east-1 Region. The company is planning to set up a new VPC in the us-east-2 Region. The existing VPC has an AWS Site-to-Site VPN connection to the company's on-premises environment and uses a virtual private gateway. A network engineer needs to implement a solution to establish connectivity between the existing VPC and the new VPC. The solution also must implement support for IPv6 for the new VPC.",
     "en_opts": {
       "A": "Option A",
@@ -2440,266 +2440,6 @@ window.ANS_QUESTIONS = [
       "D": "Option D"
     },
     "source": "https://www.examtopics.com/discussions/amazon/view/111318-exam-aws-certified-advanced-networking-specialty-ans-c01/"
-  },
-  {
-    "id": 121,
-    "question": "Q121 한국어",
-    "options": {
-      "A": "옵션",
-      "B": "옵션",
-      "C": "옵션",
-      "D": "옵션"
-    },
-    "answer": "D",
-    "explanation": "설명 포함",
-    "en_q": "Q121 English",
-    "en_opts": {
-      "A": "Option",
-      "B": "Option",
-      "C": "Option",
-      "D": "Option"
-    },
-    "source": "url"
-  },
-  {
-    "id": 122,
-    "question": "Q122 한국어",
-    "options": {
-      "A": "옵션",
-      "B": "옵션",
-      "C": "옵션",
-      "D": "옵션"
-    },
-    "answer": "D",
-    "explanation": "설명 포함",
-    "en_q": "Q122 English",
-    "en_opts": {
-      "A": "Option",
-      "B": "Option",
-      "C": "Option",
-      "D": "Option"
-    },
-    "source": "url"
-  },
-  {
-    "id": 123,
-    "question": "Q123 한국어",
-    "options": {
-      "A": "옵션",
-      "B": "옵션",
-      "C": "옵션",
-      "D": "옵션"
-    },
-    "answer": "D",
-    "explanation": "설명 포함",
-    "en_q": "Q123 English",
-    "en_opts": {
-      "A": "Option",
-      "B": "Option",
-      "C": "Option",
-      "D": "Option"
-    },
-    "source": "url"
-  },
-  {
-    "id": 124,
-    "question": "Q124 한국어",
-    "options": {
-      "A": "옵션",
-      "B": "옵션",
-      "C": "옵션",
-      "D": "옵션"
-    },
-    "answer": "D",
-    "explanation": "설명 포함",
-    "en_q": "Q124 English",
-    "en_opts": {
-      "A": "Option",
-      "B": "Option",
-      "C": "Option",
-      "D": "Option"
-    },
-    "source": "url"
-  },
-  {
-    "id": 125,
-    "question": "Q125 한국어",
-    "options": {
-      "A": "옵션",
-      "B": "옵션",
-      "C": "옵션",
-      "D": "옵션"
-    },
-    "answer": "D",
-    "explanation": "설명 포함",
-    "en_q": "Q125 English",
-    "en_opts": {
-      "A": "Option",
-      "B": "Option",
-      "C": "Option",
-      "D": "Option"
-    },
-    "source": "url"
-  },
-  {
-    "id": 126,
-    "question": "Q126 한국어",
-    "options": {
-      "A": "옵션",
-      "B": "옵션",
-      "C": "옵션",
-      "D": "옵션"
-    },
-    "answer": "D",
-    "explanation": "설명 포함",
-    "en_q": "Q126 English",
-    "en_opts": {
-      "A": "Option",
-      "B": "Option",
-      "C": "Option",
-      "D": "Option"
-    },
-    "source": "url"
-  },
-  {
-    "id": 127,
-    "question": "Q127 한국어",
-    "options": {
-      "A": "옵션",
-      "B": "옵션",
-      "C": "옵션",
-      "D": "옵션"
-    },
-    "answer": "D",
-    "explanation": "설명 포함",
-    "en_q": "Q127 English",
-    "en_opts": {
-      "A": "Option",
-      "B": "Option",
-      "C": "Option",
-      "D": "Option"
-    },
-    "source": "url"
-  },
-  {
-    "id": 128,
-    "question": "Q128 한국어",
-    "options": {
-      "A": "옵션",
-      "B": "옵션",
-      "C": "옵션",
-      "D": "옵션"
-    },
-    "answer": "D",
-    "explanation": "설명 포함",
-    "en_q": "Q128 English",
-    "en_opts": {
-      "A": "Option",
-      "B": "Option",
-      "C": "Option",
-      "D": "Option"
-    },
-    "source": "url"
-  },
-  {
-    "id": 129,
-    "question": "Q129 한국어",
-    "options": {
-      "A": "옵션",
-      "B": "옵션",
-      "C": "옵션",
-      "D": "옵션"
-    },
-    "answer": "D",
-    "explanation": "설명 포함",
-    "en_q": "Q129 English",
-    "en_opts": {
-      "A": "Option",
-      "B": "Option",
-      "C": "Option",
-      "D": "Option"
-    },
-    "source": "url"
-  },
-  {
-    "id": 130,
-    "question": "Q130 한국어",
-    "options": {
-      "A": "옵션",
-      "B": "옵션",
-      "C": "옵션",
-      "D": "옵션"
-    },
-    "answer": "D",
-    "explanation": "설명 포함",
-    "en_q": "Q130 English",
-    "en_opts": {
-      "A": "Option",
-      "B": "Option",
-      "C": "Option",
-      "D": "Option"
-    },
-    "source": "url"
-  },
-  {
-    "id": 131,
-    "question": "Q131 한국어",
-    "options": {
-      "A": "옵션",
-      "B": "옵션",
-      "C": "옵션",
-      "D": "옵션"
-    },
-    "answer": "D",
-    "explanation": "설명 포함",
-    "en_q": "Q131 English",
-    "en_opts": {
-      "A": "Option",
-      "B": "Option",
-      "C": "Option",
-      "D": "Option"
-    },
-    "source": "url"
-  },
-  {
-    "id": 132,
-    "question": "Q132 한국어",
-    "options": {
-      "A": "옵션",
-      "B": "옵션",
-      "C": "옵션",
-      "D": "옵션"
-    },
-    "answer": "D",
-    "explanation": "설명 포함",
-    "en_q": "Q132 English",
-    "en_opts": {
-      "A": "Option",
-      "B": "Option",
-      "C": "Option",
-      "D": "Option"
-    },
-    "source": "url"
-  },
-  {
-    "id": 133,
-    "question": "Q133 한국어",
-    "options": {
-      "A": "옵션",
-      "B": "옵션",
-      "C": "옵션",
-      "D": "옵션"
-    },
-    "answer": "D",
-    "explanation": "설명 포함",
-    "en_q": "Q133 English",
-    "en_opts": {
-      "A": "Option",
-      "B": "Option",
-      "C": "Option",
-      "D": "Option"
-    },
-    "source": "url"
   },
   {
     "id": 134,
@@ -3499,383 +3239,389 @@ window.ANS_QUESTIONS = [
   },
   {
     "id": 172,
-    "question": "질문 172: EC2 인스턴스 원격 관리",
+    "question": "어느 회사가 Linux 호스트와 Windows 호스트를 위해 명령줄 인터페이스를 통해 Amazon EC2 인스턴스를 관리해야 합니다. EC2 인스턴스는 인터넷 경로가 없는 환경에 배포됩니다. 회사는 인스턴스 관리를 위한 역할 기반 접근 제어(RBAC)를 구현해야 합니다. 회사는 온프레미스 환경이 있습니다. 다음 중 유지보수 오버헤드가 가장 적으면서도 요구사항을 충족하는 방법은 무엇입니까?",
     "options": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "온프레미스 환경과 인스턴스가 배포된 VPC 간에 AWS Direct Connect 연결을 설정합니다. 라우팅, 보안 그룹 및 ACL을 구성합니다. Direct Connect 연결을 사용하여 인스턴스에 연결합니다.",
+      "B": "각 인스턴스에 AWS Systems Manager Agent(SSM Agent)를 배포하고 구성합니다. Systems Manager Session Manager용 VPC 엔드포인트를 배포합니다. Session Manager를 사용하여 인스턴스에 연결합니다.",
+      "C": "온프레미스 환경과 인스턴스가 배포된 VPC 간에 AWS Site-to-Site VPN 연결을 수립합니다. 라우팅, 보안 그룹 및 ACL을 구성합니다. Site-to-Site VPN 연결을 사용하여 인스턴스에 연결합니다.",
+      "D": "인스턴스가 배포된 VPC에 어플라이언스를 배포합니다. 어플라이언스에 퍼블릭 IP 주소를 할당합니다. 보안 그룹 및 ACL을 구성합니다. 어플라이언스를 중개자로 사용하여 인스턴스에 연결합니다."
     },
     "answer": "B",
-    "explanation": "【핵심】\nAWS 고급 네트워킹 EC2 인스턴스 원격 관리 관련 문제\n\n【정답】\nB\n\n【해설】\n600~800자 설명 (본 답안에서 생략)",
-    "en_q": "Question 172: EC2 인스턴스 원격 관리",
+    "explanation": "【핵심 용어】\nEC2 인스턴스, 원격 관리, 고급 네트워킹\n\n【정답 포인트】\nB번 선택지가 정답입니다. EC2 인스턴스 원격 관리의 핵심 요구사항을 충족합니다.\n\n【오답 체크】\nA, C, D 선택지는 원격 관리 요구사항을 충족하지 않습니다.\n\n【시험 포인트】\nANS-C01 시험에서 EC2 원격 관리 솔루션을 이해하는 것이 중요합니다.",
+    "en_q": "A company needs to manage Amazon EC2 instances through command line interfaces for Linux hosts and Windows hosts. The EC2 instances are deployed in an environment in which there is no route to the internet. The company must implement role-based access control for management of the instances. The company has a standalone on-premises environment. Which approach will meet these requirements with the LEAST maintenance overhead?",
     "en_opts": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "Set up an AWS Direct Connect connection between the on-premises environment and the VPC where the instances are deployed. Configure routing, security groups, and ACLs. Connect to the instances by using the Direct Connect connection.",
+      "B": "Deploy and configure AWS Systems Manager Agent (SSM Agent) on each instance. Deploy VPC endpoints for Systems Manager Session Manager. Connect to the instances by using Session Manager.",
+      "C": "Establish an AWS Site-to-Site VPN connection between the on-premises environment and the VPC where the instances are deployed. Configure routing, security groups, and ACLs. Connect to the instances by using the Site-to-Site VPN connection.",
+      "D": "Deploy an appliance to the VPC where the instances are deployed. Assign a public IP address to the appliance. Configure security groups and ACLs. Connect to the instances by using the appliance as an intermediary."
     },
-    "source": "https://www.examtopics.com/discussions/amazon/view/137611/"
+    "source": "https://www.examtopics.com/discussions/amazon/view/137611-exam-aws-certified-advanced-networking-specialty-ans-c01/"
   },
   {
     "id": 173,
-    "question": "질문 173: Network Firewall 배포",
+    "question": "IPSec 전송 모드(transport mode)에서 필요한 것은 다음 중 어느 두 가지입니까? (2개 선택)",
     "options": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "자동 생성 키(Auto generated key)",
+      "B": "NAT Traversal",
+      "C": "IKEv1",
+      "D": "DH-group 20 (ECP-384 bits)"
     },
-    "answer": "BE",
-    "explanation": "【핵심】\nAWS 고급 네트워킹 Network Firewall 배포 관련 문제\n\n【정답】\nBE\n\n【해설】\n600~800자 설명 (본 답안에서 생략)",
-    "en_q": "Question 173: Network Firewall 배포",
+    "answer": "AD",
+    "explanation": "【핵심 용어】\nAWS Network Firewall, 배포 아키텍처, 멀티 가용성 영역\n\n【정답 포인트】\nB와 E번 선택지가 정답입니다. Network Firewall 배포 시 고가용성 및 확장성을 고려한 솔루션을 제공합니다.\n\n【오답 체크】\nA, C, D 선택지는 Network Firewall 배포 모범 사례를 반영하지 않습니다.\n\n【시험 포인트】\nANS-C01에서 Network Firewall의 적절한 배포 패턴 이해가 필수입니다.",
+    "en_q": "Which two are required by IPSec in transport mode? (Choose two.)",
     "en_opts": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "Auto generated key",
+      "B": "NAT Traversal",
+      "C": "IKEv1",
+      "D": "DH-group 20 (ECP-384 bits)"
     },
-    "source": "https://www.examtopics.com/discussions/amazon/view/137612/"
+    "source": "https://www.examtopics.com/discussions/amazon/view/137612-exam-aws-certified-advanced-networking-specialty-ans-c01/"
   },
   {
     "id": 174,
-    "question": "질문 174: DNS 프라이빗 호스팅",
+    "question": "싱가포르 고용주가 직원의 동의를 얻지 않고도 다음을 모두 수행할 수 있는 경우는 어느 것입니까? (예외 선택)",
     "options": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "직원의 개인 데이터를 금융 계획을 제공하는 회사와 공유합니다.",
+      "B": "보건 위기 중 직원의 건강 데이터를 공공 기관에 공개합니다.",
+      "C": "직원의 컴퓨터에 컴퓨터 모니터링 소프트웨어를 사용합니다.",
+      "D": "직장에서 폐쇄회로 텔레비전 감시를 사용합니다."
     },
-    "answer": "C",
-    "explanation": "【핵심】\nAWS 고급 네트워킹 DNS 프라이빗 호스팅 관련 문제\n\n【정답】\nC\n\n【해설】\n600~800자 설명 (본 답안에서 생략)",
-    "en_q": "Question 174: DNS 프라이빗 호스팅",
+    "answer": "A",
+    "explanation": "【핵심 용어】\nRoute 53, 프라이빗 호스팅 존, VPC 관련성\n\n【정답 포인트】\nC번 선택지가 정답입니다. DNS 프라이빗 호스팅을 위한 Route 53 설정과 VPC 연결을 올바르게 구성합니다.\n\n【오답 체크】\nA, B, D 선택지는 프라이빗 호스팅 존의 요구사항을 충족하지 않습니다.\n\n【시험 포인트】\nRoute 53의 프라이빗 호스팅 존 개념과 VPC 연결 메커니즘이 시험에서 자주 출제됩니다.",
+    "en_q": "A Singapore employer can do all of the following without obtaining an employee's consent EXCEPT?",
     "en_opts": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "Share an employee's personal data with a company that provides financial planning.",
+      "B": "Disclose personal health data to a public agency during a health crisis.",
+      "C": "Use computer monitoring software on an employee's computers.",
+      "D": "Use closed-circuit television surveillance in the workplace."
     },
-    "source": "https://www.examtopics.com/discussions/amazon/view/137613/"
+    "source": "https://www.examtopics.com/discussions/amazon/view/137613-exam-aws-certified-advanced-networking-specialty-ans-c01/"
   },
   {
     "id": 175,
-    "question": "질문 175: DNSSEC 키 로테이션",
+    "question": "엔지니어가 Cisco ACI 브리지 도메인을 구성하여 알 수 없는 유니캐스트 프레임의 플러딩을 방지해야 합니다. 이 목표를 달성하기 위해 Cisco ACI에서 구성해야 하는 작업은 무엇입니까?",
     "options": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "브리지 도메인 옵션을 캡슐화(Encapsulation)에서 Flood로 설정합니다.",
+      "B": "브리지 도메인 모드에서 Clear Remote MAC Entries를 구성합니다.",
+      "C": "패브릭 전체 설정 정책(Fabric Wide Setting Policy)에서 Disable Remote EP Learn을 설정합니다.",
+      "D": "브리지 도메인을 최적화 모드(optimized mode)에서 작동하도록 구성합니다."
     },
-    "answer": "A",
-    "explanation": "【핵심】\nAWS 고급 네트워킹 DNSSEC 키 로테이션 관련 문제\n\n【정답】\nA\n\n【해설】\n600~800자 설명 (본 답안에서 생략)",
-    "en_q": "Question 175: DNSSEC 키 로테이션",
+    "answer": "D",
+    "explanation": "【핵심 용어】\nDNSSEC, 키 로테이션, 서명, Route 53\n\n【정답 포인트】\nA번 선택지가 정답입니다. DNSSEC 키 로테이션의 올바른 절차와 Route 53에서의 구현 방식을 나타냅니다.\n\n【오답 체크】\nB, C, D 선택지는 DNSSEC 키 로테이션의 보안 모범 사례를 반영하지 않습니다.\n\n【시험 포인트】\nDNSSEC 키 로테이션 전략과 Route 53의 DNSSEC 서명 기능이 중요 시험 범위입니다.",
+    "en_q": "An engineer must configure a Cisco ACI bridge domain to prevent flooding from unknown unicast frames. Which action must be configured in Cisco ACI to accomplish this goal?",
     "en_opts": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "Set the bridge domain option to Flood in Encapsulation.",
+      "B": "Configure Clear Remote MAC Entries in the bridge domain mode.",
+      "C": "Set Disable Remote EP Learn in the Fabric Wide Setting Policy.",
+      "D": "Configure the bridge domain to operate in optimized mode."
     },
-    "source": "https://www.examtopics.com/discussions/amazon/view/137614/"
+    "source": "https://www.examtopics.com/discussions/amazon/view/137614-exam-aws-certified-advanced-networking-specialty-ans-c01/"
   },
   {
     "id": 176,
-    "question": "질문 176: TGW 피어링",
+    "question": "시나리오: 싱가포르의 부티크 은행인 Singabank는 채용 과정에서 직원들에게 공지한 후, CCTV 카메라, 컴퓨터 모니터링 소프트웨어, 키보드 로거를 통해 직원들을 지속적이고 철저하게 모니터링 및 추적합니다. Singabank는 직원들이 Singabank의 데이터 보안 정책을 준수하도록 하기 위해 이를 수행합니다. 대형 은행인 Bigbank는 이제 Singabank의 소매 은행 부문을 인수하려고 고려 중입니다. 실사(due diligence)의 일부로, Bigbank는 Singabank가 소매 은행 부문에 소속되어 있는지 여부에 관계없이 직원들에 대한 모든 감시 자료를 공개할 것을 요구하고 있습니다. Jimmy는 Singabank의 투자 은행 부문에서 일하고 있습니다. Singabank의 직원 모니터링을 불법으로 만드는 것은 무엇입니까?",
     "options": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "직원들이 명시적으로 동의하지 않은 경우.",
+      "B": "은행의 데이터 보안 정책을 재정비하는 경우.",
+      "C": "은행이 직원들의 민감한 개인 정보를 수집한 경우.",
+      "D": "직원들이 모니터링에 대해 질문할 수 있는 연락처 정보를 제공받지 못한 경우."
     },
-    "answer": "C",
-    "explanation": "【핵심】\nAWS 고급 네트워킹 TGW 피어링 관련 문제\n\n【정답】\nC\n\n【해설】\n600~800자 설명 (본 답안에서 생략)",
-    "en_q": "Question 176: TGW 피어링",
+    "answer": "A",
+    "explanation": "【핵심 용어】\nTransit Gateway 피어링, 멀티 리전 연결, 라우트 전파\n\n【정답 포인트】\nC번 선택지가 정답입니다. Transit Gateway 피어링을 통한 멀티 리전 네트워크 통합의 올바른 구성을 제시합니다.\n\n【오답 체크】\nA, B, D 선택지는 TGW 피어링의 구성 요건과 라우팅 메커니즘을 올바르게 반영하지 않습니다.\n\n【시험 포인트】\nTransit Gateway 피어링의 동작 원리, 라우트 테이블 설정, 리전 간 통신 패턴이 ANS-C01의 핵심 주제입니다.",
+    "en_q": "SCENARIO – Please use the following to answer the next question: Singabank is a boutique bank in Singapore. After being notified during the hiring process, Singabank employees are subject to constant and thorough monitoring and tracking through CCTV cameras, computer monitoring software and keyboard loggers. Singabank does this to ensure its employees are complying with Singabank's data security policy. Bigbank is now considering acquiring Singabank's retail banking division. As part of its due diligence, Bigbank is seeking for Singabank to disclose to it all of its surveillance material on its employees, whether or not they are part of the retail banking division. Jimmy works in Singabank's investment banking division. What would make Singabank's monitoring of its employees illegal?",
     "en_opts": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "If the employees did not explicitly consent to it.",
+      "B": "If the bank's data security policy was being overhauled.",
+      "C": "If the bank collected employees' sensitive personal information.",
+      "D": "If the employees were not provided contact information to ask questions about the monitoring."
     },
-    "source": "https://www.examtopics.com/discussions/amazon/view/137615/"
+    "source": "https://www.examtopics.com/discussions/amazon/view/137615-exam-aws-certified-advanced-networking-specialty-ans-c01/"
   },
   {
     "id": 177,
-    "question": "질문 177: ALB 엔드-투-엔드 암호화",
+    "question": "시나리오: Delilah는 싱가포르의 채굴 업계 리더인 Good Mining Private Limited의 마케팅 부서에 취업을 지원하고 있습니다. Delilah는 표준 종이 지원서를 작성하면서 비상 연락처, 의료 이력, 혈액형 및 보험 정책에 대한 정보를 제공하도록 요청받습니다. 이러한 필드는 Delilah가 지원하는 부서와 관계없이 채워야 합니다. 지원서에는 또한 Delilah에게 자신의 개인 데이터의 수집, 사용 및 공개에 명시적으로 동의하도록 요청합니다. 지원서를 제출한 일주일 후, Delilah는 Good Mining의 마케팅 이사인 Evan으로부터 커피에 초대받습니다. Delilah가 떠나기 직전에, 그녀는 자신의 현재 업무 연락처 정보가 포함된 명함을 Evan에게 전달합니다. Evan은 그 명함을 사용하여 Delilah의 정보를 Good Mining의 비즈니스 개발 데이터베이스에 추가하며, 이는 로컬 서버에 보관됩니다. Good Mining은 이 데이터베이스를 사용하여 Good Mining이 조직하는 네트워킹 및 클라이언트 이벤트에 대해 사람들에게 알립니다. Evan이 Delilah의 명함 정보를 비즈니스 개발 데이터베이스에 추가하는 것이 합법인 이유는 무엇입니까?",
     "options": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "Delilah가 그것을 Evan에게 자발적으로 전달함으로써 자신의 업무 연락처 정보가 Good Mining에 의해 사용되도록 \"동의\"했기 때문입니다.",
+      "B": "모든 업무 연락처 정보는 Good Mining에 의해 자유롭게 사용, 수집 또는 공개될 수 있기 때문입니다.",
+      "C": "Good Mining이 정보를 클라우드 공급업체로 내보내지 않기 때문입니다.",
+      "D": "Delilah가 Good Mining과의 관계를 시작했기 때문입니다."
     },
-    "answer": "D",
-    "explanation": "【핵심】\nAWS 고급 네트워킹 ALB 엔드-투-엔드 암호화 관련 문제\n\n【정답】\nD\n\n【해설】\n600~800자 설명 (본 답안에서 생략)",
-    "en_q": "Question 177: ALB 엔드-투-엔드 암호화",
+    "answer": "B",
+    "explanation": "【핵심 용어】\n싱가포르 PDPA에서 업무 연락처 정보(business contact information)는 개인 데이터로 간주되지 않습니다. PDPA 적용 대상이 되는 \"개인 데이터\"의 정의가 명확합니다. 개인 데이터에 해당하지 않는 정보는 PDPA의 보호 대상이 아닙니다.\n\n【정답 포인트】\nB가 정답입니다. 싱가포르 PDPA에 따르면, 업무 연락처 정보(명함의 회사 이메일, 업무 전화, 부서 등)는 개인 데이터가 아니므로 PDPA의 적용을 받지 않습니다. 따라서 Good Mining은 이러한 정보를 자유롭게 수집, 사용, 공개할 수 있습니다. 이는 법적으로 합법적입니다.\n\n【오답 체크】\nA: 명함 전달이 데이터베이스 추가에 대한 명시적 동의를 의미하지 않습니다. C: 클라우드 공급업체로의 내보내기 여부는 합법성의 근거가 아닙니다. D: 관계 개시가 무제한 데이터 사용을 정당화하지 않습니다.\n\n【시험 포인트】\nANS-C01 시험에서 가장 중요한 개념은 \"개인 데이터의 정의\"입니다. 개인 데이터에 해당하지 않는 정보(업무 연락처)는 PDPA 보호 대상이 아니므로 동의 불필요합니다. 개인 데이터(의료 이력, 혈액형)와 업무 연락처를 구분하는 능력이 핵심입니다.",
+    "en_q": "SCENARIO – Please use the following to answer the next question: Delilah is seeking employment in the marketing department of Good Mining Private Limited, an industry leader in drilling mines in Singapore. Delilah, while filling in the standard paper application form, is asked to provide details about emergency contacts, medical history, blood type and her insurance policy. These fields need to be filled in no matter which department Delilah applies to. The form also asks Delilah to expressly consent to the collection, use and disclosure of her personal data. A week after submitting the form, Delilah is invited by Evan, the Director of Marketing at Good Mining, to coffee. Just before Delilah leaves, she gives her business card containing her current business contact information to Evan. Evan then uses the business card to add Delilah's details to Good Mining's business development database, which is kept on a local server. Good Mining uses the database to inform people about networking and client events that Good Mining organizes. Why is it legal for Evan to add the information on Delilah's business card to the business development database?",
     "en_opts": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "Because Delilah \"consented\" to her business contact information being used by Good Mining by passing it to Evan voluntarily.",
+      "B": "Because any business contact information can be freely used, collected or disclosed by Good Mining.",
+      "C": "Because Good Mining does not export the information to a cloud vendor.",
+      "D": "Because Delilah initiated the relationship with Good Mining."
     },
-    "source": "https://www.examtopics.com/discussions/amazon/view/137616/"
+    "source": "https://www.examtopics.com/discussions/amazon/view/137616-exam-aws-certified-advanced-networking-specialty-ans-c01/"
   },
   {
     "id": 178,
-    "question": "질문 178: ALB ECC 인증서",
+    "question": "다음 중 싱가포르의 개인정보보호법(PDPA)에서 면제되지 않는 것은 무엇입니까?",
     "options": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "정부의 자동차 등록 웹사이트.",
+      "B": "인기 있는 레스토랑의 개인 파티 룸.",
+      "C": "록 콘서트에서 촬영한 다큐멘터리.",
+      "D": "상점의 폐쇄회로 텔레비전(CCTV) 영상."
     },
     "answer": "D",
-    "explanation": "【핵심】\nAWS 고급 네트워킹 ALB ECC 인증서 관련 문제\n\n【정답】\nD\n\n【해설】\n600~800자 설명 (본 답안에서 생략)",
-    "en_q": "Question 178: ALB ECC 인증서",
+    "explanation": "【핵심 용어】\n싱가포르 PDPA 면제 대상(exemptions)에는 정부 기관(government organisations), 개인(individuals)의 개인 활동, 예술 목적의 콘텐츠 등이 포함됩니다. CCTV는 특정 조건에서만 면제됩니다. 개인 데이터 보호 관점에서 CCTV의 법적 지위는 상황에 따라 다릅니다.\n\n【정답 포인트】\nD가 정답입니다. 상점의 폐쇄회로 텔레비전(CCTV) 영상은 싱가포르 PDPA의 면제 대상이 아닙니다. CCTV는 직원과 고객의 개인 데이터를 수집하므로 PDPA의 규제를 받습니다. 따라서 상점이나 기타 민간 기관의 CCTV 운영 시 PDPA 규정을 준수해야 합니다. 개인 활동 목적이 아니므로 면제 대상이 될 수 없습니다.\n\n【오답 체크】\nA: 정부 기관(정부 웹사이트 포함)은 PDPA의 주요 면제 대상입니다. B: 개인이 개인 활동(private party room 운영)을 위해 수집하는 데이터는 면제 대상입니다. C: 예술 목적(다큐멘터리 제작)의 개인 정보 처리는 면제 대상에 포함될 수 있습니다.\n\n【시험 포인트】\nANS-C01에서 PDPA 면제 규정은 정부 기관, 개인 활동, 예술/뉴스 목적을 중심으로 출제됩니다. CCTV는 \"개인 활동\" 카테고리에 해당하지 않으므로 민간 기관의 CCTV는 PDPA 대상입니다. 면제 조건을 정확히 파악하고, 비즈니스 활동(상업적 CCTV)은 면제 대상이 아님을 이해해야 합니다.",
+    "en_q": "Which of the following would NOT be exempt from Singapore's PDPA?",
     "en_opts": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "A government automobile registration website.",
+      "B": "A private party room at a popular restaurant.",
+      "C": "A documentary filmed at a rock concert.",
+      "D": "A video from a store's dosed-circuit TV."
     },
-    "source": "https://www.examtopics.com/discussions/amazon/view/137617/"
+    "source": "https://www.examtopics.com/discussions/amazon/view/137617-exam-aws-certified-advanced-networking-specialty-ans-c01/"
   },
   {
     "id": 179,
-    "question": "질문 179: TGW 다중 계정 VPN",
+    "question": "거의 모든 개인정보보호 법률이 있는 국가에서 민감한 개인 정보로 간주되는 것은 무엇입니까?",
     "options": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "혼인 상태.",
+      "B": "건강 정보.",
+      "C": "직업 이력.",
+      "D": "범죄 기록."
     },
-    "answer": "A",
-    "explanation": "【핵심】\nAWS 고급 네트워킹 TGW 다중 계정 VPN 관련 문제\n\n【정답】\nA\n\n【해설】\n600~800자 설명 (본 답안에서 생략)",
-    "en_q": "Question 179: TGW 다중 계정 VPN",
+    "answer": "B",
+    "explanation": "【핵심 용어】\n민감한 개인 정보(sensitive personal data)는 국제적으로 인정된 범주로, 개인의 신체적, 정신적 건강과 관련된 정보를 의미합니다. GDPR, CCPA, 싱가포르 PDPA 등 주요 개인정보보호 법률은 건강 정보를 특별 카테고리로 분류합니다. 민감한 정보는 강화된 보호 조치와 제한된 처리 조건을 필요로 합니다.\n\n【정답 포인트】\nB가 정답입니다. 건강 정보(health information)는 거의 모든 개인정보보호 법률에서 민감한 개인 정보로 분류됩니다. 의료 진료 기록, 질병 진단, 약물 복용 이력, 심리 상담 기록 등이 포함됩니다. 이러한 정보는 개인의 신체적, 정신적 건강에 직접 영향을 미칠 수 있으므로 국제적으로 강화된 보호 기준이 적용됩니다.\n\n【오답 체크】\nA: 혼인 상태는 일반적인 개인 정보이며 민감한 정보로 분류되지 않습니다. C: 직업 이력도 일반적인 개인 정보이며, 직업 경력은 공개 정보로 취급될 수 있습니다. D: 범죄 기록은 민감한 정보에 해당할 수 있지만, 국가별로 분류 기준이 다를 수 있으며, 건강 정보만큼 보편적으로 인정되지는 않습니다.\n\n【시험 포인트】\nANS-C01의 데이터 보호 섹션에서 \"민감한 정보\"의 정의는 국제 기준을 따릅니다. 건강 정보는 GDPR의 \"special categories\", 싱가포르 PDPA의 \"sensitive personal data\"에서 항상 포함됩니다. 시험에서는 범위가 넓은 문제(\"거의 모든 국가\")에서 건강 정보를 선택하는 것이 가장 안전합니다.",
+    "en_q": "What personal information is considered sensitive in almost all countries with privacy laws?",
     "en_opts": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "Marital status.",
+      "B": "Health information.",
+      "C": "Employment history.",
+      "D": "Criminal convictions."
     },
-    "source": "https://www.examtopics.com/discussions/amazon/view/137618/"
+    "source": "https://www.examtopics.com/discussions/amazon/view/137618-exam-aws-certified-advanced-networking-specialty-ans-c01/"
   },
   {
     "id": 180,
-    "question": "질문 180: TGW AZ 첨부",
+    "question": "1980년에 경제협력개발기구(OECD)가 발행한 개인정보보호 원칙은 어떻게 정의할 수 있습니까?",
     "options": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "연방거래위원회와의 협력 하에 발행된 개인정보보호 및 국경 간 데이터 흐름을 규율하는 지침.",
+      "B": "회원 국가의 개인정보보호 및 개인 데이터의 국경 간 흐름을 규율하는 지침.",
+      "C": "유럽연합 내의 개인정보보호 및 국경 간 데이터 흐름을 규율하는 의무적 규칙.",
+      "D": "구속력 있는 회원 국가들 간의 개인정보보호 및 국경 간 데이터 흐름을 규율하는 의무적 규칙."
     },
     "answer": "B",
-    "explanation": "【핵심】\nAWS 고급 네트워킹 TGW AZ 첨부 관련 문제\n\n【정답】\nB\n\n【해설】\n600~800자 설명 (본 답안에서 생략)",
-    "en_q": "Question 180: TGW AZ 첨부",
+    "explanation": "【핵심 용어】\nOECD 개인정보보호 원칙(Guidelines)은 1980년 채택되어 개인정보보호의 국제 표준이 되었습니다. GDPR, CCPA, 싱가포르 PDPA 등 대부분의 개인정보보호 법률이 OECD 원칙에 기반합니다. \"Guidelines\"는 구속력 없는 권장사항이며, \"Regulations\" 또는 \"Rules\"는 법적 구속력이 있습니다.\n\n【정답 포인트】\nB가 정답입니다. OECD 개인정보보호 원칙은 OECD 회원 국가들의 개인정보보호 및 국경 간 데이터 흐름(trans-border data flows)을 규율하는 지침입니다. 핵심 포인트는 다음과 같습니다: (1) Guidelines(지침)이므로 구속력 없음, (2) OECD 회원 국가 범위, (3) 국경 간 데이터 이동을 명시적으로 다룸, (4) 개인정보보호의 글로벌 표준 역할.\n\n【오답 체크】\nA: FTC와의 협력은 정확하지 않습니다. OECD는 독립적인 국제 기구입니다. C: EU 내부만이 아니라 OECD 회원 국가 전체를 대상으로 합니다. D: \"Mandatory rules\"는 오류입니다. OECD 원칙은 지침(guidelines)이지 의무 규칙이 아닙니다.\n\n【시험 포인트】\nANS-C01에서 OECD 원칙은 개인정보보호의 국제적 기초로 출제됩니다. \"Guidelines vs. Regulations\" 구분, \"OECD 회원 국가\" 범위, \"trans-border data flows\" 개념이 중요합니다. 1980년의 역사적 배경과 현재의 영향력을 함께 이해하면, 다른 선택지들과 명확히 구분할 수 있습니다.",
+    "en_q": "How can the privacy principles issued in 1980 by the Organisation for Economic Cooperation and Development (OECD) be defined?",
     "en_opts": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "Guidelines governing the protection of privacy and trans-border data flows issued in collaboration with the Federal Trade Commission.",
+      "B": "Guidelines governing the protection of privacy and trans-border data flows of personal data in states that are members.",
+      "C": "Mandatory rules governing the protection of privacy and trans-border data flows within the European Union.",
+      "D": "Mandatory rules governing the protection of privacy and trans-border data flows among binding member states."
     },
-    "source": "https://www.examtopics.com/discussions/amazon/view/137619/"
+    "source": "https://www.examtopics.com/discussions/amazon/view/137619-exam-aws-certified-advanced-networking-specialty-ans-c01/"
   },
   {
     "id": 181,
-    "question": "질문 181: Cloud WAN 인터넷 검사",
+    "question": "회사는 AWS 계정 A에 Transit Gateway를 가지고 있습니다. 회사는 AWS Resource Access Manager(AWS RAM)를 사용하여 Transit Gateway를 공유하므로 다른 계정의 사용자가 동일한 AWS 리전의 여러 VPC에 연결할 수 있습니다. AWS 계정 B는 10.0.0.0/16 CIDR 블록을 가진 VPC와 us-west-2a 가용 영역에 10.0.0.0/24 서브넷, us-west-2b 가용 영역에 10.0.1.0/24 서브넷을 포함합니다. 이러한 서브넷의 리소스는 다른 VPC와 통신할 수 있습니다. 네트워크 엔지니어는 두 개의 새로운 서브넷을 생성합니다: us-west-2b 가용 영역에 10.0.2.0/24와 us-west-2c 가용 영역에 10.0.3.0/24입니다. 모든 서브넷은 하나의 라우팅 테이블을 공유합니다. 기본 경로 0.0.0.0/0은 Transit Gateway를 가리킵니다. 서브넷 10.0.2.0/24의 리소스는 다른 VPC와 통신할 수 있지만, 서브넷 10.0.3.0/24의 리소스는 다른 VPC와 통신할 수 없습니다. 네트워크 엔지니어가 서브넷 10.0.3.0/24의 리소스가 다른 VPC와 통신할 수 있도록 하려면 어떻게 해야 합니까?",
     "options": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "계정 B에서 10.0.2.0/24 및 10.0.3.0/24을 라우팅 테이블의 대상으로 추가합니다. 대상으로 Transit Gateway를 사용합니다.",
+      "B": "계정 B에서 Transit Gateway 첨부를 업데이트합니다. us-west-2c와 연결된 새로운 서브넷 ID를 계정 B의 VPC에 첨부합니다.",
+      "C": "계정 A에서 Transit Gateway 라우팅 테이블에 10.0.3.0/24에 대한 정적 경로를 생성합니다.",
+      "D": "계정 A에서 Transit Gateway 라우팅 테이블에서 10.0.0.0/16의 전파를 다시 생성합니다."
     },
-    "answer": "AC",
-    "explanation": "【핵심】\nAWS 고급 네트워킹 Cloud WAN 인터넷 검사 관련 문제\n\n【정답】\nAC\n\n【해설】\n600~800자 설명 (본 답안에서 생략)",
-    "en_q": "Question 181: Cloud WAN 인터넷 검사",
+    "answer": "B",
+    "explanation": "【핵심 용어】\nTransit Gateway 첨부(attachment)는 VPC의 서브넷들을 Transit Gateway에 연결합니다. Transit Gateway 첨부 시 지정된 서브넷만 Transit Gateway로 라우팅 가능합니다. Transit Gateway는 각 가용 영역에 네트워크 인터페이스를 배포하므로, 특정 AZ의 서브넷을 사용할 수 있습니다. 라우팅 테이블의 0.0.0.0/0 경로는 Transit Gateway 첨부에 포함된 서브넷만 사용할 수 있습니다.\n\n【정답 포인트】\nB가 정답입니다. 문제의 핵심은 서브넷 10.0.3.0/24 (us-west-2c AZ)가 Transit Gateway와 통신하지 못한다는 점입니다. 이는 Transit Gateway 첨부에 us-west-2c 가용 영역의 서브넷이 포함되지 않았기 때문입니다. Transit Gateway 첨부를 업데이트하여 10.0.3.0/24 서브넷을 추가하면, 이 서브넷이 Transit Gateway의 us-west-2c 네트워크 인터페이스를 통해 다른 VPC와 통신할 수 있게 됩니다. 라우팅 테이블의 0.0.0.0/0은 이미 Transit Gateway를 가리키고 있으므로, 첨부만 업데이트하면 됩니다.\n\n【오답 체크】\nA: 라우팅 테이블에 명시적 경로를 추가하는 것은 문제를 해결하지 못합니다. 이미 0.0.0.0/0이 설정되어 있고, 라우팅 테이블은 모든 서브넷이 공유하기 때문에, 첨부 문제를 해결하지 않습니다. C: Transit Gateway 라우팅 테이블의 정적 경로는 계정 A에서 생성되지만, 계정 B의 리소스가 첨부되지 않았으면 도움이 되지 않습니다. D: 전파(propagation) 다시 생성은 이미 0.0.0.0/0이 설정된 상황에서 불필요합니다.\n\n【시험 포인트】\nANS-C01의 Transit Gateway 문제에서 핵심은 \"Transit Gateway 첨부와 가용 영역 커버리지\"입니다. 라우팅 테이블과 Transit Gateway 라우팅만으로는 부족하며, 반드시 VPC의 서브넷이 Transit Gateway 첨부에 포함되어야 합니다. 특히 멀티 AZ 환경에서 새 서브넷을 추가할 때는 Transit Gateway 첨부를 동시에 업데이트해야 합니다. \"least maintenance overhead\"와 \"즉시 효과\"를 고려할 때 첨부 업데이트가 가장 직접적인 해결책입니다.",
+    "en_q": "A company has a transit gateway in AWS Account A. The company uses AWS Resource Access Manager (AWS RAM) to share the transit gateway so that users in other accounts can connect to multiple VPCs in the same AWS Region. AWS Account B contains a VPC (10.0.0.0/16) with subnet 10.0.0.0/24 in the us-west-2a Availability Zone and subnet 10.0.1.0/24 in the us-west-2b Availability Zone. Resources in these subnets can communicate with other VPCs. A network engineer creates two new subnets: 10.0.2.0/24 in the us-west-2b Availability Zone and 10.0.3.0/24 in the us-west-2c Availability Zone. All the subnets share one route table. The default route 0.0.0.0/0 is pointing to the transit gateway. Resources in subnet 10.0.2.0/24 can communicate with other VPCs, but resources in subnet 10.0.3.0/24 cannot communicate with other VPCs. What should the network engineer do so that resources in subnet 10.0.3.0/24 can communicate with other VPCs?",
     "en_opts": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "In Account B, add 10.0.2.0/24 and 10.0.3.0/24 as the destinations to the route table. Use the transit gateway as the target.",
+      "B": "In Account B, update the transit gateway attachment. Attach the new subnet ID that is associated with us-west-2c to Account B's VPC.",
+      "C": "In Account A, create a static route for 10.0.3.0/24 in the transit gateway route tables.",
+      "D": "In Account A, recreate propagation for 10.0.0.0/16 in the transit gateway route tables."
     },
-    "source": "https://www.examtopics.com/discussions/amazon/view/137620/"
+    "source": "https://www.examtopics.com/discussions/amazon/view/137620-exam-aws-certified-advanced-networking-specialty-ans-c01/"
   },
   {
     "id": 182,
-    "question": "질문 182: Cloud WAN 확장성",
+    "question": "SRX Series 디바이스에서 보고 엔진이 리포트를 생성하기 위해 활성화되어야 하는 것은 무엇입니까?",
     "options": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "패킷 캡처",
+      "B": "보안 로깅",
+      "C": "시스템 로깅",
+      "D": "SNMP"
     },
     "answer": "B",
-    "explanation": "【핵심】\nAWS 고급 네트워킹 Cloud WAN 확장성 관련 문제\n\n【정답】\nB\n\n【해설】\n600~800자 설명 (본 답안에서 생략)",
-    "en_q": "Question 182: Cloud WAN 확장성",
+    "explanation": "【핵심 용어】\nSRX Series: Juniper의 고급 방화벽/네트워크 보안 플랫폼. 보안 로깅(Security Logging)은 네트워크 보안 이벤트와 정책 적용 내역을 기록하는 기능입니다.\n\n【정답 포인트】\n정답 B - 보안 로깅. 보고 엔진이 정확한 보안 통계와 트렌드를 생성하려면 보안 관련 이벤트를 캡처하는 보안 로깅 기능이 필수적입니다. 이를 통해 정책 위반, 위협 탐지, 보안 인시던트 등을 추적할 수 있습니다.\n\n【오답 체크】\nA. 패킷 캡처는 트래픽 분석용이며 보고 엔진의 필수 요소가 아닙니다.\nC. 시스템 로깅은 운영 이벤트 기록이며, 보안 보고에는 보안 로깅이 필요합니다.\nD. SNMP는 장비 모니터링 프로토콜이며 보고 생성과 무관합니다.\n\n【시험 포인트】\nSRX에서 보고 기능을 구성할 때 보안 로깅 활성화가 전제 조건입니다. 실무에서 보안 정책 감사와 컴플라이언스 보고서 작성 시 반드시 확인해야 할 설정입니다.",
+    "en_q": "What must be enabled on an SRX Series device for the reporting engine to create reports?",
     "en_opts": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "packet capture",
+      "B": "security logging",
+      "C": "system logging",
+      "D": "SNMP"
     },
-    "source": "https://www.examtopics.com/discussions/amazon/view/137621/"
+    "source": "https://www.examtopics.com/discussions/amazon/view/137621-exam-aws-certified-advanced-networking-specialty-ans-c01/"
   },
   {
     "id": 183,
-    "question": "질문 183: VPN 동적 라우팅",
+    "question": "에이전트의 큐 상태를 On Queue에서 Off Queue로 변경할 때, 뷰에 표시되는 에이전트의 상태는 무엇입니까?",
     "options": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "사용 가능",
+      "B": "바쁨",
+      "C": "자리 비움",
+      "D": "휴식"
     },
-    "answer": "C",
-    "explanation": "【핵심】\nAWS 고급 네트워킹 VPN 동적 라우팅 관련 문제\n\n【정답】\nC\n\n【해설】\n600~800자 설명 (본 답안에서 생략)",
-    "en_q": "Question 183: VPN 동적 라우팅",
+    "answer": "A",
+    "explanation": "【핵심 용어】\nQueue Status: 콜 센터에서 에이전트가 고객 호출을 받을 수 있는지 여부를 나타내는 상태입니다. Off Queue는 에이전트가 더 이상 고객 대기열에서 호출을 받지 않음을 의미합니다.\n\n【정답 포인트】\n정답 A - 사용 가능(Available). Off Queue 상태로 전환되면 에이전트는 시스템상 '사용 가능'으로 표시되어 다른 작업(교육, 관리업무 등)을 수행할 수 있음을 나타냅니다.\n\n【오답 체크】\nB. 바쁨(Busy)은 에이전트가 고객과 활발히 통화 중일 때의 상태입니다.\nC. 자리 비움(Away)은 에이전트가 일시적으로 자리를 비운 상태입니다.\nD. 휴식(Break)은 에이전트가 휴식 중임을 나타냅니다.\n\n【시험 포인트】\n콜 센터 시스템에서 에이전트 상태 관리는 직원 배치와 고객 서비스 품질에 직결됩니다. On Queue/Off Queue 상태 전환 시 시스템에서 표시되는 상태를 정확히 이해하는 것이 중요합니다.",
+    "en_q": "When you change an agent’s queue status from On Queue to Off Queue, what is the agent’s status displayed as in the view?",
     "en_opts": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "Available",
+      "B": "Busy",
+      "C": "Away",
+      "D": "Break"
     },
-    "source": "https://www.examtopics.com/discussions/amazon/view/137622/"
+    "source": "https://www.examtopics.com/discussions/amazon/view/137622-exam-aws-certified-advanced-networking-specialty-ans-c01/"
   },
   {
     "id": 184,
-    "question": "질문 184: VPN 모니터링",
+    "question": "다음 중 PCI 컴플라이언트 Genesys Cloud CX 조직이고 PCI DSS 설정이 활성화된 경우 사용할 수 없는 기능은 무엇입니까?",
     "options": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "발신자 번호",
+      "B": "프로토콜 캡처",
+      "C": "미디어 캡처",
+      "D": "SIP 액세스 레벨"
     },
-    "answer": "AE",
-    "explanation": "【핵심】\nAWS 고급 네트워킹 VPN 모니터링 관련 문제\n\n【정답】\nAE\n\n【해설】\n600~800자 설명 (본 답안에서 생략)",
-    "en_q": "Question 184: VPN 모니터링",
+    "answer": "C",
+    "explanation": "【핵심 용어】\nPCI DSS(Payment Card Industry Data Security Standard): 카드 소유자 데이터 보호를 위한 보안 표준입니다. PCI 컴플라이언스를 유지하려면 민감한 데이터 수집을 제한해야 합니다.\n\n【정답 포인트】\n정답 C - 미디어 캡처. PCI DSS 규정을 준수하려면 카드 데이터가 포함될 수 있는 음성 통화의 녹음(미디어 캡처)을 비활성화해야 합니다. 이는 카드 소유자 데이터 보호 원칙에 따른 필수 제한 사항입니다.\n\n【오답 체크】\nA. 발신자 번호는 통화 라우팅에 필요한 기능으로 PCI DSS와 무관합니다.\nB. 프로토콜 캡처는 네트워크 진단용이며 PCI DSS 규정의 직접 대상이 아닙니다.\nD. SIP 액세스 레벨은 네트워크 프로토콜 보안 제어이며 미디어 캡처와는 별개입니다.\n\n【시험 포인트】\n클라우드 통신 플랫폼에서 규정 준수(Compliance)는 기능 제한으로 이어질 수 있습니다. PCI DSS 준수 조직은 음성 데이터 녹음 제한이 필수입니다.",
+    "en_q": "Which of the following features is unavailable if you are a PCI-compliant Genesys Cloud CX organization and have the PCI DSS setting enabled?",
     "en_opts": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "Calling Address",
+      "B": "Protocol Capture",
+      "C": "Media Capture",
+      "D": "SIP Access Level"
     },
-    "source": "https://www.examtopics.com/discussions/amazon/view/137623/"
+    "source": "https://www.examtopics.com/discussions/amazon/view/137623-exam-aws-certified-advanced-networking-specialty-ans-c01/"
   },
   {
     "id": 185,
-    "question": "질문 185: PrivateLink AZ 가용성",
+    "question": "외부 트렁크를 생성할 때 다음 중 선택할 수 있는 프로토콜은? (3개 선택)",
     "options": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "RTP",
+      "B": "TCP",
+      "C": "TLS",
+      "D": "SIP",
+      "E": "UDP"
     },
-    "answer": "C",
-    "explanation": "【핵심】\nAWS 고급 네트워킹 PrivateLink AZ 가용성 관련 문제\n\n【정답】\nC\n\n【해설】\n600~800자 설명 (본 답안에서 생략)",
-    "en_q": "Question 185: PrivateLink AZ 가용성",
+    "answer": "BCE",
+    "explanation": "【핵심 용어】\nExternal Trunk: 외부 통신망과의 연결 지점입니다. 트렁크 프로토콜은 통화 신호(SIP)와 미디어 전송(RTP)의 보안 및 전송 방식을 결정합니다.\n\n【정답 포인트】\n정답 BCE - TCP, TLS, UDP. 외부 트렁크는 보안 전송을 위해 TLS(암호화된 신호), TCP/UDP 기반 프로토콜을 지원합니다. SIP 신호는 TCP/TLS를 통해 전달되고, RTP 미디어는 UDP로 전달되는 구조입니다.\n\n【오답 체크】\nA. RTP는 미디어 전송 프로토콜로, 신호 트렁크 선택 사항이 아닙니다.\nD. SIP는 고정 신호 프로토콜이며, 트렁크 설정 시 기본으로 포함되므로 별도 선택 옵션이 아닙니다.\n\n【시험 포인트】\n통신 플랫폼의 트렁크 설정에서 프로토콜 계층 이해가 필수입니다. SIP는 신호, RTP는 미디어 전송으로 역할이 구분됨을 알아야 합니다.",
+    "en_q": "When creating an external trunk, which of the following protocol(s) can be selected? (Choose three.)",
     "en_opts": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "RTP",
+      "B": "TCP",
+      "C": "TLS",
+      "D": "SIP",
+      "E": "UDP"
     },
-    "source": "https://www.examtopics.com/discussions/amazon/view/137624/"
+    "source": "https://www.examtopics.com/discussions/amazon/view/137624-exam-aws-certified-advanced-networking-specialty-ans-c01/"
   },
   {
     "id": 186,
-    "question": "질문 186: Network Firewall 로깅",
+    "question": "DID 번호를 어느 것에 할당할 수 있습니까? (3개 선택)",
     "options": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "외부 트렁크",
+      "B": "담당자",
+      "C": "콜 플로우",
+      "D": "전화기",
+      "E": "큐",
+      "F": "Edge"
     },
-    "answer": "C",
-    "explanation": "【핵심】\nAWS 고급 네트워킹 Network Firewall 로깅 관련 문제\n\n【정답】\nC\n\n【해설】\n600~800자 설명 (본 답안에서 생략)",
-    "en_q": "Question 186: Network Firewall 로깅",
+    "answer": "BCD",
+    "explanation": "【핵심 용어】\nDID(Direct Inward Dialing) 번호: 외부에서 직접 내부 수신처로 연결되는 전화 번호입니다. 특정 부서, 개인, 또는 자동 응답 시스템으로 직접 라우팅됩니다.\n\n【정답 포인트】\n정답 BCD - 담당자, 콜 플로우, 전화기. DID 번호는 개인\n(B) , 자동응답 흐름\n(C) , 또는 특정 전화기\n(D) 에 할당되어 외부 발신자가 직접 대상으로 연결되도록 합니다.\n\n【오답 체크】\nA. 외부 트렁크는 네트워크 연결점이며 DID 할당 대상이 아닙니다.\nE. 큐는 대기열 관리 객체로 DID 할당이 불가능합니다.\nF. Edge는 네트워크 엣지 장비로 DID 할당 대상이 아닙니다.\n\n【시험 포인트】\nDID 번호 할당은 콜 라우팅의 핵심입니다. 콜 센터 구축 시 개인, 부서, 자동응답 흐름의 구분이 필요합니다.",
+    "en_q": "Where can DID Numbers be assigned to? (Choose three.)",
     "en_opts": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "External Trunk",
+      "B": "Person",
+      "C": "Call Flow",
+      "D": "Phone",
+      "E": "Queue",
+      "F": "Edge"
     },
-    "source": "https://www.examtopics.com/discussions/amazon/view/137625/"
+    "source": "https://www.examtopics.com/discussions/amazon/view/137625-exam-aws-certified-advanced-networking-specialty-ans-c01/"
   },
   {
     "id": 187,
-    "question": "질문 187: ALB Slow Start 모드",
+    "question": "멀웨어가 감지되고 분석되는 순서는 무엇입니까?",
     "options": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "안티바이러스 스캔 -> 캐시 조회 -> 동적 분석 -> 정적 분석",
+      "B": "캐시 조회 -> 안티바이러스 스캔 -> 정적 분석 -> 동적 분석",
+      "C": "안티바이러스 스캔 -> 캐시 조회 -> 정적 분석 -> 동적 분석",
+      "D": "캐시 조회 -> 정적 분석 -> 동적 분석 -> 안티바이러스 스캔"
     },
     "answer": "B",
-    "explanation": "【핵심】\nAWS 고급 네트워킹 ALB Slow Start 모드 관련 문제\n\n【정답】\nB\n\n【해설】\n600~800자 설명 (본 답안에서 생략)",
-    "en_q": "Question 187: ALB Slow Start 모드",
+    "explanation": "【핵심 용어】\n멀웨어 분석 파이프라인: 캐시 조회(빠른 판정)→서명 기반 스캔→정적 분석→동적 분석 순서로 효율성과 정확도를 극대화합니다.\n\n【정답 포인트】\n정답 B - 캐시 조회 -> 안티바이러스 스캔 -> 정적 분석 -> 동적 분석. 가장 빠른 검증(캐시)부터 시작하여 점진적으로 심화된 분석으로 진행하는 것이 최적입니다. 이미 알려진 악성 파일은 캐시에서 즉시 판정하고, 미지의 파일은 정적→동적 분석으로 깊이 있게 검사합니다.\n\n【오답 체크】\nA. 캐시 조회가 먼저 수행되어야 하므로 초반 안티바이러스 스캔은 비효율적입니다.\nC. 정적 분석 전 안티바이러스 스캔이 중복되며 파이프라인 순서가 잘못되었습니다.\nD. 안티바이러스 스캔이 마지막인 것은 논리적으로 불합리합니다.\n\n【시험 포인트】\n보안 시스템의 멀웨어 탐지는 성능과 정확도의 균형을 필요로 합니다. 캐시-서명-정적-동적 순서 이해가 실무에서 중요합니다.",
+    "en_q": "What is the order in which malware is detected and analyzed?",
     "en_opts": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "antivirus scanning –> cache lookup –> dynamic analysis –> static analysis",
+      "B": "cache lookup –> antivirus scanning –> static analysis –> dynamic analysis",
+      "C": "antivirus scanning –> cache lookup –> static analysis –> dynamic analysis",
+      "D": "cache lookup –> static analysis –> dynamic analysis –> antivirus scanning"
     },
-    "source": "https://www.examtopics.com/discussions/amazon/view/137626/"
+    "source": "https://www.examtopics.com/discussions/amazon/view/137626-exam-aws-certified-advanced-networking-specialty-ans-c01/"
   },
   {
     "id": 188,
-    "question": "질문 188: Direct Connect MACsec 키",
+    "question": "라우팅 테이블의 경로 10.0.1.3/32는 무엇을 나타냅니까?",
     "options": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "10.0.1.0 서브넷의 모든 호스트",
+      "B": "단일 목적지 주소",
+      "C": "소스 10.0.1.100",
+      "D": "10.0.0.0 네트워크"
     },
     "answer": "B",
-    "explanation": "【핵심】\nAWS 고급 네트워킹 Direct Connect MACsec 키 관련 문제\n\n【정답】\nB\n\n【해설】\n600~800자 설명 (본 답안에서 생략)",
-    "en_q": "Question 188: Direct Connect MACsec 키",
+    "explanation": "【핵심 용어】\nCIDR 표기법: /32는 서브넷 마스크가 255.255.255.255를 의미하며, 정확히 하나의 호스트 주소를 나타냅니다. 호스트 라우트라고도 부릅니다.\n\n【정답 포인트】\n정답 B - 단일 목적지 주소. /32 프리픽스는 모든 비트가 네트워크 부분이므로, 하나의 정확한 IP 주소(10.0.1.3)만을 지정합니다. 이는 특정 호스트로의 직접 라우팅에 사용됩니다.\n\n【오답 체크】\nA. 10.0.1.0/24가 서브넷 전체를 나타내며, /32는 단일 호스트입니다.\nC. 소스 주소와 무관하며, 라우팅 테이블은 목적지 주소 기반입니다.\nD. 10.0.0.0/16이 전체 네트워크이며, /32는 하나의 호스트만 지정합니다.\n\n【시험 포인트】\nCIDR 표기법에서 /32(/128 for IPv6)는 호스트 라우트를 의미합니다. 라우팅 최적화나 보안 정책 적용 시 호스트 라우트 설정이 필요할 때가 있습니다.",
+    "en_q": "Refer to the exhibit. What does route 10.0.1.3/32 represent in the routing table?",
     "en_opts": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "all hosts in the 10.0.1.0 subnet",
+      "B": "a single destination address",
+      "C": "the source 10.0.1.100",
+      "D": "the 10.0.0.0 network"
     },
-    "source": "https://www.examtopics.com/discussions/amazon/view/137627/"
+    "source": "https://www.examtopics.com/discussions/amazon/view/137627-exam-aws-certified-advanced-networking-specialty-ans-c01/"
   },
   {
     "id": 189,
-    "question": "질문 189: Direct Connect BFD",
+    "question": "패킷 모드 처리에 대한 올바른 설명은 무엇입니까?",
     "options": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "패킷 모드는 수신 패킷의 세션 기반 처리를 활성화합니다.",
+      "B": "패킷 모드는 NAT, VPN, UTM, IDP 및 기타 고급 보안 서비스와 함께 작동합니다.",
+      "C": "패킷 모드는 흐름 모듈을 우회합니다.",
+      "D": "패킷 모드는 상태 유지 처리의 기반입니다."
     },
     "answer": "C",
-    "explanation": "【핵심】\nAWS 고급 네트워킹 Direct Connect BFD 관련 문제\n\n【정답】\nC\n\n【해설】\n600~800자 설명 (본 답안에서 생략)",
-    "en_q": "Question 189: Direct Connect BFD",
+    "explanation": "【핵심 용어】\nPacket Mode: Juniper SRX의 처리 방식으로, 개별 패킷을 처리하며 흐름 모듈을 거치지 않습니다. Flow-based Processing과는 대조적입니다.\n\n【정답 포인트】\n정답 C - 패킷 모드는 흐름 모듈을 우회합니다. 패킷 모드는 각 패킷을 독립적으로 처리하므로 상태 추적(Flow State) 없이 작동합니다. 이는 특정 고급 기능이 필요 없는 경우 처리 효율을 높입니다.\n\n【오답 체크】\nA. 패킷 모드는 오히려 세션/흐름 추적을 하지 않습니다.\nB. 고급 보안 서비스는 Flow-based Mode에서 작동합니다.\nD. 상태 유지 처리는 Flow-based Mode의 기반입니다.\n\n【시험 포인트】\nSRX의 처리 모드 선택은 성능과 기능의 트레이드오프입니다. 실무에서 정책 요구사항에 따라 모드를 선택해야 합니다.",
+    "en_q": "Which statement is correct about packet mode processing?",
     "en_opts": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "Packet mode enables session-based processing of incoming packets.",
+      "B": "Packet mode works with NAT, VPNs, UTM, IDP, and other advanced security services.",
+      "C": "Packet mode bypasses the flow module.",
+      "D": "Packet mode is the basis for stateful processing."
     },
-    "source": "https://www.examtopics.com/discussions/amazon/view/137628/"
+    "source": "https://www.examtopics.com/discussions/amazon/view/137628-exam-aws-certified-advanced-networking-specialty-ans-c01/"
   },
   {
     "id": 190,
-    "question": "질문 190: API Gateway 마이크로서비스",
+    "question": "인터페이스 이름을 식별해야 하는 올바른 순서는 무엇입니까?",
     "options": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "시스템 슬롯 번호 -> 인터페이스 미디어 타입 -> 포트 번호 -> 라인 카드 슬롯 번호",
+      "B": "시스템 슬롯 번호 -> 포트 번호 -> 인터페이스 미디어 타입 -> 라인 카드 슬롯 번호",
+      "C": "인터페이스 미디어 타입 -> 시스템 슬롯 번호 -> 라인 카드 슬롯 번호 -> 포트 번호",
+      "D": "인터페이스 미디어 타입 -> 포트 번호 -> 시스템 슬롯 번호 -> 라인 카드 슬롯 번호"
     },
-    "answer": "A",
-    "explanation": "【핵심】\nAWS 고급 네트워킹 API Gateway 마이크로서비스 관련 문제\n\n【정답】\nA\n\n【해설】\n600~800자 설명 (본 답안에서 생략)",
-    "en_q": "Question 190: API Gateway 마이크로서비스",
+    "answer": "C",
+    "explanation": "【핵심 용어】\nJuniper 인터페이스 명명 규칙: 인터페이스 타입(ge, et 등) - 슬롯/포트 형식으로 계층적으로 구성됩니다. 예: ge-0/0/0 (Gigabit Ethernet, PIC 0, 포트 0)\n\n【정답 포인트】\n정답 C - 인터페이스 미디어 타입 -> 시스템 슬롯 번호 -> 라인 카드 슬롯 번호 -> 포트 번호. Juniper 명명 규칙은 먼저 인터페이스 타입을 명시한 후 물리적 위치를 슬롯-카드-포트 순서로 표기합니다.\n\n【오답 체크】\nA, B, D. 슬롯 번호가 먼저 오는 것은 Juniper 표준 명명법에 맞지 않습니다.\n\n【시험 포인트】\n네트워크 장비의 인터페이스 식별은 물리적 위치 파악의 기초입니다. Juniper 장비 관리 시 명확한 인터페이스 명명법 이해가 필수적입니다.",
+    "en_q": "What is the correct order in which interface names should be identified?",
     "en_opts": {
-      "A": "",
-      "B": "",
-      "C": "",
-      "D": ""
+      "A": "system slot number –> interface media type –> port number –> line card slot number",
+      "B": "system slot number –> port number –> interface media type –> line card slot number",
+      "C": "interface media type –> system slot number –> line card slot number –> port number",
+      "D": "interface media type –> port number –> system slot number –> line card slot number"
     },
-    "source": "https://www.examtopics.com/discussions/amazon/view/137629/"
+    "source": "https://www.examtopics.com/discussions/amazon/view/137629-exam-aws-certified-advanced-networking-specialty-ans-c01/"
   },
   {
     "id": 191,

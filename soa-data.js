@@ -844,285 +844,285 @@ window.SOA_QUESTIONS = [
   {
     "id": 43,
     "question": "한 회사의 상태 저장 웹 애플리케이션이 Auto Scaling 그룹의 Amazon EC2 인스턴스에서 호스팅됩니다. 인스턴스들은 단일 대상 그룹을 가진 Application Load Balancer(ALB) 뒤에서 실행됩니다. ALB는 Amazon CloudFront 배포의 원본으로 구성됩니다. 사용자들이 웹 애플리케이션에서 무작위로 로그아웃된다고 보고합니다. CloudOps 엔지니어가 이 문제를 해결하기 위해 취해야 할 조치의 조합은? (두 개 선택)",
-    "options": [
-      "A. ALB 대상 그룹에서 최소 미처리 요청 알고리즘으로 변경합니다.",
-      "B. CloudFront 배포 캐시 동작에서 쿠키 포워딩을 구성합니다.",
-      "C. CloudFront 배포 캐시 동작에서 헤더 포워딩을 구성합니다.",
-      "D. ALB 리스너 규칙에서 그룹 수준 스티키니스를 활성화합니다.",
-      "E. ALB 대상 그룹에서 스티키 세션을 활성화합니다."
-    ],
+    "options": {
+      "A": "ALB 대상 그룹에서 최소 미처리 요청 알고리즘으로 변경합니다.",
+      "B": "CloudFront 배포 캐시 동작에서 쿠키 포워딩을 구성합니다.",
+      "C": "CloudFront 배포 캐시 동작에서 헤더 포워딩을 구성합니다.",
+      "D": "ALB 리스너 규칙에서 그룹 수준 스티키니스를 활성화합니다.",
+      "E": "ALB 대상 그룹에서 스티키 세션을 활성화합니다."
+    },
     "answer": "BE",
     "explanation": "【핵심 용어】\n▸ Application Load Balancer Sticky Sessions — 동일 사용자 요청을 같은 백엔드 인스턴스로 라우팅하는 기능\n▸ Cookie Forwarding — CloudFront가 쿠키를 오리진(ALB)으로 전달, 세션 식별 가능\n▸ Round Robin / Least Outstanding Requests — ALB의 기본 로드 밸런싱 알고리즘 (세션 유지 X)\n\n【정답 포인트】\n▸ \"동일 사용자 → 같은 인스턴스\" → ALB 스티키 세션 활성화 필수\n▸ CloudFront → ALB 경로에서 쿠키 손실 방지 → CloudFront에서 쿠키 포워딩 활성화\n▸ B(쿠키 포워딩) + E(스티키 세션) 조합으로 세션 일관성 보장\n\n【오답 체크】\n(A) Least Outstanding Requests 알고리즘은 분산 효율 기준의 로드 밸런싱일 뿐 세션 유지 기능 없음. 오히려 분산 강화로 문제 악화.\n(C) 헤더 포워딩은 일반 HTTP 헤더만 전달하며 쿠키 정보를 보존하지 않아 ALB 스티키 세션 식별 불가.\n(D) ALB Target Group 수준의 그룹 스티키니스 개념은 존재하지 않음. 스티키 세션은 대상 그룹 속성으로 활성화.\n\n【시험 포인트】\n▸ \"동일 사용자 동일 서버\" → ALB Sticky Sessions + CloudFront Cookie Forwarding 조합 필수\n▸ CloudFront 앞단 시 쿠키 포워딩 누락이 세션 단절 흔한 원인\n▸ ALB 스티키 세션은 application-based(쿠키) / duration-based 두 가지 모드",
     "en_q": "A company has a stateful web application that is hosted on Amazon EC2 instances in an Auto Scaling group. The instances run behind an Application Load Balancer (ALB) that has a single target group. The ALB is configured as the origin in an Amazon CloudFront distribution. Users are reporting random logouts from the web application. Which combination of actions should a CloudOps engineer take to resolve this problem? (Choose two.)",
-    "en_opts": [
-      "A: Change to the least outstanding requests algorithm on the ALB target group",
-      "B: Configure cookie forwarding in the CloudFront distribution cache behavior",
-      "C: Configure header forwarding in the CloudFront distribution cache behavior",
-      "D: Enable group-level stickiness on the ALB listener rule",
-      "E: Enable sticky sessions on the ALB target group"
-    ],
+    "en_opts": {
+      "A": "Change to the least outstanding requests algorithm on the ALB target group",
+      "B": "Configure cookie forwarding in the CloudFront distribution cache behavior",
+      "C": "Configure header forwarding in the CloudFront distribution cache behavior",
+      "D": "Enable group-level stickiness on the ALB listener rule",
+      "E": "Enable sticky sessions on the ALB target group"
+    },
     "source": "https://www.examtopics.com/discussions/amazon/view/369149-exam-aws-certified-cloudops-engineer-associate-soa-c03-topic/"
   },
   {
     "id": 44,
     "question": "글로벌 회사가 AWS Organizations의 조직을 사용하여 여러 AWS 계정을 관리합니다. 규정 준수를 위해 회사는 5개 AWS 리전에 워크로드 환경을 배포합니다. 각 리전별로 별도의 AWS 계정이 있습니다. 회사는 모든 환경의 VPC를 디렉토리 역할의 중앙 공유 VPC와 공유 모니터링 VPC에 연결해야 합니다. 공유 계정들은 각각 별도의 AWS 계정에 있습니다. 이 요구사항을 충족하는 솔루션은?",
-    "options": [
-      "A. 중앙 공유 AWS 계정에 Transit Gateway를 생성합니다. Transit Gateway를 회사의 AWS 계정과 공유합니다. 모든 VPC를 중앙 Transit Gateway에 연결합니다.",
-      "B. 회사가 리소스를 배포한 모든 리전에 각각 Transit Gateway를 생성합니다. Transit Gateway를 회사 AWS 계정과 공유합니다. 각 리전의 VPC를 같은 리전의 Transit Gateway에 연결합니다. Transit Gateway를 피어링합니다. 모든 라우팅 테이블에 적절한 경로를 생성합니다.",
-      "C. 공유 VPC를 위한 가상 프라이빗 게이트웨이를 생성합니다. 워크로드 VPC를 위한 고객 게이트웨이를 생성합니다. 디렉토리 VPC, 모니터링 VPC 및 모든 워크로드 VPC 간 AWS Site-to-Site VPN 연결을 구성합니다.",
-      "D. 중앙 공유 VPC, 공유 모니터링 VPC 및 모든 워크로드 VPC 간 VPC 피어링 연결을 생성합니다."
-    ],
+    "options": {
+      "A": "중앙 공유 AWS 계정에 Transit Gateway를 생성합니다. Transit Gateway를 회사의 AWS 계정과 공유합니다. 모든 VPC를 중앙 Transit Gateway에 연결합니다.",
+      "B": "회사가 리소스를 배포한 모든 리전에 각각 Transit Gateway를 생성합니다. Transit Gateway를 회사 AWS 계정과 공유합니다. 각 리전의 VPC를 같은 리전의 Transit Gateway에 연결합니다. Transit Gateway를 피어링합니다. 모든 라우팅 테이블에 적절한 경로를 생성합니다.",
+      "C": "공유 VPC를 위한 가상 프라이빗 게이트웨이를 생성합니다. 워크로드 VPC를 위한 고객 게이트웨이를 생성합니다. 디렉토리 VPC, 모니터링 VPC 및 모든 워크로드 VPC 간 AWS Site-to-Site VPN 연결을 구성합니다.",
+      "D": "중앙 공유 VPC, 공유 모니터링 VPC 및 모든 워크로드 VPC 간 VPC 피어링 연결을 생성합니다."
+    },
     "answer": "B",
     "explanation": "【핵심 용어】\n▸ Transit Gateway — 리전 내 및 리전 간 VPC/온프레미스를 연결하는 중앙 허브(스포크 모델)\n▸ Transit Gateway Peering — 서로 다른 리전의 Transit Gateway 간 연결\n▸ VPC 피어링 — 1:1 양방향 연결로, 다중 VPC 연결 시 메시인그래프 복잡도\n▸ Site-to-Site VPN — 온프레미스 환경 연결용, 5개 리전 × 2개 공유 VPC = 최소 10개 VPN 필요\n\n【정답 포인트】\nB(리전별 Transit Gateway + 피어링): 5개 리전 각각에 TGW 배포 → 같은 리전의 모든 VPC(워크로드 + 공유)를 로컬 TGW에 연결 → 리전 간 TGW 피어링으로 전역 연결 → 확장성 우수, 중앙집중식 관리 최소화\n\n【오답 체크】\n(A) 중앙 TGW는 단일 리전의 VPC만 직접 연결 가능하며, 5개 리전 분산 배포에는 크로스 리전 능력 부족\n(C) Site-to-Site VPN은 온프레미스-AWS 간 용도이며, 각 VPC마다 별도 VPN 터널 필요로 관리 복잡도 극대\n(D) 5개 리전 × 3개 VPC(워크로드 1개 + 공유 2개) = 15개 VPC를 모두 피어링하면 조합 수(15×14/2=105)로 관리 불가능\n\n【시험 포인트】\n▸ 다중 VPC 다중 리전 환결 → Transit Gateway 피어링이 표준 패턴\n▸ 리전별 배포 = 각 리전의 지연 시간 최소화 + 로컬 라우팅 table 관리\n▸ VPC 피어링은 메시 수가 지수함수적으로 증가하므로 3개 이상 VPC 연결 시 TGW 선택",
     "en_q": "A global company uses an organization in AWS Organizations to manage multiple AWS accounts. To comply with regulations, the company deploys workload environments to five AWS Regions. The company has a separate AWS account for each Region. The company needs to connect every environment's VPC to a central shared VPC that serves as a directory and to a shared monitoring VPC. The shared accounts are each in separate AWS accounts. Which solution will meet these requirements?",
-    "en_opts": [
-      "A: Create a transit gateway in the central shared AWS account. Share the transit gateway with the company's AWS accounts. Connect all VPCs to the central transit gateway.",
-      "B: Create a separate transit gateway in every Region where the company has deployed resources. Share the transit gateways with company's AWS accounts. Connect the VPC in each Region to the transit gateway that is in the same Region. Peer the transit gateways. Create appropriate routes in all route tables.",
-      "C: Create a virtual private gateway for the shared VPCs. Create a customer gateway for the workload VPCs. Configure an AWS Site-to-Site VPN connection between the directory VPC, the monitoring VPC, and every workload VPC.",
-      "D: Create VPC peering connections between the central shared VPC, the shared monitoring VPC, and every workload VPC."
-    ],
+    "en_opts": {
+      "A": "Create a transit gateway in the central shared AWS account. Share the transit gateway with the company's AWS accounts. Connect all VPCs to the central transit gateway.",
+      "B": "Create a separate transit gateway in every Region where the company has deployed resources. Share the transit gateways with company's AWS accounts. Connect the VPC in each Region to the transit gateway that is in the same Region. Peer the transit gateways. Create appropriate routes in all route tables.",
+      "C": "Create a virtual private gateway for the shared VPCs. Create a customer gateway for the workload VPCs. Configure an AWS Site-to-Site VPN connection between the directory VPC, the monitoring VPC, and every workload VPC.",
+      "D": "Create VPC peering connections between the central shared VPC, the shared monitoring VPC, and every workload VPC."
+    },
     "source": "https://www.examtopics.com/discussions/amazon/view/369150-exam-aws-certified-cloudops-engineer-associate-soa-c03-topic/"
   },
   {
     "id": 45,
     "question": "한 회사가 Amazon RDS for PostgreSQL 데이터베이스에 중요 정보를 저장합니다. 회사는 피크 시간 동안 성능 저하, 높은 CPU 사용률, 증가된 쿼리 지연 시간, 연결 타임아웃을 확인합니다. 또한 피크 시간 동안 사용자 연결의 급증을 식별합니다. 연결 급증이 데이터베이스의 읽기 성능을 영향을 미칩니다. 회사가 데이터베이스 성능 문제를 해결하려고 합니다. 이 요구사항을 충족하는 단계의 조합은? (두 개 선택)",
-    "options": [
-      "A. Amazon RDS Performance Insights를 사용하여 데이터베이스 성능에 가장 영향을 미치는 SQL 쿼리를 분석합니다. 분석 결과에 따라 SQL 쿼리를 업데이트합니다.",
-      "B. Amazon CloudWatch Logs Insights를 사용하여 데이터베이스 쿼리를 분석하고 성능 병목을 식별합니다. 분석 결과에 따라 쿼리를 업데이트합니다.",
-      "C. 단일 가용 영역을 가진 Amazon RDS for PostgreSQL을 사용합니다.",
-      "D. 연결 풀링을 완전히 비활성화하여 모든 사용자 연결이 피크 시간에도 동등하게 처리되도록 합니다.",
-      "E. RDS Proxy를 구현하여 연결 풀링을 활성화합니다."
-    ],
+    "options": {
+      "A": "Amazon RDS Performance Insights를 사용하여 데이터베이스 성능에 가장 영향을 미치는 SQL 쿼리를 분석합니다. 분석 결과에 따라 SQL 쿼리를 업데이트합니다.",
+      "B": "Amazon CloudWatch Logs Insights를 사용하여 데이터베이스 쿼리를 분석하고 성능 병목을 식별합니다. 분석 결과에 따라 쿼리를 업데이트합니다.",
+      "C": "단일 가용 영역을 가진 Amazon RDS for PostgreSQL을 사용합니다.",
+      "D": "연결 풀링을 완전히 비활성화하여 모든 사용자 연결이 피크 시간에도 동등하게 처리되도록 합니다.",
+      "E": "RDS Proxy를 구현하여 연결 풀링을 활성화합니다."
+    },
     "answer": "AE",
     "explanation": "【핵심 용어】\n▸ RDS Performance Insights — 실시간 DB 성능 모니터링, 느린 쿼리 식별 및 대기 이벤트 분석\n▸ RDS Proxy — 연결 풀링으로 데이터베이스 연결 재사용, 연결 오버헤드 감소(최대 1,000배)\n▸ CloudWatch Logs Insights — 로그 쿼리 분석 도구지만, DB 성능 메트릭스(DB Load, Active Sessions) 직접 분석 불가\n▸ 연결 급증 — 애플리케이션이 새로운 연결을 계속 생성하면 데이터베이스 리소스(메모리, CPU) 소진\n\n【정답 포인트】\nA(Performance Insights): 실시간으로 느린 쿼리, 대기 이벤트(Lock, I/O), DB Load 분석 → 쿼리 최적화로 근본적 처리량 개선\nE(RDS Proxy): 애플리케이션 연결을 풀 내 기존 연결로 재사용 → 새 연결 생성 오버헤드 제거, CPU/메모리 절감\n\n【오답 체크】\n(B) CloudWatch Logs Insights는 텍스트 로그 분석 도구로, 데이터베이스의 성능 메트릭(DB Load, wait events)을 직접 측정하지 않음\n(C) 다중 AZ는 가용성 향상이지 피크 시간 성능 개선과 무관하며, CPU/메모리 병목은 해결되지 않음\n(D) 연결 풀링 비활성화는 반대 방향으로, 각 사용자 연결이 독립적 리소스를 점유하므로 성능 악화\n\n【시험 포인트】\n▸ 데이터베이스 성능 = 느린 쿼리(쿼리 최적화) + 연결 오버헤드(RDS Proxy)\n▸ Performance Insights는 어느 쿼리가 병목인지 식별 → 개발자가 쿼리 개선\n▸ RDS Proxy는 연결 수를 물리적으로 줄여 데이터베이스 리소스 절감\n▸ 연결 급증은 성능 저하의 주요 원인이므로 RDS Proxy 필수",
     "en_q": "A company stores critical information in an Amazon RDS for PostgreSQL database. The company notices degraded performance, high CPU utilization, increased query latency, and connection timeouts during peak shopping hours. The company also identifies surges in user connections during peak hours. The connection surges affect the read performance of the database. The company wants to resolve the database performance issues. Which combination of steps will meet this requirement? (Choose two.)",
-    "en_opts": [
-      "A: Use Amazon RDS Performance Insights to analyze the SQL queries that most affect database performance. Update the SQL queries based on the analysis findings.",
-      "B: Use Amazon CloudWatch Logs Insights to analyze the database queries and identify performance bottlenecks. Update the queries based on the analysis findings.",
-      "C: Use Amazon RDS for PostgreSQL with a single Availability Zone.",
-      "D: Disable connection pooling entirely to ensure that all user connections are treated equally, even during peak hours.",
-      "E: Implement RDS Proxy with connection pooling."
-    ],
+    "en_opts": {
+      "A": "Use Amazon RDS Performance Insights to analyze the SQL queries that most affect database performance. Update the SQL queries based on the analysis findings.",
+      "B": "Use Amazon CloudWatch Logs Insights to analyze the database queries and identify performance bottlenecks. Update the queries based on the analysis findings.",
+      "C": "Use Amazon RDS for PostgreSQL with a single Availability Zone.",
+      "D": "Disable connection pooling entirely to ensure that all user connections are treated equally, even during peak hours.",
+      "E": "Implement RDS Proxy with connection pooling."
+    },
     "source": "https://www.examtopics.com/discussions/amazon/view/369151-exam-aws-certified-cloudops-engineer-associate-soa-c03-topic/"
   },
   {
     "id": 46,
     "question": "한 회사가 Application Load Balancer(ALB) 뒤의 3개 Amazon EC2 인스턴스에서 웹 애플리케이션을 실행합니다. 회사는 트래픽 증가의 무작위 주기가 애플리케이션의 성능 저하를 초래한다는 것을 알 수 있습니다. CloudOps 엔지니어는 증가된 트래픽을 수용하기 위해 애플리케이션을 확장해야 합니다. 이 요구사항을 충족하는 솔루션은?",
-    "options": [
-      "A. 애플리케이션 지연 시간을 모니터링하는 Amazon CloudWatch 알람을 생성합니다. 원하는 임계값에 도달하면 각 EC2 인스턴스의 크기를 늘리도록 알람을 구성합니다.",
-      "B. 애플리케이션 지연 시간을 모니터링하는 Amazon EventBridge 규칙을 생성합니다. 원하는 임계값에 도달하면 EC2 인스턴스를 ALB에 추가하도록 구성합니다.",
-      "C. 애플리케이션을 대상 추적 확장 정책이 있는 Auto Scaling 그룹의 EC2 인스턴스에 배포합니다. ALB를 Auto Scaling 그룹에 연결합니다.",
-      "D. 애플리케이션을 예약 확장 정책이 있는 Auto Scaling 그룹의 EC2 인스턴스에 배포합니다. ALB를 Auto Scaling 그룹에 연결합니다."
-    ],
+    "options": {
+      "A": "애플리케이션 지연 시간을 모니터링하는 Amazon CloudWatch 알람을 생성합니다. 원하는 임계값에 도달하면 각 EC2 인스턴스의 크기를 늘리도록 알람을 구성합니다.",
+      "B": "애플리케이션 지연 시간을 모니터링하는 Amazon EventBridge 규칙을 생성합니다. 원하는 임계값에 도달하면 EC2 인스턴스를 ALB에 추가하도록 구성합니다.",
+      "C": "애플리케이션을 대상 추적 확장 정책이 있는 Auto Scaling 그룹의 EC2 인스턴스에 배포합니다. ALB를 Auto Scaling 그룹에 연결합니다.",
+      "D": "애플리케이션을 예약 확장 정책이 있는 Auto Scaling 그룹의 EC2 인스턴스에 배포합니다. ALB를 Auto Scaling 그룹에 연결합니다."
+    },
     "answer": "C",
     "explanation": "【핵심 용어】\n▸ 수평 확장(Horizontal Scaling) — 인스턴스 개수를 늘려 처리량 증가\n▸ 수직 확장(Vertical Scaling) — 단일 인스턴스의 크기/성능을 증가(한계 존재)\n▸ 대상 추적 정책(Target Tracking) — 특정 메트릭(CPU, ALB Target Response Time)에 따라 자동 확장\n▸ 예약 확장(Scheduled Scaling) — 미리 정한 시간에 확장, 예측 가능한 트래픽 패턴용\n▸ EventBridge — 이벤트 기반 워크플로우지만, 자동 확장은 전담 서비스 아님\n\n【정답 포인트】\nC(Auto Scaling + 대상 추적): 무작위 트래픽 급증에 대응하려면 메트릭 기반 동적 확장 필요 → 대상 추적 정책이 특정 메트릭(ALB Target Response Time, RequestCountPerTarget)을 모니터링 → 자동으로 인스턴스 개수 조정 → ALB 연결로 즉시 로드 밸런싱\n\n【오답 체크】\n(A) 수직 확장은 한계가 있고, CloudWatch 알람만으로는 자동 실행 불가능(Lambda 또는 Systems Manager 추가 필요)\n(B) EventBridge는 이벤트 라우팅 서비스이며, Auto Scaling의 전담 기능(대상 추적, 조정 정책)을 대체하지 못함\n(D) 예약 확장은 고정 시간 기반이므로 무작위 트래픽 급증에 대응 불가\n\n【시험 포인트】\n▸ 무작위 트래픽 = 메트릭 기반 동적 확장(대상 추적) 선택\n▸ 예측 가능한 시간대(오전 9-11시) = 예약 확장\n▸ Auto Scaling이 수평 확장의 표준 패턴(확장 그룹 내 인스턴스 개수 조정)\n▸ ALB와 Auto Scaling 통합이 필수(로드 밸런싱 + 동적 인스턴스 관리)",
     "en_q": "A company runs a web application on three Amazon EC2 instances behind an Application Load Balancer (ALB). The company notices that random periods of increased traffic cause a degradation in the application's performance. A CloudOps engineer must scale the application to meet the increased traffic. Which solution meets these requirements?",
-    "en_opts": [
-      "A: Create an Amazon CloudWatch alarm to monitor application latency and increase the size of each EC2 instance if the desired threshold is reached.",
-      "B: Create an Amazon EventBridge rule to monitor application latency and add an EC2 instance to the ALB if the desired threshold is reached.",
-      "C: Deploy the application to an Auto Scaling group of EC2 instances with a target tracking scaling policy. Attach the ALB to the Auto Scaling group.",
-      "D: Deploy the application to an Auto Scaling group of EC2 instances with a scheduled scaling policy. Attach the ALB to the Auto Scaling group."
-    ],
+    "en_opts": {
+      "A": "Create an Amazon CloudWatch alarm to monitor application latency and increase the size of each EC2 instance if the desired threshold is reached.",
+      "B": "Create an Amazon EventBridge rule to monitor application latency and add an EC2 instance to the ALB if the desired threshold is reached.",
+      "C": "Deploy the application to an Auto Scaling group of EC2 instances with a target tracking scaling policy. Attach the ALB to the Auto Scaling group.",
+      "D": "Deploy the application to an Auto Scaling group of EC2 instances with a scheduled scaling policy. Attach the ALB to the Auto Scaling group."
+    },
     "source": "https://www.examtopics.com/discussions/amazon/view/369216-exam-aws-certified-cloudops-engineer-associate-soa-c03-topic/"
   },
   {
     "id": 47,
     "question": "한 회사의 보고서 생성 작업이 예전에는 15분에 완료되었지만 이제 1시간이 걸립니다. 애플리케이션이 보고서를 생성합니다. 애플리케이션은 Amazon EC2 인스턴스에서 실행되고 Amazon RDS for MySQL 데이터베이스에서 데이터를 추출합니다. CloudOps 엔지니어가 RDS 인스턴스의 Amazon CloudWatch 대시보드를 확인하고 보고서가 실행되지 않을 때도 읽기 IOPS 메트릭이 높다는 것을 알 수 있습니다. CloudOps 엔지니어가 RDS 인스턴스의 성능과 가용성을 개선해야 합니다. 이 요구사항을 충족하는 솔루션은?",
-    "options": [
-      "A. RDS 인스턴스 앞에 Amazon ElastiCache 클러스터를 구성합니다. 보고서 생성 작업을 업데이트하여 ElastiCache 클러스터를 쿼리합니다.",
-      "B. RDS 읽기 복제본을 배포합니다. 보고서 생성 작업을 업데이트하여 리더 엔드포인트를 쿼리합니다.",
-      "C. Amazon CloudFront 배포를 생성합니다. RDS 인스턴스를 원본으로 설정합니다. 보고서 생성 작업을 업데이트하여 CloudFront 배포를 쿼리합니다.",
-      "D. RDS 인스턴스의 크기를 늘립니다."
-    ],
+    "options": {
+      "A": "RDS 인스턴스 앞에 Amazon ElastiCache 클러스터를 구성합니다. 보고서 생성 작업을 업데이트하여 ElastiCache 클러스터를 쿼리합니다.",
+      "B": "RDS 읽기 복제본을 배포합니다. 보고서 생성 작업을 업데이트하여 리더 엔드포인트를 쿼리합니다.",
+      "C": "Amazon CloudFront 배포를 생성합니다. RDS 인스턴스를 원본으로 설정합니다. 보고서 생성 작업을 업데이트하여 CloudFront 배포를 쿼리합니다.",
+      "D": "RDS 인스턴스의 크기를 늘립니다."
+    },
     "answer": "B",
     "explanation": "【핵심 용어】\n▸ 읽기 복제본(Read Replica) — 쓰기는 Primary, 읽기는 Replica에서 처리하여 I/O 분산\n▸ 읽기 IOPS 지속 — 보고서 작업만의 문제가 아니라 백그라운드 작업도 높은 읽기 IOPS 유발\n▸ ElastiCache — 애플리케이션 캐싱용이지만, 기존 쿼리 코드 대규모 수정 필요\n▸ CloudFront — 정적 웹 콘텐츠용이며, 동적 데이터베이스 쿼리에는 부적합\n\n【정답 포인트】\nB(Read Replica): 읽기 복제본이 원본 데이터베이스와 동기화되므로 최신 데이터 반영 → 보고서 생성 작업은 복제본의 리더 엔드포인트로 재지정 → Primary는 애플리케이션의 쓰기/트랜잭션만 처리 → IOPS 부하 분산 → 복제본이 별도 인스턴스이므로 가용성도 향상\n\n【오답 체크】\n(A) ElastiCache는 애플리케이션 로직이 캐시 계층을 인식해야 하므로, 기존 SQL 쿼리를 Redis/Memcached 명령어로 재작성 필요 → 높은 개발 비용\n(C) CloudFront는 웹 페이지, 이미지 같은 정적 콘텐츠 캐싱용이며, 동적 데이터베이스 쿼리 응답은 캐싱하지 않음\n(D) 인스턴스 크기 증가는 수직 확장이지만, 읽기 부하 자체는 증가하므로 단기 해결책일 뿐 확장성 제한\n\n【시험 포인트】\n▸ 읽기 집약적 워크로드(보고서, 분석) = Read Replica 분리\n▸ 복제본은 비동기이므로 약간의 지연 가능하지만, 분석/보고서는 실시간 일관성 요구 낮음\n▸ \"보고서 작업 + 백그라운드 IOPS\" 조합 = 읽기 트래픽이 주 원인이므로 분산 필수\n▸ Read Replica는 \"최소 개발 노력\"으로 IOPS 분산 달성",
     "en_q": "A company's reporting job that used to run in 15 minutes is now taking an hour to run. An application generates the reports. The application runs on Amazon EC2 instances and extracts data from an Amazon RDS for MySQL database. A CloudOps engineer checks the Amazon CloudWatch dashboard for the RDS instance and notices that the Read IOPS metrics are high, even when the reports are not running. The CloudOps engineer needs to improve the performance and the availability of the RDS instance. Which solution will meet these requirements?",
-    "en_opts": [
-      "A: Configure an Amazon ElastiCache cluster in front of the RDS instance. Update the reporting job to query the ElastiCache cluster.",
-      "B: Deploy an RDS read replica. Update the reporting job to query the reader endpoint.",
-      "C: Create an Amazon CloudFront distribution. Set the RDS instance as the origin. Update the reporting job to query the CloudFront distribution.",
-      "D: Increase the size of the RDS instance."
-    ],
+    "en_opts": {
+      "A": "Configure an Amazon ElastiCache cluster in front of the RDS instance. Update the reporting job to query the ElastiCache cluster.",
+      "B": "Deploy an RDS read replica. Update the reporting job to query the reader endpoint.",
+      "C": "Create an Amazon CloudFront distribution. Set the RDS instance as the origin. Update the reporting job to query the CloudFront distribution.",
+      "D": "Increase the size of the RDS instance."
+    },
     "source": "https://www.examtopics.com/discussions/amazon/view/369217-exam-aws-certified-cloudops-engineer-associate-soa-c03-topic/"
   },
   {
     "id": 48,
     "question": "AWS에서 여러 워크로드를 실행하는 회사가 DNS 기반 위협 보호를 구현하여 보안 태세를 강화하려고 합니다. 회사는 DNS 기반 공격을 차단해야 합니다. 이 요구사항을 충족하는 솔루션은?",
-    "options": [
-      "A. DNS 쿼리를 필터링하고 악의적인 쿼리를 차단하기 위해 AWS Shield Advanced를 배포합니다. 도메인 필터링 정책을 설정합니다.",
-      "B. AWS WAF를 사용하여 DNS 트래픽에서 악의적인 도메인을 검사합니다. 알려진 위협을 차단하는 사용자 지정 규칙을 생성합니다.",
-      "C. Amazon Route 53 Resolver를 구성하여 DNS 쿼리를 Route 53 Resolver DNS Firewall Advanced로 포워딩하여 위협을 감지하고 필터링합니다.",
-      "D. AWS Config를 구성하여 DNS 쿼리 및 DNS 트래픽 패턴을 모니터링합니다. AWS Lambda 함수를 사용하여 악의적인 도메인에 대한 액세스를 방지합니다."
-    ],
+    "options": {
+      "A": "DNS 쿼리를 필터링하고 악의적인 쿼리를 차단하기 위해 AWS Shield Advanced를 배포합니다. 도메인 필터링 정책을 설정합니다.",
+      "B": "AWS WAF를 사용하여 DNS 트래픽에서 악의적인 도메인을 검사합니다. 알려진 위협을 차단하는 사용자 지정 규칙을 생성합니다.",
+      "C": "Amazon Route 53 Resolver를 구성하여 DNS 쿼리를 Route 53 Resolver DNS Firewall Advanced로 포워딩하여 위협을 감지하고 필터링합니다.",
+      "D": "AWS Config를 구성하여 DNS 쿼리 및 DNS 트래픽 패턴을 모니터링합니다. AWS Lambda 함수를 사용하여 악의적인 도메인에 대한 액세스를 방지합니다."
+    },
     "answer": "C",
     "explanation": "【핵심 용어】\n▸ Route 53 Resolver DNS Firewall — DNS 쿼리를 인프라 수준에서 검사하여 악의적 도메인 탐지 및 차단\n▸ AWS Shield — DDoS 공격(Layer 3/4) 방어지만, DNS 위협 필터링 기능 없음\n▸ AWS WAF — 웹 애플리케이션 방화벽(Layer 7), DNS 쿼리 자체는 검사 대상 아님\n▸ AWS Config — 리소스 구성 변경 추적이지, DNS 보안 기능 없음\n\n【정답 포인트】\nC(Route 53 Resolver DNS Firewall): 모든 DNS 쿼리가 Route 53 Resolver를 통과 → DNS Firewall이 쿼리를 검사하여 위협 도메인 데이터베이스(예: 피싱, 랜섬웨어) 확인 → 악의적 도메인 요청 차단 → VPC 수준에서 적용되어 모든 인스턴스/서비스 보호\n\n【오답 체크】\n(A) AWS Shield Advanced는 L3/4 DDoS 공격(SYN flood, UDP flood)만 방어하며, DNS 도메인 필터링은 미지원\n(B) AWS WAF는 HTTP/HTTPS 트래픽(L7) 검사용이며, DNS 프로토콜(UDP 53)은 검사 범위 밖\n(D) AWS Config는 AWS 리소스 변경 이력만 추적하며, 실시간 DNS 위협 탐지 능력 없음\n\n【시험 포인트】\n▸ DNS 위협 차단 = Route 53 Resolver DNS Firewall (유일한 AWS 네이티브 솔루션)\n▸ 다른 서비스는 각각의 역할(DDoS, WAF, 설정 추적)이 다르므로 DNS 보안에는 부적합\n▸ \"DNS 기반 공격\" = 피싱, 랜섬웨어 C&C, 악의적 도메인 리다이렉트 → 도메인 명성 DB 기반 필터링 필수",
     "en_q": "A company that runs multiple workloads on AWS wants to enhance its security posture by implementing DNS-based threat protection. The company must block DNS-based attacks. Which solution will meet this requirement?",
-    "en_opts": [
-      "A: Deploy AWS Shield Advanced to filter and block malicious DNS queries. Set up domain filtering policies.",
-      "B: Use AWS WAF to inspect DNS traffic for malicious domains. Create custom rules to block known threats.",
-      "C: Configure Amazon Route 53 Resolver to forward DNS queries to Route 53 Resolver DNS Firewall Advanced to detect and filter threats.",
-      "D: Configure AWS Config to monitor DNS queries and DNS traffic patterns. Use an AWS Lambda function to prevent access to malicious domains."
-    ],
+    "en_opts": {
+      "A": "Deploy AWS Shield Advanced to filter and block malicious DNS queries. Set up domain filtering policies.",
+      "B": "Use AWS WAF to inspect DNS traffic for malicious domains. Create custom rules to block known threats.",
+      "C": "Configure Amazon Route 53 Resolver to forward DNS queries to Route 53 Resolver DNS Firewall Advanced to detect and filter threats.",
+      "D": "Configure AWS Config to monitor DNS queries and DNS traffic patterns. Use an AWS Lambda function to prevent access to malicious domains."
+    },
     "source": "https://www.examtopics.com/discussions/amazon/view/369343-exam-aws-certified-cloudops-engineer-associate-soa-c03-topic/"
   },
   {
     "id": 49,
     "question": "CloudOps 엔지니어가 프로덕션 데이터베이스를 마이그레이션 계정과 공유하려고 합니다. 프로덕션 데이터베이스는 Amazon RDS DB 인스턴스에서 호스팅되고 있으며, production-rds-key라는 별칭을 가진 AWS Key Management Service(AWS KMS) 키로 암호화됩니다. CloudOps 엔지니어가 최소한의 관리 부담으로 이 요구사항을 충족하기 위해 수행해야 할 작업은?",
-    "options": [
-      "A. 프로덕션 계정에서 RDS DB 인스턴스의 스냅샷을 생성합니다. production-rds-key KMS 키 정책을 수정하여 마이그레이션 계정의 루트 사용자에게 액세스 권한을 부여합니다. 스냅샷을 마이그레이션 계정과 공유합니다.",
-      "B. 마이그레이션 계정에서 RDS 읽기 복제본을 생성합니다. KMS 키 정책을 구성하여 production-rds-key KMS 키를 마이그레이션 계정으로 복제합니다.",
-      "C. 프로덕션 계정에서 RDS DB 인스턴스의 스냅샷을 생성합니다. 스냅샷을 마이그레이션 계정과 공유합니다. 마이그레이션 계정에서 동일한 별칭을 가진 새 KMS 키를 생성합니다.",
-      "D. 네이티브 데이터베이스 툴셋을 사용하여 RDS DB 인스턴스를 Amazon S3로 내보냅니다. 프로덕션 계정과 마이그레이션 계정 간 크로스 계정 액세스를 위한 S3 버킷 및 S3 버킷 정책을 생성합니다. 네이티브 데이터베이스 툴셋을 사용하여 Amazon S3에서 새 RDS DB 인스턴스로 데이터베이스를 가져옵니다."
-    ],
+    "options": {
+      "A": "프로덕션 계정에서 RDS DB 인스턴스의 스냅샷을 생성합니다. production-rds-key KMS 키 정책을 수정하여 마이그레이션 계정의 루트 사용자에게 액세스 권한을 부여합니다. 스냅샷을 마이그레이션 계정과 공유합니다.",
+      "B": "마이그레이션 계정에서 RDS 읽기 복제본을 생성합니다. KMS 키 정책을 구성하여 production-rds-key KMS 키를 마이그레이션 계정으로 복제합니다.",
+      "C": "프로덕션 계정에서 RDS DB 인스턴스의 스냅샷을 생성합니다. 스냅샷을 마이그레이션 계정과 공유합니다. 마이그레이션 계정에서 동일한 별칭을 가진 새 KMS 키를 생성합니다.",
+      "D": "네이티브 데이터베이스 툴셋을 사용하여 RDS DB 인스턴스를 Amazon S3로 내보냅니다. 프로덕션 계정과 마이그레이션 계정 간 크로스 계정 액세스를 위한 S3 버킷 및 S3 버킷 정책을 생성합니다. 네이티브 데이터베이스 툴셋을 사용하여 Amazon S3에서 새 RDS DB 인스턴스로 데이터베이스를 가져옵니다."
+    },
     "answer": "A",
     "explanation": "【핵심 용어】\n▸ RDS 스냅샷 공유 — 스냅샷과 암호화 KMS 키 접근 권한 모두 필요\n▸ KMS 크로스 계정 액세스 — KMS 키 정책에서 대상 계정의 루트 또는 역할에 kms:Decrypt, kms:DescribeKey 권한 부여\n▸ 마이그레이션 계정 루트 사용자 — 크로스 계정 권한의 기본 보안 주체\n▸ 읽기 복제본 크로스 계정 — KMS 키 복제 개념이 없음(Option B 오류)\n\n【정답 포인트】\nA(스냅샷 공유 + KMS 정책): ① RDS 스냅샷 생성(암호화 유지) → ② production-rds-key의 KMS 정책에 마이그레이션 계정 루트 권한 추가(kms:Decrypt 등) → ③ 스냅샷을 마이그레이션 계정과 공유 → 마이그레이션 계정에서 스냅샷 복원 시 기존 KMS 키 자동 사용 → \"최소 관리 부담\" 충족\n\n【오답 체크】\n(B) RDS는 \"계정 간 읽기 복제본 생성\" 미지원이며, \"KMS 키 복제\"는 KMS 기능이 아님\n(C) 스냅샷 공유 후 마이그레이션 계정에서 새 KMS 키 생성 → 기존 데이터 암호 해독 불가능(다른 키로 재암호화 필요, 복잡함)\n(D) S3 Export → 엑셀 포맷 변환 → Import는 관리 오버헤드 최대이며, 스냅샷 방식이 훨씬 간단\n\n【시험 포인트】\n▸ 암호화된 RDS 스냅샷 공유 = KMS 키 정책 + 스냅샷 공유 2단계 필수\n▸ 마이그레이션 계정은 스냅샷 복원 시 자동으로 기존 KMS 키 사용(새 키 생성 불필요)\n▸ \"최소 관리 부담\" = 스냅샷 기반 복사(옵션 A가 가장 간단)\n▸ S3 Export는 데이터 형식 변환이 필요하므로 오버헤드 증가",
     "en_q": "A CloudOps engineer wants to share a copy of a production database with a migration account. The production database is hosted on an Amazon RDS DB instance and is encrypted at rest with an AWS Key Management Service (AWS KMS) key that has an alias of production-rds-key. What must the CloudOps engineer do to meet these requirements with the LEAST administrative overhead?",
-    "en_opts": [
-      "A: Take a snapshot of the RDS DB instance in the production account. Amend the KMS key policy of the production-rds-key KMS key to give access to the migration account's root user. Share the snapshot with the migration account.",
-      "B: Create an RDS read replica in the migration account. Configure the KMS key policy to replicate the production-rds-key KMS key to the migration account.",
-      "C: Take a snapshot of the RDS DB instance in the production account. Share the snapshot with the migration account. In the migration account, create a new KMS key that has an identical alias.",
-      "D: Use native database toolsets to export the RDS DB instance to Amazon S3. Create an S3 bucket and an S3 bucket policy for cross-account access between the production account and the migration account. Use native database toolsets to import the database from Amazon S3 to a new RDS DB instance."
-    ],
+    "en_opts": {
+      "A": "Take a snapshot of the RDS DB instance in the production account. Amend the KMS key policy of the production-rds-key KMS key to give access to the migration account's root user. Share the snapshot with the migration account.",
+      "B": "Create an RDS read replica in the migration account. Configure the KMS key policy to replicate the production-rds-key KMS key to the migration account.",
+      "C": "Take a snapshot of the RDS DB instance in the production account. Share the snapshot with the migration account. In the migration account, create a new KMS key that has an identical alias.",
+      "D": "Use native database toolsets to export the RDS DB instance to Amazon S3. Create an S3 bucket and an S3 bucket policy for cross-account access between the production account and the migration account. Use native database toolsets to import the database from Amazon S3 to a new RDS DB instance."
+    },
     "source": "https://www.examtopics.com/discussions/amazon/view/369152-exam-aws-certified-cloudops-engineer-associate-soa-c03-topic/"
   },
   {
     "id": 50,
     "question": "한 회사가 여러 AWS Lambda 함수를 사용하는 중요한 서버리스 애플리케이션을 가지고 있습니다. 각 Lambda 함수는 자신의 Amazon CloudWatch Logs 로그 그룹에서 매일 1GB의 로그 데이터를 생성합니다. 회사의 보안팀이 모든 로그 그룹에서 애플리케이션 오류를 유형별로 그룹화한 개수를 요청합니다. CloudOps 엔지니어가 이 요구사항을 충족하기 위해 수행해야 할 작업은?",
-    "options": [
-      "A. stats 명령어와 count 함수를 사용하는 CloudWatch Logs Insights 쿼리를 실행합니다.",
-      "B. groupby 키워드와 count 함수를 사용하는 CloudWatch Logs 검색을 실행합니다.",
-      "C. SELECT와 GROUP BV 키워드를 사용하는 Amazon Athena 쿼리를 실행합니다.",
-      "D. SELECT와 GROUP BY 키워드를 사용하는 Amazon RDS 쿼리를 실행합니다."
-    ],
+    "options": {
+      "A": "stats 명령어와 count 함수를 사용하는 CloudWatch Logs Insights 쿼리를 실행합니다.",
+      "B": "groupby 키워드와 count 함수를 사용하는 CloudWatch Logs 검색을 실행합니다.",
+      "C": "SELECT와 GROUP BV 키워드를 사용하는 Amazon Athena 쿼리를 실행합니다.",
+      "D": "SELECT와 GROUP BY 키워드를 사용하는 Amazon RDS 쿼리를 실행합니다."
+    },
     "answer": "A",
     "explanation": "【핵심 용어】\n▸ CloudWatch Logs Insights — CloudWatch Logs 전문 쿼리 엔진(stat, fields, filter, count, avg 등 지원)\n▸ CloudWatch Logs 검색 — 간단한 전문 검색만 가능하고, groupby 기능 없음\n▸ Amazon Athena — S3에 저장된 데이터 쿼리(로그를 S3로 내보낸 후 사용)\n▸ Amazon RDS — 구조화된 데이터베이스로, 로그 데이터 원본이 아님\n\n【정답 포인트】\nA(CloudWatch Logs Insights): 모든 로그 그룹을 Insights로 동시 쿼리 → stats count(*) by errorType → 오류를 유형별로 그룹화하고 개수 집계 → 실시간 분석 가능, 추가 설정 불필요\n\n【오답 체크】\n(B) CloudWatch Logs의 기본 검색은 \"검색어 기반 필터링\"만 가능하며, 통계 집계(groupby, count)는 Insights 전용 기능\n(C) Athena는 로그가 S3에 저장되어 있을 때만 사용 가능하며, CloudWatch Logs 데이터를 직접 쿼리할 수 없음\n(D) RDS는 데이터베이스이지 로그 저장소가 아니므로, CloudWatch Logs 데이터와 무관\n\n【시험 포인트】\n▸ CloudWatch Logs → 실시간 로그 분석 = CloudWatch Logs Insights 필수\n▸ \"모든 로그 그룹에서 오류 유형별 집계\" = stats count(*) by errorType 패턴\n▸ Insights는 초기 1GB 데이터 무료 분석 제공(매월)\n▸ S3로 내보낸 로그 = Athena 사용 가능, 하지만 CloudWatch Logs 직접 쿼리가 더 간단",
     "en_q": "A company has a critical serverless application that uses multiple AWS Lambda functions. Each Lambda function generates 1 GB of log data daily in its own Amazon CloudWatch Logs log group. The company's security team asks for a count of application errors, grouped by type, across all of the log groups. What should a CloudOps engineer do to meet this requirement?",
-    "en_opts": [
-      "A: Perform a CloudWatch Logs Insights query that uses the stats command and count function.",
-      "B: Perform a CloudWatch Logs search that uses the groupby keyword and count function.",
-      "C: Perform an Amazon Athena query that uses the SELECT and GROUP BV keywords.",
-      "D: Perform an Amazon RDS query that uses the SELECT and GROUP BY keywords."
-    ],
+    "en_opts": {
+      "A": "Perform a CloudWatch Logs Insights query that uses the stats command and count function.",
+      "B": "Perform a CloudWatch Logs search that uses the groupby keyword and count function.",
+      "C": "Perform an Amazon Athena query that uses the SELECT and GROUP BV keywords.",
+      "D": "Perform an Amazon RDS query that uses the SELECT and GROUP BY keywords."
+    },
     "source": "https://www.examtopics.com/discussions/amazon/view/369153-exam-aws-certified-cloudops-engineer-associate-soa-c03-topic/"
   },
   {
     "id": 51,
     "question": "개발자가 Amazon Linux Amazon Machine Image(AMI)를 사용하여 타사 애플리케이션을 호스팅하는 EC2 인스턴스를 시작합니다. 애플리케이션이 가끔 불안정해집니다. CloudOps 엔지니어는 사용률이 15분 동안 90% 이상일 때마다 EC2 인스턴스를 자동으로 재부팅하고 개발자에게 재부팅에 대해 알려주는 솔루션이 필요합니다. 최소한의 관리 노력으로 이 요구사항을 충족하는 솔루션은?",
-    "options": [
-      "A. 인스턴스의 CPU 사용률을 모니터링하도록 Amazon CloudWatch 알람을 구성합니다. 알람이 활성화되면 AWS Lambda 함수를 호출하여 Amazon Simple Notification Service(Amazon SNS) 주제에 메시지를 발행하도록 알람을 구성합니다. Lambda 함수를 구성하여 EC2 인스턴스를 재부팅합니다. 개발자를 SNS 주제에 구독시킵니다.",
-      "B. 인스턴스의 CPU 사용률을 모니터링하는 Amazon CloudWatch 알람을 생성합니다. 알람을 구성하여 Amazon Simple Notification Service(Amazon SNS) 주제에 알림을 발행하고 EC2 인스턴스를 재부팅하는 EC2 작업을 수행합니다. 개발자를 SNS 주제에 구독시킵니다.",
-      "C. 인스턴스의 CPU 사용률을 모니터링하는 Amazon CloudWatch 알람을 생성합니다. 알람을 구성하여 AWS Systems Manager 작업을 호출하여 개발자에게 알림을 발행하고 재부팅을 요청하는 인시던트를 생성합니다.",
-      "D. Amazon Simple Notification Service(Amazon SNS) 주제에 메시지를 발행하고 EC2 인스턴스를 재부팅하는 AWS Systems Manager 런북 스크립트를 생성합니다. 개발자를 SNS 주제에 구독시킵니다. 인스턴스의 CPU 사용률이 15분 이상 90% 이상으로 유지되면 Systems Manager 런북을 실행하도록 Amazon CloudWatch 알람을 구성합니다."
-    ],
+    "options": {
+      "A": "인스턴스의 CPU 사용률을 모니터링하도록 Amazon CloudWatch 알람을 구성합니다. 알람이 활성화되면 AWS Lambda 함수를 호출하여 Amazon Simple Notification Service(Amazon SNS) 주제에 메시지를 발행하도록 알람을 구성합니다. Lambda 함수를 구성하여 EC2 인스턴스를 재부팅합니다. 개발자를 SNS 주제에 구독시킵니다.",
+      "B": "인스턴스의 CPU 사용률을 모니터링하는 Amazon CloudWatch 알람을 생성합니다. 알람을 구성하여 Amazon Simple Notification Service(Amazon SNS) 주제에 알림을 발행하고 EC2 인스턴스를 재부팅하는 EC2 작업을 수행합니다. 개발자를 SNS 주제에 구독시킵니다.",
+      "C": "인스턴스의 CPU 사용률을 모니터링하는 Amazon CloudWatch 알람을 생성합니다. 알람을 구성하여 AWS Systems Manager 작업을 호출하여 개발자에게 알림을 발행하고 재부팅을 요청하는 인시던트를 생성합니다.",
+      "D": "Amazon Simple Notification Service(Amazon SNS) 주제에 메시지를 발행하고 EC2 인스턴스를 재부팅하는 AWS Systems Manager 런북 스크립트를 생성합니다. 개발자를 SNS 주제에 구독시킵니다. 인스턴스의 CPU 사용률이 15분 이상 90% 이상으로 유지되면 Systems Manager 런북을 실행하도록 Amazon CloudWatch 알람을 구성합니다."
+    },
     "answer": "B",
     "explanation": "【핵심 용어】\n▸ CloudWatch Alarm — 메트릭 임계값 기반 자동 트리거\n▸ EC2 Auto Recovery (recover) — CloudWatch Alarm 액션으로 인스턴스 자동 복구\n▸ Systems Manager Automation Runbook — 자동화된 운영 작업 실행 (수동 트리거 가능)\n▸ AWS::EC2::Reboot — CloudWatch Alarm 자체 액션 (개발 코드 불필요)\n\n【정답 포인트】\n▸ \"EC2 자동 재부팅 + 최소 개발 노력\" → CloudWatch Alarm + EC2 Reboot 액션 조합\n▸ 알람 액션에 EC2 reboot을 직접 지정 → Lambda·런북 작성 불필요\n▸ 가장 단순한 네이티브 통합으로 운영 오버헤드 최소\n\n【오답 체크】\n(A) Lambda 함수 개발 + 실행 역할 권한 설정 + EC2 재부팅 호출 코드 필요. 코드 유지보수 부담 발생.\n(C) Systems Manager 인시던트는 사람의 개입을 전제로 한 인시던트 관리 도구. 자동 재부팅과 무관.\n(D) Automation 런북 작성 + CloudWatch ↔ 런북 연결 구성이 추가로 필요해 정답보다 복잡, \"최소 노력\" 위배.\n\n【시험 포인트】\n▸ EC2 재부팅/복구 → CloudWatch Alarm 네이티브 액션이 가장 단순\n▸ Lambda·런북·인시던트는 모두 추가 작업이 들어가는 옵션 → 우선순위 낮음\n▸ \"최소 운영 노력\" 키워드 → 네이티브 통합 우선 검토",
     "en_q": "A developer uses an Amazon Linux Amazon Machine Image (AMI) to launch an EC2 instance that hosts a third-party application. The application occasionally becomes unstable. The CloudOps engineer needs a solution to automatically reboot the EC2 instance whenever utilization is above 90% for 15 minutes and to notify the developer about the reboot. Which solution will meet these requirements with the LEAST administrative effort?",
-    "en_opts": [
-      "A: Configure an Amazon CloudWatch alarm that evaluates the CPU utilization of the instance. Configure the alarm to invoke an AWS Lambda function to publish a message to an Amazon Simple Notification Service (Amazon SNS) topic when the CloudWatch alarm activates. Configure the Lambda function to reboot the EC2 instance. Subscribe the developer to the SNS topic.",
-      "B: Create an Amazon CloudWatch alarm that evaluates the CPU utilization of the instance. Configure the alarm to publish a notification to an Amazon Simple Notification Service (Amazon SNS) topic and to perform an EC2 action to reboot the instance. Subscribe the developer to the SNS topic.",
-      "C: Create an Amazon CloudWatch alarm that evaluates the CPU utilization of the instance Configure the alarm to invoke an AWS Systems Manager action to create an incident to notify the developer and request the reboot.",
-      "D: Create an AWS Systems Manager runbook script to publish a message to an Amazon Simple Notification Service (Amazon SNS) topic and to reboot the EC2 instance. Subscribe the developer to the SNS topic. Configure an Amazon CloudWatch alarm to run the Systems Manager runbook when CPU utilization for the instance remains above 90% for more than 15 minutes."
-    ],
+    "en_opts": {
+      "A": "Configure an Amazon CloudWatch alarm that evaluates the CPU utilization of the instance. Configure the alarm to invoke an AWS Lambda function to publish a message to an Amazon Simple Notification Service (Amazon SNS) topic when the CloudWatch alarm activates. Configure the Lambda function to reboot the EC2 instance. Subscribe the developer to the SNS topic.",
+      "B": "Create an Amazon CloudWatch alarm that evaluates the CPU utilization of the instance. Configure the alarm to publish a notification to an Amazon Simple Notification Service (Amazon SNS) topic and to perform an EC2 action to reboot the instance. Subscribe the developer to the SNS topic.",
+      "C": "Create an Amazon CloudWatch alarm that evaluates the CPU utilization of the instance Configure the alarm to invoke an AWS Systems Manager action to create an incident to notify the developer and request the reboot.",
+      "D": "Create an AWS Systems Manager runbook script to publish a message to an Amazon Simple Notification Service (Amazon SNS) topic and to reboot the EC2 instance. Subscribe the developer to the SNS topic. Configure an Amazon CloudWatch alarm to run the Systems Manager runbook when CPU utilization for the instance remains above 90% for more than 15 minutes."
+    },
     "source": "https://www.examtopics.com/discussions/amazon/view/369218-exam-aws-certified-cloudops-engineer-associate-soa-c03-topic/"
   },
   {
     "id": 52,
     "question": "한 회사가 Application Load Balancer(ALB) 뒤에서 실행되는 마이크로서비스 집합을 가지고 있습니다. CloudOps 엔지니어가 Amazon Route 53을 사용하여 ALB URL을 example.com에 매핑하는 레코드를 생성해야 합니다. 이 요구사항을 충족하는 레코드 유형은?",
-    "options": [
-      "A. A 레코드",
-      "B. AAAA 레코드",
-      "C. 별칭 레코드",
-      "D. CNAME 레코드"
-    ],
+    "options": {
+      "A": "A 레코드",
+      "B": "AAAA 레코드",
+      "C": "별칭 레코드",
+      "D": "CNAME 레코드"
+    },
     "answer": "C",
     "explanation": "【핵심 용어】\n▸ A 레코드 — 도메인을 IPv4 주소(예: 203.0.113.1)로 매핑\n▸ AAAA 레코드 — 도메인을 IPv6 주소로 매핑\n▸ CNAME 레코드 — 도메인을 다른 도메인으로 매핑(Canonical Name), 루트 도메인(example.com) 불가\n▸ 별칭 레코드 — Route 53 전용, AWS 리소스(ALB, CloudFront, S3 등)에 직접 연결 가능, 루트 도메인 지원\n\n【정답 포인트】\nC(별칭 레코드): ALB는 DNS 이름(예: my-alb-123456.us-east-1.elb.amazonaws.com)을 가지므로 → Route 53 별칭 레코드로 example.com을 ALB의 DNS 이름에 매핑 → 별칭은 AWS 리소스 직결로 자동 IP 업데이트(수동 관리 불필요)\n\n【오답 체크】\n(A) A 레코드는 IPv4 고정 주소용이며, ALB는 관리형 서비스로 IP 변경 가능성 → 별칭이 더 적합\n(B) AAAA 레코드는 IPv6 매핑용이며, 일반적 ALB는 IPv4 기본\n(D) CNAME은 루트 도메인(example.com) 사용 불가(CNAME은 서브도메인 전용, www.example.com만 가능) + AWS 리소스 직결 미지원\n\n【시험 포인트】\n▸ ALB → Route 53 = 별칭 레코드 표준 패턴\n▸ 별칭 레코드는 AWS 리소스 매핑 전용(ALB, CloudFront, S3 정적 웹사이트 호스팅 등)\n▸ 루트 도메인 매핑 = A 또는 별칭 (CNAME 불가)\n▸ CNAME은 외부 도메인(타사 호스팅, GitHub Pages) 매핑용",
     "en_q": "A company has a microservice that runs on a set of Amazon EC2 instances. The EC2 instances run behind an Application Load Balancer (ALB). A CloudOps engineer must use Amazon Route 53 to create a record that maps the ALB URL to example.com. Which type of record will meet this requirement?",
-    "en_opts": [
-      "A: An A record",
-      "B: An AAAA record",
-      "C: An alias record",
-      "D: A CNAME record"
-    ],
+    "en_opts": {
+      "A": "An A record",
+      "B": "An AAAA record",
+      "C": "An alias record",
+      "D": "A CNAME record"
+    },
     "source": "https://www.examtopics.com/discussions/amazon/view/369154-exam-aws-certified-cloudops-engineer-associate-soa-c03-topic/"
   },
   {
     "id": 53,
     "question": "애플리케이션이 Application Load Balancer(ALB) 뒤의 EC2 인스턴스에서 실행됩니다. 애플리케이션은 시작 후 로컬 캐시를 채우는 데 최대 2분이 걸립니다. 애플리케이션은 시작 후 몇 초 후 대상 그룹 상태 확인에서 정상으로 보고됩니다. CloudOps 엔지니어는 일부 인스턴스가 재부팅된 후 각 인스턴스가 정상으로 보고된 직후 인스턴스가 동일한 트래픽 점유율을 받는 것을 관찰합니다. 애플리케이션이 캐시를 채우는 동안 점진적으로 증가하는 트래픽 점유율을 받아야 합니다. 이 요구사항을 충족하는 솔루션은?",
-    "options": [
-      "A. slow_start.duration_seconds 대상 그룹 속성을 120초로 변경합니다. 인스턴스를 재부팅하기 전에 대상 그룹에서 인스턴스를 등록 해제합니다. 인스턴스를 재부팅한 후 대상 그룹에 인스턴스를 등록합니다.",
-      "B. 대상 그룹의 HealthCheckTimeoutSeconds 파라미터를 120초로 변경합니다. 인스턴스를 재부팅하기 전에 대상 그룹에서 인스턴스를 등록 해제합니다. 인스턴스를 재부팅한 후 대상 그룹에 인스턴스를 등록합니다.",
-      "C. 상태 확인 상태를 모니터링하도록 Amazon CloudWatch 알람을 구성합니다. 상태 확인이 실패하면 EC2 인스턴스를 재시작하도록 알람 작업을 구성합니다. loadbalancing.algorithm.type 대상 그룹 속성을 weighted_random으로 변경합니다.",
-      "D. Amazon EC2 Auto Scaling 그룹을 생성합니다. 기존 EC2 인스턴스를 Auto Scaling 그룹에 연결합니다. EC2 Auto Scaling 라이프사이클 훅을 구성하여 시작 인스턴스를 Pending Wait 상태로 이동합니다. 로컬 캐시가 채워지면 라이프사이클 훅을 완료하도록 애플리케이션을 업데이트합니다."
-    ],
+    "options": {
+      "A": "slow_start.duration_seconds 대상 그룹 속성을 120초로 변경합니다. 인스턴스를 재부팅하기 전에 대상 그룹에서 인스턴스를 등록 해제합니다. 인스턴스를 재부팅한 후 대상 그룹에 인스턴스를 등록합니다.",
+      "B": "대상 그룹의 HealthCheckTimeoutSeconds 파라미터를 120초로 변경합니다. 인스턴스를 재부팅하기 전에 대상 그룹에서 인스턴스를 등록 해제합니다. 인스턴스를 재부팅한 후 대상 그룹에 인스턴스를 등록합니다.",
+      "C": "상태 확인 상태를 모니터링하도록 Amazon CloudWatch 알람을 구성합니다. 상태 확인이 실패하면 EC2 인스턴스를 재시작하도록 알람 작업을 구성합니다. loadbalancing.algorithm.type 대상 그룹 속성을 weighted_random으로 변경합니다.",
+      "D": "Amazon EC2 Auto Scaling 그룹을 생성합니다. 기존 EC2 인스턴스를 Auto Scaling 그룹에 연결합니다. EC2 Auto Scaling 라이프사이클 훅을 구성하여 시작 인스턴스를 Pending Wait 상태로 이동합니다. 로컬 캐시가 채워지면 라이프사이클 훅을 완료하도록 애플리케이션을 업데이트합니다."
+    },
     "answer": "A",
     "explanation": "【핵심 용어】\n▸ Slow Start Mode — ALB가 신규 등록 인스턴스에 처음 1~3분간 점진적으로 트래픽 할당(100%까지 선형 증가)\n▸ slow_start.duration_seconds — Slow Start 지속 시간 설정(기본 300초, 최대 3600초)\n▸ 상태 확인 정상 — 응용 프로그램 준비 상태와 무관하게 헬스 체크 통과 시 정상 판정\n▸ 라이프사이클 훅 — Auto Scaling 인스턴스 상태 전이 중 대기(Pending Wait)\n\n【정답 포인트】\nA(Slow Start Mode): slow_start.duration_seconds = 120초 설정 → 인스턴스 재부팅 후 대상 그룹 등록(health check 통과) → ALB가 120초 동안 트래픽를 0%에서 100%까지 점진적 증가 → 로컬 캐시 채우는 2분(120초) 동안 충분한 Warm-up 시간 확보 → \"최소 코드 변경\" (ALB 속성 설정만)\n\n【오답 체크】\n(B) HealthCheckTimeoutSeconds는 헬스 체크 응답 대기 시간이며, 신규 인스턴스 트래픽 점진적 할당과 무관\n(C) CloudWatch 알람 + weighted_random은 상태 재시작 및 분산 방식 변경이지, 신규 인스턴스 Warm-up과 무관\n(D) 라이프사이클 훅은 응용 프로그램 코드 수정 필요(complete-lifecycle-action 호출) → 관리 오버헤드 증가 + 기존 인스턴스 Auto Scaling 그룹 통합의 복잡함\n\n【시험 포인트】\n▸ 신규 인스턴스 Warm-up (startup time) = Slow Start Mode(ALB 기본 제공)\n▸ 2분 Warm-up → slow_start.duration_seconds = 120초 이상 설정\n▸ 라이프사이클 훅은 Custom Logic 필요 시(응용 프로그램이 캐시 채우기 완료 신호 보낼 때)\n▸ \"최소 오버헤드\" = Slow Start Mode 설정 (속성 변경만)",
     "en_q": "An application runs on Amazon EC2 instances behind an Application Load Balancer (ALB). The application takes up to 2 minutes to populate a local cache after the application is started. The application reports as healthy in the target group health check a few seconds after starting. A CloudOps engineer observes that after some of the instances are rebooted, the instances receive an equal share of the traffic immediately after each instance reports as healthy. The application needs to receive a gradually increasing share of the traffic while the application cache is populated. Which solution will meet this requirement?",
-    "en_opts": [
-      "A: Change the slow_start.duration_seconds target group attribute to 120 seconds. Before rebooting the instances, deregister the instances from the target group. After rebooting the instances, register the instances with the target group.",
-      "B: Change the HealthCheckTimeoutSeconds paramotor in the target group to 120 seconds. Before rebooting the instances, deregister the instances from the target group. After rebooting the instances, register the instances with the target group.",
-      "C: Configure an Amazon CloudWatch alarm to monitor the health check status. Configure the action of the alarm to restart an EC2 instance if a health check fails. Change the loadbalancing.algorithm.type target group attribute to be weighted_random.",
-      "D: Create an Amazon EC2 Auto Scaling group. Attach the existing EC2 instances to the Auto Scaling group. Configure an EC2 Auto Scaling lifecycle hook to move starting instances to the Pending Wait state. Update the application to complete the lifecycle hook when the local cache has been populated."
-    ],
+    "en_opts": {
+      "A": "Change the slow_start.duration_seconds target group attribute to 120 seconds. Before rebooting the instances, deregister the instances from the target group. After rebooting the instances, register the instances with the target group.",
+      "B": "Change the HealthCheckTimeoutSeconds paramotor in the target group to 120 seconds. Before rebooting the instances, deregister the instances from the target group. After rebooting the instances, register the instances with the target group.",
+      "C": "Configure an Amazon CloudWatch alarm to monitor the health check status. Configure the action of the alarm to restart an EC2 instance if a health check fails. Change the loadbalancing.algorithm.type target group attribute to be weighted_random.",
+      "D": "Create an Amazon EC2 Auto Scaling group. Attach the existing EC2 instances to the Auto Scaling group. Configure an EC2 Auto Scaling lifecycle hook to move starting instances to the Pending Wait state. Update the application to complete the lifecycle hook when the local cache has been populated."
+    },
     "source": "https://www.examtopics.com/discussions/amazon/view/369155-exam-aws-certified-cloudops-engineer-associate-soa-c03-topic/"
   },
   {
     "id": 54,
     "question": "한 회사가 Amazon EC2 인스턴스에서 애플리케이션을 실행합니다. 애플리케이션이 Amazon Aurora PostgreSQL 데이터베이스에서 데이터를 저장하고 검색합니다. 개발자가 실수로 데이터베이스에서 테이블을 삭제하면 애플리케이션 오류가 발생합니다. 2시간 후 CloudOps 엔지니어가 데이터를 복구하고 애플리케이션이 다시 작동하도록 해야 합니다. 이 요구사항을 충족하는 솔루션은?",
-    "options": [
-      "A. Aurora Backtrack 기능을 사용하여 2시간 전 데이터베이스를 지정된 시간으로 되감습니다.",
-      "B. 기존 데이터베이스에서 포인트 인타임 복구(Point-In-Time Recovery)를 수행하여 2시간 전의 지정된 시점으로 데이터베이스를 복구합니다.",
-      "C. 포인트 인타임 복구를 수행하고 새 데이터베이스를 생성하여 2시간 전의 지정된 시점으로 데이터베이스를 복구합니다. 애플리케이션을 새 데이터베이스 엔드포인트를 사용하도록 재구성합니다.",
-      "D. 새 Aurora 클러스터를 생성합니다. S3 버킷에서 데이터 복원 옵션을 선택합니다. 2시간 전의 오류 시간까지의 로그 파일을 선택합니다."
-    ],
+    "options": {
+      "A": "Aurora Backtrack 기능을 사용하여 2시간 전 데이터베이스를 지정된 시간으로 되감습니다.",
+      "B": "기존 데이터베이스에서 포인트 인타임 복구(Point-In-Time Recovery)를 수행하여 2시간 전의 지정된 시점으로 데이터베이스를 복구합니다.",
+      "C": "포인트 인타임 복구를 수행하고 새 데이터베이스를 생성하여 2시간 전의 지정된 시점으로 데이터베이스를 복구합니다. 애플리케이션을 새 데이터베이스 엔드포인트를 사용하도록 재구성합니다.",
+      "D": "새 Aurora 클러스터를 생성합니다. S3 버킷에서 데이터 복원 옵션을 선택합니다. 2시간 전의 오류 시간까지의 로그 파일을 선택합니다."
+    },
     "answer": "C",
     "explanation": "【핵심 용어】\n▸ Aurora Backtrack — 시점으로 \"복귀\"(원본 DB 변경, 다운타임 발생), 최대 72시간 보존\n▸ Point-In-Time Recovery(PITR) — 지정 시점에서 \"새 DB 복구\"(기존 DB 유지), 최대 35일\n▸ Backtrack 제약 — 기존 DB에 쓰기 작업이 있으면 롤백 불가, 복귀 시 애플리케이션 중단 필요\n▸ PITR 새 DB — 기존 DB는 유지하고 복구된 별도 DB 생성 → 비교 후 전환 가능\n\n【정답 포인트】\nC(PITR 새 DB): ① PITR로 2시간 전 시점 선택 → ② 새로운 Aurora 클러스터 생성(원본 DB 유지) → ③ 새 DB 엔드포인트로 애플리케이션 재구성 → 장점: 기존 DB 보존 가능, 롤백 시간 단축, 데이터 검증 후 전환\n\n【오답 체크】\n(A) Aurora Backtrack은 기존 DB를 즉시 복귀시키므로 → 복귀 중 애플리케이션 다운, 실패 시 복원 불가능, 위험\n(B) 기존 DB에서 PITR 수행 시 원본 테이블(삭제됨)은 여전히 삭제 상태이며, DB 내 데이터 복구 메커니즘 없음\n(D) S3 Export/Import는 Aurora의 기본 PITR 기능이 아니며, 복구 시간 증가\n\n【시험 포인트】\n▸ 테이블 삭제 = 즉시 복구 필요(2시간 후) → PITR 새 DB 표준 패턴\n▸ Backtrack은 \"실시간 복귀\"(빠름)이지만 위험 → 운영 환경에선 PITR 새 DB 권장\n▸ PITR 35일 유지 기본값 → 2시간은 충분히 가능\n▸ \"애플리케이션 다시 작동\" = 새 DB 엔드포인트로 재구성",
     "en_q": "A company runs an application on Amazon EC2 instances. The application stores and retrieves data from an Amazon Aurora PostgreSQL database. A developer accidentally drops a table from the database, which causes application errors. Two hours later, a CloudOps engineer needs to recover the data and make the application function again. Which solution will meet this requirement?",
-    "en_opts": [
-      "A: Use the Aurora Backtrack feature to rewind the database to a specified time, 2 hours in the past.",
-      "B: Perform a point-in-time recovery on the existing database to restore the database to a specified point in time, 2 hours in the past.",
-      "C: Perform a point-in-time recovery and create a new database to restore the database to a specified point in time, 2 hours in the past. Reconfigure the application to use a new database endpoint.",
-      "D: Create a new Aurora cluster. Choose the Restore data from S3 bucket option. Choose log files up to the failure time 2 hours in the past."
-    ],
+    "en_opts": {
+      "A": "Use the Aurora Backtrack feature to rewind the database to a specified time, 2 hours in the past.",
+      "B": "Perform a point-in-time recovery on the existing database to restore the database to a specified point in time, 2 hours in the past.",
+      "C": "Perform a point-in-time recovery and create a new database to restore the database to a specified point in time, 2 hours in the past. Reconfigure the application to use a new database endpoint.",
+      "D": "Create a new Aurora cluster. Choose the Restore data from S3 bucket option. Choose log files up to the failure time 2 hours in the past."
+    },
     "source": "https://www.examtopics.com/discussions/amazon/view/369222-exam-aws-certified-cloudops-engineer-associate-soa-c03-topic/"
   },
   {
     "id": 55,
     "question": "한 회사가 AWS에서 여러 워크로드를 실행합니다. 회사는 특정 AWS 리전에서 5개의 AWS Trusted Advisor 서비스 할당량 메트릭을 모니터링하려고 합니다. 회사는 리소스 사용량이 서비스 할당량의 60%를 초과할 때마다 이메일 알림을 받기를 원합니다. 이 요구사항을 충족하는 솔루션은?",
-    "options": [
-      "A. 각 Trusted Advisor 서비스 할당량 메트릭마다 하나씩 5개의 Amazon CloudWatch 알람을 생성합니다. 사용량이 하나의 서비스 할당량의 60%를 초과할 때마다 이메일 알림을 위해 Amazon Simple Notification Service(Amazon SNS) 주제를 구성합니다.",
-      "B. 각 Trusted Advisor 서비스 할당량 메트릭마다 하나씩 5개의 Amazon CloudWatch 알람을 생성합니다. 사용량이 하나의 서비스 할당량의 60%를 초과할 때마다 이메일 알림을 위해 Amazon Simple Queue Service(Amazon SQS) 큐를 구성합니다.",
-      "C. AWS Health Dashboard를 사용하여 각 Trusted Advisor 서비스 할당량 메트릭을 모니터링합니다. 사용량이 하나의 서비스 할당량의 60%를 초과할 때마다 이메일 알림을 위해 Amazon Simple Queue Service(Amazon SQS) 큐를 구성합니다.",
-      "D. AWS Health Dashboard를 사용하여 각 Trusted Advisor 서비스 할당량 메트릭을 모니터링합니다. 사용량이 하나의 서비스 할당량의 60%를 초과할 때마다 이메일 알림을 위해 Amazon Simple Notification Service(Amazon SNS) 주제를 구성합니다."
-    ],
+    "options": {
+      "A": "각 Trusted Advisor 서비스 할당량 메트릭마다 하나씩 5개의 Amazon CloudWatch 알람을 생성합니다. 사용량이 하나의 서비스 할당량의 60%를 초과할 때마다 이메일 알림을 위해 Amazon Simple Notification Service(Amazon SNS) 주제를 구성합니다.",
+      "B": "각 Trusted Advisor 서비스 할당량 메트릭마다 하나씩 5개의 Amazon CloudWatch 알람을 생성합니다. 사용량이 하나의 서비스 할당량의 60%를 초과할 때마다 이메일 알림을 위해 Amazon Simple Queue Service(Amazon SQS) 큐를 구성합니다.",
+      "C": "AWS Health Dashboard를 사용하여 각 Trusted Advisor 서비스 할당량 메트릭을 모니터링합니다. 사용량이 하나의 서비스 할당량의 60%를 초과할 때마다 이메일 알림을 위해 Amazon Simple Queue Service(Amazon SQS) 큐를 구성합니다.",
+      "D": "AWS Health Dashboard를 사용하여 각 Trusted Advisor 서비스 할당량 메트릭을 모니터링합니다. 사용량이 하나의 서비스 할당량의 60%를 초과할 때마다 이메일 알림을 위해 Amazon Simple Notification Service(Amazon SNS) 주제를 구성합니다."
+    },
     "answer": "A",
     "explanation": "【핵심 용어】\n▸ Trusted Advisor — AWS 서비스 할당량, 보안 모범 사례, 비용 최적화 모니터링\n▸ Trusted Advisor 메트릭 → CloudWatch로 노출 — Trusted Advisor의 메트릭을 CloudWatch 메트릭으로 발행\n▸ AWS Health Dashboard — 계정 상태, 공지사항(Trusted Advisor와 다름)\n▸ SNS — 이메일 알림용 메시지 서비스\n▸ SQS — 메시지 큐(이메일 직접 발송 불가)\n\n【정답 포인트】\nA(CloudWatch 알람 + SNS): ① Trusted Advisor 메트릭이 CloudWatch에 자동 발행 → ② 각 5개 할당량 메트릭마다 CloudWatch 알람 생성(임계값 60%) → ③ 알람 > SNS 주제 발행 → ④ 개발자가 SNS 주제 구독(이메일) → 안정적이고 표준 패턴\n\n【오답 체크】\n(B) SQS는 메시지 큐이며, 이메일 직접 발송 불가(SNS와 통합 필요)\n(C) AWS Health Dashboard는 계정 이벤트/서비스 상태 모니터링용이며, Trusted Advisor 메트릭 직접 쿼리 불가\n(D) Health Dashboard는 Trusted Advisor 메트릭 임계값 알람 기능 없음(CloudWatch 전담)\n\n【시험 포인트】\n▸ Trusted Advisor 할당량 모니터링 = CloudWatch 메트릭 + CloudWatch 알람(표준)\n▸ \"이메일 알림\" = SNS (SQS 아님)\n▸ Health Dashboard는 일반 계정 상태, 공지사항용 (할당량 메트릭 임계값 설정 불가)\n▸ 5개 메트릭 = 5개 CloudWatch 알람 필요",
     "en_q": "A company runs several workloads on AWS. The company identifies five AWS Trusted Advisor service quota metrics to monitor in a specific AWS Region. The company wants to receive email notification each time resource usage exceeds 60% of one of the service quotas. Which solution will meet these requirements?",
-    "en_opts": [
-      "A: Create five Amazon CloudWatch alarms, one for each Trusted Advisor service quota metric. Configure an Amazon Simple Notification Service (Amazon SNS) topic for email notification each time that usage exceeds 60% of one of the service quotas.",
-      "B: Create five Amazon CloudWatch alarms, one for each Trusted Advisor service quota metric. Configure an Amazon Simple Queue Service (Amazon SQS) queue for email notification each time that usage exceeds 60% of one of the service quotas.",
-      "C: Use the AWS Health Dashboard to monitor each Trusted Advisor service quota metric. Configure an Amazon Simple Queue Service (Amazon SQS) queue for email notification each time that usage exceeds 60% of one of the service quotas.",
-      "D: Use the AWS Health Dashboard to monitor each Trusted Advisor service quota metric. Configure an Amazon Simple Notification Service (Amazon SNS) topic for email notification each time that usage exceeds 60% of one of the service quotas."
-    ],
+    "en_opts": {
+      "A": "Create five Amazon CloudWatch alarms, one for each Trusted Advisor service quota metric. Configure an Amazon Simple Notification Service (Amazon SNS) topic for email notification each time that usage exceeds 60% of one of the service quotas.",
+      "B": "Create five Amazon CloudWatch alarms, one for each Trusted Advisor service quota metric. Configure an Amazon Simple Queue Service (Amazon SQS) queue for email notification each time that usage exceeds 60% of one of the service quotas.",
+      "C": "Use the AWS Health Dashboard to monitor each Trusted Advisor service quota metric. Configure an Amazon Simple Queue Service (Amazon SQS) queue for email notification each time that usage exceeds 60% of one of the service quotas.",
+      "D": "Use the AWS Health Dashboard to monitor each Trusted Advisor service quota metric. Configure an Amazon Simple Notification Service (Amazon SNS) topic for email notification each time that usage exceeds 60% of one of the service quotas."
+    },
     "source": "https://www.examtopics.com/discussions/amazon/view/369156-exam-aws-certified-cloudops-engineer-associate-soa-c03-topic/"
   },
   {
     "id": 56,
     "question": "CloudOps 엔지니어가 Amazon CloudWatch Synthetics 구현을 문제 해결 중입니다. CloudWatch Synthetics 결과를 Amazon S3 버킷으로 전송해야 합니다. CloudOps 엔지니어가 인터넷 게이트웨이가 연결된 VPC에서 실행되는 기존 카나리의 구성을 복사했습니다. 그러나 CloudOps 엔지니어가 인터넷 액세스가 없는 프라이빗 VPC에서 카나리를 성공적으로 시작할 수 없습니다. CloudOps 엔지니어가 프라이빗 VPC에서 카나리를 성공적으로 실행하려면 어떻게 해야 합니까?",
-    "options": [
-      "A. VPC에서 DNS 분석 옵션과 DNS 호스트명 옵션이 활성화되어 있는지 확인합니다. VPC에 synthetics:GetCanaryRuns 권한을 추가합니다. S3 버킷에서 CloudWatch Synthetics 역할에 IgnorePublicAcls 권한을 추가합니다.",
-      "B. VPC에서 DNS 분석 옵션과 DNS 호스트명 옵션을 비활성화합니다. Amazon S3을 위한 게이트웨이 VPC 엔드포인트를 생성합니다. CloudWatch Synthetics이 S3 엔드포인트를 사용할 수 있도록 권한을 추가합니다.",
-      "C. VPC에서 DNS 분석 옵션과 DNS 호스트명 옵션을 비활성화합니다. 카나리에 보안 그룹을 추가하여 DNS 포트에서 아웃바운드 트래픽을 허용합니다. CloudWatch Synthetics이 S3 버킷에 쓸 수 있는 권한을 추가합니다.",
-      "D. VPC에서 DNS 분석 옵션과 DNS 호스트명 옵션이 활성화되어 있는지 확인합니다. CloudWatch를 위한 인터페이스 VPC 엔드포인트를 생성합니다. Amazon S3을 위한 게이트웨이 VPC 엔드포인트를 생성합니다. CloudWatch Synthetics이 두 엔드포인트를 모두 사용할 수 있도록 권한을 추가합니다."
-    ],
+    "options": {
+      "A": "VPC에서 DNS 분석 옵션과 DNS 호스트명 옵션이 활성화되어 있는지 확인합니다. VPC에 synthetics:GetCanaryRuns 권한을 추가합니다. S3 버킷에서 CloudWatch Synthetics 역할에 IgnorePublicAcls 권한을 추가합니다.",
+      "B": "VPC에서 DNS 분석 옵션과 DNS 호스트명 옵션을 비활성화합니다. Amazon S3을 위한 게이트웨이 VPC 엔드포인트를 생성합니다. CloudWatch Synthetics이 S3 엔드포인트를 사용할 수 있도록 권한을 추가합니다.",
+      "C": "VPC에서 DNS 분석 옵션과 DNS 호스트명 옵션을 비활성화합니다. 카나리에 보안 그룹을 추가하여 DNS 포트에서 아웃바운드 트래픽을 허용합니다. CloudWatch Synthetics이 S3 버킷에 쓸 수 있는 권한을 추가합니다.",
+      "D": "VPC에서 DNS 분석 옵션과 DNS 호스트명 옵션이 활성화되어 있는지 확인합니다. CloudWatch를 위한 인터페이스 VPC 엔드포인트를 생성합니다. Amazon S3을 위한 게이트웨이 VPC 엔드포인트를 생성합니다. CloudWatch Synthetics이 두 엔드포인트를 모두 사용할 수 있도록 권한을 추가합니다."
+    },
     "answer": "D",
     "explanation": "【핵심 용어】\n▸ CloudWatch Synthetics — 카나리 스크립트로 웹 애플리케이션 가용성 모니터링\n▸ 프라이빗 VPC(인터넷 액세스 없음) — NAT Gateway/IGW 없음, AWS 서비스 접근 = VPC 엔드포인트 필수\n▸ 게이트웨이 엔드포인트 — S3, DynamoDB 전용(프리티어)\n▸ 인터페이스 엔드포인트 — CloudWatch, CloudWatch Logs, Systems Manager 등(요금 발생)\n▸ DNS 호스트명 — VPC 내 EC2에 DNS 이름 할당하여 엔드포인트 접근 가능\n\n【정답 포인트】\nD(인터페이스 + 게이트웨이 엔드포인트): ① DNS 해석(enable_dns_hostnames=true) + DNS 지원(enable_dns_support=true) 활성화 → ② CloudWatch 인터페이스 엔드포인트(카나리 메트릭 발행) → ③ S3 게이트웨이 엔드포인트(결과 쓰기) → ④ 권한 추가(s3:PutObject, cloudwatch:PutMetricData) → 프라이빗 VPC에서 AWS 서비스 접근 완성\n\n【오답 체크】\n(A) synthetics:GetCanaryRuns은 실제 권한이 아니며, VPC에 권한 추가 불가(IAM 역할에만 추가)\n(B) DNS 옵션 비활성화하면 엔드포인트 DNS 이름 해석 불가능 → 반대 방향의 오류\n(C) DNS 비활성화 + DNS 포트 아웃바운드는 모순이며, 근본 해결책 아님(엔드포인트 없음)\n\n【시험 포인트】\n▸ 프라이빗 VPC CloudWatch Synthetics = CloudWatch + S3 엔드포인트 필수\n▸ CloudWatch는 인터페이스 엔드포인트(eni-xxxx.us-east-1.vpce.amazonaws.com)\n▸ S3는 게이트웨이 엔드포인트(s3.us-east-1.vpce.amazonaws.com)\n▸ DNS 호스트명 활성화 = 엔드포인트 DNS 이름 해석 가능\n▸ 카나리가 메트릭 발행 + 결과 저장 = 2개 엔드포인트 모두 필요",
     "en_q": "A CloudOps engineer is troubleshooting an implementation of Amazon CloudWatch Synthetics. The CloudWatch Synthetics results must be sent to an Amazon S3 bucket. The CloudOps engineer has copied the configuration of an existing canary that runs on a VPC that has an internet gateway attached. However, the CloudOps engineer cannot get the canary to successfully start on a private VPC that has no internet access. What should the CloudOps engineer do to successfully run the canary on the private VPC?",
-    "en_opts": [
-      "A: Ensure that the DNS resolution option and the DNS hostnames option are turned on in the VPC. Add the synthetics:GetCanaryRuns permission to the VPC. On the S3 bucket, add the IgnorePublicAcls permission to the CloudWatch Synthetics role.",
-      "B: Ensure that the DNS resolution option and the DNS hostnames option are turned off in the VPC. Create a gateway VPC endpoint for Amazon S3. Add the permissions to allow CloudWatch Synthetics to use the S3 endpoint.",
-      "C: Ensure that the DNS resolution option and the DNS hostnames option are turned off in the VPAdd a security group to the canary to allow outbound traffic on the DNS port. Add the permissions to allow CloudWatch Synthetics to write to the S3 bucket.",
-      "D: Ensure that the DNS resolution option and the DNS hostnames option are turned on in the VPC. Create an interface VPC endpoint for CloudWatch. Create a gateway VPC endpoint for Amazon S3. Add the permissions to allow CloudWatch Synthetics to use both endpoints."
-    ],
+    "en_opts": {
+      "A": "Ensure that the DNS resolution option and the DNS hostnames option are turned on in the VPC. Add the synthetics:GetCanaryRuns permission to the VPC. On the S3 bucket, add the IgnorePublicAcls permission to the CloudWatch Synthetics role.",
+      "B": "Ensure that the DNS resolution option and the DNS hostnames option are turned off in the VPC. Create a gateway VPC endpoint for Amazon S3. Add the permissions to allow CloudWatch Synthetics to use the S3 endpoint.",
+      "C": "Ensure that the DNS resolution option and the DNS hostnames option are turned off in the VPAdd a security group to the canary to allow outbound traffic on the DNS port. Add the permissions to allow CloudWatch Synthetics to write to the S3 bucket.",
+      "D": "Ensure that the DNS resolution option and the DNS hostnames option are turned on in the VPC. Create an interface VPC endpoint for CloudWatch. Create a gateway VPC endpoint for Amazon S3. Add the permissions to allow CloudWatch Synthetics to use both endpoints."
+    },
     "source": "https://www.examtopics.com/discussions/amazon/view/369157-exam-aws-certified-cloudops-engineer-associate-soa-c03-topic/"
   },
   {
